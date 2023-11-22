@@ -1,0 +1,56 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout1}">
+
+<div layout:fragment="content">
+
+    <div style="margin-top: 20px;">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col" style="text-align: right;">No</th>
+                <th scope="col" style="text-align: right;">title</th>
+                <th scope="col" style="text-align: right;">writer</th>
+                <th scope="col" style="text-align: right;">category</th>
+                <th scope="col" style="text-align: right;">date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="resource, loop : ${paging}">
+                <td style="text-align: right;" th:text="${paging.number * paging.size + loop.count}"></td>
+                <td style="text-align: right;">
+                    <a th:href="@{|/resource/readDetail?id=${resource.id}|}">[[${resource.title}]]</a>
+                </td>
+                <td style="text-align: right;">[[${resource.content}]]</td>
+                <td style="text-align: right;"
+                    th:text="${#temporals.format(resource.createDate, 'yyyy년 MM월 dd일 HH시 mm분')}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div style="margin-top: 50px;">
+        <nav aria-label="Page navigation example">
+            <div th:if="${!paging.isEmpty()}">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item" th:classappend="${!paging.hasPrevious} ? disabled">
+                        <a class="page-link" th:href="@{|?page=${paging.number-1}|}">
+                            <span>이전</span>
+                        </a>
+                    </li>
+                    <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+                        th:if="${page >= paging.number-5 and page <= paging.number+5}"
+                        th:classappend="${page == paging.number} ? 'active'" class="page-item">
+                        <a th:text="${page+1}" class="page-link" th:href="@{|?page=${page}|}"></a>
+                    </li>
+                    <li class="page-item" th:classappend="${!paging.hasNext} ? disabled">
+                        <a class="page-link" th:href="@{|?page=${paging.number+1}|}">
+                            <span>다음</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+
+</html>
