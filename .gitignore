@@ -1,17 +1,9 @@
-# Compiled class file
+.classpath
+.project
+.metadata/
+bin/
+.settings/
 *.class
-
-# Log file
-*.log
-
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.jar
 *.war
 *.nar
 *.ear
@@ -19,6 +11,52 @@
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
+# Servers 폴더
+Servers
+
+# Spring 관련 폴더, 파일
+target
+/target/
+.springBeans
+pom.properties
+MANIFEST.MF
+*.log
+.factorypath
+settings.json
+.DS_Store
+
+# SpringBoot 관련 파일
+config.properties
+
+### Java template
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+### macOS template
+*.DS_Store
+.AppleDouble
+.LSOverride
+
+# IntelliJ project files
+.idea
+.idea/*.xml
+*.iml
+out
+gen
+build
+rebel.xml
+
+# Compliled files
+/target/
+**/target
+
+/example/
+
+# Gradle
+.gradle
+/build/
+.gradletasknamecache
