@@ -1,0 +1,34 @@
+package com.example.fran365.item;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.time.LocalDateTime;
+
+@RequestMapping("/item")
+@Controller
+public class ItemController {
+
+    @Autowired
+    private ItemService itemService;
+
+    @PostMapping("/create")
+    public String create(@RequestParam Integer id,
+                         @RequestParam int price,
+                         @RequestParam String productId,
+                         @RequestParam String name){
+
+        Item item = new Item();
+        item.setName(name);
+        item.setPrice(price);
+        item.setProductId(productId);
+        item.setCreateDate(LocalDateTime.now());
+
+        itemService.create(item);
+
+        return "readirect:/product/readDetail?id="+id;
+    }
+}
