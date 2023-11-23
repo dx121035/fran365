@@ -1,6 +1,7 @@
 package com.example.fran365.item;
 
 import com.example.fran365.cart.Cart;
+import com.example.fran365.member.Member;
 import jakarta.persistence.*;
 import lombok.Data;
 

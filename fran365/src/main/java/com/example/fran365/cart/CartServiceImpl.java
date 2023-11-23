@@ -1,7 +1,10 @@
 package com.example.fran365.cart;
 
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+
+import com.example.fran365.member.Member;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -18,7 +21,7 @@ public class CartServiceImpl implements CartService{
 
         Cart cart = new Cart();
 
-        cart.setUsername(memer.getUsername());
+        cart.setUsername(member.getUsername());
 
         cartRepository.save(cart);
     }
