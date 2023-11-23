@@ -48,15 +48,6 @@ public class ProductController {
         return "product/readList";
     }
 
-
-    @GetMapping("/readDetail")
-    public String readDetail(Model model, @RequestParam("id") Integer id) {
-
-        model.addAttribute("details", productService.readDetail(id));
-
-        return "product/readDetail";
-    }
-
     @GetMapping("/update")
     public String update(Model model, @RequestParam("id") Integer id) {
 
