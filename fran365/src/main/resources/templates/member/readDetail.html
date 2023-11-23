@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>detail</title>
+</head>
+<body>
+<p><img th:src="@{|https://seulabucket.s3.ap-northeast-2.amazonaws.com/${member.image}|}"/></p>
+
+<a>이름</a>
+<div>
+  <input class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" name="name" th:value="${member.name}" readonly>
+</div>
+
+<a>아이디</a>
+<div>
+  <input class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" name="name" th:value="${member.username}" readonly>
+</div>
+
+<a>주소</a>
+<div>
+  <input class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" name="name" th:value="${member.addr}" readonly>
+</div>
+
+<a>전화번호</a>
+<div>
+  <input class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" name="name" th:value="${member.tel}" readonly>
+</div>
+
+
+
+
+
+</body>
+</html>

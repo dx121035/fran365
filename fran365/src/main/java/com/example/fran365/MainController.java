@@ -12,4 +12,11 @@ public class MainController {
 		return "index";
 	}
 
+	@GetMapping("/login")
+	public String login() {
+
+		return "login";
+	}
+
+
 }

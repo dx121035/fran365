@@ -1,0 +1,18 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+</head>
+<body>
+
+<th:block th:each="list : ${lists}">
+    id: <a th:text="${list.id}" th:href="@{|/member/readDetail?id=${list.id}|}"></a>
+    <br>
+    name: <a th:text="${list.name}"></a>
+    <br>
+    about: <a th:text="${list.username}"></a>
+
+    <br><br>
+</th:block>
+</body>
+</html>
