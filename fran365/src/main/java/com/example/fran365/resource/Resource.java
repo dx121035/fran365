@@ -18,7 +18,7 @@ public class Resource {
 
     private String title;
 
-    private Long content;
+    private String content;
 
     private String category;
 
@@ -27,6 +27,8 @@ public class Resource {
     private int price;
 
     private String image;
+
+    private String expiration;
 
     private LocalDateTime createDate;
 
