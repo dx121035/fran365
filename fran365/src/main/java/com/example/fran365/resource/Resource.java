@@ -20,9 +20,13 @@ public class Resource {
 
     private String content;
 
+    private String writer;
+
+    private String addr;
+
     private String category;
 
-    private String amount;
+    private int amount;
 
     private int price;
 

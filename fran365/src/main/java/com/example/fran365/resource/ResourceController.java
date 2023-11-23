@@ -6,6 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
+
 @RequestMapping("/resource")
 @Controller
 public class ResourceController {
@@ -34,6 +37,7 @@ public class ResourceController {
         Page<Resource> paging = resourceService.getList(page);
         model.addAttribute("paging", paging);
 
+
         return "resource/readList";
     }
 
@@ -52,7 +56,7 @@ public class ResourceController {
 
         model.addAttribute("resource", resource);
 
-        return "resource/update";
+        return "readDetail";
     }
 
     @PostMapping("/update")
@@ -69,6 +73,24 @@ public class ResourceController {
     public String delete(@RequestParam Integer id) {
 
         resourceService.delete(id);
+
+        return "redirect:/resource/readList";
+    }
+
+    @GetMapping("/purchase")
+    public String purchase(@RequestParam int amount, @RequestParam Integer id){
+
+        Resource resource = resourceService.readDetail(id);
+
+//      구매 후 수량 변화
+        int inventory = resource.getAmount() - amount;
+        resource.setAmount(inventory);
+        resourceService.update(resource);
+
+//      수량 0이 되면 게시물 삭제
+        if(inventory == 0){
+            resourceService.delete(id);
+        }
 
         return "redirect:/resource/readList";
     }

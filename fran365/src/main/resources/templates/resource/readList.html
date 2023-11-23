@@ -7,23 +7,47 @@
         <table class="table">
             <thead>
             <tr>
-                <th scope="col" style="text-align: right;">No</th>
-                <th scope="col" style="text-align: right;">title</th>
-                <th scope="col" style="text-align: right;">writer</th>
-                <th scope="col" style="text-align: right;">category</th>
-                <th scope="col" style="text-align: right;">date</th>
+                <th scope="col" style="text-align: right;">제목</th>
+                <th scope="col" style="text-align: right;">카테고리</th>
+                <th scope="col" style="text-align: right;">주소</th>
+                <th scope="col" style="text-align: right;">유통기한</th>
+                <th scope="col" style="text-align: right;">잔여 수량</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="resource, loop : ${paging}">
-                <td style="text-align: right;" th:text="${paging.number * paging.size + loop.count}"></td>
-                <td style="text-align: right;">
-                    <a th:href="@{|/resource/readDetail?id=${resource.id}|}">[[${resource.title}]]</a>
+                <td>
+                    <a th:href="@{|/resource/readDetail?id=${resource.id}|}" th:text="${resource.title}"></a>
                 </td>
-                <td style="text-align: right;">[[${resource.content}]]</td>
-                <td style="text-align: right;"
-                    th:text="${#temporals.format(resource.createDate, 'yyyy년 MM월 dd일 HH시 mm분')}"></td>
+                <td style="text-align: right;">[[${resource.category}]]</td>
+                <td style="text-align: right;">[[${resource.addr}]]</td>
+                <td style="text-align: right;">[[${resource.expiration}]]</td>
+                <td>
+                    <select name="amount" th:id="'amount_' + ${loop.index}">
+                        <option th:each="i : ${#numbers.sequence(resource.amount, 1)}"
+                                th:value="${i}">[[${i}]]</option>
+                    </select>
+                </td>
+                <td>
+                    <a href="#" th:onclick="'purchase(' + ${resource.id} + ', ' + ${loop.index} + ')'" >구매</a>
+                </td>
             </tr>
+
+            <script th:inline="javascript">
+                /*<![CDATA[*/
+                function purchase(id, index) {
+                    var amountSelect = document.getElementById('amount_' + index);
+                    var selectedAmount = amountSelect.value;
+
+                    // 선택된 amount 값을 사용하여 URL 생성
+                    var purchaseLink = '/resource/purchase?id=' + id + '&amount=' + selectedAmount;
+
+                    // 페이지 이동
+                    window.location.href = purchaseLink;
+                }
+                /*]]>*/
+            </script>
+
             </tbody>
         </table>
     </div>

@@ -1,10 +1,16 @@
+// 작성자 : 임지호
 package com.example.fran365.resource;
 
+import com.example.fran365.member.Member;
+import com.example.fran365.member.MemberRepository;
+import com.example.fran365.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -17,6 +23,9 @@ public class ResourceServiceImpl implements ResourceService {
 
     @Autowired
     private ResourceRepository resourceRepository;
+
+    @Autowired
+    private MemberService memberService;
 
     @Override
     public List<Resource> readList() {
@@ -33,7 +42,14 @@ public class ResourceServiceImpl implements ResourceService {
     @Override
     public void create(Resource resource) {
 
+        Member member = memberService.readDetailUsername();
+
+        resource.setAddr(member.getAddr());
+
+        resource.setWriter(member.getName());
+
         resource.setCreateDate(LocalDateTime.now());
+
         resourceRepository.save(resource);
     }
 
