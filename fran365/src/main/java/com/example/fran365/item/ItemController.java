@@ -17,16 +17,19 @@ public class ItemController {
 
     @PostMapping("/create")
     public String create(@RequestParam Integer id,
-                         @RequestParam int price,
-                         @RequestParam String name){
+                         @RequestParam String name,
+                         @RequestParam int quantity,
+                         @RequestParam int price
+                         ){
 
         Item item = new Item();
         item.setName(name);
         item.setPrice(price);
+        item.setQuantity(quantity);
         item.setCreateDate(LocalDateTime.now());
 
         itemService.create(item);
 
-        return "readirect:/product/readDetail?id="+id;
+        return "redirect:/product/readList";
     }
 }

@@ -1,0 +1,19 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout=http:www.ultraq.net.nz/thymeleaf/layout
+      layout:decorate="~{fragments/layout1}">
+
+<div layout:fragment="content">
+
+    <th:block th:each="item : ${cart.itemList}">
+        <td class="column-2">[[${item.name}]]</td>
+        <td class="column-3">[[${item.price}]]</td>
+
+    </th:block>
+    <div class="size-209">
+								<span class="mtext-110 cl2 p-l-40">
+									[[${total}]]원
+								</span>
+    </div>
+
+</div>
+</html>
