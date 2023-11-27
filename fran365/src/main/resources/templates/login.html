@@ -1,0 +1,27 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+</head>
+<body>
+<form th:action="@{/login}" th:object="${member}" method="post">
+    <div class="mb-3 text-start">
+        <h4 class="form-label"  style="color: black;">아이디 <span class="fas fa-user text-900 fs--1 form-icon" style="color: green;"></span></h4>
+        <div class="form-icon-container">
+            <input class="form-control form-icon-input" name="username" type="email" placeholder="name@example.com" />
+        </div>
+    </div>
+    <div class="mb-3 text-start">
+        <h4 class="form-label" for="password" style="color: black;">암호 <span class="fas fa-key text-900 fs--1 form-icon" style="color: green;"></span></h4>
+        <div class="form-icon-container">
+            <input class="form-control form-icon-input" name="password" type="password" placeholder="Password" />
+        </div>
+    </div>
+    <br>
+    <button class="btn btn-primary w-100 mb-3">로그인</button>
+</form>
+
+</body>
+</html>
