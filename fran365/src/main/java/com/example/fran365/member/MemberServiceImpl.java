@@ -17,7 +17,7 @@ import com.example.fran365.cart.CartService;
 public class MemberServiceImpl implements MemberService {
 
 	@Autowired
-	private MemberRepository userRepository;
+	private MemberRepository memberRepository;
 	
 	@Autowired
 	private CartService cartService;
@@ -33,7 +33,7 @@ public class MemberServiceImpl implements MemberService {
 		member.setCreateDate(LocalDateTime.now());
 
 
-		userRepository.save(member);
+		memberRepository.save(member);
 		
 		//카트생성
 		cartService.create(member);
@@ -48,7 +48,7 @@ public class MemberServiceImpl implements MemberService {
 				
 		String username= auth.getName();
 				
-		Optional<Member> uc = userRepository.findByusername(username);
+		Optional<Member> uc = memberRepository.findByUsername(username);
 		
 		return uc.get();
 	}

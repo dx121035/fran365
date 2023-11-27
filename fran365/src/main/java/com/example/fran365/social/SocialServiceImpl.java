@@ -66,7 +66,7 @@ public class SocialServiceImpl implements SocialService {
 
     @Override
     public List<Social> readList(String username) {
-        return socialRepository.findAll(username);
+        return socialRepository.findAll();
     }
 
     @Override

@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface SocialRepository extends JpaRepository<Social,Integer> {
 
-    List<Social> findAll(String username);
+
+
 }
