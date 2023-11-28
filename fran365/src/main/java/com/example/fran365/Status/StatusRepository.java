@@ -1,4 +1,4 @@
-package com.example.fran365.Status;
+package com.example.fran365.status;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

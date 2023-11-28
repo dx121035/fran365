@@ -1,4 +1,4 @@
-package com.example.fran365.Status;
+package com.example.fran365.status;
 
 import com.example.fran365.delivery.Delivery;
 import jakarta.persistence.*;
@@ -14,7 +14,7 @@ public class Status {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String invoiceNumber;
+    private String tracking;
 
     private LocalDateTime createDate;
 

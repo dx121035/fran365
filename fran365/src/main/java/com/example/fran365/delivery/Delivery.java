@@ -1,6 +1,6 @@
 package com.example.fran365.delivery;
 
-import com.example.fran365.Status.Status;
+import com.example.fran365.status.Status;
 import jakarta.persistence.*;
 import lombok.Data;
 

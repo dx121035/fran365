@@ -45,9 +45,8 @@ public class CartServiceImpl implements CartService{
 
         Optional<Cart> oc = cartRepository.findByUsername(username);
         Cart cart = oc.get();
-        Integer id = cart.getId();
 
-        cartRepository.deleteById(id);
+        cartRepository.delete(cart);
     }
 
     @Override

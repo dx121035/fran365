@@ -1,7 +1,7 @@
 package com.example.fran365.delivery;
 
-import com.example.fran365.Status.Status;
-import com.example.fran365.Status.StatusService;
+import com.example.fran365.status.Status;
+import com.example.fran365.status.StatusService;
 import com.example.fran365.cart.Cart;
 import com.example.fran365.cart.CartService;
 import com.example.fran365.item.Item;
@@ -57,7 +57,7 @@ public class DeliveryServiceImpl implements DeliveryService{
         Status status = new Status();
         status.setStep(1);
         status.setUsername(username);
-        status.setInvoiceNumber("");
+        status.setTracking("");
         status.setDelivery(delivery);
         statusService.create(status);
 
