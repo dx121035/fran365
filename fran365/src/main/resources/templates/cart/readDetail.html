@@ -3,17 +3,50 @@
       layout:decorate="~{fragments/layout1}">
 
 <div layout:fragment="content">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <th:block th:each="item : ${cart.itemList}">
         <td class="column-2">[[${item.name}]]</td>
         <td class="column-3">[[${item.price}]]</td>
+        <input type="number" name="quantity" class="quantity" th:value="${item.quantity}"  th:attr="data-id=${item.id}"/>
+
 
     </th:block>
     <div class="size-209">
-								<span class="mtext-110 cl2 p-l-40">
+								<span class="total">
 									[[${total}]]원
 								</span>
     </div>
 
+    <button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer" onclick="requestPay()">
+        결제하기
+    </button>
+
+
+
+    <script>
+        $(".quantity").change(function() {
+            var itemId = $(this).data("id");
+            var quantity = $(this).val();
+
+            $.ajax({
+                type: "POST",
+                url: "/cart/update",
+                dataType: "json",
+                data: {
+                    itemId: itemId,
+                    quantity: quantity
+                },
+                success: function(data) {
+                    // 총합 금액 업데이트
+                    $(".total").text(data.total + "원");
+                },
+                error: function(err) {
+                    // 에러 처리
+                    console.log(err);
+                }
+            });
+        });
+    </script>
 </div>
 </html>

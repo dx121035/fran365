@@ -25,9 +25,4 @@ public class ItemServiceImpl implements ItemService{
         itemRepository.save(item);
     }
 
-    @Override
-    public Integer priceTotal(Cart cart) {
-
-        return itemRepository.priceTotal(cart);
-    }
 }

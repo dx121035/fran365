@@ -9,4 +9,8 @@ public interface CartService {
     Cart readDetailUsername();
 
     void delete();
+
+    Cart updateQuantity(int itemId, Integer quantity);
+
+    int TotalPrice(Cart updatedCart);
 }

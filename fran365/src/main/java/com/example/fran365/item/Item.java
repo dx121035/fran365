@@ -19,7 +19,7 @@ public class Item {
 
     private int price;
 
-    private String quantity;
+    private Integer quantity;
 
     private LocalDateTime createDate;
 

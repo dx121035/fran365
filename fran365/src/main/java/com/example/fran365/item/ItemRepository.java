@@ -7,6 +7,4 @@ import org.springframework.data.repository.query.Param;
 
 public interface ItemRepository extends JpaRepository<Item, Integer> {
 
-    @Query("SELECT SUM(i.price) FROM Item i WHERE i.cart = :cart")
-    Integer priceTotal(@Param("cart") Cart cart);
 }

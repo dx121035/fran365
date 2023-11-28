@@ -6,5 +6,4 @@ public interface ItemService {
 
     void create(Item item);
 
-    Integer priceTotal(Cart cart);
 }
