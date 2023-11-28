@@ -23,6 +23,7 @@ public class ItemController {
                          ){
 
         Item item = new Item();
+        item.setProductId(id);
         item.setName(name);
         item.setPrice(price);
         item.setQuantity(quantity);

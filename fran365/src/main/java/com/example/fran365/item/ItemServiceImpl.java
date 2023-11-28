@@ -20,9 +20,17 @@ public class ItemServiceImpl implements ItemService{
 
         Cart cart = cartService.readDetailUsername();
 
-        item.setCart(cart);
+        Item check = itemRepository.findByCartAndProductId(cart, item.getProductId());
 
-        itemRepository.save(item);
+        if (check != null){
+            check.setQuantity(check.getQuantity() + item.getQuantity());
+
+            itemRepository.save(check);
+        } else{
+            item.setCart(cart);
+
+            itemRepository.save(item);
+        }
     }
 
 }

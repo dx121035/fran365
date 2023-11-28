@@ -1,9 +1,11 @@
 package com.example.fran365.delivery;
 
+import com.example.fran365.Status.Status;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -15,13 +17,12 @@ public class Delivery {
 
     private String uid;//카드 승인번호
 
-    private String invoiceNumber;//송장 번호
+    @OneToMany(mappedBy = "delivery", cascade = CascadeType.REMOVE)
+    private List<Status> statusList;
 
-    private String allAbout;
+    private String username;
 
-    private String status;
-
-    private int step;
+    private int total;
 
     private LocalDateTime createDate;
 }

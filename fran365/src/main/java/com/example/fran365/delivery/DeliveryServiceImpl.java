@@ -1,9 +1,12 @@
-package com.example.fran365.delivery;/*package com.example.fran365.delivery;
+package com.example.fran365.delivery;
 
+import com.example.fran365.Status.Status;
+import com.example.fran365.Status.StatusService;
 import com.example.fran365.cart.Cart;
 import com.example.fran365.cart.CartService;
 import com.example.fran365.item.Item;
 import com.example.fran365.item.ItemService;
+import com.example.fran365.member.Member;
 import com.example.fran365.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -21,7 +24,7 @@ public class DeliveryServiceImpl implements DeliveryService{
     private DeliveryRepository deliveryRepository;
 
     @Autowired
-    private DeliveryService deliveryService;
+    private StatusService statusService;
 
     @Autowired
     private ItemService itemService;
@@ -40,19 +43,27 @@ public class DeliveryServiceImpl implements DeliveryService{
 
         Cart cart = cartService.readDetailUsername();
         List<Item> item = cart.getItemList();
-        String itemName = item.get(0).getName();
+
+        int total = cartService.TotalPrice(cart);
 
         Delivery delivery = new Delivery();
         delivery.setCreateDate(LocalDateTime.now());
-        delivery.setStep(1);
+        delivery.setTotal(total);
         delivery.setUid(uid);
-        delivery.setUsername(memberService.readdetailusername());
-        delivery.setInvoiceNumber(delivery.getInvoiceNumber());
+        delivery.setUsername(username);
+
         deliveryRepository.save(delivery);
+
+        Status status = new Status();
+        status.setStep(1);
+        status.setUsername(username);
+        status.setInvoiceNumber("");
+        status.setDelivery(delivery);
+        statusService.create(status);
 
         Member member = memberService.readDetailUsername();
         cartService.delete();
-        cartService.create(user);
+        cartService.create(member);
 
     }
 
@@ -72,4 +83,4 @@ public class DeliveryServiceImpl implements DeliveryService{
 
         return delivery;
     }
-}*/
+}
