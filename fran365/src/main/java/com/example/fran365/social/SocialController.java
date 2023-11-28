@@ -31,9 +31,9 @@ public class SocialController {
     }
 
     @PostMapping("/create")
-    public String create(Social social, @RequestParam("filename") MultipartFile file)
-                        throws IOException {
-        socialService.create(social, file);
+    public String create(Social social){
+
+        socialService.create(social);
 
         return "redirect:/product/readlist";
     }

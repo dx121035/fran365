@@ -1,16 +1,14 @@
-package com.example.fran365.social;
+package com.example.fran365.comment2;
 
 import com.example.fran365.comment.Comment;
-import com.example.fran365.member.Member;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
-@Data
 @Entity
-public class Social {
+@Data
+public class Comment2 {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,12 +20,6 @@ public class Social {
 
     private LocalDateTime createDate;
 
-    @OneToMany(mappedBy = "social", cascade = CascadeType.REMOVE)
-    private
-    List<Comment> commentList;
-
-    //추천  조아요
-    @ManyToMany
-    List<Member> voter;
-
+    @ManyToOne
+    private Comment comment;
 }

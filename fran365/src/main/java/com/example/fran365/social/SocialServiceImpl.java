@@ -38,21 +38,7 @@ public class SocialServiceImpl implements SocialService {
     private MemberRepository memberRepository;
 
     @Override
-    public void create(Social social, MultipartFile multipartFile) throws IOException {
-
-        File file = new File(multipartFile.getOriginalFilename());
-
-        try (FileOutputStream fos = new FileOutputStream(file)) {
-            fos.write(multipartFile.getBytes());
-        }
-
-        String filename = System.currentTimeMillis() + "_" + multipartFile.getOriginalFilename();
-        amazonS3.putObject(new PutObjectRequest(bucketName, filename, file));
-
-        file.delete();
-
-        social.setImage(filename);
-//        social.setCreateDate(LocalDateTime.now());
+    public void create(Social social) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
@@ -75,7 +61,7 @@ public class SocialServiceImpl implements SocialService {
     }
 
     @Override
-    public void update(Social social, MultipartFile multipartFile) throws IOException {
+    public void update(Social social) {
 
     }
 

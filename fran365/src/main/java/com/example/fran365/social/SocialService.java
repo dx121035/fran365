@@ -8,13 +8,13 @@ import java.util.List;
 
 public interface SocialService {
 
-    void create(Social social, MultipartFile multipartFile) throws IOException;
+    void create(Social social);
 
     List<Social> readList(String username);
 
     List<Social> readDetail();
 
-    void update(Social social, MultipartFile multipartFile) throws IOException;
+    void update(Social social);
 
     void delete(Integer id);
 }
