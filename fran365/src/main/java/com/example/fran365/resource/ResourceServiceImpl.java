@@ -2,16 +2,16 @@
 package com.example.fran365.resource;
 
 import com.example.fran365.member.Member;
-import com.example.fran365.member.MemberRepository;
 import com.example.fran365.member.MemberService;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.Isolation;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -26,6 +26,9 @@ public class ResourceServiceImpl implements ResourceService {
 
     @Autowired
     private MemberService memberService;
+
+    @Autowired
+    private PlatformTransactionManager transactionManager;
 
     @Override
     public List<Resource> readList() {
@@ -77,4 +80,25 @@ public class ResourceServiceImpl implements ResourceService {
         Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
         return resourceRepository.findAll(pageable);
     }
+
+    @Override
+    @Transactional
+    public void updateProductStock(Integer id, int amount) {
+        Resource resource = resourceRepository.findWithPessimisticLockById(id);
+
+                if (resource.getAmount() >= amount) {
+                    resource.setAmount(resource.getAmount() - amount);
+                    resourceRepository.save(resource);
+
+                }else {
+                    throw new RuntimeException("Not enough stock available");
+                }
+
+        if (resource.getAmount() == 0) {
+            resourceRepository.delete(resource);
+        }
+    }
 }
+
+
+

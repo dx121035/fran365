@@ -22,7 +22,7 @@
                 <td style="text-align: right;">[[${resource.category}]]</td>
                 <td style="text-align: right;">[[${resource.addr}]]</td>
                 <td style="text-align: right;">[[${resource.expiration}]]</td>
-                <td>
+                <td style="text-align: right;">
                     <select name="amount" th:id="'amount_' + ${loop.index}">
                         <option th:each="i : ${#numbers.sequence(resource.amount, 1)}"
                                 th:value="${i}">[[${i}]]</option>

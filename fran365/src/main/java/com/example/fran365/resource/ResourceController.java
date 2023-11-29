@@ -6,9 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
-
 @RequestMapping("/resource")
 @Controller
 public class ResourceController {
@@ -78,19 +75,9 @@ public class ResourceController {
     }
 
     @GetMapping("/purchase")
-    public String purchase(@RequestParam int amount, @RequestParam Integer id){
+    public String purchase(@RequestParam Integer id, @RequestParam int amount){
 
-        Resource resource = resourceService.readDetail(id);
-
-//      구매 후 수량 변화
-        int inventory = resource.getAmount() - amount;
-        resource.setAmount(inventory);
-        resourceService.update(resource);
-
-//      수량 0이 되면 게시물 삭제
-        if(inventory == 0){
-            resourceService.delete(id);
-        }
+        resourceService.updateProductStock(id, amount);
 
         return "redirect:/resource/readList";
     }
