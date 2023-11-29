@@ -17,6 +17,10 @@ public interface ResourceService {
     void delete(Integer id);
 
     Page<Resource> getList(int page);
+
+    void updateProductStock(Integer id, int amount);
+
+
 }
 
 
