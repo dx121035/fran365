@@ -7,6 +7,7 @@
 package com.example.fran365.product;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,8 @@ import java.io.IOException;
 @RequestMapping("/product")
 public class ProductController {
 
+    @Value("${aws.s3.awspath}")
+    private String awspath;
     @Autowired
     private ProductService productService;
 
@@ -45,6 +48,7 @@ public class ProductController {
     public String readList(Model model) {
 
         model.addAttribute("lists", productService.readList());
+        model.addAttribute("awspath", awspath);
 
         return "product/readList";
     }
