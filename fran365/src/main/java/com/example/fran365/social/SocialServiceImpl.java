@@ -1,22 +1,16 @@
 package com.example.fran365.social;
 
 import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.example.fran365.cart.Cart;
-import com.example.fran365.member.Member;
+import com.example.fran365.cart.CartController;
 import com.example.fran365.member.MemberRepository;
-import com.example.fran365.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.swing.text.html.Option;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -38,45 +32,36 @@ public class SocialServiceImpl implements SocialService {
     private MemberRepository memberRepository;
 
     @Override
-    public void create(Social social, MultipartFile multipartFile) throws IOException {
-
-        File file = new File(multipartFile.getOriginalFilename());
-
-        try (FileOutputStream fos = new FileOutputStream(file)) {
-            fos.write(multipartFile.getBytes());
-        }
-
-        String filename = System.currentTimeMillis() + "_" + multipartFile.getOriginalFilename();
-        amazonS3.putObject(new PutObjectRequest(bucketName, filename, file));
-
-        file.delete();
-
-        social.setImage(filename);
-//        social.setCreateDate(LocalDateTime.now());
+    public void create(Social social) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
 
-        Optional<Member> os = memberRepository.findByUsername(username);
-
-        social.setUsername(os.toString());
+        social.setUsername(username);
+        social.setCreateDate(LocalDateTime.now());
         socialRepository.save(social);
 
     }
 
     @Override
-    public List<Social> readList(String username) {
-        return socialRepository.findAll();
+    public List<Social> readList() {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+
+        return socialRepository.findByUsername(username);
     }
 
     @Override
     public List<Social> readDetail() {
+
         return socialRepository.findAll();
     }
 
     @Override
-    public void update(Social social, MultipartFile multipartFile) throws IOException {
+    public void update(Social social) {
 
+        socialRepository.save(social);
     }
 
     @Override
@@ -85,4 +70,7 @@ public class SocialServiceImpl implements SocialService {
 
         socialRepository.delete(sp.get());
     }
+
+
+
 }

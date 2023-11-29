@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/social/create" method="post">
+    <input type="hidden" id="content-id" name="contentId">
+    내용 : <input type="text" id="content" name="content">
+    <input type="submit" value="등록">
+</form>
+<br>
+<th:block th:each="list:${lists}">
+    [[${list.content}]]
+    <div th:text="${#temporals.format(list.createDate, 'yyyy년 MM월 dd일 HH:mm')}"></div>
+</th:block>
+<br><br><br><br><br>
+<th:block th:each="detail:${details}">
+    <br>
+    [[${detail.username}]]
+    <br>
+    <div th:text="${#temporals.format(detail.createDate, 'yyyy년 MM월 dd일 HH:mm')}"></div>
+    [[${detail.content}]]
+    <br>
+</th:block>
+
+
+
+</body>
+</html>
