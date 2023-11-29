@@ -1,18 +1,12 @@
 package com.example.fran365.social;
 
-import com.example.fran365.member.Member;
 import com.example.fran365.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.*;
 
-import javax.swing.plaf.multi.MultiOptionPaneUI;
-import java.io.IOException;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/social")
@@ -24,10 +18,13 @@ public class SocialController {
     @Autowired
     private MemberService mamberService;
 
-    @GetMapping("/create")
-    public String create(){
+    @GetMapping("/social")
+    public String allSocial(Model model){
 
-        return "social/create";
+        model.addAttribute("details", socialService.readDetail());
+        model.addAttribute("lists", socialService.readList());
+
+        return "social/social";
     }
 
     @PostMapping("/create")
@@ -35,15 +32,7 @@ public class SocialController {
 
         socialService.create(social);
 
-        return "redirect:/product/readlist";
-    }
-
-    @GetMapping("/readlist")
-    public String readList(Model model, String username){
-
-        model.addAttribute("lists", socialService.readList(username));
-
-        return "social/social";
+        return "redirect:/social/social";
     }
 
 
