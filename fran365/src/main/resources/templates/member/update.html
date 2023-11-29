@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/member/update}" method="post" enctype="multipart/form-data">
+
+    <a>성함</a>
+    <div class="bor19 size-218 m-b-20">
+        <input class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" name="name" th:value="${member.name}" readonly>
+    </div>
+
+    <a>아이디</a>
+    <div class="bor19 size-218 m-b-20">
+        <input class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" name="username" th:value="${member.username}" readonly>
+    </div>
+
+    <a>비밀번호</a>
+    <div class="bor19 size-218 m-b-20">
+        <input class="stext-111 cl2 plh3 size-116 p-lr-18" type="hidden" name="password">
+    </div>
+
+    <a>휴대폰번호</a>
+    <div class="bor19 size-218 m-b-20">
+        <input class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" name="phone" th:value="${member.phone}">
+    </div>
+
+    <a>주소</a>
+    <div class="bor19 size-218 m-b-20">
+        <input class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" name="address" th:value="${member.address}">
+    </div>
+
+
+    <a>프로필사진</a>
+    <div class="bor19 size-218 m-b-30">
+        <input class="stext-111 cl2 plh3 size-116 p-lr-18 p-t-10" type="file" name="file">
+    </div>
+
+    <input type="hidden" name="id" th:value="${member.id}">
+    <input type="hidden" name="image" th:value="${member.image}">
+    <input type="hidden" name="password" th:value="${member.password}">
+    <input type="hidden" name="role" th:value="${member.role}">
+
+    <button class="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04" onclick="location.href='/member/update'">
+        수정하기
+    </button>
+
+</form>
+</body>
+</html>
