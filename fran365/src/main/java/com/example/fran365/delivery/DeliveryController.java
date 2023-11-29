@@ -37,12 +37,7 @@ public class DeliveryController {
     @GetMapping("/readList")
     public String readList(Model model){
 
-        Cart cart = cartService.readDetailUsername();
-
         model.addAttribute("deliveries", deliveryService.readList());
-        model.addAttribute("cart", cartService.readDetailUsername());
-        model.addAttribute("user", memberService.readDetailUsername());
-        model.addAttribute("total", cartService.TotalPrice(cart));
 
         return  "delivery/readList";
 
@@ -51,11 +46,6 @@ public class DeliveryController {
     @GetMapping("/readDetail")
     public String readDetail(Model model, @RequestParam Integer id){
 
-        Cart cart = cartService.readDetailUsername();
-
-        model.addAttribute("crat", cartService.readDetailUsername());
-        model.addAttribute("member", memberService.readDetailUsername());
-        model.addAttribute("total", cartService.TotalPrice(cart));
         model.addAttribute("delivery", deliveryService.readDetail(id));
 
         return "delivery/readDetail";

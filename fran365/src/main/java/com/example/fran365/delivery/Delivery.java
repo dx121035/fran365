@@ -17,6 +17,8 @@ public class Delivery {
 
     private String uid;//카드 승인번호
 
+    private String name;
+
     private String allAbout;
 
     @OneToMany(mappedBy = "delivery", cascade = CascadeType.REMOVE)

@@ -42,20 +42,50 @@ public class DeliveryServiceImpl implements DeliveryService{
         String username = auth.getName();
 
         Cart cart = cartService.readDetailUsername();
-        List<Item> item = cart.getItemList();
+        List<Item> itemList = cart.getItemList();
+
+        StringBuilder deliveryItem = new StringBuilder();
+
+        for(int i = 0; i < itemList.size(); i++){
+            String itemName = itemList.get(i).getName();
+
+            if(i==0){
+                deliveryItem.append(itemName);
+            }else{
+                deliveryItem.append(itemList.get(i).getName());
+            }
+            String name = deliveryItem.toString();
+        }
+
+
+
+
+       /* String itemName= item.get(0).getName();
+
+        int itemSize = item.size() - 1;
+
+        String name;
+
+        if (itemSize == 0) {
+            name = itemName;
+        } else {
+            name= itemName + "외" + itemSize + "개";
+        }*/
 
         int total = cartService.TotalPrice(cart);
 
         Delivery delivery = new Delivery();
         delivery.setCreateDate(LocalDateTime.now());
         delivery.setTotal(total);
+        //delivery.setAllAbout(allAbout);
+        delivery.setName(name);
         delivery.setUid(uid);
         delivery.setUsername(username);
 
         deliveryRepository.save(delivery);
 
         Status status = new Status();
-        status.setStep(1);
+        status.setStep("결제완료");
         status.setUsername(username);
         status.setTracking("");
         status.setDelivery(delivery);

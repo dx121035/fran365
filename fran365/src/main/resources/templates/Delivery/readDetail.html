@@ -9,21 +9,28 @@
     <thead>
     <tr>
         <th>주문번호</th>
-        <th>송장번호</th>
-        <th>발주목록</th>
-        <th>발주날짜</th>
+        <th>주문목록</th>
+        <th>주문날짜</th>
         <th>주문금액</th>
+        <th>송장번호</th>
         <th>배송상태</th>
     </tr>
     </thead>
     <tbody class="list">
     <tr th:block th:each="status:${delivery.statusList}">
         <td>[[${delivery.uid}]]</td>
-        <td>[[${status.invoiceNumber</td>
-        <td>발주목록</td>
+        <td>[[${delivery.name}]]</td>
         <td>[[${#temporals.format(delivery.createDate, 'yyyy-MM-dd HH:mm')}]]</td>
         <td>[[${delivery.total}]]</td>
-        <td>[[${delivery.status}]]</td>
+        <td>[[${status.tracking}]]</td>
+        <td><span th:switch="${status.step}">
+                    <span th:case="결제완료">Payment completed</span>
+                    <span th:case="상품준비중">Product in preparation</span>
+                    <span th:case="배송준비중">Preparing for delivery</span>
+                    <span th:case="배송중">Delivery</span>
+                    <span th:case="배송완료">Delivery completed</span>
+                    <span th:case="*">Unknown status</span>
+                </span></td>
     </tr>
     </tbody>
 </table>
