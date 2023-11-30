@@ -23,7 +23,7 @@ import java.util.Random;
 
 @Service
 public class MemberServiceImpl implements MemberService {
-	
+
 	@Autowired
 	private MemberRepository memberRepository;
 

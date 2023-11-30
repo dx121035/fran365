@@ -1,0 +1,94 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout=http:www.ultraq.net.nz/thymeleaf/layout
+      layout:decorate="~{fragments/layout1}">
+
+<div layout:fragment="content">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- PortOne SDK -->
+    <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+
+
+    <script>
+        var IMP = window.IMP;
+        IMP.init("imp50853832");
+
+        function requestPay() {
+            console.log(uuid());
+            IMP.request_pay(
+                {
+                    pg: "danal_tpay",
+                    pay_method: "card",
+                    merchant_uid: "ORD"+uuid(),
+                    name: "장바구니결제test",
+                    amount: "[[${total}]]",
+                    buyer_email: "[[${member.username}]]"
+
+                },
+                function (rsp) {
+
+                    if(rsp.success) { //결제 성공 케이스
+                        alert("카드 결제 성공")
+                        //컨트롤러로 성공시 성공 ID값 전달
+                        location.href='/delivery/pay?uid=' + rsp.imp_uid;
+
+                    } else { //결제 실패 케이스
+                        alert("카드 결제 실패")
+                    }
+
+                }
+            );
+        }
+    </script>
+    <script>
+        function uuid() {
+            return 'xxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        }
+
+        console.log(uuid())
+    </script>
+
+    <th:block th:each="item : ${cart.itemList}">
+        <br>
+        <td class="column-2">[[${item.name}]]</td>
+        <td class="column-3">[[${item.price}]]</td>
+        <input type="number" name="quantity" class="quantity" th:value="${item.quantity}"  th:attr="data-id=${item.id}"/>
+
+
+    </th:block>
+    <div class="size-209">
+								<span class="total">
+									[[${total}]]원
+								</span>
+    </div>
+
+    <button onclick="requestPay()">결제하기</button>
+
+    <script>
+        $(".quantity").change(function() {
+            var itemId = $(this).data("id");
+            var quantity = $(this).val();
+
+            $.ajax({
+                type: "POST",
+                url: "/cart/update",
+                dataType: "json",
+                data: {
+                    itemId: itemId,
+                    quantity: quantity
+                },
+                success: function(data) {
+                    // 총합 금액 업데이트
+                    $(".total").text(data.total + "원");
+                },
+                error: function(err) {
+                    // 에러 처리
+                    console.log(err);
+                }
+            });
+        });
+    </script>
+</div>
+</html>
