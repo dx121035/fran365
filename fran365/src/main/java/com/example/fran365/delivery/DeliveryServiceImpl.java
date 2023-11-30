@@ -1,13 +1,13 @@
 package com.example.fran365.delivery;
 
-import com.example.fran365.status.Status;
-import com.example.fran365.status.StatusService;
+
 import com.example.fran365.cart.Cart;
 import com.example.fran365.cart.CartService;
 import com.example.fran365.item.Item;
 import com.example.fran365.item.ItemService;
 import com.example.fran365.member.Member;
 import com.example.fran365.member.MemberService;
+import com.example.fran365.status.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -49,28 +49,15 @@ public class DeliveryServiceImpl implements DeliveryService{
         for(int i = 0; i < itemList.size(); i++){
             String itemName = itemList.get(i).getName();
 
-            if(i==0){
-                deliveryItem.append(itemName);
-            }else{
-                deliveryItem.append(itemList.get(i).getName());
+            if(i != 0) {
+                deliveryItem.append(", ");  // 아이템 이름들 사이에 쉼표와 공백을 추가합니다.
             }
-            String name = deliveryItem.toString();
+            deliveryItem.append(itemName);
         }
+        String name = deliveryItem.toString();
 
 
 
-
-       /* String itemName= item.get(0).getName();
-
-        int itemSize = item.size() - 1;
-
-        String name;
-
-        if (itemSize == 0) {
-            name = itemName;
-        } else {
-            name= itemName + "외" + itemSize + "개";
-        }*/
 
         int total = cartService.TotalPrice(cart);
 
@@ -85,7 +72,7 @@ public class DeliveryServiceImpl implements DeliveryService{
         deliveryRepository.save(delivery);
 
         Status status = new Status();
-        status.setStep("결제완료");
+        status.setStep(1);
         status.setUsername(username);
         status.setTracking("");
         status.setDelivery(delivery);
