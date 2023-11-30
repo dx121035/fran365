@@ -22,7 +22,7 @@ public class SocialServiceImpl implements SocialService {
     @Autowired
     private AmazonS3 amazonS3;
 
-    @Value("seulabucket")
+    @Value("ucket-va1rkc")
     private String bucketName;
 
     @Autowired

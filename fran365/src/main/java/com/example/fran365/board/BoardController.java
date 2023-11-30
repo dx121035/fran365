@@ -5,6 +5,8 @@ mail: inew3w@gmail.com
 
 package com.example.fran365.board;
 
+import com.example.fran365.member.Member;
+import com.example.fran365.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -71,7 +73,7 @@ public class BoardController {
     public String detail(Model model,@RequestParam Integer id) {
 
         Board board = boardService.detail(id);
-        Member member = memberService.readdetailusername();
+        Member member = memberService.readDetailUsername();
         boardService.hit(board,member);
 
         model.addAttribute("board", boardService.detail(id));
@@ -82,7 +84,7 @@ public class BoardController {
     @GetMapping("/update")
     public String update(Model model,@RequestParam Integer id){
         Board board = boardService.detail(id);
-        Member member = memberService.readdetailusername();
+        Member member = memberService.readDetailUsername();
         boardService.hit(board,member);
 
         model.addAttribute("board", boardService.detail(id));

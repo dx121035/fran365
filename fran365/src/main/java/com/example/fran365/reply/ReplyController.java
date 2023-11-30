@@ -8,6 +8,8 @@ package com.example.fran365.reply;
 
 import com.example.fran365.board.Board;
 import com.example.fran365.board.BoardService;
+import com.example.fran365.member.Member;
+import com.example.fran365.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,7 +46,7 @@ public class ReplyController {
     public String detail(Model model, @RequestParam Integer id) {
 
         Board board = boardService.detail(id);
-        Member member = memberService.readdetailusername();
+        Member member = memberService.readDetailUsername();
         boardService.hit(board,member);
 
         model.addAttribute("board", boardService.detail(id));
