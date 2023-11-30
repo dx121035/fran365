@@ -42,7 +42,7 @@ public class MemberServiceImpl implements MemberService {
 
 	MailDto mailDto;
 
-	@Value("jaehoonbucket")
+	@Value("bucket-va1rkc")
 	private String bucketName;
 
 
