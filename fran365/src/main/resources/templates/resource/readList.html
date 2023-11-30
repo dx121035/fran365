@@ -3,6 +3,12 @@
 
 <div layout:fragment="content">
 
+
+    <th:block th:each="sales: ${brand.salesList}">
+        <a th:text="${sales.getMonth()} + 월"></a>
+        <a th:text="'급여 : ' +  ${sales.getIncome()}"></a><br>
+    </th:block>
+
     <div style="margin-top: 20px;">
         <table class="table">
             <thead>
