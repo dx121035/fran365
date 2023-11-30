@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 
+
 @Service
 public class MemberServiceImpl implements MemberService {
 
@@ -48,9 +49,16 @@ public class MemberServiceImpl implements MemberService {
 	@Value("bucket-va1rkc")
 	private String bucketName;
 
-	//create
+
+	
+	
+	
+
+
+
+
 	@Override
-	public void create(Member member, MultipartFile multipartFile) throws IOException {
+	public Member create(Member member, MultipartFile multipartFile) throws IOException {
 
 		File file = new File(multipartFile.getOriginalFilename());
 
@@ -67,11 +75,14 @@ public class MemberServiceImpl implements MemberService {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 		member.setPassword(passwordEncoder.encode(member.getPassword()));
+
+		member.setUsername(member.getUsername());
+		member.setPassword(member.getPassword());
 		member.setCreateDate(LocalDateTime.now());
 		member.setImage(filename);
-
 		member.setRole("ROLE_USER");
-		memberRepository.save(member);
+		
+		return memberRepository.save(member);
 
 		// 카트 생성
 		//cartService.create(user);
