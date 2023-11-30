@@ -153,7 +153,3 @@ public class ResourceServiceImpl implements ResourceService {
 //        // 롤백이 발생하지 않도록 처리
 //    }
 }
-
-
-
-
