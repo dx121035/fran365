@@ -39,9 +39,13 @@ public class MemberServiceImpl implements MemberService {
 	//@Autowired
 	//private CartService cartService;
 
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+
+
 	MailDto mailDto;
 
-	@Value("youjinbucket")
+	@Value("bucket-va1rkc")
 	private String bucketName;
 
 	//create
@@ -144,18 +148,21 @@ public class MemberServiceImpl implements MemberService {
 
 	//임시 비밀번호로 업데이트
 	@Override
-	public void updatePassword(String str, String username) {
-
-		// Use the autowired memberRepository (mr) to find the member by email
-		Optional<Member> memberOptional = mr.findByUsername(username);
-
-		if (memberOptional.isPresent()) {
-			Long memberId = Long.valueOf(memberOptional.get().getId());
-			MemberServiceImpl mmr = new MemberServiceImpl();
-			mmr.updatePassword(String.valueOf(memberId), str);
+	public void updatePassword(String newPassword, String username) {
+		// Check if the memberRepository is not null before using it
+		if (memberRepository != null) {
+			Optional<Member> memberOptional = memberRepository.findByUsername(username);
+			if (memberOptional.isPresent()) {
+				Member member = memberOptional.get();
+				member.setPassword(newPassword);
+				memberRepository.save(member);
+			} else {
+				// Handle the case where the user is not found
+				System.err.println("User with username " + username + " not found.");
+			}
 		} else {
-			// Handle the case where the member is not found
-			// You might want to throw an exception or handle it based on your application logic
+			// Handle the case where memberRepository is null
+			System.err.println("MemberRepository is not properly initialized.");
 		}
 	}
 
@@ -184,8 +191,8 @@ public class MemberServiceImpl implements MemberService {
 		message.setTo(mailDto.getAddress());
 		message.setSubject(mailDto.getTitle());
 		message.setText(mailDto.getMessage());
-		message.setFrom("보낸이@naver.com");
-		message.setReplyTo("보낸이@naver.com");
+		message.setFrom("seula724@naver.com");
+		message.setReplyTo("seula724@naver.com");
 		System.out.println("message" + message);
 		mailSender.send(message);
 	}
@@ -198,8 +205,32 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	@Transactional
 	public void sendTemporaryPassword(String username) {
+		Optional<Member> memberOptional = memberRepository.findByUsername(username);
 
+		if (memberOptional.isPresent()) {
+			// User exists, proceed with sending the temporary password
+			String temporaryPassword = getTempPassword();
+			String encryptedPassword = passwordEncoder.encode(temporaryPassword);
+
+			// Update the user's password in the database with the encrypted temporary password
+			updatePassword(encryptedPassword, username);
+
+			// Send the email with the temporary password
+			MailDto mailDto = new MailDto();
+			mailDto.setAddress(memberOptional.get().getUsername()); // Set the recipient email
+			mailDto.setTitle("Temporary Password");
+			mailDto.setMessage("Your temporary password is: " + temporaryPassword);
+
+			mailSend(mailDto); // Assuming mailSend method is implemented correctly
+
+			// You might want to log or handle the success here
+			System.out.println("Temporary password sent successfully to: " + memberOptional.get().getUsername());
+		} else {
+			// User does not exist, handle this case (e.g., log an error)
+			System.err.println("User with username " + username + " does not exist.");
+		}
 	}
 
 
@@ -213,6 +244,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 }
+
+
+
 
 
 

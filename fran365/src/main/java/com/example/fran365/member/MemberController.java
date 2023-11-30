@@ -84,7 +84,7 @@ public class MemberController {
 
 		return "member/readDetail";
 	}
-
+	//본인인증하기
 	@PostMapping("/phoneCheck")
 	@ResponseBody
 	public String phoneCheck(String phone) throws NoSuchAlgorithmException, IOException { // 휴대폰 문자보내기
@@ -97,6 +97,7 @@ public class MemberController {
 		return Integer.toString(randomNumber);
 	}
 
+	//아이디 찾기
 	@GetMapping("/findId")
 	public String findId() {
 		return "member/findId";  // Make sure this matches the template file name
@@ -118,10 +119,13 @@ public class MemberController {
 		return response;
 	}
 
+	//이메일로 임시번호 보내기
 	@GetMapping("/sendEmail")
 	public String sendEmail() {
 		return "member/sendEmail";
 	}
+
+
 	@Transactional
 	@PostMapping("/sendEmail")
 	public ResponseEntity<String> sendEmail(@RequestParam("username") String username) {
@@ -135,3 +139,4 @@ public class MemberController {
 		}
 	}
 }
+

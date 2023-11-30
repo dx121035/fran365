@@ -16,54 +16,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
 
-<ul>
-    <li id="GgCustomLogin">
-        <a href="javascript:void(0)">
-            <span>Login with Google</span>
-        </a>
-    </li>
-</ul>
-<script>
-    // Function to be executed when the page loads
-    window.onload = function() {
-        init(); // Call the init function to initialize Google Sign-In
-    };
 
-    function init() {
-        gapi.load('auth2', function() {
-            gapi.auth2.init();
-            options = new gapi.auth2.SigninOptionsBuilder();
-            options.setPrompt('select_account');
-            options.setScope('email profile openid https://www.googleapis.com/auth/user.birthday.read');
-            gapi.auth2.getAuthInstance().attachClickHandler('GgCustomLogin', options, onSignIn, onSignInFailure);
-        });
-    }
-
-    function onSignIn(googleUser) {
-        var access_token = googleUser.getAuthResponse().access_token;
-
-        // Perform your AJAX request to the server for further processing
-        $.ajax({
-            url: 'http://localhost:8080/login/oauth2/code/google',
-            data: { personFields: 'birthdays', key: 'AIzaSyBE0OeynY4OgeTdwxrmHnk0sOXIE0qoEsM', 'access_token': access_token },
-            method: 'GET'
-        })
-            .done(function(response) {
-                var profile = googleUser.getBasicProfile();
-                console.log(profile);
-
-                // Redirect to the index.html page
-                window.location.href = '/index.html'; // Change the URL to your actual index.html location
-            })
-            .fail(function(error) {
-                console.log(error);
-            });
-    }
-
-    function onSignInFailure(error) {
-        console.log(error);
-    }
-</script>
 
 
 <form action="/login"  method="post">
@@ -72,6 +25,8 @@
         <input type="submit" value="로그인">
 </form>
 <a href="/member/findId">아이디 찾기</a>
+<a href="/member/sendEmail">비밀번호 찾기</a>
+
 <a href="javascript:kakaoLogin()" class="btn btn-phoenix-secondary w-100 mb-3"><span class="fab fa-google text-danger me-2 fs--1"></span>카카오 로그인</a>
 <div id="naver_id_login"></div>
 
@@ -123,6 +78,48 @@
         window.location.href = 'index.html';
     }
 </script>-->
+
+<script>
+    // Function to be executed when the page loads
+    window.onload = function() {
+        init(); // Call the init function to initialize Google Sign-In
+    };
+
+    function init() {
+        gapi.load('auth2', function() {
+            gapi.auth2.init();
+            options = new gapi.auth2.SigninOptionsBuilder();
+            options.setPrompt('select_account');
+            options.setScope('email profile openid https://www.googleapis.com/auth/user.birthday.read');
+            gapi.auth2.getAuthInstance().attachClickHandler('GgCustomLogin', options, onSignIn, onSignInFailure);
+        });
+    }
+
+    function onSignIn(googleUser) {
+        var access_token = googleUser.getAuthResponse().access_token;
+
+        // Perform your AJAX request to the server for further processing
+        $.ajax({
+            url: 'http://localhost:8080/login/oauth2/code/google',
+            data: { personFields: 'birthdays', key: 'AIzaSyBE0OeynY4OgeTdwxrmHnk0sOXIE0qoEsM', 'access_token': access_token },
+            method: 'GET'
+        })
+            .done(function(response) {
+                var profile = googleUser.getBasicProfile();
+                console.log(profile);
+
+                // Redirect to the index.html page
+                window.location.href = '/index.html'; // Change the URL to your actual index.html location
+            })
+            .fail(function(error) {
+                console.log(error);
+            });
+    }
+
+    function onSignInFailure(error) {
+        console.log(error);
+    }
+</script>
 
 <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script></body>
 

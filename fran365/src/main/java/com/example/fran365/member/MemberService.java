@@ -28,8 +28,10 @@ public interface MemberService {
 	//비밀번호 변경
 	void updatePassWord(Long Id, String Password);
 
-
+	//임시번호 암호화 하기
 	void sendTemporaryPassword(String username);
+
+
 }
 
 
