@@ -121,6 +121,6 @@ public class BoardServiceImpl implements BoardService {
     public void hit(Board board, Member member) {
         List<Member> a = board.getHitter();
         a.add(member);
-        boardRepository.save(member);
+        boardRepository.save(board);
     }
 }
