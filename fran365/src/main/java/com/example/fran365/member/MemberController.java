@@ -7,12 +7,15 @@ import org.springframework.stereotype.Controller;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.ui.Model;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @RequestMapping("/member")
@@ -38,7 +41,7 @@ public class MemberController {
 
 	@PostMapping("/create")
 	public String create(@Valid MemberForm memberForm, BindingResult result, Member member,
-						 @RequestParam("file") MultipartFile file) throws IOException {
+						 @RequestParam("filename") MultipartFile file) throws IOException {
 
 		// 비밀번호와 비밀번호 확인 값이 일치하는지 검사
 		if (!memberForm.getPassword().equals(memberForm.getConfirmPassword())) {
@@ -49,6 +52,14 @@ public class MemberController {
 
 		try {
 			memberService.create(member,file);
+
+			String to = member.getName();
+			String phone = member.getPhone();
+
+			String subject = to + "님의 회원가입을 환영합니다.";
+
+			/*smsService.sendSms(subject,phone);*/
+
 		}catch(DataIntegrityViolationException e) {
 			e.printStackTrace();
 			result.reject("signupFailed", "이미 등록된 사용자입니다.");
@@ -68,32 +79,28 @@ public class MemberController {
 
 //비번 2개 일치 여부 확인 후 돌려보내기...
 
-	@PostMapping("/signup")
-	public String signup(@Valid MemberForm MemberForm, BindingResult bindingResult,Member member,MultipartFile file) throws IOException {
-		if (bindingResult.hasErrors()) {
-			return "member/create";
-		}
-
-		if (!MemberForm.getPassword().equals(MemberForm.getConfirmPassword())) {
-			bindingResult.rejectValue("ConfirmPassword", "passwordInCorrect",
-					"2개의 패스워드가 일치하지 않습니다.");
-			return "member/create";
-		}
-
-
-
-
-		memberService.create(member, file);
-
-		String to = member.getName();
-		String phone = member.getPhone();
-
-		String subject = to + "님의 회원가입을 환영합니다.";
-
-		/*smsService.sendSms(subject,phone);*/
-
-		return "redirect:/";
-	}
+//	@PostMapping("/signup")
+//	public String signup(@Valid MemberForm MemberForm, BindingResult bindingResult,Member member,MultipartFile file) throws IOException {
+//		if (bindingResult.hasErrors()) {
+//			return "member/create";
+//		}
+//
+//		if (!MemberForm.getPassword().equals(MemberForm.getConfirmPassword())) {
+//			bindingResult.rejectValue("ConfirmPassword", "passwordInCorrect",
+//					"2개의 패스워드가 일치하지 않습니다.");
+//			return "member/create";
+//		}
+//
+//
+//		memberService.create(member, file);
+//		String to = member.getName();
+//		String phone = member.getPhone();
+//		String subject = to + "님의 회원가입을 환영합니다.";
+//
+//		/*smsService.sendSms(subject,phone);*/
+//
+//		return "redirect:/";
+//	}
 
 	@GetMapping("/readList")
 	public String readList(Model model) {
@@ -175,5 +182,51 @@ public class MemberController {
 			return ResponseEntity.ok("사용 가능한 아이디입니다.");
 		}
 	}
+
+
+	//아이디 찾기
+	@GetMapping("/findId")
+	public String findId() {
+		return "member/findId";  // Make sure this matches the template file name
+	}
+
+	@ResponseBody
+	@PostMapping(value = {"/findId"}, produces = {"application/json;charset=UTF-8"})
+	public Map<String, String> submitFindId(@RequestParam String name, @RequestParam String phone) {
+		Map<String, String> response = new HashMap<>();
+
+		Optional<Member> member = this.memberService.findIdUser(name, phone);
+
+		if (member.isPresent()) {
+			response.put("message", "찾으시는 아이디는 <span style=\"color:green\">" + member.get().getUsername()+"</span>입니다.</p>");
+		} else {
+			response.put("error", "아이디가 존재하지 않습니다<br> 이름과전화번호를 확인해주세요.");
+		}
+
+		return response;
+	}
+
+	//이메일로 임시번호 보내기
+	@GetMapping("/sendEmail")
+	public String sendEmail() {
+		return "member/sendEmail";
+	}
+
+
+	@Transactional
+	@PostMapping("/sendEmail")
+	public ResponseEntity<String> sendEmail(@RequestParam("username") String username) {
+		try {
+			memberService.sendTemporaryPassword(username);
+			return ResponseEntity.ok("success");
+		} catch (Exception e) {
+			// Log the exception for debugging purposes
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("error");
+		}
+	}
+
+
 }
+
 

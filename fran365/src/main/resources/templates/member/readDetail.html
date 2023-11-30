@@ -1,3 +1,7 @@
+<!--
+name= yujin
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,36 +9,10 @@
     <title>Title</title>
 </head>
 <body>
-<<<<<<< Updated upstream
-=======
-
-<p><img th:src="@{|${awspath}/${member.image}|}"/></p>
-
-<a>이름</a>
-<div>
-  <input class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" name="name" th:value="${member.name}" readonly>
-</div>
-
-<a>아이디</a>
-<div>
-  <input class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" name="name" th:value="${member.username}" readonly>
-</div>
-
-<a>주소</a>
-<div>
-  <input class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" name="name" th:value="${member.addr}" readonly>
-</div>
-
-<a>전화번호</a>
-<div>
-  <input class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" name="name" th:value="${member.tel}" readonly>
-</div>
-
->>>>>>> Stashed changes
 
 아이디:[[${member.username}]]<br>
 
-<form th:action="@{|/member/changePassword?id=${member.id}|}" method="post">
+<form th:action="@{|/member/updatePw?id=${member.id}|}" method="post">
     비밀번호: *********   <button type="submit">비밀번호 변경</button>
 </form>
 이름:[[${member.name}]]<br>

@@ -9,22 +9,16 @@ import org.springframework.web.multipart.MultipartFile;
 public interface MemberService {
 
 	Member create(Member member, MultipartFile file ) throws IOException;
-
 	List<Member> readList();
 	Member readDetailUsername();
 	void update(Member member, MultipartFile multipartFile) throws IOException;
-
 	Optional<Member> findIdUser(String paramString1, String paramString2);
-
 	//임시 비밀번호로 업데이트
 	void updatePassword(String str, String username);
-
 	//랜덤함수로 임시비밀번호 구문 만들기
 	String getTempPassword();
-
 	// 메일보내기
 	void mailSend(MailDto mailDto);
-
 	//비밀번호 변경
 	void updatePassWord(Long Id, String Password);
 
