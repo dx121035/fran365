@@ -1,3 +1,6 @@
+<!--
+name= yujin
+-->
 <html>
 <head>
     <meta id="_csrf" name="_csrf" content="${_csrf.token}" />
@@ -20,6 +23,7 @@
             <form>
                 <div class="justify-content-center formHeader">
                     <a id="findIdForm" href="/findId"><h3>아이디 찾기</h3></a>
+
                     <hr>
                 </div>
                 <div class="inputForm">
@@ -53,7 +57,7 @@
     </div>
 </div>
 
-<!-- 페이지 개별 적용 js -->
+<!-- 아이디찾기 스크립트 -->
 <script>
     $('#findIdBtn').on('click', function(){
         var name = $('#name').val();

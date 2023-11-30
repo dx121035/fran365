@@ -75,7 +75,6 @@ public class MemberServiceImpl implements MemberService {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 		member.setPassword(passwordEncoder.encode(member.getPassword()));
-
 		member.setUsername(member.getUsername());
 		member.setPassword(member.getPassword());
 		member.setCreateDate(LocalDateTime.now());
@@ -157,6 +156,7 @@ public class MemberServiceImpl implements MemberService {
 		return this.memberRepository.findByNameAndPhone(name, phone);
 	}
 
+	//임시 비밀번호로 업데이트
 	//임시 비밀번호로 업데이트
 	@Override
 	public void updatePassword(String newPassword, String username) {
@@ -255,10 +255,6 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 }
-
-
-
-
 
 
 
