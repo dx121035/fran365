@@ -8,15 +8,15 @@
 
 <form th:action="@{/login}" method="post">
 
-  <input type="text" name="username" placeholder="username">
+    <input type="text" name="username" placeholder="username">
     <br> <br>
-  <input type="text" name="password" placeholder="password">
-  <input type="submit" value="전송">
+    <input type="text" name="password" placeholder="password">
+    <input type="submit" value="전송">
 
-  <fb:login-button
-          scope="public_profile,email"
-          onlogin="checkLoginState();">
-  </fb:login-button>
+    <fb:login-button
+            scope="public_profile,email"
+            onlogin="checkLoginState();">
+    </fb:login-button>
 
 </form>
 

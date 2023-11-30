@@ -26,55 +26,55 @@ public class UserDetailService implements UserDetailsService {
 
 	@Autowired
 	private UserDetailRepository userDetailRepository;
-	
+
 	@Override
 	public Member loadUserByUsername(String username) throws UsernameNotFoundException {
-		
+
 		System.out.println("서비스에서 확인: " + username);
-		
-	Optional<Member> tmember = userDetailRepository.findByusername(username);
-	Member member = tmember.get();
-	
+
+		Optional<Member> tmember = userDetailRepository.findByusername(username);
+		Member member = tmember.get();
+
 		if(member == null) {
 			throw new UsernameNotFoundException("username" + username + " not found");
 		}
-	
-	return member;
+
+		return member;
 	}
-	
-	
-	
+
+
+
 	@Autowired
 	private HttpServletRequest req;
-	
+
 	public int logincheck(String username) {
-		
+
 		Optional<Member> member = userDetailRepository.findByusername(username);
-		
-	
+
+
 		if (member.isPresent()) {
 			// 디비에 존재하는 회원 이기 때문에 스프링 시큐리티 규격에 맞게 세션 처리
-			
+
 			List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
 			list.add(new SimpleGrantedAuthority("ROLE_USER"));
-			
+
 			SecurityContext sc = SecurityContextHolder.getContext();
-			
+
 			sc.setAuthentication(new UsernamePasswordAuthenticationToken(member, null, list));
-			
-			
+
+
 			HttpSession session = req.getSession(true);
-			
+
 			session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY,sc);
-		
+
 			return 1;
-			
+
 		} else {
-			
+
 			return 0;
 		}
-	
-	
+
+
 	}
-	
+
 }

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<table>
+  <thead>
+  <tr>
+    <th>상품명</th>
+    <th>주문번호</th>
+    <th>주문날짜</th>
+    <th>결제금액</th>
+  </tr>
+  </thead>
+  <tbody class="list">
+
+  <tr th:block th:each="delivery:${deliveries}">
+    <td><a th:href="@{|/delivery/readDetail?id=${delivery.id}|}">[[${delivery.name}]]</a></td>
+    <td>[[${delivery.uid}]]</td>
+    <td>[[${#temporals.format(delivery.createDate, 'yyyy-MM-dd HH:mm')}]]</td>
+    <td>[[${delivery.total}]]원</td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>
