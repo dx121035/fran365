@@ -1,0 +1,96 @@
+<!--name:sunghee kim
+date:2023/11/23
+mail: inew3w@gmail.com-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>게시판 상세보기</title>
+</head>
+<body>
+<div class="container">
+    <input type="hidden" name="id" th:value="${board.id}">
+    <div class="text-center">
+        <h2 class="section-heading text-uppercase">게시판 상세보기</h2>
+    </div>
+    <div class="container">
+        <div class="mb-5">
+            <div class="card mb-4">
+                <div class="card-body p-3 p-sm-4">
+                    <div class="border-bottom mb-3">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="btn-reveal-trigger d-flex">
+                                <div class="flex-1" style="font-size: 35px;">[[${board.category}]]] [[${board.title}]]</div>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center mb-3">
+                            <p><a th:text="${#temporals.format(board.createDate, 'yyyy년 MM월 dd일 HH시 mm분')}"></a>
+                            </p>
+                        </div>
+                        <div class="flex-1" style="font-size: 25px;" th:utext="${board.content}"></div>
+                        <img th:src="@{|${awspath}/${board.image}|}">
+<!--
+                                <div th:if="${#authentication.name == 'admin' or #authentication.name == board.writer}">
+-->
+                                    <a th:href="@{|/board/update?id=${board.id}|}"
+                                       class="border border-300 rounded-2 p-2 mb-2 text-center bg-outline-danger dark__bg-1000 shadow-sm ml-2"
+                                       style="text-decoration: none;">수정</a>
+                                    <a th:href="@{|/board/delete?id=${board.id}|}"
+                                       class="border border-300 rounded-2 p-2 mb-2 text-center bg-outline-danger dark__bg-1000 shadow-sm ml-2"
+                                       style="text-decoration: none;">삭제</a>
+                                <!--</div>-->
+                        <a th:href="@{/qna/create}"
+                           class="border border-300 rounded-2 p-2 mb-2 text-center bg-outline-danger dark__bg-1000 shadow-sm ml-2"
+                           style="text-decoration: none;">게시판 등록</a>
+                        <br><br><br>
+                    </div><br>
+                    <div class="d-flex">
+                        <button class="btn btn-link text-900 p-0 fs--2 me-3 fw-bolder"
+                                style="text-decoration: none;" type="button">
+                            <span class="fa-solid fa-comment me-1" style="font-size: 1.5em;"></span>
+                            <span style="font-size: 1.5em;">댓글</span>
+                            <span class="badge rounded-pill bg-success" style="font-size: 1.2em;"
+                                  th:text="${#lists.size(board.replyList)}"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="col-12">
+            <div class="card h-200">
+                <div class="card-body">
+                    <h3 class="mb-4">댓글</h3>
+                        <form action="/reply/create" method="post" class="w-100">
+                            <input type="hidden" name="id" th:value="${board.id}">
+<!--
+                            <input type="hidden" name="rwriter" th:value="${board.writer}">
+-->
+                            <input type="text" name="rwriter" >
+                            <textarea class="form-control" type="text" name="content" placeholder="답변을 입력하세요"
+                                      rows="4"></textarea>
+                            <button class="btn btn-primary w-100 mb-4" name="content">등록</button>
+                        </form>
+                    <th:block class="table-primary" th:each="reply: ${board.replyList}">
+                        <div class="fs--1 fw-semi-bold pb-3 mb-4 border-bottom border-dashed border-300">
+                            <div class="d-flex justify-content-between">
+                                <div class="text-1000 mb-1"
+                                     th:utext="${#strings.replace(reply.content, ',', '')}"></div>
+                            </div>
+                            <div class="text-end">
+                                <p class="text-600 mb-0"
+                                   th:text="${#temporals.format(reply.createDate, 'yyyy년 MM월 dd일 HH시 mm분')}">
+                                </p>
+                            </div>
+                        </div>
+                    </th:block>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
