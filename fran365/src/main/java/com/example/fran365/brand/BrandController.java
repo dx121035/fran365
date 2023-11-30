@@ -2,24 +2,20 @@
 date:2023/11/23
 mail: inew3w@gmail.com
 */
-
 package com.example.fran365.brand;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
 
 @RequestMapping("/brand")
 @Controller
 public class BrandController {
 
     @Autowired private BrandService brandService;
-   // @Autowired private UserService userService;
 
     @GetMapping("/create")
     public String create() {
@@ -33,35 +29,21 @@ public class BrandController {
     }
     @GetMapping("/list")
     public String list(Model model) {
-       model.addAttribute("brand",brandService.list());
-       return "brand/list";
-   }
-  /*    @GetMapping("/list")
-      public String list(Model model,@RequestParam(value="page",defaultValue="0")int page) {
-          Page<Brand> paging = brandService.getList(page);
-          //model.addAttribute("brands",boardService.list());
-
-     model.addAttribute("paging",paging);
-     return "brand/list";
-      }*/
-
+        model.addAttribute("brand",brandService.list());
+        return "brand/list";
+    }
     @GetMapping("/detail")
     public String detail(Model model,@RequestParam Integer id) {
 
-        //Brand brand = brandService.detail(id);
-        //User user = userService.readdetailusername();
-       // boardService.hit(brand,user);
+        Brand brand = brandService.detail(id);
 
         model.addAttribute("brand", brandService.detail(id));
 
         return "brand/detail";
     }
-
     @GetMapping("/update")
     public String update(Model model,@RequestParam Integer id) {
-        //Brand brand = brandService.detail(id);
-        //User user = userService.readdetailusername();
-       // boardService.hit(brand,user);
+        Brand brand = brandService.detail(id);
 
         model.addAttribute("brand", brandService.detail(id));
         return "brand/update";
