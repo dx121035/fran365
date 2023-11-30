@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -84,17 +82,23 @@
 
 
 
-    <form action="/member/create" method="post"enctype="multipart/form-data">
-        <p>아이디:<input type="text" name="username" />
+<form th:action="@{/member/create}" th:object="${memberForm}" method="post"enctype="multipart/form-data">
+	
+	    <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
+            <div th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+        </div>
+        
+        
+	  <p>아이디:<input type="text" name="username" />
+	  <p>비밀번호:<input type="password" name="password"  />
+	  <p>비밀번호 확인:<input type="text" name="confirmPassword"  />
+	  <p>이름:<input type="text" name="name"  />
+	  <p>핸드폰<input type="text" name="phone"  /><br>
+	  <p>주소:<input type="text" name="address"/>
+	  <p>프로필사진:<input type="file" name="file" /><br><br>
 
-        <p>비밀번호:<input type="password" name="password"  />
-        <p>이름:<input type="text" name="name"  />
-        <p>핸드폰<input type="text" name="phone"  /><br>
-        <p>주소:<input type="text" name="address"/>
-        <p>프로필사진:<input type="file" name="filename" /><br><br>
-
-            <input class="btn btn-primary rounded-pill py-3 px-5 submit-button" type="submit" value="회원 가입"></input>
-    </form>
+    <input class="btn btn-primary rounded-pill py-3 px-5 submit-button" type="submit" value="회원 가입"></input>
+</form>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
