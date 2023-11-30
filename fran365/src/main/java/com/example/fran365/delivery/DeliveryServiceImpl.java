@@ -7,6 +7,7 @@ import com.example.fran365.item.Item;
 import com.example.fran365.item.ItemService;
 import com.example.fran365.member.Member;
 import com.example.fran365.member.MemberService;
+import com.example.fran365.status.Status;
 import com.example.fran365.status.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -54,17 +55,26 @@ public class DeliveryServiceImpl implements DeliveryService{
             }
             deliveryItem.append(itemName);
         }
-        String name = deliveryItem.toString();
+        String allAbout = deliveryItem.toString();
 
+        String firstItem= itemList.get(0).getName();
 
+        int itemSize = itemList.size() - 1;
 
+        String name;
+
+        if (itemSize == 0) {
+            name = firstItem;
+        } else {
+            name= firstItem + "외" + itemSize + "개";
+        }
 
         int total = cartService.TotalPrice(cart);
 
         Delivery delivery = new Delivery();
         delivery.setCreateDate(LocalDateTime.now());
         delivery.setTotal(total);
-        //delivery.setAllAbout(allAbout);
+        delivery.setAllAbout(allAbout);
         delivery.setName(name);
         delivery.setUid(uid);
         delivery.setUsername(username);
@@ -72,7 +82,7 @@ public class DeliveryServiceImpl implements DeliveryService{
         deliveryRepository.save(delivery);
 
         Status status = new Status();
-        status.setStep(1);
+        status.setStep("결제완료");
         status.setUsername(username);
         status.setTracking("");
         status.setDelivery(delivery);

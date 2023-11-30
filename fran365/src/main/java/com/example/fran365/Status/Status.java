@@ -23,5 +23,5 @@ public class Status {
 
     private String username;
 
-    private int step;
+    private String step;
 }

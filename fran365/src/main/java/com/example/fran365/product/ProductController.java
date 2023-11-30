@@ -8,6 +8,7 @@ package com.example.fran365.product;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,9 +46,10 @@ public class ProductController {
 
 
     @GetMapping("/readList")
-    public String readList(Model model) {
+    public String readList(Model model, @RequestParam(value="page", defaultValue="0") int page) {
 
-        model.addAttribute("lists", productService.readList());
+        Page<Product> paging = productService.getList(page);
+        model.addAttribute("paging", paging);
         model.addAttribute("awspath", awspath);
 
         return "product/readList";

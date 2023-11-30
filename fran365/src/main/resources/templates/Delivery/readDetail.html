@@ -19,7 +19,7 @@
     <tbody class="list">
     <tr th:block th:each="status:${delivery.statusList}">
         <td>[[${delivery.uid}]]</td>
-        <td>[[${delivery.name}]]</td>
+        <td>[[${delivery.allAbout}]]</td>
         <td>[[${#temporals.format(delivery.createDate, 'yyyy-MM-dd HH:mm')}]]</td>
         <td>[[${delivery.total}]]</td>
         <td>[[${status.tracking}]]</td>
@@ -29,8 +29,7 @@
                     <span th:case="배송준비중">Preparing for delivery</span>
                     <span th:case="배송중">Delivery</span>
                     <span th:case="배송완료">Delivery completed</span>
-                    <span th:case="*">Unknown status</span>
-                </span></td>
+        </span></td>
     </tr>
     </tbody>
 </table>

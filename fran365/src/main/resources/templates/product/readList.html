@@ -10,24 +10,50 @@ mail : leeseulaseula@gmail.com
     <title>Title</title>
 </head>
 <body>
-<th:block th:each="list:${lists}">
-    <br>[[${list.name}]]<img th:src="@{|https://seulabucket.s3.ap-northeast-2.amazonaws.com/${list.image}|}" width="200px" height="300px" style="border-radius: 2%;">
-/&#8361; [[${list.price}]]/[[${list.stock}]]
-    <a th:href="@{|/product/delete?id=${list.id}|}">삭제</a>
-    <a th:href="@{|/product/update?id=${list.id}|}">수정</a>
+<th:block th:each="product, loop : ${paging}">
+    <br>[[${product.name}]]<img th:src="@{|${awspath}/${product.image}|}" width="200px" height="300px" style="border-radius: 2%;">
+    /&#8361; [[${product.price}]]/[[${product.stock}]]
+
+    <a th:href="@{|/product/delete?id=${product.id}|}">삭제</a>
+    <a th:href="@{|/product/update?id=${product.id}|}">수정</a>
+
+    <form th:action="@{|/item/create?id=${product.id}|}" method="post">
 
 
-    <form th:action="@{|/item/create?id=${list.id}|}" method="post">
-
-
-        <input type="hidden" name="name" th:value="${list.name}">
         수량 : <input type="number" name="quantity" min="1"  style="width:50px;">
-        <input type="hidden" name="price" th:value="${list.price}">
+
+        <input type="hidden" name="name" th:value="${product.name}">
+        <input type="hidden" name="price" th:value="${product.price}">
         <input type="submit" value="장바구니에 담기">
+
     </form>
 
 
+
 </th:block>
+<nav aria-label="Page navigation example">
+    <div th:if="${!paging.isEmpty()}">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:classappend="${!paging.hasPrevious} ? disabled">
+                <a class="page-link"
+                   th:href="@{|?page=${paging.number-1}|}">
+                    <span>이전</span>
+                </a>
+            </li>
+            <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+                th:if="${page >= paging.number-5 and page <= paging.number+5}"
+                th:classappend="${page == paging.number} ? 'active'"
+                class="page-item">
+                <a th:text="${page+1}" class="page-link" th:href="@{|?page=${page}|}"></a>
+            </li>
+            <li class="page-item" th:classappend="${!paging.hasNext} ? disabled">
+                <a class="page-link" th:href="@{|?page=${paging.number+1}|}">
+                    <span>다음</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
 <a href="/cart/readDetail">장바구니</a>
 </body>
 </html>
