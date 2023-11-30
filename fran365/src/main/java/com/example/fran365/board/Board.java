@@ -5,6 +5,7 @@ mail: inew3w@gmail.com
 
 package com.example.fran365.board;
 
+import com.example.fran365.member.Member;
 import com.example.fran365.reply.Reply;
 import jakarta.persistence.*;
 import lombok.Data;

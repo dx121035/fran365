@@ -5,6 +5,7 @@ mail: inew3w@gmail.com
 
 package com.example.fran365.board;
 
+import com.example.fran365.member.Member;
 import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,6 +21,6 @@ public interface BoardService {
     Page <Board> getFAQBoards(String category,int page);
     Page <Board> getAllBoardsByCategories(List<String> categories,int page);
 
-    void hit (Board board,Member member);
+    void hit (Board board, Member member);
 
 }
