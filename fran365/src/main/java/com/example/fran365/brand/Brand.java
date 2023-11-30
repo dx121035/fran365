@@ -5,10 +5,12 @@ mail: inew3w@gmail.com
 
 package com.example.fran365.brand;
 
+import com.example.fran365.sales.Sales;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -34,6 +36,11 @@ public class Brand {
     private String time; //영업 시간
 
     private String email;
+
+    private String username;
+
+    @OneToMany(mappedBy = "brand", cascade = CascadeType.REMOVE)
+    private List<Sales> salesList;
 
     private LocalDateTime createDate;
 }

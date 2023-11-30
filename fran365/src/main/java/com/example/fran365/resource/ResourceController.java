@@ -1,7 +1,11 @@
 package com.example.fran365.resource;
 
+import com.example.fran365.brand.BrandRepository;
+import com.example.fran365.sales.SalesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +17,9 @@ public class ResourceController {
     @Autowired
     private ResourceService resourceService;
 
+    @Autowired
+    private BrandRepository brandRepository;
+
     @GetMapping("/create")
     public String create() {
 
@@ -23,6 +30,7 @@ public class ResourceController {
     @PostMapping("/create")
     public String create(Resource resource) {
 
+
         resourceService.create(resource);
 
         return "redirect:/resource/readList";
@@ -31,6 +39,11 @@ public class ResourceController {
     @GetMapping("/readList")
     public String readList(Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
 
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+
+        model.addAttribute("brand",brandRepository.findByUsername(username));
         Page<Resource> paging = resourceService.getList(page);
         model.addAttribute("paging", paging);
 
