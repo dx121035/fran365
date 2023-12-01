@@ -1,13 +1,15 @@
 package com.example.fran365.member;
 
-import jakarta.persistence.*;
-import lombok.Data;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
+
+
+import jakarta.persistence.*;
+
+import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 
 @Entity
@@ -18,22 +20,28 @@ public class Member implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String username;
+    @Column(unique = true)
+    private String username; //아이디를 이메일로 강제
 
     private String password;
-
-    @Enumerated(EnumType.STRING)
-    private Role role;
 
     private boolean enabled;
 
     private String name;
 
-    private String tel;
-
-    private String addr;
+    private String phone;
 
     private String image;
+
+    private String address;
+
+    private String bid; //가입한 사람 매장주소
+
+//    @Enumerated(EnumType.STRING)
+//    private Role role;
+    
+    
+    private String Role;
 
     private LocalDateTime createDate;
 
@@ -79,6 +87,5 @@ public class Member implements UserDetails {
         // TODO Auto-generated method stub
         return true;
     }
-
 
 }
