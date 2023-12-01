@@ -50,7 +50,7 @@ public class ResourceServiceImpl implements ResourceService {
 
         Member member = memberService.readDetailUsername();
 
-        resource.setAddr(member.getAddr());
+        resource.setAddr(member.getAddress());
 
         resource.setWriter(member.getName());
 

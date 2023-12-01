@@ -40,7 +40,6 @@ public class Member implements UserDetails {
 //    @Enumerated(EnumType.STRING)
 //    private Role role;
     
-    
     private String Role;
 
     private LocalDateTime createDate;
@@ -54,38 +53,38 @@ public class Member implements UserDetails {
 
     @Override
     public String getPassword() {
-        // TODO Auto-generated method stub
-        return password;
+
+    	return password;
     }
 
     @Override
     public String getUsername() {
-        // TODO Auto-generated method stub
-        return username;
+
+    	return username;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        // TODO Auto-generated method stub
-        return true;
+
+    	return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        // TODO Auto-generated method stub
-        return true;
+
+    	return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        // TODO Auto-generated method stub
-        return true;
+
+    	return true;
     }
 
     @Override
     public boolean isEnabled() {
-        // TODO Auto-generated method stub
-        return true;
+
+    	return true;
     }
 
 }
