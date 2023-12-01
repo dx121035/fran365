@@ -10,7 +10,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
@@ -28,18 +27,22 @@ public class UserDetailService implements UserDetailsService {
 	private UserDetailRepository userDetailRepository;
 
 	@Override
-	public Member loadUserByUsername(String username) throws UsernameNotFoundException {
+	public User loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		System.out.println("서비스에서 확인: " + username);
+		System.out.println("서비스 확인 " + username);
 
 		Optional<Member> tmember = userDetailRepository.findByusername(username);
 		Member member = tmember.get();
+
 
 		if(member == null) {
 			throw new UsernameNotFoundException("username" + username + " not found");
 		}
 
-		return member;
+		User user = new User(member);
+
+
+		return user;
 	}
 
 
@@ -49,11 +52,10 @@ public class UserDetailService implements UserDetailsService {
 
 	public int logincheck(String username) {
 
-		Optional<Member> member = userDetailRepository.findByusername(username);
+		Optional<Member> tmember = userDetailRepository.findByusername(username);
+		Member member = tmember.get();
 
-
-		if (member.isPresent()) {
-			// 디비에 존재하는 회원 이기 때문에 스프링 시큐리티 규격에 맞게 세션 처리
+		if (member != null) {
 
 			List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
 			list.add(new SimpleGrantedAuthority("ROLE_USER"));
