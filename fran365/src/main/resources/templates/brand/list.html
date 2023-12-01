@@ -1,0 +1,151 @@
+<!--name:sunghee kim
+date:2023/11/30
+mail: inew3w@gmail.com-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="row gx-7">
+    <!-- 전국 매장 리스트 -->
+    <div class="col-12 col-xl-6">
+        <div data-list='{"valueNames":["title","address","email","tel","time","phone"],"page":5}'>
+            <div class="mb-6 mt-5">
+                <h4>매장 정보</h4>
+                <!-- <p class="text-700">Where you generated most of the revenue</p> -->
+            </div>
+            <div class="table-responsive scrollbar" style="height:420px">
+                <table class="table fs--4 mb-1">
+                    <thead>
+                    <tr>
+                        <th class="sort border-top border-200 ps-0 align-middle" scope="col" data-sort="title" style="width:10%">매장이름</th>
+                        <th class="sort border-top border-200 align-middle text-center" scope="col" data-sort="address" style="width:25%">매장 주소</th>
+                        <th class="sort border-top border-200 text-center" scope="col" data-sort="mail" style="width:10%">이메일</th>
+                        <th class="sort border-top border-200 text-center" scope="col" data-sort="tel" style="width:15%">전화번호</th>
+                        <th class="sort border-top border-200 text-center" scope="col" data-sort="time" style="width:15%">영업시간</th>
+                        <th class="sort border-top border-200 text-center" scope="col" data-sort="phone" style="width:15%">점주 핸드폰</th>
+                    </tr>
+                    </thead>
+                    <tbody class="list" id="table-regions-by-revenue">
+                    <tr th:each="brand: ${brand}">
+                        <td class="title white-space-nowrap ps-1 country" ><a th:href="@{|/brand/detail?id=${brand.id}|}" th:text="${brand.title}"></a></td>
+                        <td class="address align-middle text-center" th:text="${brand.address2}"></td>
+                        <td class="email align-middle text-center" th:text="${brand.email}"></td>
+                        <td class="tel align-middle text-center" th:text="${brand.tel}"></td>
+                        <td class="time align-middle text-center" th:text="${brand.time}"></td>
+                        <td class="phone align-middle text-center" th:text="${brand.phone}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row align-items-center py-1">
+                <div class="pagination d-none"></div>
+                <div class="col d-flex fs--1">
+                    <p class="mb-0 d-none d-sm-block me-3 fw-semi-bold text-900" data-list-info="data-list-info"></p>
+                </div>
+                <div class="col-auto d-flex">
+                    <button class="btn btn-link px-1 me-1" type="button" title="Previous" data-list-pagination="prev"><span class="fas fa-chevron-left me-2"></span>Previous</button>
+                    <button class="btn btn-link px-1 ms-1" type="button" title="Next" data-list-pagination="next">Next<span class="fas fa-chevron-right ms-2"></span></button>
+                </div>
+            </div>
+            <!-- 전국 매장 검색 기능  -->
+            <div class="search-box mb-3 mx-auto">
+                <form class="position-relative" data-bs-toggle="search"
+                      data-bs-display="static">
+                    <input class="form-control search-input search form-control-sm"
+                           type="search" placeholder="검색어를 입력하세요" aria-label="Search" /> <span
+                        class="fas fa-search search-box-icon"></span>
+                </form>
+            </div>
+            <!-- <div th:if="${#authentication.name == 'admin'}"> -->
+            <a href="/brand/create">작성</a>
+            <!--</div>-->
+        </div>
+    </div>
+    <div class="col-12 col-xl-6">
+        <div class="mx-n4 mx-lg-n6 ms-xl-0 h-100">
+            <div class="h-100 w-100">
+                <div class="mb-5 mt-4">
+                    <h4>가맹점 위치</h4>
+                </div>
+                <div class="mb-4">
+                    <div class="row g-3">
+                        <div id="kmap" style="width: 100%; height: 500px;"></div>
+                        <script type="text/javascript"
+                                src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9eab04f54e929879b23643109e0c42e1&libraries=services"></script>
+                        <script th:inline="javascript">
+                            var container = document
+                                    .getElementById('kmap'), // 지도를 표시할 div
+                                option = {
+                                    center : new kakao.maps.LatLng(37,127), // 지도의 중심좌표
+                                    level : 10
+                                    // 지도의 확대 레벨
+                                };
+                            var brandList = /*[[${brand}]]*/ [];
+
+                            // 지도를 생성합니다
+                            var map = new kakao.maps.Map(container,
+                                option);
+                            // 주소-좌표 변환 객체를 생성합니다
+                            var geocoder = new kakao.maps.services.Geocoder();
+
+                            brandList.forEach( function (brand) {
+                                // 주소로 좌표를 검색합니다
+                                geocoder.addressSearch(brand.address2, function(result, status) {
+                                    // 정상적으로 검색이 완료됐으면
+                                    if (status === kakao.maps.services.Status.OK) {
+                                        var coords = new kakao.maps.LatLng(
+                                            result[0].y,
+                                            result[0].x);
+
+                                        // 결과값으로 받은 위치를 마커로 표시합니다
+                                        var marker = new kakao.maps.Marker(
+                                            {
+                                                map : map,
+                                                position : coords,
+                                            });
+                                        var iwContent = '<div style="padding: 10px; font-family: Arial, sans-serif; color: #008080;">매장 이름: <strong style="color: red; font-weight: bold;">' + brand.title + '</strong></div>' +
+                                            '<div style="padding: 5px 0; white-space: nowrap; font-family: Arial, sans-serif; color: #777;">매장번호: ' + brand.tel + '</div>';
+                                        iwRemoveable = true;
+
+                                        // 인포윈도우로 장소에 대한 설명을 표시합니다
+                                        var infowindow = new kakao.maps.InfoWindow(
+                                            {
+                                                content : iwContent
+                                            });
+                                        // 마커에 마우스오버 이벤트를 등록합니다
+                                        kakao.maps.event.addListener
+                                        (marker,'mouseover',function() {// 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+                                            infowindow.open(map,marker);
+                                        });
+                                        // 마커에 마우스아웃 이벤트를 등록합니다
+                                        kakao.maps.event
+                                            .addListener(
+                                                marker,
+                                                'mouseout',
+                                                function() {
+                                                    // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
+                                                    infowindow
+                                                        .close();
+                                                });
+
+                                        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                                        map.setCenter(coords);
+                                    }
+                                });
+                            });
+
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

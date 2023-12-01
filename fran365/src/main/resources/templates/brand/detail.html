@@ -1,0 +1,143 @@
+<!--name:sunghee kim
+date:2023/11/30
+mail: inew3w@gmail.com-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>지점 상세보기</title>
+</head>
+<body>
+<script>
+    var navbarVertical = document.querySelector('.navbar-vertical');
+    navbarVertical.remove();
+    navbarTop.removeAttribute('style');
+</script>
+<!-- 매장 상세 정보 -->
+<div class="row g-3 mb-6">
+    <input type="hidden" name="id" th:value="${brand.id}">
+    <div class="col-12 col-lg-4">
+        <h4>가맹점 위치</h4>
+        <div class="card h-100">
+            <div class="card-body">
+                <div class="border-bottom border-dashed border-300">
+                    <h4 class="mb-3 lh-sm lh-xl-1">[[${brand.title}]]
+                        <button class="btn btn-link p-0" type="button"> <span class="fas fa-edit fs--1 ms-3 text-500"></span></button>
+                    </h4>
+                </div>
+                <div class="pt-4 mb-7 mb-lg-4 mb-xl-7">
+                    <div class="row justify-content-between">
+                        <div class="col-auto">
+                            <h5 class="text-1000">매장주소</h5>
+                        </div>
+                        <div class="col-auto">
+                            <p class="text-800">[[${brand.address2}]]</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-top border-dashed border-300 pt-4">
+                    <div class="row flex-between-center mb-2">
+                        <div class="col-auto">
+                            <h5 class="text-1000 mb-0">매장 번호</h5>
+                        </div>
+                        <div class="col-auto">[[${brand.tel}]]</div>
+                    </div>
+                    <div class="row flex-between-center mb-2">
+                        <div class="col-auto">
+                            <h5 class="text-1000 mb-0">이메일</h5>
+                        </div>
+                        <div class="col-auto">[[${brand.email}]]</div>
+                    </div>
+                    <div class="row flex-between-center mb-2">
+                        <div class="col-auto">
+                            <h5 class="text-1000 mb-0">점주 번호</h5>
+                        </div>
+                        <div class="col-auto">[[${brand.phone}]]</div>
+                    </div>
+                </div>
+                <br><br><br><br><br><br>
+                <!-- <div th:if="${#authentication.name == 'admin'}"> -->
+                <a th:href="@{|/brand/update?id=${brand.id}|}">수정</a>
+                <a th:href="@{|/brand/delete?id=${brand.id}|}">삭제</a>
+                <!-- </div> -->
+            </div>
+        </div>
+    </div>
+    <!-- 매장 상세 지도 & 지도 뷰   -->
+    <div class="col-12 col-lg-8">
+        <h4>가맹점 위치</h4>
+        <div class="card h-100">
+            <div class="card-body">
+                <!--  <div class="h-75 bg-white" id="map"></div>  -->
+                <div id="kmap"style="width: 50%; height: 500px; float: left; position: relative"></div>
+                <div id="roadview"style="width: 50%; height: 500px; float: left; position: relative"></div>
+
+                <script type="text/javascript"
+                        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9eab04f54e929879b23643109e0c42e1&libraries=services"></script>
+                <script th:inline="javascript">
+                    var container = document.getElementById('kmap'), // 지도를 표시할 div
+                        option = { center : new kakao.maps.LatLng( 37.566826, 126.9786567), // 지도의 중심좌표
+                            level : 3 // 지도의 확대 레벨
+                        };
+                    // 지도를 생성합니다
+                    var map = new kakao.maps.Map( container, option);
+
+                    // 주소-좌표 변환 객체를 생성합니다
+                    var geocoder = new kakao.maps.services.Geocoder();
+
+                    var address = /*[[${brand.address2}]]*/ '';
+                    var title = /*[[${brand.title}]]*/ '';
+
+                    // 주소로 좌표를 검색합니다
+                    geocoder.addressSearch(address , function(result, status) {
+
+                        // 정상적으로 검색이 완료됐으면
+                        if (status === kakao.maps.services.Status.OK) {
+
+                            var coords = new kakao.maps.LatLng(
+                                result[0].y,
+                                result[0].x);
+
+                            // 결과값으로 받은 위치를 마커로 표시합니다
+                            var marker = new kakao.maps.Marker(
+                                {
+                                    map : map,
+                                    position : coords,
+                                });
+
+                            // 인포윈도우로 장소에 대한 설명을 표시합니다
+                            var infowindow = new kakao.maps.InfoWindow(
+                                {
+                                    content : '<div style="width:150px;text-align:center;padding:6px 0;">'+title+'</div>'
+                                });
+                            infowindow.open(map, marker);
+
+                            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                            map.setCenter(coords);
+
+                            // 로드 뷰는 지도와는 별도로 그릴수 있다. 지도 없이 로드뷰만 생성도 가능하다.
+
+                            var roadviewContainer = document
+                                .getElementById('roadview'); //로드뷰를 표시할 div
+                            var roadview = new kakao.maps.Roadview(
+                                roadviewContainer); //로드뷰 객체
+                            var roadviewClient = new kakao.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
+
+                            /*       var position = new kakao.maps.LatLng(37.558043, 126.919002); */
+
+                            // 특정 위치의 좌표와 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄운다.
+                            roadviewClient.getNearestPanoId(coords, 50, function(panoId) {
+                                roadview.setPanoId(panoId, coords); //panoId와 중심좌표를 통해 로드뷰 실행
+                            });
+
+                        }
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

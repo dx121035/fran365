@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>주문번호</th>
+        <th>주문목록</th>
+        <th>주문날짜</th>
+        <th>주문금액</th>
+        <th>송장번호</th>
+        <th>배송상태</th>
+    </tr>
+    </thead>
+    <tbody class="list">
+    <tr th:block th:each="status:${delivery.statusList}">
+        <td>[[${delivery.uid}]]</td>
+        <td>[[${delivery.allAbout}]]</td>
+        <td>[[${#temporals.format(delivery.createDate, 'yyyy-MM-dd HH:mm')}]]</td>
+        <td>[[${delivery.total}]]</td>
+        <td>[[${status.tracking}]]</td>
+        <td><span th:switch="${status.step}">
+                    <span th:case="결제완료">Payment completed</span>
+                    <span th:case="상품준비중">Product in preparation</span>
+                    <span th:case="배송준비중">Preparing for delivery</span>
+                    <span th:case="배송중">Delivery</span>
+                    <span th:case="배송완료">Delivery completed</span>
+        </span></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

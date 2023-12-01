@@ -1,0 +1,26 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout1}">
+
+<div layout:fragment="content">
+
+  <form action="/resource/create" method="post">
+    <p>제목 : <input type="text" name="title"></p>
+    <p>카테고리:
+      <select name="category">
+        <option value="팝니다">팝니다</option>
+        <option value="삽니다">삽니다</option>
+        <!-- Add more options as needed -->
+      </select>
+    </p>
+    <p>내용 : <input type="text" name="content"></p>
+    <p>수량 : <input type="text" name="amount"></p>
+    <p>가격1 : <input type="text" name="price"></p>
+    <p>유통기한 : <input type="text" name="expiration"></p>
+
+    <input type="submit" value="전송">
+  </form>
+
+
+</div>
+
+</html>
