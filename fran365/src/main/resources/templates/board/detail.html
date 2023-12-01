@@ -65,10 +65,9 @@ mail: inew3w@gmail.com-->
                     <h3 class="mb-4">댓글</h3>
                         <form action="/reply/create" method="post" class="w-100">
                             <input type="hidden" name="id" th:value="${board.id}">
-<!--
+
                             <input type="hidden" name="rwriter" th:value="${board.writer}">
--->
-                            <input type="text" name="rwriter" >
+
                             <textarea class="form-control" type="text" name="content" placeholder="답변을 입력하세요"
                                       rows="4"></textarea>
                             <button class="btn btn-primary w-100 mb-4" name="content">등록</button>
