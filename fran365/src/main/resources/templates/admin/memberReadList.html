@@ -234,7 +234,7 @@
 				  <th:block th:each="member : ${members}">
                   <tr class="hover-actions-trigger btn-reveal-trigger position-static">
 					<td class="position1 align-middle white-space-nowrap text-1100">[[${member.id}]]</td>
-                    <td class="customer align-middle white-space-nowrap"><a class="d-flex align-items-center text-900 text-hover-1000" href="#!">
+                    <td class="customer align-middle white-space-nowrap"><a class="d-flex align-items-center text-900 text-hover-1000" th:href="@{|/admin/memberReadDetail?id=${member.id}|}">
                         <div class="avatar avatar-m"><img class="rounded-circle" src="../assets/img/team/32.webp" alt="" />
                         </div>
                         <h6 class="mb-0 ms-3 fw-semi-bold">[[${member.name}]]</h6>
