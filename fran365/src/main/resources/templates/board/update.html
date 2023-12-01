@@ -41,12 +41,12 @@ mail: inew3w@gmail.com-->
 
                             <select class="form-select" name="category" id="category" th:value="${board.category}">
                                 <option selected="selected" th:value="${board.category}" disabled>[[${board.category}]]</option>
-                                <!--    <div th:if="${#authentication.name == 'admin'}">-->
+                                <div th:if="${#authentication.name == 'admin'}">
                                 <optgroup label="Admin">
                                     <option value="공지">공지</option>
                                     <option value="FAQ">FAQ</option>
                                 </optgroup>
-                                <!--</div>-->
+                                </div>
                                 <optgroup label="Member">
                                     <option value="상품">상품</option>
                                     <option value="배송">배송</option>
