@@ -1,13 +1,17 @@
-<html xmlns:sec="http://www.w3.org/1999/xhtml" lang="" xmlns:th="http://www.thymeleaf.org"
+<html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout=http:www.ultraq.net.nz/thymeleaf/layout
 	  layout:decorate="~{fragments/layout1}">
 
 <div layout:fragment="content">
 인덱스 테스트
-	<p><a href="/logout" sec:authorize="isAuthenticated()">Log out</a>
+	<a href="/member/create">회원가입</a>
+	<a href="/login">로그인</a>
+	<a href="/logout">로그아웃</a>
+	<a href="/product/create">상품 등록</a>
+	<a href="/product/readList">상품 목록</a>
+	<a href="/cart/readDetail">장바구니</a>
+	<a href="/social/social">인스타그램</a>
 
-	<p><a href="/login" sec:authorize="isAnonymous()">log in</a>
-	<p><a href="/member/readDetail"  sec:authorize="isAuthenticated()">readDetail</a>
-	<div style="color:red" th:text="${#authentication.name} + ' 님 로그인 중'"></div>
-	<br><br>
+	<div style="color:papayawhip" th:text="${#authentication.name} + ' 님 로그인 중'"></div>
+	<p><a href="/admin/main">관리자페이지</a></p>
 </div>
