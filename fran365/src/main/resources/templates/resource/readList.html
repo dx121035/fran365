@@ -4,6 +4,8 @@
 <div layout:fragment="content">
 
 
+    <a th:text="${brand.getAddress1()}"></a>
+    <a th:text="${brand.getAddress2()}"></a><br>
     <th:block th:each="sales: ${brand.salesList}">
         <a th:text="${sales.getMonth()} + 월"></a>
         <a th:text="'급여 : ' +  ${sales.getIncome()}"></a><br>
@@ -26,7 +28,7 @@
                     <a th:href="@{|/resource/readDetail?id=${resource.id}|}" th:text="${resource.title}"></a>
                 </td>
                 <td style="text-align: right;">[[${resource.category}]]</td>
-                <td style="text-align: right;">[[${resource.addr}]]</td>
+                <td style="text-align: right;">[[${resource.address}]]</td>
                 <td style="text-align: right;">[[${resource.expiration}]]</td>
                 <td style="text-align: right;">
                     <select name="amount" th:id="'amount_' + ${loop.index}">
@@ -34,19 +36,25 @@
                                 th:value="${i}">[[${i}]]</option>
                     </select>
                 </td>
+
                 <td>
-                    <a href="#" th:onclick="'purchase(' + ${resource.id} + ', ' + ${loop.index} + ')'" >구매</a>
+                    <a href="#" th:attr="onclick='purchase(' + ${resource.id} + ', ' + ${loop.index} + ', \'' + ${resource.category} + '\')'">구매</a>
+
+                </td>
+
+
                 </td>
             </tr>
 
             <script th:inline="javascript">
                 /*<![CDATA[*/
-                function purchase(id, index) {
+                function purchase(id, index, category) {
                     var amountSelect = document.getElementById('amount_' + index);
                     var selectedAmount = amountSelect.value;
 
+
                     // 선택된 amount 값을 사용하여 URL 생성
-                    var purchaseLink = '/resource/purchase?id=' + id + '&amount=' + selectedAmount;
+                    var purchaseLink = '/resource/purchase?id=' + id + '&amount=' + selectedAmount + '&category=' + category;
 
                     // 페이지 이동
                     window.location.href = purchaseLink;
