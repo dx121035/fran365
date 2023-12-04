@@ -1,6 +1,7 @@
 package com.example.fran365.admin;
 
 import java.util.List;
+import java.util.Map;
 
 import com.example.fran365.member.Member;
 
@@ -15,5 +16,7 @@ public interface AdminService {
 	void memberDelete(Integer id);
 	
 	void memberApprove(Integer id, Integer number);
+	
+	Map<Object, Object> getPosition();
 	
 }

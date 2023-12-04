@@ -1,6 +1,8 @@
 package com.example.fran365.admin;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,12 +10,16 @@ import org.springframework.stereotype.Service;
 
 import com.example.fran365.member.Member;
 import com.example.fran365.member.MemberRepository;
+import com.example.fran365.position.PositionService;
 
 @Service
 public class AdminServiceImpl implements AdminService {
 	
 	@Autowired
 	private MemberRepository memberRepository;
+	
+	@Autowired
+	private PositionService positionService;
 
 	@Override
 	public List<Member> memberReadList() {
@@ -54,6 +60,21 @@ public class AdminServiceImpl implements AdminService {
 		member.setEnabled(true);
 		member.setPosition(number);
 		memberRepository.save(member);
+	}
+
+	@Override
+	public Map<Object, Object> getPosition() {
+		
+		Map<Object, Object> map = new HashMap<>();
+		
+		for (int i = 0; i < positionService.readList().size(); i++) {
+			
+			int positionNumber = positionService.readList().get(i).getNumber();
+			String positionPosition = positionService.readList().get(i).getPosition();
+			map.put(positionNumber, positionPosition);
+		}
+
+		return map;
 	}
 	
 }

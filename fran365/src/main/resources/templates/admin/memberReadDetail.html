@@ -261,11 +261,11 @@
                         </div>
                         <div>
                           <h5>소속</h5>
-                          <p class="fs-1 text-800 mb-0">본사</p>
+                          <p class="fs-1 text-800 mb-0">[[${member.belong}]]</p>
                         </div>
                         <div>
                           <h5>직급</h5>
-                          <p class="fs-1 text-800 mb-0">과장</p>
+                          <p class="fs-1 text-800 mb-0"><span th:text="${positionMap.get(T(java.lang.Integer).parseInt(member.position ?: '0'))}"></span></p>
                         </div>
                       </div>
                     </div>

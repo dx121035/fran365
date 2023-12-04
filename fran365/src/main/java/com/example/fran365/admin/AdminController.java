@@ -53,15 +53,7 @@ public class AdminController {
 		model.addAttribute("awspath", awspath);
 		model.addAttribute("user", memberService.readDetailUsername());
 		model.addAttribute("members", adminService.memberReadList());
-		Map<Object, Object> map = new HashMap<>();
-		
-		for (int i = 0; i < positionService.readList().size(); i++) {
-			
-			int positionNumber = positionService.readList().get(i).getNumber();
-			String positionPosition = positionService.readList().get(i).getPosition();
-			map.put(positionNumber, positionPosition);
-		}
-		model.addAttribute("positionMap", map);
+		model.addAttribute("positionMap", adminService.getPosition());
 		
 		return "admin/memberReadList";
 	}
@@ -72,6 +64,7 @@ public class AdminController {
 		model.addAttribute("awspath", awspath);
 		model.addAttribute("user", memberService.readDetailUsername());
 		model.addAttribute("member", adminService.memberReadDeatail(id));
+		model.addAttribute("positionMap", adminService.getPosition());
 		
 		return "admin/memberReadDetail";
 	}
