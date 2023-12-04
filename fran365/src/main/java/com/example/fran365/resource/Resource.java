@@ -21,7 +21,9 @@ public class Resource {
 
     private String writer;
 
-    private String addr;
+    private String username;
+
+    private String address;
 
     private String category;
 

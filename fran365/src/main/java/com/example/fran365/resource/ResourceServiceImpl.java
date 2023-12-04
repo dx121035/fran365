@@ -1,8 +1,12 @@
 // 작성자 : 임지호
 package com.example.fran365.resource;
 
+import com.example.fran365.brand.Brand;
+import com.example.fran365.brand.BrandRepository;
+import com.example.fran365.brand.BrandService;
 import com.example.fran365.member.Member;
 import com.example.fran365.member.MemberService;
+import com.example.fran365.stock.StockRepository;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,7 +35,10 @@ public class ResourceServiceImpl implements ResourceService {
     private MemberService memberService;
 
     @Autowired
-    private PlatformTransactionManager transactionManager;
+    private StockRepository stockRepository;
+
+    @Autowired
+    private BrandRepository brandRepository;
 
     @Override
     public List<Resource> readList() {
@@ -50,9 +57,11 @@ public class ResourceServiceImpl implements ResourceService {
 
         Member member = memberService.readDetailUsername();
 
-        resource.setAddr(member.getAddress());
+        resource.setAddress(member.getAddress());
 
         resource.setWriter(member.getName());
+
+        resource.setUsername(member.getUsername());
 
         resource.setCreateDate(LocalDateTime.now());
 
@@ -87,19 +96,22 @@ public class ResourceServiceImpl implements ResourceService {
     @Override
     @Transactional
     public void updateProductStock(Integer id, int amount) {
+
         Resource resource = resourceRepository.findWithPessimisticLockById(id);
 
-                if (resource.getAmount() >= amount) {
-                    resource.setAmount(resource.getAmount() - amount);
-                    resourceRepository.save(resource);
+        if (resource.getAmount() >= amount) {
+            resource.setAmount(resource.getAmount() - amount);
+            resourceRepository.save(resource);
 
-                }else {
-                    throw new RuntimeException("Not enough stock available");
-                }
+        } else {
+            throw new RuntimeException("Not enough stock available");
+        }
 
         if (resource.getAmount() == 0) {
             resourceRepository.delete(resource);
         }
+
+
     }
 
 //    @Transactional

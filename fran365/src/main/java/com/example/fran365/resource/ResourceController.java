@@ -2,6 +2,7 @@ package com.example.fran365.resource;
 
 import com.example.fran365.brand.BrandRepository;
 import com.example.fran365.sales.SalesService;
+import com.example.fran365.stock.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
@@ -19,6 +20,9 @@ public class ResourceController {
 
     @Autowired
     private BrandRepository brandRepository;
+
+    @Autowired
+    private StockService stockService;
 
     @GetMapping("/create")
     public String create() {
@@ -66,7 +70,7 @@ public class ResourceController {
 
         model.addAttribute("resource", resource);
 
-        return "readDetail";
+        return "resource/readDetail";
     }
 
     @PostMapping("/update")
@@ -88,9 +92,10 @@ public class ResourceController {
     }
 
     @GetMapping("/purchase")
-    public String purchase(@RequestParam Integer id, @RequestParam int amount){
+    public String purchase(@RequestParam Integer id, @RequestParam int amount, @RequestParam String category){
 
         resourceService.updateProductStock(id, amount);
+        stockService.trade(id, amount, category);
 
         return "redirect:/resource/readList";
     }

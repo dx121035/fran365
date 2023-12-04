@@ -87,8 +87,7 @@
 				        </div>
 				    </a>
 				</div>
-				<!-- parent pages-->
-                <div class="nav-item-wrapper" style="font-size: 16px; margin-top: 8px;">
+				<div class="nav-item-wrapper" style="font-size: 16px; margin-top: 8px;">
 				    <a class="nav-link label-1" href="../pages/members.html" role="button" data-bs-toggle="" aria-expanded="false">
 				        <div class="d-flex align-items-center">
 				            <span class="nav-link-icon" style="margin-bottom: 5px;"><span data-feather="help-circle"></span></span>
@@ -223,116 +222,40 @@
       </nav>
       
       
-      <div class="content pb-0">
-        <div class="row gy-3 mb-6 justify-content-between">
-          <div class="col-md-9 col-auto">
-            <h2 class="text-1100" style="font-size: 24px;">대시보드</h2>
+      <div class="content pb-6">
+        
+		<h2 class="text-1100" style="font-size: 24px;">본사 일정관리</h2>
+        <div class="row g-0 my-6 align-items-center">
+          <div class="col-5 col-md-6">
+            <h4 class="mb-0 text-1100 fw-bold fs-md-2"><span class="calendar-day d-block d-md-inline mb-1"></span><span class="px-3 fw-thin text-400 d-none d-md-inline">|</span><span class="calendar-date"></span></h4>
+          </div>
+          <div class="col-7 col-md-6 d-flex justify-content-end">
+            <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#addEventModal"> <span class="fas fa-plus pe-2 fs--2"></span>일정추가 </button>
           </div>
         </div>
         
-        <div class="row mb-6 gy-6">
-          <div class="col-12 col-xxl-2">
-            <div class="row align-items-center g-3 g-xxl-0 h-100 align-content-between">
-				
-			<div class="col-12 col-sm-6 col-md-3 col-lg-6 col-xl-3 col-xxl-12">
-                <div class="d-flex align-items-center"><span class="fs-4 lh-1 uil uil-users-alt text-success-500"></span>
-                  <div class="ms-2">
-                    <div class="d-flex align-items-end">
-                      <span class="fs-1 fw-semi-bold text-900">회원</span><h2 class="mb-0 ms-2"><a th:text="${#lists.size(members)}"></a></h2><span class="fs-1 fw-semi-bold text-900">명</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="col-12 col-sm-6 col-md-3 col-lg-6 col-xl-3 col-xxl-12">
-                <div class="d-flex align-items-center"><span class="fs-4 lh-1 uil uil-invoice text-warning-500"></span>
-                  <div class="ms-2">
-                    <div class="d-flex align-items-end">
-                      <span class="fs-1 fw-semi-bold text-900">발주 신청</span><h2 class="mb-0 ms-2">23</h2><span class="fs-1 fw-semi-bold text-900">건</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="col-12 col-sm-6 col-md-3 col-lg-6 col-xl-3 col-xxl-12">
-                <div class="d-flex align-items-center"><span class="fs-4 lh-1 uil uil-books text-primary-500"></span>
-                  <div class="ms-2">
-                    <div class="d-flex align-items-end">
-                      <span class="fs-1 fw-semi-bold text-900">미처리 결재</span><h2 class="mb-0 ms-2">32</h2><span class="fs-1 fw-semi-bold text-900">건</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="col-12 col-sm-6 col-md-3 col-lg-6 col-xl-3 col-xxl-12">
-                <div class="d-flex align-items-center"><span class="fs-4 lh-1 uil uil-refresh text-danger-500"></span>
-                  <div class="ms-2">
-                    <div class="d-flex align-items-end">
-                      <span class="fs-1 fw-semi-bold text-900">미처리 문의</span><h2 class="mb-0 ms-2">3</h2><span class="fs-1 fw-semi-bold text-900">건</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
+        <div class="mx-n4 px-4 mx-lg-n6 px-lg-6 border-y border-200">
+          <div class="row py-3 gy-3 gx-0">
+            <div class="col-6 col-md-4 order-1 d-flex align-items-center">
+              <button class="btn btn-sm btn-phoenix-primary px-4" data-event="today">오늘</button>
             </div>
-           </div>
-           </div>
-          
-        <div class="mx-n4 px-4 mx-lg-n6 px-lg-6 pt-7 pb-3 border-y border-300">
-          <div class="row">
-            <div class="col-12 col-xl-7 col-xxl-6">
-              <div class="row g-3 mb-3">
-                <div class="col-12 col-md-6">
-                  <h2 class="text-1100" style="font-size: 24px;">전국 지역별 지점현황</h2>
-                  <p class="text-700 mb-md-7">2023-11-28 기준</p>
-                  <div class="d-flex align-items-center justify-content-between">
-                    <p class="mb-0 fw-bold">지역별 지점 수 </p>
-                    <p class="mb-0 fs--1">전체 <span class="fw-bold">51</span></p>
-                  </div>
-                  <hr class="bg-200 mb-2 mt-2" />
-                  <div class="d-flex align-items-center mb-1"><span class="d-inline-block bg-info-300 bullet-item me-2"></span>
-                    <p class="mb-0 fw-semi-bold text-900 lh-sm flex-1">서울</p>
-                    <h5 class="mb-0 text-900">20</h5>
-                  </div>
-                  <div class="d-flex align-items-center mb-1"><span class="d-inline-block bg-warning-300 bullet-item me-2"></span>
-                    <p class="mb-0 fw-semi-bold text-900 lh-sm flex-1">경기</p>
-                    <h5 class="mb-0 text-900">15</h5>
-                  </div>
-                  <div class="d-flex align-items-center mb-1"><span class="d-inline-block bg-danger-300 bullet-item me-2"></span>
-                    <p class="mb-0 fw-semi-bold text-900 lh-sm flex-1">경남</p>
-                    <h5 class="mb-0 text-900">10</h5>
-                  </div>
-                  <div class="d-flex align-items-center mb-1"><span class="d-inline-block bg-success-300 bullet-item me-2"></span>
-                    <p class="mb-0 fw-semi-bold text-900 lh-sm flex-1">충남</p>
-                    <h5 class="mb-0 text-900">5</h5>
-                  </div>
-                  <div class="d-flex align-items-center"><span class="d-inline-block bg-primary bullet-item me-2"></span>
-                    <p class="mb-0 fw-semi-bold text-900 lh-sm flex-1">강원</p>
-                    <h5 class="mb-0 text-900">1</h5>
-                  </div>
-                  <button class="btn btn-outline-primary mt-5">상세정보<span class="fas fa-angle-right ms-2 fs--2 text-center"></span></button>
-                </div>
-                <div class="col-12 col-md-6">
-                  <div class="position-relative mb-sm-4 mb-xl-0">
-                    <div class="echart-issue-chart1" style="min-height:390px;width:100%"></div>
-                  </div>
+            <div class="col-12 col-md-4 order-md-1 d-flex align-items-center justify-content-center">
+              <button class="btn icon-item icon-item-sm shadow-none text-1100 p-0" type="button" data-event="prev" title="Previous"><span class="fas fa-chevron-left"></span></button>
+              <h3 class="px-3 text-1100 fw-semi-bold calendar-title mb-0"> </h3>
+              <button class="btn icon-item icon-item-sm shadow-none text-1100 p-0" type="button" data-event="next" title="Next"><span class="fas fa-chevron-right"></span></button>
+            </div>
+            <div class="col-6 col-md-4 ms-auto order-1 d-flex justify-content-end">
+              <div>
+                <div class="btn-group btn-group-sm" role="group">
+                  <button class="btn btn-phoenix-secondary active-view" data-fc-view="dayGridMonth">월</button>
+                  <button class="btn btn-phoenix-secondary" data-fc-view="timeGridWeek">주</button>
                 </div>
               </div>
-            </div>
-            <div class="col-12 col-xl-5 col-xxl-6">
-              
-            <h2 class="text-1100" style="font-size: 24px;">11월 지점별 매출현황</h2>
-            <p class="text-700">2023-11-28 기준</p>
-            <p class="text-500 mb-md-2" style="font-size: 0.8rem;">매출액 (만원)</p>
-            <div class="echart-basic-bar-chart-example1" style="min-height:300px"></div>
-              
             </div>
           </div>
         </div>
-        </div>
-		
-        <div class="content pt-2">
-		<p>kakaomap 테스트
+        
+        <div class="calendar-outline mt-6 mb-9" id="appCalendar"></div>
       
         <footer class="footer position-absolute">
           <div class="row g-0 justify-content-between align-items-center h-100">
@@ -346,6 +269,48 @@
         </footer>
       </div>
       
+      <div class="modal fade" id="eventDetailsModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content border"></div>
+        </div>
+      </div>
+      <div class="modal fade" id="addEventModal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content border">
+            <form action="/event/create" method="post">
+              <div class="modal-header px-card border-0">
+                <div class="w-100 d-flex justify-content-between align-items-start">
+                  <div>
+                    <h5 class="mb-0 lh-sm text-1000">일정 등록하기</h5>
+                    <div class="mt-2">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-body p-card py-0">
+                <div class="form-floating mb-3">
+                  <input class="form-control" id="eventTitle" type="text" name="title" required="required" placeholder="Event title" />
+                  <label for="eventTitle">제목</label>
+                </div>
+                <div class="flatpickr-input-container mb-3">
+                  <div class="form-floating">
+                    <input class="form-control datetimepicker" id="eventStartDate" type="text" name="startDate" placeholder="yyyy/mm/dd" data-options='{"disableMobile":true,"enableTime":"true","dateFormat":"Y-m-d"}' /><span class="uil uil-calendar-alt flatpickr-icon text-700"></span>
+                    <label class="ps-6" for="eventStartDate">날짜</label>
+                  </div>
+                </div>
+                <div class="form-floating my-5">
+                  <textarea class="form-control" id="eventDescription" placeholder="Leave a comment here" name="description" style="height: 128px"></textarea>
+                  <label for="eventDescription">내용</label>
+                </div>
+                
+              </div>
+              <div class="modal-footer d-flex justify-content-between align-items-center border-0">
+                <button class="btn btn-primary px-4" type="submit">등록</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
       
       <script>
         var navbarTopStyle = window.config.config.phoenixNavbarTopStyle;
@@ -360,7 +325,16 @@
           navbarVertical.classList.add('navbar-darker');
         }
       </script>
-      
+      <div class="support-chat-container">
+        <div class="container-fluid support-chat">
+          <div class="card bg-white">
+            <div class="card-header d-flex flex-between-center px-4 py-3 border-bottom">
+              <h5 class="mb-0 d-flex align-items-center gap-2">Demo widget<span class="fa-solid fa-circle text-success fs--3"></span></h5>
+              <div class="btn-reveal-trigger">
+                <button class="btn btn-link p-0 dropdown-toggle dropdown-caret-none transition-none d-flex" type="button" id="support-chat-dropdown" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h text-900"></span></button>
+                <div class="dropdown-menu dropdown-menu-end py-2" aria-labelledby="support-chat-dropdown"><a class="dropdown-item" href="#!">Request a callback</a><a class="dropdown-item" href="#!">Search in chat</a><a class="dropdown-item" href="#!">Show history</a><a class="dropdown-item" href="#!">Report to Admin</a><a class="dropdown-item btn-support-chat" href="#!">Close Support</a></div>
+              </div>
+            </div>
             
     </main>
 
@@ -629,6 +603,413 @@
     document.addEventListener('DOMContentLoaded', basicBarChartInit);
   </script>
   
+<script th:inline="javascript">
+(function (factory) {
+  typeof define === 'function' && define.amd ? define(factory) :
+  factory();
+})((function () { 'use strict';
+
+  /* -------------------------------------------------------------------------- */
+
+  const camelize = str => {
+    const text = str.replace(/[-_\s.]+(.)?/g, (_, c) =>
+      c ? c.toUpperCase() : ''
+    );
+    return `${text.substr(0, 1).toLowerCase()}${text.substr(1)}`;
+  };
+
+  const getData = (el, data) => {
+    try {
+      return JSON.parse(el.dataset[camelize(data)]);
+    } catch (e) {
+      return el.dataset[camelize(data)];
+    }
+  };
+
+  /* -------------------------------------------------------------------------- */
+  /*                                   Calendar                                 */
+
+  /* -------------------------------------------------------------------------- */
+  const renderCalendar = (el, option) => {
+    const { merge } = window._;
+
+    const options = merge(
+      {
+        initialView: 'dayGridMonth',
+        editable: true,
+        direction: document.querySelector('html').getAttribute('dir'),
+        headerToolbar: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        buttonText: {
+          month: 'Month',
+          week: 'Week',
+          day: 'Day'
+        }
+      },
+      option
+    );
+    const calendar = new window.FullCalendar.Calendar(el, options);
+    calendar.render();
+    document
+      .querySelector('.navbar-vertical-toggle')
+      ?.addEventListener('navbar.vertical.toggle', () => calendar.updateSize());
+    return calendar;
+  };
+
+  const fullCalendarInit = () => {
+    const { getData } = window.phoenix.utils;
+
+    const calendars = document.querySelectorAll('[data-calendar]');
+    calendars.forEach(item => {
+      const options = getData(item, 'calendar');
+      renderCalendar(item, options);
+    });
+  };
+
+  const fullCalendar = {
+    renderCalendar,
+    fullCalendarInit
+  };
+
+  const { dayjs } = window;
+  const currentDay = dayjs && dayjs().format('DD');
+  const currentMonth = dayjs && dayjs().format('MM');
+  const prevMonth = dayjs && dayjs().subtract(1, 'month').format('MM');
+  const nextMonth = dayjs && dayjs().add(1, 'month').format('MM');
+  const currentYear = dayjs && dayjs().format('YYYY');
+  const eventList = /*[[${events}]]*/ [];
+  const events = [];
+
+	eventList.forEach(function (event) {
+	    events.push({
+	        title: event.title,
+	        start: event.startDate,
+	        description: event.description,
+	        id: event.id,
+	        className: 'text-info'
+	    });
+	});
+	
+  const getTemplate = event => `
+<div class="modal-header ps-card border-bottom">
+  <div>
+    <h4 class="modal-title text-1000 mb-0">${event.title}</h4>
+    ${
+      event.extendedProps.organizer
+        ? `<p class="mb-0 fs--1 mt-1">
+        by <a href="#!">${event.extendedProps.organizer}</a>
+      </p>`
+        : ''
+    }
+  </div>
+  <button type="button" class="btn p-1 fw-bolder" data-bs-dismiss="modal" aria-label="Close">
+    <span class='fas fa-times fs-0'></span>
+  </button>
+
+</div>
+
+<div class="modal-body px-card pb-card pt-1 fs--1">
+  ${
+    event.extendedProps.description
+      ? `
+      <div class="mt-3 border-bottom pb-3">
+        <h5 class='mb-0 text-800'>내용</h5>
+        <p class="mb-0 mt-2">
+          ${event.extendedProps.description.split(' ').slice(0, 30).join(' ')}
+        </p>
+      </div>
+    `
+      : ''
+  } 
+  <div class="mt-4 ${event.extendedProps.location ? 'border-bottom pb-3' : ''}">
+    <h5 class='mb-0 text-800'>시간</h5>
+    <p class="mb-1 mt-2">
+    ${
+      window.dayjs &&
+      window.dayjs(event.start).format('dddd, MMMM D, YYYY, h:mm A')
+    } 
+    ${
+      event.end
+        ? `– ${
+            window.dayjs &&
+            window
+              .dayjs(event.end)
+              .subtract(1, 'day')
+              .format('dddd, MMMM D, YYYY, h:mm A')
+          }`
+        : ''
+    }
+  </p>
+
+  </div>
+  ${
+    event.extendedProps.location
+      ? `
+        <div class="mt-4 ">
+          <h5 class='mb-0 text-800'>Location</h5>
+          <p class="mb-0 mt-2">${event.extendedProps.location}</p>
+        </div>
+      `
+      : ''
+  }
+  ${
+    event.schedules
+      ? `
+      <div class="mt-3">
+        <h5 class='mb-0 text-800'>Schedule</h5>
+        <ul class="list-unstyled timeline mt-2 mb-0">
+          ${event.schedules
+            .map(schedule => `<li>${schedule.title}</li>`)
+            .join('')}
+        </ul>
+      </div>
+      `
+      : ''
+  }
+  </div>
+</div>
+
+<div class="modal-footer d-flex justify-content-end px-card pt-0 border-top-0">
+  <a href="#!" class="btn btn-phoenix-secondary btn-sm">
+    <span class="fas fa-pencil-alt fs--2 mr-2"></span> 수정
+  </a>
+  <a href="/event/delete?id=${event.id}" class="btn btn-phoenix-danger btn-sm" data-calendar-event-remove>
+    <span class="fa-solid fa-trash fs--1 mr-2" data-fa-transform="shrink-2"></span> 삭제
+  </a>
+  <a href='#!' class="btn btn-primary btn-sm">
+    상세보기
+    <span class="fas fa-angle-right fs--2 ml-1"></span>
+  </a>
+</div>
+`;
+
+  /*-----------------------------------------------
+  |   Calendar
+  -----------------------------------------------*/
+  const appCalendarInit = () => {
+    const Selectors = {
+      ACTIVE: '.active',
+      ADD_EVENT_FORM: '#addEventForm',
+      ADD_EVENT_MODAL: '#addEventModal',
+      CALENDAR: '#appCalendar',
+      CALENDAR_TITLE: '.calendar-title',
+      CALENDAR_DAY: '.calendar-day',
+      CALENDAR_DATE: '.calendar-date',
+      DATA_CALENDAR_VIEW: '[data-fc-view]',
+      DATA_EVENT: 'data-event',
+      DATA_VIEW_TITLE: '[data-view-title]',
+      EVENT_DETAILS_MODAL: '#eventDetailsModal',
+      EVENT_DETAILS_MODAL_CONTENT: '#eventDetailsModal .modal-content',
+      EVENT_START_DATE: '#addEventModal [name="startDate"]',
+      INPUT_TITLE: '[name="title"]'
+    };
+
+    const Events = {
+      CLICK: 'click',
+      SHOWN_BS_MODAL: 'shown.bs.modal',
+      SUBMIT: 'submit'
+    };
+
+    const DataKeys = {
+      EVENT: 'event',
+      FC_VIEW: 'fc-view'
+    };
+
+    const eventList = events.reduce(
+      (acc, val) =>
+        val.schedules ? acc.concat(val.schedules.concat(val)) : acc.concat(val),
+      []
+    );
+
+    const updateDay = day => {
+      const days = [
+        '일요일',
+        '월요일',
+        '화요일',
+        '수요일',
+        '목요일',
+        '금요일',
+        '토요일'
+      ];
+      return days[day];
+    };
+
+    const setCurrentDate = () => {
+      const dateObj = new Date();
+      const month = dateObj.toLocaleString('en-US', { month: 'short' });
+      const date = dateObj.getDate(); // return date number
+      const day = dateObj.getDay(); // return week day number
+      const year = dateObj.getFullYear();
+      const newdate = `${date}  ${month},  ${year}`;
+      if (document.querySelector(Selectors.CALENDAR_DAY)) {
+        document.querySelector(Selectors.CALENDAR_DAY).textContent =
+          updateDay(day);
+      }
+      if (document.querySelector(Selectors.CALENDAR_DATE)) {
+        document.querySelector(Selectors.CALENDAR_DATE).textContent = newdate;
+      }
+    };
+    setCurrentDate();
+
+    const updateTitle = currentData => {
+      const { currentViewType } = currentData;
+      // week view
+      if (currentViewType === 'timeGridWeek') {
+        const weekStartsDate = currentData.dateProfile.currentRange.start;
+        const startingMonth = weekStartsDate.toLocaleString('en-US', {
+          month: 'short'
+        });
+        const startingDate = weekStartsDate.getDate();
+        const weekEndDate = currentData.dateProfile.currentRange.end;
+
+        const endingMonth = weekEndDate.toLocaleString('en-US', {
+          month: 'short'
+        });
+        const endingDate = weekEndDate.getDate();
+
+        document.querySelector(
+          Selectors.CALENDAR_TITLE
+        ).textContent = `${startingMonth} ${startingDate} - ${endingMonth} ${endingDate}`;
+      } else
+        document.querySelector(Selectors.CALENDAR_TITLE).textContent =
+          currentData.viewTitle;
+    };
+
+    const appCalendar = document.querySelector(Selectors.CALENDAR);
+    const addEventForm = document.querySelector(Selectors.ADD_EVENT_FORM);
+    const addEventModal = document.querySelector(Selectors.ADD_EVENT_MODAL);
+    const eventDetailsModal = document.querySelector(
+      Selectors.EVENT_DETAILS_MODAL
+    );
+
+    if (appCalendar) {
+      const calendar = fullCalendar.renderCalendar(appCalendar, {
+        headerToolbar: false,
+        dayMaxEvents: 3,
+        height: 800,
+        stickyHeaderDates: false,
+        views: {
+          week: {
+            eventLimit: 3
+          }
+        },
+        eventTimeFormat: {
+          hour: 'numeric',
+          minute: '2-digit',
+          omitZeroMinute: true,
+          meridiem: true
+        },
+        events: eventList,
+        eventClick: info => {
+          if (info.event.url) {
+            window.open(info.event.url, '_blank');
+            info.jsEvent.preventDefault();
+          } else {
+            const template = getTemplate(info.event);
+            document.querySelector(
+              Selectors.EVENT_DETAILS_MODAL_CONTENT
+            ).innerHTML = template;
+            const modal = new window.bootstrap.Modal(eventDetailsModal);
+            modal.show();
+          }
+        },
+        dateClick(info) {
+          const modal = new window.bootstrap.Modal(addEventModal);
+          modal.show();
+          /* eslint-disable-next-line */
+          const flatpickr = document.querySelector(Selectors.EVENT_START_DATE)._flatpickr;
+          flatpickr.setDate([info.dateStr]);
+        }
+      });
+
+      updateTitle(calendar.currentData);
+
+      document.addEventListener('click', e => {
+        // handle prev and next button click
+        if (
+          e.target.hasAttribute(Selectors.DATA_EVENT) ||
+          e.target.parentNode.hasAttribute(Selectors.DATA_EVENT)
+        ) {
+          const el = e.target.hasAttribute(Selectors.DATA_EVENT)
+            ? e.target
+            : e.target.parentNode;
+          const type = getData(el, DataKeys.EVENT);
+          switch (type) {
+            case 'prev':
+              calendar.prev();
+              updateTitle(calendar.currentData);
+              break;
+            case 'next':
+              calendar.next();
+              updateTitle(calendar.currentData);
+              break;
+            case 'today':
+              calendar.today();
+              updateTitle(calendar.currentData);
+              break;
+            default:
+              calendar.today();
+              updateTitle(calendar.currentData);
+              break;
+          }
+        }
+
+        // handle fc-view
+        if (e.target.hasAttribute('data-fc-view')) {
+          const el = e.target;
+          calendar.changeView(getData(el, DataKeys.FC_VIEW));
+          updateTitle(calendar.currentData);
+          document
+            .querySelectorAll(Selectors.DATA_CALENDAR_VIEW)
+            .forEach(item => {
+              if (item === e.target) {
+                item.classList.add('active-view');
+              } else {
+                item.classList.remove('active-view');
+              }
+            });
+        }
+      });
+
+      if (addEventForm) {
+        addEventForm.addEventListener(Events.SUBMIT, e => {
+          e.preventDefault();
+          const { title, startDate, endDate, label, description, allDay } =
+            e.target;
+          calendar.addEvent({
+            title: title.value,
+            start: startDate.value,
+            end: endDate.value ? endDate.value : null,
+            allDay: allDay.checked,
+            className: `text-${label.value}`,
+            description: description.value
+          });
+          e.target.reset();
+          window.bootstrap.Modal.getInstance(addEventModal).hide();
+        });
+      }
+
+      if (addEventModal) {
+        addEventModal.addEventListener(
+          Events.SHOWN_BS_MODAL,
+          ({ currentTarget }) => {
+            currentTarget.querySelector(Selectors.INPUT_TITLE)?.focus();
+          }
+        );
+      }
+    }
+  };
+
+  const { docReady } = window.phoenix.utils;
+
+  docReady(appCalendarInit);
+
+}));
+</script>
+
   </body>
 
 </html>

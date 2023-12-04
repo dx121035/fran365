@@ -1,6 +1,7 @@
 package com.example.fran365.admin;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,5 +21,38 @@ public class AdminServiceImpl implements AdminService {
 		return memberRepository.findAll();
 	}
 
+	@Override
+	public Member memberReadDeatail(Integer id) {
+		
+		Optional<Member> om = memberRepository.findById(id);
+		Member member = om.get();
+
+		return member;
+	}
+
+	@Override
+	public void memberDelete(Integer id) {
+		
+		Optional<Member> om = memberRepository.findById(id);
+		Member member = om.get();
+		
+		memberRepository.delete(member);
+	}
+
+	@Override
+	public List<Member> memberApprove() {
+
+		return memberRepository.findByEnabled(false);
+	}
+
+	@Override
+	public void memberApprove(Integer id) {
+
+		Optional<Member> om = memberRepository.findById(id);
+		Member member = om.get();
+		
+		member.setEnabled(true);
+		memberRepository.save(member);
+	}
 	
 }

@@ -87,8 +87,7 @@
 				        </div>
 				    </a>
 				</div>
-				<!-- parent pages-->
-                <div class="nav-item-wrapper" style="font-size: 16px; margin-top: 8px;">
+				<div class="nav-item-wrapper" style="font-size: 16px; margin-top: 8px;">
 				    <a class="nav-link label-1" href="../pages/members.html" role="button" data-bs-toggle="" aria-expanded="false">
 				        <div class="d-flex align-items-center">
 				            <span class="nav-link-icon" style="margin-bottom: 5px;"><span data-feather="help-circle"></span></span>
@@ -156,12 +155,6 @@
             </ul>
           </div>
         </div>
-                
-              </li>
-              
-            </ul>
-          </div>
-        </div>
         <div class="navbar-vertical-footer">
           <button class="btn navbar-vertical-toggle border-0 fw-semi-bold w-100 white-space-nowrap d-flex align-items-center"><span class="uil uil-left-arrow-to-left fs-0"></span><span class="uil uil-arrow-from-right fs-0"></span><span class="navbar-vertical-footer-text ms-2">작게보기</span></button>
         </div>
@@ -199,7 +192,7 @@
                   <div class="card-body p-0">
                     <div class="text-center pt-4 pb-3">
                       <div class="avatar avatar-xl ">
-                        <img class="rounded-circle " th:src="@{|${awspath}/${user.image}|}"  alt="" />
+                        <img class="rounded-circle " th:src="@{|${awspath}/${user.image}|}" alt="" />
 
                       </div>
                       <h6 class="mt-2 text-black">[[${user.name}]]</h6>
@@ -223,117 +216,170 @@
       </nav>
       
       
-      <div class="content pb-0">
-        <div class="row gy-3 mb-6 justify-content-between">
-          <div class="col-md-9 col-auto">
-            <h2 class="text-1100" style="font-size: 24px;">대시보드</h2>
-          </div>
-        </div>
+		<div class="content">
         
-        <div class="row mb-6 gy-6">
-          <div class="col-12 col-xxl-2">
-            <div class="row align-items-center g-3 g-xxl-0 h-100 align-content-between">
-				
-			<div class="col-12 col-sm-6 col-md-3 col-lg-6 col-xl-3 col-xxl-12">
-                <div class="d-flex align-items-center"><span class="fs-4 lh-1 uil uil-users-alt text-success-500"></span>
-                  <div class="ms-2">
-                    <div class="d-flex align-items-end">
-                      <span class="fs-1 fw-semi-bold text-900">회원</span><h2 class="mb-0 ms-2"><a th:text="${#lists.size(members)}"></a></h2><span class="fs-1 fw-semi-bold text-900">명</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="col-12 col-sm-6 col-md-3 col-lg-6 col-xl-3 col-xxl-12">
-                <div class="d-flex align-items-center"><span class="fs-4 lh-1 uil uil-invoice text-warning-500"></span>
-                  <div class="ms-2">
-                    <div class="d-flex align-items-end">
-                      <span class="fs-1 fw-semi-bold text-900">발주 신청</span><h2 class="mb-0 ms-2">23</h2><span class="fs-1 fw-semi-bold text-900">건</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="col-12 col-sm-6 col-md-3 col-lg-6 col-xl-3 col-xxl-12">
-                <div class="d-flex align-items-center"><span class="fs-4 lh-1 uil uil-books text-primary-500"></span>
-                  <div class="ms-2">
-                    <div class="d-flex align-items-end">
-                      <span class="fs-1 fw-semi-bold text-900">미처리 결재</span><h2 class="mb-0 ms-2">32</h2><span class="fs-1 fw-semi-bold text-900">건</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="col-12 col-sm-6 col-md-3 col-lg-6 col-xl-3 col-xxl-12">
-                <div class="d-flex align-items-center"><span class="fs-4 lh-1 uil uil-refresh text-danger-500"></span>
-                  <div class="ms-2">
-                    <div class="d-flex align-items-end">
-                      <span class="fs-1 fw-semi-bold text-900">미처리 문의</span><h2 class="mb-0 ms-2">3</h2><span class="fs-1 fw-semi-bold text-900">건</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
+        <div class="mb-9">
+          <div class="row align-items-center justify-content-between g-3 mb-4">
+            <div class="col-auto">
+              <h2 class="mb-0">회원 상세정보</h2>
             </div>
-           </div>
-           </div>
-          
-        <div class="mx-n4 px-4 mx-lg-n6 px-lg-6 pt-7 pb-3 border-y border-300">
-          <div class="row">
-            <div class="col-12 col-xl-7 col-xxl-6">
-              <div class="row g-3 mb-3">
-                <div class="col-12 col-md-6">
-                  <h2 class="text-1100" style="font-size: 24px;">전국 지역별 지점현황</h2>
-                  <p class="text-700 mb-md-7">2023-11-28 기준</p>
-                  <div class="d-flex align-items-center justify-content-between">
-                    <p class="mb-0 fw-bold">지역별 지점 수 </p>
-                    <p class="mb-0 fs--1">전체 <span class="fw-bold">51</span></p>
-                  </div>
-                  <hr class="bg-200 mb-2 mt-2" />
-                  <div class="d-flex align-items-center mb-1"><span class="d-inline-block bg-info-300 bullet-item me-2"></span>
-                    <p class="mb-0 fw-semi-bold text-900 lh-sm flex-1">서울</p>
-                    <h5 class="mb-0 text-900">20</h5>
-                  </div>
-                  <div class="d-flex align-items-center mb-1"><span class="d-inline-block bg-warning-300 bullet-item me-2"></span>
-                    <p class="mb-0 fw-semi-bold text-900 lh-sm flex-1">경기</p>
-                    <h5 class="mb-0 text-900">15</h5>
-                  </div>
-                  <div class="d-flex align-items-center mb-1"><span class="d-inline-block bg-danger-300 bullet-item me-2"></span>
-                    <p class="mb-0 fw-semi-bold text-900 lh-sm flex-1">경남</p>
-                    <h5 class="mb-0 text-900">10</h5>
-                  </div>
-                  <div class="d-flex align-items-center mb-1"><span class="d-inline-block bg-success-300 bullet-item me-2"></span>
-                    <p class="mb-0 fw-semi-bold text-900 lh-sm flex-1">충남</p>
-                    <h5 class="mb-0 text-900">5</h5>
-                  </div>
-                  <div class="d-flex align-items-center"><span class="d-inline-block bg-primary bullet-item me-2"></span>
-                    <p class="mb-0 fw-semi-bold text-900 lh-sm flex-1">강원</p>
-                    <h5 class="mb-0 text-900">1</h5>
-                  </div>
-                  <button class="btn btn-outline-primary mt-5">상세정보<span class="fas fa-angle-right ms-2 fs--2 text-center"></span></button>
+            <div class="col-auto">
+              <div class="row g-3">
+                <div class="col-auto">
+                  <button class="btn btn-phoenix-danger"><a th:href="@{|/admin/memberDelete?id=${member.id}|}"><span class="fa-solid fa-trash-can me-2"></span>회원탈퇴</a></button>
                 </div>
-                <div class="col-12 col-md-6">
-                  <div class="position-relative mb-sm-4 mb-xl-0">
-                    <div class="echart-issue-chart1" style="min-height:390px;width:100%"></div>
-                  </div>
-                </div>
+                
               </div>
-            </div>
-            <div class="col-12 col-xl-5 col-xxl-6">
-              
-            <h2 class="text-1100" style="font-size: 24px;">11월 지점별 매출현황</h2>
-            <p class="text-700">2023-11-28 기준</p>
-            <p class="text-500 mb-md-2" style="font-size: 0.8rem;">매출액 (만원)</p>
-            <div class="echart-basic-bar-chart-example1" style="min-height:300px"></div>
-              
             </div>
           </div>
-        </div>
-        </div>
-		
-        <div class="content pt-2">
-		<p>kakaomap 테스트
-      
+          <div class="row g-5">
+            <div class="col-12 col-xxl-4">
+              <div class="row g-3 g-xxl-0 h-100">
+                <div class="col-12 col-md-7 col-xxl-12 mb-xxl-3">
+                  <div class="card h-100">
+                    <div class="card-body d-flex flex-column justify-content-between pb-3">
+                      <div class="row align-items-center g-5 mb-3 text-center text-sm-start">
+                        <div class="col-12 col-sm-auto mb-sm-2">
+                          <div class="avatar avatar-5xl"><img class="rounded-circle" th:src="@{|${awspath}/${member.image}|}" alt="" /></div>
+                        </div>
+                        <div class="col-12 col-sm-auto flex-1">
+                          <h3>[[${member.name}]]</h3>
+                          <p class="text-800">가입일: [[${#temporals.format(member.createDate, 'yyyy-MM-dd HH:mm')}]]</p>
+                          <div><a class="me-2" href="#!"><span class="fab fa-linkedin-in text-400 hover-primary"></span></a><a class="me-2" href="#!"><span class="fab fa-facebook text-400 hover-primary"></span></a><a href="#!"><span class="fab fa-twitter text-400 hover-primary"></span></a></div>
+                        </div>
+                      </div>
+                      <div class="d-flex flex-between-center border-top border-dashed border-300 pt-4">
+                        <div>
+                          <h5>권한</h5>
+                          <p class="fs-1 text-800 mb-0">[[${member.role}]]</p>
+                        </div>
+                        <div>
+                          <h5>소속</h5>
+                          <p class="fs-1 text-800 mb-0">본사</p>
+                        </div>
+                        <div>
+                          <h5>직급</h5>
+                          <p class="fs-1 text-800 mb-0">과장</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-5 col-xxl-12 mb-xxl-3">
+                  <div class="card h-100">
+                    <div class="card-body pb-3">
+                      
+                      <div class="mb-4">
+                        <h5 class="text-1000">아이디</h5>[[${member.username}]]
+                      </div>
+                      <div class="mb-4">
+                        <h5 class="text-1000">핸드폰 번호</h5>[[${member.phone}]]
+                      </div>
+                      <div class="mb-4">
+                        <h5 class="text-1000">주소</h5>[[${member.address}]]
+                      </div>
+                      <h5 class="text-1000">가맹점 주소</h5>종로구 율곡로 12길 10
+                    </div>
+                  </div>
+                </div>
+                
+                
+              </div>
+            </div>
+            <div class="col-12 col-xxl-8">
+              <div class="mb-6">
+                <h3 class="mb-4 mt-2">발주 현황 <span class="text-700 fw-normal">(1)</span></h3>
+                <div class="border-top border-bottom border-200" id="customerOrdersTable" data-list='{"valueNames":["order","total","payment_status","fulfilment_status","delivery_type","date"],"page":6,"pagination":true}'>
+                  <div class="table-responsive scrollbar">
+                    <table class="table fs--1 mb-0">
+                      <thead>
+                        <tr>
+                          <th class="sort white-space-nowrap align-middle ps-0 pe-3" scope="col" data-sort="order" style="width:10%;">번호</th>
+                          <th class="sort align-middle" scope="col" data-sort="total" style="width:22%;">주문번호</th>
+                          <th class="sort align-middle white-space-nowrap pe-3" scope="col" data-sort="payment_status" style="width:22%;">주문목록</th>
+                          <th class="sort align-middle white-space-nowrap text-start pe-3" scope="col" data-sort="fulfilment_status" style="width:20%;">주문가격</th>
+                          <th class="sort align-middle white-space-nowrap text-start" scope="col" data-sort="delivery_type" style="width:16%;">배송상태</th>
+                          <th class="sort align-middle" scope="col" data-sort="date">처리일자</th>
+                          <th class="sort text-end align-middle pe-0 ps-5" scope="col"></th>
+                        </tr>
+                      </thead>
+                      <tbody class="list" id="customer-order-table-body">
+                        <tr class="hover-actions-trigger btn-reveal-trigger position-static">
+                          <td class="order align-middle white-space-nowrap ps-0"><a class="fw-semi-bold" href="#">#1</a></td>
+                          <td class="total align-middle fw-bold text-1000"><a href="#">imp_111442_333802</a></td>
+                          <td class="payment_status align-middle white-space-nowrap text-start fw-bold text-1000">스프링버거 외 1건</td>
+                          <td class="fulfilment_status align-middle white-space-nowrap text-start fw-bold text-1000">3100원</td>
+                          <td class="delivery_type align-middle white-space-nowrap text-900 fs--1 text-start"><span class="badge badge-phoenix fs--2 badge-phoenix-success"><span class="badge-label">입금확인</span><span class="ms-1" data-feather="check" style="height:12.8px;width:12.8px;"></span></span></td>
+                          <td class="date align-middle white-space-nowrap fw-bold text-1000">2023-12-03 17:27</td>
+                          <td class="align-middle white-space-nowrap text-end pe-0 ps-5">
+                            <div class="font-sans-serif btn-reveal-trigger position-static">
+                              <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs--2"></span></button>
+                              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
+                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                        
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="row align-items-center justify-content-between py-2 pe-0 fs--1">
+                    <div class="col-auto d-flex">
+                      <p class="mb-0 d-none d-sm-block me-3 fw-semi-bold text-900" data-list-info="data-list-info"></p><a class="fw-semi-bold" href="#!" data-list-view="*">전체보기<span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a><a class="fw-semi-bold d-none" href="#!" data-list-view="less">View Less<span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a>
+                    </div>
+                    <div class="col-auto d-flex">
+                      <button class="page-link" data-list-pagination="prev"><span class="fas fa-chevron-left"></span></button>
+                      <ul class="mb-0 pagination"></ul>
+                      <button class="page-link pe-0" data-list-pagination="next"><span class="fas fa-chevron-right"></span></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="mb-6">
+                <h3 class="mb-4">문의 내역 <span class="text-700 fw-normal">(1)</span></h3>
+                <div class="border-200 border-top border-bottom" id="customerWishlistTable" data-list='{"valueNames":["products","color","size","price","quantity","total"],"page":5,"pagination":true}'>
+                  <div class="table-responsive scrollbar">
+                    <table class="table fs--1 mb-0">
+                      <thead>
+                        <tr>
+						  <th class="sort white-space-nowrap align-middle ps-0 pe-3" scope="col" style="width:8%;">번호</th>
+						  <th class="sort align-middle" scope="col" data-sort="color" style="width:10%;">분류</th>
+                          <th class="sort white-space-nowrap align-middle" scope="col" style="width:25%;" data-sort="products">제목</th>
+                          <th class="sort align-middle" scope="col" data-sort="size" style="width:12%;">작성자</th>
+                          <th class="sort align-middle" scope="col" data-sort="price" style="width:10%;">처리상태</th>
+                          <th class="sort align-middle" scope="col" data-sort="total" style="width:10%;">등록일자</th>
+                        </tr>
+                      </thead>
+                      <tbody class="list" id="customer-wishlist-table-body">
+                        <tr class="hover-actions-trigger btn-reveal-trigger position-static">
+                          <td class="align-middle white-space-nowrap py-1"><a class="fw-semi-bold" href="#">#1</a></td>
+                          <td class="color align-middle white-space-nowrap fw-bold text-1000">재고</td>
+                          <td class="products align-middle fw-bold text-1000">상품코드 A1722-4023 언제 입고되나요.</td>
+                          <td class="size align-middle white-space-nowrap fw-bold text-1000">thdayei121@naver.com</td>
+                          <td class="payment_status align-middle white-space-nowrap text-start fw-bold text-700"><span class="badge badge-phoenix fs--2 badge-phoenix-warning"><span class="badge-label">답변대기</span><span class="ms-1" data-feather="alert-octagon" style="height:12.8px;width:12.8px;"></span></span></td>
+                          <td class="total align-middle fw-bold text-1000">2023-12-03 17:41</td>
+                        </tr>
+                       
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="row align-items-center justify-content-between py-2 pe-0 fs--1">
+                    <div class="col-auto d-flex">
+                      <p class="mb-0 d-none d-sm-block me-3 fw-semi-bold text-900" data-list-info="data-list-info"></p><a class="fw-semi-bold" href="#!" data-list-view="*">전체보기<span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a><a class="fw-semi-bold d-none" href="#!" data-list-view="less">View Less<span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a>
+                    </div>
+                    <div class="col-auto d-flex">
+                      <button class="page-link" data-list-pagination="prev"><span class="fas fa-chevron-left"></span></button>
+                      <ul class="mb-0 pagination"></ul>
+                      <button class="page-link pe-0" data-list-pagination="next"><span class="fas fa-chevron-right"></span></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                
+        
+        
         <footer class="footer position-absolute">
           <div class="row g-0 justify-content-between align-items-center h-100">
             <div class="col-12 col-sm-auto text-center">
@@ -345,8 +391,6 @@
           </div>
         </footer>
       </div>
-      
-      
       <script>
         var navbarTopStyle = window.config.config.phoenixNavbarTopStyle;
         var navbarTop = document.querySelector('.navbar-top');
@@ -360,7 +404,20 @@
           navbarVertical.classList.add('navbar-darker');
         }
       </script>
-      
+
+      <script>
+        var navbarTopStyle = window.config.config.phoenixNavbarTopStyle;
+        var navbarTop = document.querySelector('.navbar-top');
+        if (navbarTopStyle === 'darker') {
+          navbarTop.classList.add('navbar-darker');
+        }
+
+        var navbarVerticalStyle = window.config.config.phoenixNavbarVerticalStyle;
+        var navbarVertical = document.querySelector('.navbar-vertical');
+        if (navbarVertical && navbarVerticalStyle === 'darker') {
+          navbarVertical.classList.add('navbar-darker');
+        }
+      </script>
             
     </main>
 
@@ -384,251 +441,7 @@
     <script src="../assets/js/projectmanagement-dashboard.js"></script>
     <script src="../assets/js/echarts-example.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="../vendors/fullcalendar/main.js"></script>
     
-<script>
-	const echartTabs = document.querySelectorAll('[data-tab-has-echarts]');
-  if (echartTabs) {
-    echartTabs.forEach(tab => {
-      tab.addEventListener('shown.bs.tab', e => {
-        const el = e.target;
-        const { hash } = el;
-        const id = hash || el.dataset.bsTarget;
-        const content = document.getElementById(id.substring(1));
-        const chart = content?.querySelector('[data-echart-tab]');
-        if (chart) {
-          window.echarts.init(chart).resize();
-        }
-      });
-    });
-  }
-
-  const tooltipFormatter = (params, dateFormatter = 'MMM DD') => {
-    let tooltipItem = ``;
-    params.forEach(el => {
-      tooltipItem += `<div class='ms-1'>
-        <h6 class="text-700"><span class="fas fa-circle me-1 fs--2" style="color:${
-          el.borderColor ? el.borderColor : el.color
-        }"></span>
-          ${el.seriesName} : ${
-      typeof el.value === 'object' ? el.value[1] : el.value
-    }
-        </h6>
-      </div>`;
-    });
-    return `<div>
-            <p class='mb-2 text-600'>
-              ${
-                window.dayjs(params[0].axisValue).isValid()
-                  ? window.dayjs(params[0].axisValue).format(dateFormatter)
-                  : params[0].axisValue
-              }
-            </p>
-            ${tooltipItem}
-          </div>`;
-  };
-
-  const handleTooltipPosition = ([pos, , dom, , size]) => {
-    // only for mobile device
-    if (window.innerWidth <= 540) {
-      const tooltipHeight = dom.offsetHeight;
-      const obj = { top: pos[1] - tooltipHeight - 20 };
-      obj[pos[0] < size.viewSize[0] / 2 ? 'left' : 'right'] = 5;
-      return obj;
-    }
-    return null; // else default behaviour
-  };
-  
-  
-    const issuesDiscoveredChartInit = () => {
-    const { getColor, getData } = window.phoenix.utils;
-    const issuesDiscoveredChartEl = document.querySelector('.echart-issue-chart1');
-
-    if (issuesDiscoveredChartEl) {
-      const userOptions = getData(issuesDiscoveredChartEl, 'echarts');
-      const chart = window.echarts.init(issuesDiscoveredChartEl);
-
-      const getDefaultOptions = () => ({
-        color: [
-          getColor('info-300'),
-          getColor('warning-300'),
-          getColor('danger-300'),
-          getColor('success-300'),
-          getColor('primary')
-        ],
-        tooltip: {
-          trigger: 'item',
-          position: (...params) => handleTooltipPosition(params)
-        },
-        responsive: true,
-        maintainAspectRatio: false,
-
-        series: [
-          {
-            name: '지역별 지점 수',
-            type: 'pie',
-            radius: ['48%', '90%'],
-            startAngle: 30,
-            avoidLabelOverlap: false,
-            // label: {
-            //   show: false,
-            //   position: 'center'
-            // },
-
-            label: {
-              show: false,
-              position: 'center',
-              formatter: '{x|{d}%} \n {y|{b}}',
-              rich: {
-                x: {
-                  fontSize: 31.25,
-                  fontWeight: 800,
-                  color: getColor('gray-700'),
-                  padding: [0, 0, 5, 15]
-                },
-                y: {
-                  fontSize: 12.8,
-                  color: getColor('gray-700'),
-                  fontWeight: 600
-                }
-              }
-            },
-            emphasis: {
-              label: {
-                show: true
-              }
-            },
-            labelLine: {
-              show: false
-            },
-            data: [
-              { value: 20, name: '서울' },
-              { value: 15, name: '경기' },
-              { value: 10, name: '경남' },
-              { value: 5, name: '충남' },
-              { value: 1, name: '강원' }
-            ]
-          }
-        ],
-        grid: {
-          bottom: 0,
-          top: 0,
-          left: 0,
-          right: 0,
-          containLabel: false
-        }
-      });
-      
-      // 기본 옵션 적용
-      chart.setOption(getDefaultOptions());
-    }
-  };
-  
-  const basicBarChartInit = () => {
-    const { getColor, getData } = window.phoenix.utils;
-    const $chartEl = document.querySelector('.echart-basic-bar-chart-example1');
-    const months = [
-      '종로점',
-      '명동점',
-      '미아점',
-      '수유점',
-      '성북점',
-      '길음점',
-      '노원점'
-    ];
-    const data = [
-      14900,
-      8200,
-      5300,
-      4900,
-      2600,
-      2200,
-      1500
-    ];
-
-    if ($chartEl) {
-      const userOptions = getData($chartEl, 'echarts');
-      const chart2 = window.echarts.init($chartEl);
-      const getDefaultOptions = () => ({
-        tooltip: {
-          trigger: 'axis',
-          padding: [7, 10],
-          backgroundColor: getColor('gray-100'),
-          borderColor: getColor('gray-300'),
-          textStyle: { color: getColor('dark') },
-          borderWidth: 1,
-          formatter: params => tooltipFormatter(params),
-          transitionDuration: 0,
-          axisPointer: {
-            type: 'none'
-          }
-        },
-        xAxis: {
-          type: 'category',
-          data: months,
-          axisLine: {
-            lineStyle: {
-              color: getColor('gray-300'),
-              type: 'solid'
-            }
-          },
-          axisTick: { show: false },
-          axisLabel: {
-            color: getColor('gray-400'),
-            formatter: value => value,
-            margin: 15
-          },
-          splitLine: {
-            show: false
-          }
-        },
-        yAxis: {
-          type: 'value',
-          boundaryGap: true,
-          axisLabel: {
-            show: true,
-            color: getColor('gray-400'),
-            margin: 5
-          },
-          splitLine: {
-            show: true,
-            lineStyle: {
-              color: getColor('gray-200')
-            }
-          },
-          axisTick: { show: false },
-          axisLine: { show: false },
-          min: 0
-        },
-        series: [
-          {
-            type: 'bar',
-            name: '매출액',
-            data,
-            lineStyle: { color: getColor('primary') },
-            itemStyle: {
-              color: getColor('primary'),
-              barBorderRadius: [3, 3, 0, 0]
-            },
-            showSymbol: false,
-            symbol: 'circle',
-            smooth: false,
-            hoverAnimation: true
-          }
-        ],
-        grid: { right: '3%', left: '10%', bottom: '10%', top: '5%' }
-      });
-      
-      // 기본 옵션 적용
-      chart2.setOption(getDefaultOptions());
-    }
-  };
-  
-    // 페이지 로드 시 차트 초기화 함수 호출
-    document.addEventListener('DOMContentLoaded', issuesDiscoveredChartInit);
-    document.addEventListener('DOMContentLoaded', basicBarChartInit);
-  </script>
-  
   </body>
 
 </html>

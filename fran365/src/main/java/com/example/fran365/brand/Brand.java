@@ -6,6 +6,7 @@ mail: inew3w@gmail.com
 package com.example.fran365.brand;
 
 import com.example.fran365.sales.Sales;
+import com.example.fran365.stock.Stock;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -43,4 +44,11 @@ public class Brand {
     private List<Sales> salesList;
 
     private LocalDateTime createDate;
+
+    @OneToMany(mappedBy = "brand", cascade = CascadeType.REMOVE)
+    private List<Stock> stockList;
+
+    public List<Stock> getStockList() {
+        return stockList;
+    }
 }
