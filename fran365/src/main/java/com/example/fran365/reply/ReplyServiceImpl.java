@@ -47,7 +47,7 @@ public class ReplyServiceImpl implements ReplyService {
     public void sendSimpleMessage(String to, String subject, String text) {
 
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("inew3w@naver.com"); // 실제 네이버 이메일 주소
+        message.setFrom("seula724@naver.com"); // 실제 네이버 이메일 주소
         message.setTo(to);
         message.setSubject(subject);
         message.setText(text);

@@ -80,6 +80,7 @@ public class MemberServiceImpl implements MemberService {
 		member.setCreateDate(LocalDateTime.now());
 		member.setImage(filename);
 		member.setRole("ROLE_USER");
+		member.setPosition("");
 		
 		return memberRepository.save(member);
 
