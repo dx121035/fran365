@@ -15,6 +15,9 @@ import java.util.List;
 public interface BoardService {
     void create (Board board, MultipartFile multipartFile,String category) throws IOException;
     Board detail(Integer id);
+
+    Board readDetail(Integer id);
+
     void update (Board board, MultipartFile multipartFile,String category) throws IOException;
     void delete (Integer id);
     Page <Board> getNoticeBoards(String category,int page);

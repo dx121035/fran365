@@ -78,9 +78,21 @@ public class BoardController {
 
         model.addAttribute("board", boardService.detail(id));
         model.addAttribute("awspath", awspath);
-        return "board/detail";
-    }
 
+            return "board/detail";
+    }
+    @GetMapping("/readDetail")
+    public String readDetail(Model model,@RequestParam Integer id) {
+
+        Board board = boardService.detail(id);
+        Member member = memberService.readDetailUsername();
+        boardService.hit(board,member);
+
+        model.addAttribute("board", boardService.detail(id));
+        model.addAttribute("awspath", awspath);
+            return "board/readDetail";
+
+    }
     @GetMapping("/update")
     public String update(Model model,@RequestParam Integer id){
         Board board = boardService.detail(id);
@@ -92,7 +104,7 @@ public class BoardController {
         return "board/update";
     }
     @PostMapping("/update")
-    public String update(Board board,@RequestParam Integer id, MultipartFile tempfile,@RequestParam String category) throws IOException {
+    public String update(Board board, MultipartFile tempfile,@RequestParam("category") String category) throws IOException {
 
         boardService.update(board,tempfile, category);
         if ("공지".equals(category)) {

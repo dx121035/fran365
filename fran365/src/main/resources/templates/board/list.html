@@ -8,51 +8,118 @@ mail: inew3w@gmail.com-->
     <meta charset="UTF-8">
     <title>게시판 목록</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- ===============================================-->
+    <!--    Favicons-->
+    <!-- ===============================================-->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../assets/img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/img/favicons/favicon-16x16.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../../assets/img/favicons/favicon.ico">
+    <link rel="manifest" href="../../assets/img/favicons/manifest.json">
+    <meta name="msapplication-TileImage" content="../../assets/img/favicons/mstile-150x150.png">
+    <meta name="theme-color" content="#ffffff">
+    <script src="../../vendors/imagesloaded/imagesloaded.pkgd.min.js"></script>
+    <script src="../../vendors/simplebar/simplebar.min.js"></script>
+    <script src="../../assets/js/config.js"></script>
 
+    <!-- ===============================================-->
+    <!--    Stylesheets-->
+    <!-- ===============================================-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <link href="../../vendors/simplebar/simplebar.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <link href="../../assets/css/theme-rtl.min.css" type="text/css" rel="stylesheet" id="style-rtl">
+    <link href="../../assets/css/theme.min.css" type="text/css" rel="stylesheet" id="style-default">
+    <link href="../../assets/css/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
+    <link href="../../assets/css/user.min.css" type="text/css" rel="stylesheet" id="user-style-default">
+    <script>
+        var phoenixIsRTL = window.config.config.phoenixIsRTL;
+        if (phoenixIsRTL) {
+            var linkDefault = document.getElementById('style-default');
+            var userLinkDefault = document.getElementById('user-style-default');
+            linkDefault.setAttribute('disabled', true);
+            userLinkDefault.setAttribute('disabled', true);
+            document.querySelector('html').setAttribute('dir', 'rtl');
+        } else {
+            var linkRTL = document.getElementById('style-rtl');
+            var userLinkRTL = document.getElementById('user-style-rtl');
+            linkRTL.setAttribute('disabled', true);
+            userLinkRTL.setAttribute('disabled', true);
+        }
+    </script>
 </head>
 <body>
+
+<br><br><br><br><br>
+<div class="container">
 <div class="card shadow-none border border-300 mb-3"
      data-component-card="data-component-card">
-
     <div class="card-header p-4 border-bottom border-300 bg-soft">
-        <div style="text-align: end; font-size: 25px;">
-            <a th:href="@{/board/create}">게시판 등록</a>
-        </div>
-        <div class="row g-3 justify-content-between align-items-center">
-            <div class="col-12 col-md">
-                <h4 class="text-900 mb-0" data-anchor="data-anchor">Question & Answer</h4>
-            </div>
+        <div class="d-flex justify-content-between align-items-center">
+            <h4 class="text-900 mb-0" data-anchor="data-anchor">Question & Answer</h4>
+            <a th:href="@{/board/create}"
+               class="border border-300 rounded-2 p-2 mb-2 text-center bg-outline-danger dark__bg-1000 shadow-sm"
+               style="text-decoration: none;">질문 등록</a>
         </div>
     </div>
     <div class="card-body p-0">
-
         <div class="p-4 code-to-copy">
-            <div id="tableExample4"
-                 data-list='{"valueNames":["id","title","category","createDate"],"page":10,"pagination":true}'>
-
+            <div id="tableExample3"
+                 data-list='{"valueNames":["id","title","writer","createDate","state"],"page":5,"pagination":true, "filter":{"key":"state"}}'>
+                <div class="row justify-content-end g-0">
+                    <div class="col-auto px-3">
+                        <select class="form-select form-select-sm mb-3"
+                                data-list-filter="data-list-filter">
+                            <option selected="" value="">진행상황</option>
+                            <option value="warning">답변대기</option>
+                            <option value="success">답변완료</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table class="table table-sm fs--1 mb-0">
                         <thead>
                         <tr class="be-light">
                             <th class="sort border-top ps-3" data-sort="id">번호</th>
-                            <th class="sort border-top" data-sort="category">종류</th>
                             <th class="sort border-top" data-sort="title">제목</th>
+                            <th class="sort border-top" data-sort="writer">작성자</th>
                             <th class="sort border-top" data-sort="createDate">작성일</th>
-                            <th class="sort border-top" data-sort="d">조회수</th>
+                            <th class="sort border-top" data-sort="state">상태</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="list">
                         <th:block >
                             <tr th:each="board, loop : ${paging}">
                                 <td class="align-middle ps-3 id" th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
-                                <td class="align-middle category" th:text="${board.category}"></td>
-                                <td class="align-middle title" ><a th:text="${board.title}" th:href="@{|/board/detail?id=${board.id}|}"></a></td>
+                                <td class="align-middle title" ><a th:text="${board.title}" th:href="@{|/board/readDetail?id=${board.id}|}"></a></td>
+                                <td class="align-middle title" th:text="${board.writer}"></td>
                                 <td class="align-middle createDate" th:text="${#temporals.format(board.createDate, 'yyyy년 MM월 dd일')}"></td>
-                                <td class="align-middle d" th:text="${#lists.size(board.hitter)}"></td> <p>
+                                <td class="align-middle state" >
+                                <div th:if="${board.state eq '답변대기'}" class="badge badge-phoenix fs--2 badge-phoenix-warning">
+                                    <span class="fw-bold" th:text="${board.state}"></span>
+                                    <span class="ms-1 fas fa-check"></span>
+                                </div>
+                                <div th:if="${board.state eq '답변완료'}" class="badge badge-phoenix fs--2 badge-phoenix-success">
+                                    <span class="fw-bold" th:text="${board.state}"></span>
+                                    <span class="ms-1 fas fa-check"></span>
+                                </div>
+                                </td><p>
                             </tr>
                         </th:block>
                         </tbody>
                     </table>
+                </div>
+                <br><br>
+                <div class="search-box mb-3 mx-auto">
+                    <form class="position-relative" data-bs-toggle="search"
+                          data-bs-display="static">
+                        <input id="searchInput" class="form-control search-input search form-control-sm"
+                               type="search" placeholder="Search" aria-label="Search" /> <span
+                            class="fas fa-search search-box-icon"></span>
+
+                    </form>
                 </div>
                 <nav aria-label="Page navigation example">
                     <div th:if="${!paging.isEmpty()}">
@@ -77,8 +144,40 @@ mail: inew3w@gmail.com-->
                 </nav>
             </div>
         </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var options = {
+                    valueNames: ["id", "title", "writer", "createDate", "state"],
+                    page: 5,
+                    pagination: true,
+                    filter: { key: "state" },
+                };
+
+                var boardList = new List('tableExample3', options);
+
+                // Search functionality
+                var searchInput = document.getElementById('searchInput');
+                searchInput.addEventListener('input', function () {
+                    boardList.search(this.value);
+                });
+            });
+        </script>
     </div>
 </div>
+</div>
+<!-- ===============================================-->
+<!--    JavaScripts-->
+<!-- ===============================================-->
+<script src="../../vendors/popper/popper.min.js"></script>
+<script src="../../vendors/bootstrap/bootstrap.min.js"></script>
+<script src="../../vendors/anchorjs/anchor.min.js"></script>
+<script src="../../vendors/is/is.min.js"></script>
+<script src="../../vendors/fontawesome/all.min.js"></script>
+<script src="../../vendors/lodash/lodash.min.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+<script src="../../vendors/list.js/list.min.js"></script>
+<script src="../../vendors/feather-icons/feather.min.js"></script>
+<script src="../../vendors/dayjs/dayjs.min.js"></script>
 
 </body>
 </html>

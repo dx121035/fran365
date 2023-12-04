@@ -64,6 +64,12 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
+    public Board readDetail(Integer id) {
+        Optional<Board> board =  boardRepository.findById(id);
+        return board.get();
+    }
+
+    @Override
     public void update(Board board, MultipartFile multipartFile,String category) throws IOException{
 
         File file =new File(multipartFile.getOriginalFilename());
@@ -88,10 +94,9 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public void delete(Integer id) {
-        Optional<Board> board =  boardRepository.findById(id);
+        Optional<Board> board = boardRepository.findById(id);
         boardRepository.delete(board.get());
     }
-
 
     @Override
     public Page<Board> getNoticeBoards(String category, int page) {

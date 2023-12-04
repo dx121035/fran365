@@ -29,6 +29,8 @@ public class Board{
 
     private String category;
 
+    private String state;
+
     private String image;
 
     private LocalDateTime createDate;

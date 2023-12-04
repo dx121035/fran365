@@ -61,10 +61,16 @@ mail: inew3w@gmail.com-->
 </head>
 <body>
 <div class="container">
+<div class="card shadow-none border border-300 my-4" data-component-card="data-component-card">
     <div class="card-header p-4 border-bottom border-300 bg-soft">
         <div class="row g-3 justify-content-between align-items-center">
             <div class="col-12 col-md">
                 <h2 class="text-900 mb-0 text-center fs-5" data-anchor="data-anchor">게시판 등록</h2><br><br>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-0">
+        <div class="p-4 code-to-copy">
                 <form action="/board/create" method="post" enctype="multipart/form-data">
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="title">제목</label>
@@ -82,7 +88,7 @@ mail: inew3w@gmail.com-->
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" >카테고리</label>
                         <div class="col-sm-10">
-                            <div th:if="${#authentication.name == 'admin'}">
+                        <div th:if="${#authentication.name == 'admin'}">
                             <select class="form-select" name="category" id="category">
                                 <option selected="selected" disabled>유형 선택</option>
                                 <optgroup label="Admin">
@@ -90,9 +96,9 @@ mail: inew3w@gmail.com-->
                                     <option value="FAQ">FAQ</option>
                                 </optgroup>
                             </select>
-                            </div>
+                        </div>
                             <div th:if="${#authentication.name != 'admin'}">
-                            <select name="category" id="category">
+                            <select class="form-select" name="category" id="category">
                                 <option selected="selected" disabled>유형 선택</option>
                                 <optgroup label="Member">
                                     <option value="상품">상품</option>
@@ -115,6 +121,7 @@ mail: inew3w@gmail.com-->
                             <textarea class="form-control" id="summernote" name="content" type="text" placeholder="내용을 입력하세요" required ></textarea>
                         </div>
                     </div>
+                    <input type="hidden" name="state" th:value="${board?.state != null} ? ${board.state} : '답변대기'" />
                     <br><br>
                     <div class="vstack gap-2 col-md-5 mx-auto">
                         <button class="btn btn-primary" type="submit">등록</button>
@@ -124,6 +131,7 @@ mail: inew3w@gmail.com-->
         </div>
     </div>
 </div>
+
 <script>
     $('#summernote').summernote({
         tabsize: 2,
