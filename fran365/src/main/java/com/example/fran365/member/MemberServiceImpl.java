@@ -50,9 +50,9 @@ public class MemberServiceImpl implements MemberService {
 	private String bucketName;
 
 
-	
-	
-	
+
+
+
 
 
 
@@ -81,7 +81,8 @@ public class MemberServiceImpl implements MemberService {
 		member.setImage(filename);
 		member.setRole("ROLE_USER");
 		member.setPosition(null);
-		
+
+
 		return memberRepository.save(member);
 
 		// 카트 생성
@@ -256,6 +257,3 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 }
-
-
-
