@@ -14,5 +14,6 @@ public interface AdminService {
 	
 	void memberDelete(Integer id);
 	
-	void memberApprove(Integer id);
+	void memberApprove(Integer id, Integer number);
+	
 }

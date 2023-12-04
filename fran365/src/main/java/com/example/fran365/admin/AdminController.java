@@ -1,5 +1,8 @@
 package com.example.fran365.admin;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.fran365.event.EventService;
 import com.example.fran365.member.MemberService;
+import com.example.fran365.position.PositionService;
 
 
 @RequestMapping("/admin")
@@ -29,6 +33,9 @@ public class AdminController {
 	@Autowired
 	private MemberService memberService;
 	
+	@Autowired
+	private PositionService positionService;
+	
 	@GetMapping("/main")
 	public String adminMain(Model model) {
 		
@@ -46,6 +53,15 @@ public class AdminController {
 		model.addAttribute("awspath", awspath);
 		model.addAttribute("user", memberService.readDetailUsername());
 		model.addAttribute("members", adminService.memberReadList());
+		Map<Object, Object> map = new HashMap<>();
+		
+		for (int i = 0; i < positionService.readList().size(); i++) {
+			
+			int positionNumber = positionService.readList().get(i).getNumber();
+			String positionPosition = positionService.readList().get(i).getPosition();
+			map.put(positionNumber, positionPosition);
+		}
+		model.addAttribute("positionMap", map);
 		
 		return "admin/memberReadList";
 	}
@@ -84,15 +100,35 @@ public class AdminController {
 		model.addAttribute("awspath", awspath);
 		model.addAttribute("user", memberService.readDetailUsername());
 		model.addAttribute("members", adminService.memberApprove());
+		model.addAttribute("positions", positionService.readList());
 		
 		return "admin/memberApprove";
 	}
 	
 	@ResponseBody
 	@PostMapping("/memberApprove")
-	public int memberApprove(Integer id) {
+	public int memberApprove(Integer id, Integer number) {
 		
-		adminService.memberApprove(id);
+		adminService.memberApprove(id, number);
+		
+		return 1;
+	}
+	
+	@GetMapping("/memberPosition")
+	public String memberPosition(Model model) {
+		
+		model.addAttribute("awspath", awspath);
+		model.addAttribute("user", memberService.readDetailUsername());
+        model.addAttribute("positions", positionService.readList());
+		
+		return "admin/memberPosition";
+	}
+	
+	@ResponseBody
+	@PostMapping("/updatePosition")
+	public int updatePosition(Integer id) {
+		
+		
 		
 		return 1;
 	}

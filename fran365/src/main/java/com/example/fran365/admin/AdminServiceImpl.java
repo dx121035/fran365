@@ -46,12 +46,13 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public void memberApprove(Integer id) {
+	public void memberApprove(Integer id, Integer number) {
 
 		Optional<Member> om = memberRepository.findById(id);
 		Member member = om.get();
 		
 		member.setEnabled(true);
+		member.setPosition(number);
 		memberRepository.save(member);
 	}
 	

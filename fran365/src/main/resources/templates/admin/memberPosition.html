@@ -223,56 +223,45 @@
       
       
 		<div class="content">
-        <h2 class="text-bold text-1100 mb-5">가입신청 목록</h2>
-        <div id="members" data-list='{"valueNames":["customer","email","mobile_number","city","last_active","joined"],"page":10,"pagination":true}'>
+        <h2 class="text-bold text-1100 mb-5">본사 직급관리</h2>
+        <div id="members" data-list='{"valueNames":["number","customer","position","city","last_active","joined"],"page":10,"pagination":true}'>
           <div class="row align-items-center justify-content-between g-3 mb-4">
-            <div class="col col-auto">
-              <div class="search-box">
-                <form class="position-relative" data-bs-toggle="search" data-bs-display="static">
-                  <input class="form-control search-input search" type="search" placeholder="회원을 검색하세요." aria-label="Search" />
-                  <span class="fas fa-search search-box-icon"></span>
-
-                </form>
-              </div>
-            </div>
+			  
+            <div class="col">
+				<form action="/position/create" method="post">
+			    <div class="row mt-3">
+			        <div class="col-auto">
+			            <input class="form-control mb-0" type="text" name="position" placeholder="직급" />
+			        </div>
+			        <div class="col-auto">
+			            <input class="form-control mb-0" type="text" name="number" placeholder="직급번호" />
+			        </div>
+			        <div class="col-auto">
+			            <button class="btn btn-primary"><span class="fas fa-plus me-2"></span>직급 추가</button>
+			        </div>
+			    </div>
+			    </form>
+			</div>
+			
           </div>
-          <div class="mx-n4 mx-lg-n6 px-4 px-lg-6 mb-9 bg-white border-y border-300 mt-2 position-relative top-1">
+          <div class="mx-n4 mx-lg-n6 px-4 px-lg-6 mb-9 bg-white border-y border-300 mt-2 position-relative top-1" style="width: 60%;">
             <div class="table-responsive scrollbar ms-n1 ps-1">
               <table class="table table-sm fs--1 mb-0">
                 <thead>
                   <tr>
-					<th class="sort align-middle" scope="col" data-sort="id" style="width:6%; min-width:60px;">번호</th>
-                    <th class="sort align-middle" scope="col" data-sort="customer" style="width:15%; min-width:150px;">이름</th>
-                    <th class="sort align-middle" scope="col" data-sort="email" style="width:18%; min-width:180px;">아이디</th>
-                    <th class="sort align-middle pe-3" scope="col" data-sort="mobile_number" style="width:13%; min-width:130px;">핸드폰번호</th>
-                    <th class="sort align-middle" scope="col" data-sort="city" style="width:22%; min-width:220px;">주소</th>
-                    <th class="sort align-middle" scope="col" data-sort="position1" style="width:8%;  min-width:80px;">소속</th>
-                    <th class="sort align-middle" scope="col" data-sort="position2" style="width:8%;  min-width:80px;">직급</th>
-                    <th class="sort align-middle" scope="col" data-sort="joined" style="width:10%;  min-width:100px;">신청일</th>
-                    <th class="align-middle" scope="col" style="width:8%;  min-width:80px;"></th>
+					<th class="sort align-middle" scope="col" data-sort="number" style="width:20%; min-width:100px;">직급번호</th>
+                    <th class="sort align-middle" scope="col" data-sort="customer" style="width:20%; min-width:100px;">소속</th>
+                    <th class="sort align-middle" scope="col" data-sort="position" style="width:20%; min-width:100px;">직급</th>
+                    <th class="align-middle" scope="col" style="width:10%;"></th>
                   </tr>
                 </thead>
                 <tbody class="list" id="members-table-body">
-				  <th:block th:each="member : ${members}">
+				  <th:block th:each="position : ${positions}">
                   <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-					<td class="position1 align-middle white-space-nowrap text-1100"><a href="#">#[[${member.id}]]</a></td>
-                    <td class="customer align-middle white-space-nowrap"><a class="d-flex align-items-center text-900 text-hover-1000" th:href="@{|/admin/memberReadDetail?id=${member.id}|}">
-                        <div class="avatar avatar-m"><img class="rounded-circle" th:src="@{|${awspath}/${member.image}|}" alt="" />
-                        </div>
-                        <h6 class="mb-0 ms-3 fw-semi-bold">[[${member.name}]]</h6>
-                      </a></td>
-                    <td class="email align-middle white-space-nowrap text-1100">[[${member.username}]]</td>
-                    <td class="mobile_number align-middle white-space-nowrap text-1100">[[${member.phone}]]</td>
-                    <td class="city align-middle white-space-nowrap text-1100">[[${member.address}]]</td>
-                    <td class="position1 align-middle white-space-nowrap text-1100">[[${member.belong}]]</td>
-                    <td class="position2 align-middle white-space-nowrap text-1100">
-						<select style="color: black;">
-							<option selected text=""></option>
-					        <option class="number" th:each="position : ${positions}" th:value="${position.number}" th:text="${position.position}"></option>
-					    </select>
-					</td>
-                    <td class="joined align-middle white-space-nowrap text-1100" th:text="${#temporals.format(member.createDate, 'yyyy-MM-dd HH:mm')}"></td>
-                  	<td class="align-middle"><button class="btn btn-primary btn-sm" style="padding: 5px 10px; font-size: 12px; margin-left: 22px;" th:onclick="approveMember([[${member.id}]])">승인</button></td>
+					<td class="number align-middle white-space-nowrap text-1100">[[${position.number}]]</td>
+                    <td class="customer align-middle white-space-nowrap text-1100">본사</td>
+                    <td class="number align-middle white-space-nowrap text-1100">[[${position.position}]]</td>
+                  	<td class="position align-middle"><button class="btn btn-danger btn-sm" style="padding: 5px 10px; font-size: 12px; margin-left: 22px;" th:onclick="deletePosition([[${position.id}]])">삭제</button></td>
                   </tr>
                   </th:block>
                 </tbody>
@@ -329,19 +318,34 @@
         }
       </script>
       
-      <script>
+     <script>
         function approveMember(memberId) {
-			 var positionNumber = $(".number:selected").val();
 			
             $.ajax({
                 type: "POST",
                 url: "/admin/memberApprove",
                 data: {
-                    id: memberId,
-                    number: positionNumber
+                    id: memberId
                 },
                 success: function(data){
-                alert("회원가입 승인");
+                alert("회원가입 승인.");
+                location.reload();
+            }
+            });
+        }
+    </script>
+    
+    <script>
+        function deletePosition(positionId) {
+			
+            $.ajax({
+                type: "POST",
+                url: "/position/delete",
+                data: {
+                    id: positionId
+                },
+                success: function(data){
+                alert("삭제되었습니다.");
                 location.reload();
             }
             });

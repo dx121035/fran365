@@ -152,6 +152,12 @@
                         </a>
                         <!-- more inner pages-->
                       </li>
+                      <li class="nav-item"><a class="nav-link" href="/admin/memberPosition" data-bs-toggle="" aria-expanded="false">
+                          <div class="d-flex align-items-center"><span class="nav-link-text">직급관리</span>
+                          </div>
+                        </a>
+                        <!-- more inner pages-->
+                      </li>
             </ul>
           </div>
         </div>
@@ -246,6 +252,8 @@
                   </tr>
                 </thead>
                 <tbody class="list" id="members-table-body">
+					
+					
 				  <th:block th:each="member : ${members}">
                   <tr class="hover-actions-trigger btn-reveal-trigger position-static">
 					<td class="position1 align-middle white-space-nowrap text-1100"><a href="#">#[[${member.id}]]</a></td>
@@ -257,8 +265,10 @@
                     <td class="email align-middle white-space-nowrap text-1100">[[${member.username}]]</td>
                     <td class="mobile_number align-middle white-space-nowrap text-1100">[[${member.phone}]]</td>
                     <td class="city align-middle white-space-nowrap text-1100">[[${member.address}]]</td>
-                    <td class="position1 align-middle white-space-nowrap text-1100">본사</td>
-                    <td class="position2 align-middle white-space-nowrap text-1100">과장</td>
+                    <td class="position1 align-middle white-space-nowrap text-1100">[[${member.belong}]]</td>
+                    <td class="position2 align-middle white-space-nowrap text-1100">
+						<span th:text="${positionMap.get(T(java.lang.Integer).parseInt(member.position ?: '0'))}"></span>
+					</td>
                     <td class="joined align-middle white-space-nowrap text-1100" th:text="${#temporals.format(member.createDate, 'yyyy-MM-dd HH:mm')}"></td>
                   </tr>
                   </th:block>
