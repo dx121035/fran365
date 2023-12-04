@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.fran365.event.EventService;
 import com.example.fran365.member.MemberService;
@@ -64,6 +66,35 @@ public class AdminController {
 		adminService.memberDelete(id);
 		
 		return "redirect:/admin/memberReadList";
+	}
+	
+	@GetMapping("/schedule")
+	public String schedule(Model model) {
+		
+		model.addAttribute("awspath", awspath);
+		model.addAttribute("user", memberService.readDetailUsername());
+		model.addAttribute("events", eventService.readList());
+		
+		return "admin/schedule";
+	}
+	
+	@GetMapping("/memberApprove")
+	public String memberApprove(Model model) {
+		
+		model.addAttribute("awspath", awspath);
+		model.addAttribute("user", memberService.readDetailUsername());
+		model.addAttribute("members", adminService.memberApprove());
+		
+		return "admin/memberApprove";
+	}
+	
+	@ResponseBody
+	@PostMapping("/memberApprove")
+	public int memberApprove(Integer id) {
+		
+		adminService.memberApprove(id);
+		
+		return 1;
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.example.fran365.member;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,6 +11,5 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
     
     Optional<Member> findByNameAndPhone(@Param("name") String paramString1, @Param("phone") String paramString2);
 
-
-
+    List<Member> findByEnabled(boolean enabled);
 }

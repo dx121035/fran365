@@ -38,5 +38,21 @@ public class AdminServiceImpl implements AdminService {
 		
 		memberRepository.delete(member);
 	}
+
+	@Override
+	public List<Member> memberApprove() {
+
+		return memberRepository.findByEnabled(false);
+	}
+
+	@Override
+	public void memberApprove(Integer id) {
+
+		Optional<Member> om = memberRepository.findById(id);
+		Member member = om.get();
+		
+		member.setEnabled(true);
+		memberRepository.save(member);
+	}
 	
 }
