@@ -3,10 +3,7 @@ package com.example.fran365.member;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
-
-
 import jakarta.persistence.*;
-
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -37,10 +34,11 @@ public class Member implements UserDetails {
 
     private String bid; //가입한 사람 매장주소
 
-//    @Enumerated(EnumType.STRING)
-//    private Role role;
-    
     private String Role;
+
+    private String belong;
+
+    private String position;
 
     private LocalDateTime createDate;
 
