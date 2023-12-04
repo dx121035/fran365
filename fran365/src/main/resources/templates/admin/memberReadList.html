@@ -87,8 +87,7 @@
 				        </div>
 				    </a>
 				</div>
-				<!-- parent pages-->
-                <div class="nav-item-wrapper" style="font-size: 16px; margin-top: 8px;">
+				<div class="nav-item-wrapper" style="font-size: 16px; margin-top: 8px;">
 				    <a class="nav-link label-1" href="../pages/members.html" role="button" data-bs-toggle="" aria-expanded="false">
 				        <div class="d-flex align-items-center">
 				            <span class="nav-link-icon" style="margin-bottom: 5px;"><span data-feather="help-circle"></span></span>
@@ -96,7 +95,23 @@
 				        </div>
 				    </a>
 				</div><!-- parent pages-->
+				<div class="nav-item-wrapper" style="font-size: 16px; margin-top: 8px;">
+				    <a class="nav-link label-1" href="../pages/members.html" role="button" data-bs-toggle="" aria-expanded="false">
+				        <div class="d-flex align-items-center">
+				            <span class="nav-link-icon" style="margin-bottom: 5px;"><span data-feather="check-square"></span></span>
+				            <span class="nav-link-text-wrapper"><span class="nav-link-text">결재관리</span></span>
+				        </div>
+				    </a>
+				</div><!-- parent pages-->
                 <div class="nav-item-wrapper" style="font-size: 16px; margin-top: 8px;">
+				    <a class="nav-link label-1" href="../pages/members.html" role="button" data-bs-toggle="" aria-expanded="false">
+				        <div class="d-flex align-items-center">
+				            <span class="nav-link-icon" style="margin-bottom: 5px;"><span data-feather="shopping-cart"></span></span>
+				            <span class="nav-link-text-wrapper"><span class="nav-link-text">발주관리</span></span>
+				        </div>
+				    </a>
+				</div><!-- parent pages-->
+				<div class="nav-item-wrapper" style="font-size: 16px; margin-top: 8px;">
 				    <a class="nav-link label-1" href="../pages/members.html" role="button" data-bs-toggle="" aria-expanded="false">
 				        <div class="d-flex align-items-center">
 				            <span class="nav-link-icon" style="margin-bottom: 5px;"><span data-feather="map-pin"></span></span>
@@ -105,7 +120,7 @@
 				    </a>
 				</div><!-- parent pages-->
                 <div class="nav-item-wrapper" style="font-size: 16px; margin-top: 8px;">
-				    <a class="nav-link label-1" href="../pages/members.html" role="button" data-bs-toggle="" aria-expanded="false">
+				    <a class="nav-link label-1" href="/admin/schedule" role="button" data-bs-toggle="" aria-expanded="false">
 				        <div class="d-flex align-items-center">
 				            <span class="nav-link-icon" style="margin-bottom: 5px;"><span data-feather="calendar"></span></span>
 				            <span class="nav-link-text-wrapper"><span class="nav-link-text">일정관리</span></span>
@@ -131,7 +146,7 @@
                         </a>
                         <!-- more inner pages-->
                       </li>
-                      <li class="nav-item"><a class="nav-link" href="../dashboard/project-management.html" data-bs-toggle="" aria-expanded="false">
+                      <li class="nav-item"><a class="nav-link" href="/admin/memberApprove" data-bs-toggle="" aria-expanded="false">
                           <div class="d-flex align-items-center"><span class="nav-link-text">가입신청목록</span>
                           </div>
                         </a>
@@ -168,7 +183,7 @@
             
             <li class="nav-item dropdown"><a class="nav-link lh-1 pe-0" id="navbarDropdownUser" href="#!" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
                 <div class="avatar avatar-l ">
-                  <img class="rounded-circle " src="../assets/img/team/40x40/57.webp" alt="" />
+                  <img class="rounded-circle " th:src="@{|${awspath}/${user.image}|}" alt="" />
 
                 </div>
               </a>
@@ -177,10 +192,10 @@
                   <div class="card-body p-0">
                     <div class="text-center pt-4 pb-3">
                       <div class="avatar avatar-xl ">
-                        <img class="rounded-circle " src="../assets/img/team/72x72/57.webp" alt="" />
+                        <img class="rounded-circle " th:src="@{|${awspath}/${user.image}|}" alt="" />
 
                       </div>
-                      <h6 class="mt-2 text-black">신영진</h6>
+                      <h6 class="mt-2 text-black">[[${user.name}]]</h6>
                     </div>
                     
                   </div>
@@ -233,15 +248,15 @@
                 <tbody class="list" id="members-table-body">
 				  <th:block th:each="member : ${members}">
                   <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-					<td class="position1 align-middle white-space-nowrap text-1100">[[${member.id}]]</td>
+					<td class="position1 align-middle white-space-nowrap text-1100"><a href="#">#[[${member.id}]]</a></td>
                     <td class="customer align-middle white-space-nowrap"><a class="d-flex align-items-center text-900 text-hover-1000" th:href="@{|/admin/memberReadDetail?id=${member.id}|}">
-                        <div class="avatar avatar-m"><img class="rounded-circle" src="../assets/img/team/32.webp" alt="" />
+                        <div class="avatar avatar-m"><img class="rounded-circle" th:src="@{|${awspath}/${member.image}|}" alt="" />
                         </div>
                         <h6 class="mb-0 ms-3 fw-semi-bold">[[${member.name}]]</h6>
                       </a></td>
                     <td class="email align-middle white-space-nowrap text-1100">[[${member.username}]]</td>
-                    <td class="mobile_number align-middle white-space-nowrap text-1100">[[${member.tel}]]</td>
-                    <td class="city align-middle white-space-nowrap text-1100">[[${member.addr}]]</td>
+                    <td class="mobile_number align-middle white-space-nowrap text-1100">[[${member.phone}]]</td>
+                    <td class="city align-middle white-space-nowrap text-1100">[[${member.address}]]</td>
                     <td class="position1 align-middle white-space-nowrap text-1100">본사</td>
                     <td class="position2 align-middle white-space-nowrap text-1100">과장</td>
                     <td class="joined align-middle white-space-nowrap text-1100" th:text="${#temporals.format(member.createDate, 'yyyy-MM-dd HH:mm')}"></td>
