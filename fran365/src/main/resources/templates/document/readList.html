@@ -1,0 +1,22 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+</head>
+<body>
+
+<th:block th:each="docu : ${docus}">
+    id: <a th:text="${docu.id}" th:href="@{|/document/readDetail?id=${docu.id}|}"></a>
+    <br>
+    category: <a th:text="${docu.category}"></a>
+    <br>
+    status: <a th:text="${docu.status}"></a>
+    <br>
+    depart: <a th:text="${docu.depart}"></a>
+    <br>
+    deadline: <a th:text="${docu.deadline}"></a>
+
+    <br><br>
+</th:block>
+</body>
+</html>

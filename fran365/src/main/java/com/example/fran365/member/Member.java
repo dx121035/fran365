@@ -38,7 +38,7 @@ public class Member implements UserDetails {
 
     private String belong;
 
-    private String position;
+    private Integer position;
 
     private LocalDateTime createDate;
 
