@@ -33,13 +33,15 @@ public class ReplyController {
     private BoardService boardService;
 
     @PostMapping("/create")
-    public String create(@RequestParam Integer id, @RequestParam String rwriter, @RequestParam String content, Principal principal) {
-
-        replyService.create(id, content);
-        replyService.sendSimpleMessage(rwriter,
-                "질문에 답변이 등록되었습니다.",
-                "답변:" + content);
+    public String create(@RequestParam Integer id,  @RequestParam String content, @RequestParam String writer) {
+        replyService.create(id,content,writer);
         return "redirect:/board/detail?id=" + id;
+    }
+
+    @PostMapping("/noticeCreate")
+    public String noticeCreate(@RequestParam Integer id,  @RequestParam String content, @RequestParam String writer) {
+        replyService.create(id,content,writer);
+        return "redirect:/board/noticeDetail?id=" + id;
     }
 
     @GetMapping("/detail")
@@ -52,4 +54,16 @@ public class ReplyController {
         model.addAttribute("board", boardService.detail(id));
         return "board/detail";
     }
+    @GetMapping("/noticeDetail")
+    public String noticeDetail(Model model,@RequestParam Integer id) {
+
+        Board board = boardService.detail(id);
+        Member member = memberService.readDetailUsername();
+        boardService.hit(board,member);
+
+        model.addAttribute("board", boardService.detail(id));
+        return "board/noticeDetail";
+
+    }
+
 }

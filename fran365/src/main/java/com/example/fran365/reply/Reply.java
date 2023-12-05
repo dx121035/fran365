@@ -21,6 +21,8 @@ public class Reply {
 
     private String content;
 
+    private String writer;
+
     private LocalDateTime createDate;
 
     @ManyToOne

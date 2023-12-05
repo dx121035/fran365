@@ -25,13 +25,30 @@ public class ReplyServiceImpl implements ReplyService {
     private ReplyRepository replyRepository;
 
     @Override
-    public void create(Integer id, String content) {
+    public void create(Integer id, String content,String writer) {
 
         Board board = boardService.detail(id);
-        board.setStatus("답변완료");
+        if (!board.getCategory().equals("공지") && !board.getCategory().equals("FAQ")) {
+            board.setStatus("답변완료");
+        }
         Reply c = new Reply();
         c.setContent(content);
         c.setBoard(board);
+        c.setWriter(writer);
+        c.setCreateDate(LocalDateTime.now());
+        replyRepository.save(c);
+    }
+
+    @Override
+    public void noticeCreate(Integer id, String content, String writer) {
+        Board board = boardService.detail(id);
+        if (!board.getCategory().equals("공지") && !board.getCategory().equals("FAQ")) {
+            board.setStatus("답변완료");
+        }
+        Reply c = new Reply();
+        c.setContent(content);
+        c.setBoard(board);
+        c.setWriter(writer);
         c.setCreateDate(LocalDateTime.now());
         replyRepository.save(c);
     }
@@ -42,17 +59,11 @@ public class ReplyServiceImpl implements ReplyService {
         return reply.get();
     }
 
-    @Autowired
-    private JavaMailSender javaMailSender;
-
-    public void sendSimpleMessage(String to, String subject, String text) {
-
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("seula724@naver.com"); // 실제 네이버 이메일 주소
-        message.setTo(to);
-        message.setSubject(subject);
-        message.setText(text);
-
-        javaMailSender.send(message);
+    @Override
+    public Reply noticeDetail(Integer id) {
+        Optional<Reply> reply = replyRepository.findById(id);
+        return reply.get();
     }
+
+
 }

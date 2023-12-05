@@ -25,4 +25,6 @@ public interface BoardService {
     List<Board> getAllBoardsByCategories(List<String> categories);
     void hit (Board board, Member member);
 
+
+
 }

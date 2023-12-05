@@ -29,9 +29,6 @@ public class BoardController {
     @Autowired private BoardService boardService;
     @Autowired private MemberService memberService;
 
-    @Value("${aws.s3.awspath}")
-    private String awspath;
-
     @GetMapping("/create")
     public String create() {
         return "board/create";
@@ -77,7 +74,6 @@ public class BoardController {
         boardService.hit(board,member);
 
         model.addAttribute("board", boardService.detail(id));
-        model.addAttribute("awspath", awspath);
 
             return "board/detail";
     }
@@ -89,7 +85,6 @@ public class BoardController {
         boardService.hit(board,member);
 
         model.addAttribute("board", boardService.detail(id));
-        model.addAttribute("awspath", awspath);
             return "board/noticeDetail";
 
     }
@@ -101,7 +96,6 @@ public class BoardController {
         boardService.hit(board,member);
 
         model.addAttribute("board", boardService.detail(id));
-        model.addAttribute("awspath", awspath);
         return "board/FAQDetail";
 
     }
@@ -112,7 +106,6 @@ public class BoardController {
         boardService.hit(board,member);
 
         model.addAttribute("board", boardService.detail(id));
-        model.addAttribute("awspath", awspath);
         return "board/update";
     }
     @PostMapping("/update")
