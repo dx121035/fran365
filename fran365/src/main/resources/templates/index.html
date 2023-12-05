@@ -3,15 +3,143 @@
 	  layout:decorate="~{fragments/layout1}">
 
 <div layout:fragment="content">
-인덱스 테스트
-	<a href="/member/create">회원가입</a>
-	<a href="/login">로그인</a>
-	<a href="/logout">로그아웃</a>
-	<a href="/product/create">상품 등록</a>
-	<a href="/product/readList">상품 목록</a>
-	<a href="/cart/readDetail">장바구니</a>
-	<a href="/social/social">인스타그램</a>
 
-	<div style="color:papayawhip" th:text="${#authentication.name} + ' 님 로그인 중'"></div>
-	<p><a href="/admin/main">관리자페이지</a></p>
+
+
+	<main class="alternate-landing" style="--phoenix-scroll-margin-top: 1.2rem;">
+
+		<section class="overflow-hidden rotating-earth-container pb-5 pb-md-0 pt-12">
+			<div class="container-small px-lg-7 px-xxl-3">
+				<div class="row">
+					<div class="col-lg-6 text-center text-lg-start">
+						<h5 class="text-info mb-3">One-stop solution</h5>
+						<h2 class="mb-2 lh-base">Used by millions of users</h2>
+						<h1 class="fs-4 fs-sm-6 mb-3 text-gradient-info fw-black">Fran365 </h1>
+						<p class="mb-10">Fran365  프랜차이즈 RPA(업무자동화) 솔루션</p>
+						<div class="row gy-6">
+							<div class="col-sm-6 text-center text-lg-start"><img class="mb-4 d-dark-none" src="../../assets/img/icons/lightning-speed.png" alt="" /><img class="mb-4 d-light-none" src="../../assets/img/icons/lightning-speed-dark.png" alt="" />
+								<h4 class="mb-2">Lightning Speed</h4>
+								<p>Grow fast with Phoenix!</p>
+							</div>
+							<div class="col-sm-6 text-center text-lg-start"><img class="mb-4 d-dark-none" src="../../assets/img/icons/best-statistics.png" alt="" /><img class="mb-4 d-light-none" src="../../assets/img/icons/best-statistics-dark.png" alt="" />
+								<h4 class="mb-2">Best Statistics</h4>
+								<p>Get all reports at hand!</p>
+							</div>
+							<div class="col-sm-6 text-center text-lg-start"><img class="mb-4 d-dark-none" src="../../assets/img/icons/all-night.png" alt="" /><img class="mb-4 d-light-none" src="../../assets/img/icons/all-night-dark.png" alt="" />
+								<h4 class="mb-2">All-night Protection</h4>
+								<p>Security Assured: Ensure data Safety with Phoenix!</p>
+							</div>
+							<div class="col-sm-6 text-center text-lg-start"><img class="mb-4 d-dark-none" src="../../assets/img/icons/editable-features.png" alt="" /><img class="mb-4 d-light-none" src="../../assets/img/icons/editable-features-dark.png" alt="" />
+								<h4 class="mb-2">Editable Features</h4>
+								<p>Edits made easy and safe!</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-auto">
+						<div class="position-relative position-lg-absolute rotating-earth">
+							<div class="lottie d-dark-none" data-options='{"path":"../../assets/img/animated-icons/rotating-earth.json"}'></div>
+							<div class="lottie d-light-none" data-options='{"path":"../../assets/img/animated-icons/rotating-earth-dark.json"}'></div><img class="position-absolute d-dark-none" src="../../assets/img/spot-illustrations/earth-plane.png" alt="" /><img class="position-absolute d-light-none" src="../../assets/img/spot-illustrations/earth-plane-dark.png" alt="" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="counter-container">
+			<div class="position-absolute start-0 end-0 w-100 counter-overlay" style="transform: skewY(-8deg)"></div>
+			<div class="container-small position-relative">
+				<div class="row gx-0 gy-8 justify-content-center">
+					<div class="col-sm-6 col-md-auto me-md-5 pe-md-5 border-end-md border-dashed text-center order-2 order-md-0">
+						<h1 class="fs-5 fs-lg-7 fw-bolder text-info mb-3"><span>$</span><span data-countup='{"endValue":8976,"duration":5,"suffix":""}'></span></h1>
+						<h4>Revenue</h4>
+					</div>
+					<div class="col-sm-6 col-md-auto me-md-5 pe-md-5 border-end-md border-dashed text-center order-1 order-md-0">
+						<h1 class="fs-5 fs-lg-7 fw-bolder text-info mb-3"><span data-countup='{"endValue":308,"duration":10,"suffix":""}'></span><span>K</span></h1>
+						<h4>User</h4>
+					</div>
+					<div class="col-sm-6 col-md-auto me-md-5 pe-md-5 border-end-md border-dashed text-center">
+						<h1 class="fs-5 fs-lg-7 fw-bolder text-info mb-3" data-countup='{"endValue":12,"duration":0.5,"suffix":""}'></h1>
+						<h4>Countries</h4>
+					</div>
+					<div class="col-sm-6 col-md-auto text-center">
+						<h1 class="fs-5 fs-lg-7 fw-bolder text-info mb-3" data-countup='{"endValue":125,"duration":15,"suffix":"+"}'></h1>
+						<h4>Stories</h4>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="pt-10" id="blog">
+
+			<div class="container-small px-lg-7 px-xxl-3">
+				<div class="text-center mb-5 mb-8">
+					<h5 class="text-info mb-3">Blogs</h5>
+					<h2 class="mb-2">Our most viewed articles</h2>
+				</div>
+				<div class="row gx-3 gy-7">
+					<div class="col-lg-4">
+						<div class="blog-card"><img class="w-100 rounded-3" src="/assets/img/blog/blog-5.png" alt="" />
+							<div class="d-flex align-items-cente mt-3"><a class="btn-link text-decoration-none text-800 d-flex align-items-center me-3" href="#!"><span class="fa-solid fa-eye fs--1"></span><span class="fs--2 ms-1 lh-1">2563</span></a><a class="btn-link text-decoration-none text-800 d-flex align-items-center me-3" href="#!"><span class="fa-solid fa-heart fs--1"></span><span class="ms-1 fs--2 lh-1">125</span></a><a class="btn-link text-decoration-none text-800 d-flex align-items-center" href="#!"><span class="fa-solid fa-comment fs--1"></span><span class="ms-1 fs--2 lh-1">125</span></a></div><span class="badge bg-primary mb-2 mt-4">SEO</span>
+							<h4 class="mb-3 pe-sm-5 lh-lg">Top 10 ways to Ace SEO for your business</h4><a class="btn-link px-0 d-flex align-items-center fs--1 fw-bold" href="#!" role="button">See more<span class="fa-solid fa-angle-right ms-2"></span></a>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="blog-card"><img class="w-100 rounded-3" src="/assets/img/blog/blog-6.png" alt="" />
+							<div class="d-flex align-items-cente mt-3"><a class="btn-link text-decoration-none text-800 d-flex align-items-center me-3" href="#!"><span class="fa-solid fa-eye fs--1"></span><span class="fs--2 ms-1 lh-1">1256</span></a><a class="btn-link text-decoration-none text-800 d-flex align-items-center me-3" href="#!"><span class="fa-solid fa-heart fs--1"></span><span class="ms-1 fs--2 lh-1">325</span></a><a class="btn-link text-decoration-none text-800 d-flex align-items-center" href="#!"><span class="fa-solid fa-comment fs--1"></span><span class="ms-1 fs--2 lh-1">32</span></a></div><span class="badge bg-primary mb-2 mt-4">Marketing</span>
+							<h4 class="mb-3 pe-sm-5 lh-lg">Top 12 Marketing strategies you can take</h4><a class="btn-link px-0 d-flex align-items-center fs--1 fw-bold" href="#!" role="button">See more<span class="fa-solid fa-angle-right ms-2"></span></a>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="blog-card"><img class="w-100 rounded-3" src="../../assets/img/blog/blog-7.png" alt="" />
+							<div class="d-flex align-items-cente mt-3"><a class="btn-link text-decoration-none text-800 d-flex align-items-center me-3" href="#!"><span class="fa-solid fa-eye fs--1"></span><span class="fs--2 ms-1 lh-1">142</span></a><a class="btn-link text-decoration-none text-800 d-flex align-items-center me-3" href="#!"><span class="fa-solid fa-heart fs--1"></span><span class="ms-1 fs--2 lh-1">123</span></a><a class="btn-link text-decoration-none text-800 d-flex align-items-center" href="#!"><span class="fa-solid fa-comment fs--1"></span><span class="ms-1 fs--2 lh-1">22</span></a></div><span class="badge bg-primary mb-2 mt-4">Marketing</span>
+							<h4 class="mb-3 pe-sm-5 lh-lg">The top 7 methods to improve as a marketer</h4><a class="btn-link px-0 d-flex align-items-center fs--1 fw-bold" href="#!" role="button">See more<span class="fa-solid fa-angle-right ms-2"></span></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- end of .container-->
+
+		</section>
+
+		<section class="pb-10 pb-xl-14">
+
+			<div class="container-small px-lg-7 px-xxl-3">
+				<div class="text-center mb-7">
+					<h5 class="text-info mb-3">Contact</h5>
+					<h2 class="mb-2">Choose the best deal for you</h2>
+				</div>
+				<div class="row">
+					<div class="col-12 mb-10">
+						<div class="googlemap" data-googlemap="data-googlemap" data-gmap="data-gmap" data-latlng="40.7228022,-74.0020158" data-scrollwheel="false" data-zoom="15" style="height: 381px; border-radius:1.5rem;">
+							<div class="marker-content py-3">
+								<h5>Google map</h5>
+								<p>A nice template for your site.<br />Customize it as you want.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</section>
+
+	</main>
+
+
+
+
+	<!-- ===============================================-->
+	<!--    JavaScripts-->
+	<!-- ===============================================-->
+
+	<script src="/vendors/lodash/lodash.min.js"></script>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+	<script src="/vendors/list.js/list.min.js"></script>
+	<script src="/vendors/feather-icons/feather.min.js"></script>
+	<script src="/vendors/dayjs/dayjs.min.js"></script>
+	<script src="/assets/js/phoenix.js"></script>
+	<script src="/vendors/bigpicture/BigPicture.js"></script>
+	<script src="/vendors/lottie/lottie.min.js"></script>
+	<script src="/vendors/countup/countUp.umd.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbaQGvhe7Af-uOMJz68NWHnO34UjjE7Lo&callback=initMap" async></script>
+
+
 </div>

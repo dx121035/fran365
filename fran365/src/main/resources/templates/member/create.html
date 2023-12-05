@@ -1,10 +1,65 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US" dir="ltr">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- ===============================================-->
+    <!--    Document Title-->
+    <!-- ===============================================-->
+    <title>Phoenix</title>
+
+
+    <!-- ===============================================-->
+    <!--    Favicons-->
+    <!-- ===============================================-->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicons/favicon.ico">
+    <link rel="manifest" href="/assets/img/favicons/manifest.json">
+    <meta name="msapplication-TileImage" content="/assets/img/favicons/mstile-150x150.png">
+    <meta name="theme-color" content="#ffffff">
+    <script src="/vendors/imagesloaded/imagesloaded.pkgd.min.js"></script>
+    <script src="/vendors/simplebar/simplebar.min.js"></script>
+    <script src="/assets/js/config.js"></script>
+
+
+    <!-- ===============================================-->
+    <!--    Stylesheets-->
+    <!-- ===============================================-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <link href="/vendors/simplebar/simplebar.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <link href="/assets/css/theme-rtl.min.css" type="text/css" rel="stylesheet" id="style-rtl">
+    <link href="/assets/css/theme.min.css" type="text/css" rel="stylesheet" id="style-default">
+    <link href="/assets/css/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
+    <link href="/assets/css/user.min.css" type="text/css" rel="stylesheet" id="user-style-default">
+    <script>
+        var phoenixIsRTL = window.config.config.phoenixIsRTL;
+        if (phoenixIsRTL) {
+            var linkDefault = document.getElementById('style-default');
+            var userLinkDefault = document.getElementById('user-style-default');
+            linkDefault.setAttribute('disabled', true);
+            userLinkDefault.setAttribute('disabled', true);
+            document.querySelector('html').setAttribute('dir', 'rtl');
+        } else {
+            var linkRTL = document.getElementById('style-rtl');
+            var userLinkRTL = document.getElementById('user-style-rtl');
+            linkRTL.setAttribute('disabled', true);
+            userLinkRTL.setAttribute('disabled', true);
+        }
+    </script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 </head>
+
+
 <body>
 
 <script>
@@ -68,43 +123,135 @@
     });
 
 </script>
-<h1>회원가입</h1>
-<h3>본인인증 하셔야 회원가입이 가능합니다.</h3>
-<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-    <input id="phone" type="text" title="전화번호 입력">
-    <button id="phoneChk" class="btn btn-primary"  onclick="phoneChk()">인증번호 전송</button><br />
-    <br>
-    <input id="phone2" type="text" name="phone2" title="인증번호 입력" required />
-
-    <input id="Confirm" type="hidden">
-    <button id="phoneChk2" class="btn btn-primary" onclick="confirmNum()">본인인증</button><br>
-
-
-
-
-    <form th:action="@{/member/create}" th:object="${memberForm}" method="post"enctype="multipart/form-data">
-
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
-            <div th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+<main class="main" id="top">
+    <div class="container-fluid bg-300 dark__bg-1200">
+        <div class="bg-holder bg-auth-card-overlay" style="background-image:url(/public/assets/img/bg/37.png);">
         </div>
+        <!--/.bg-holder-->
+
+        <div class="row flex-center position-relative min-vh-80 g-0 py-3">
+            <div class="col-11 col-sm-10 col-xl-8">
+                <div class="card border border-200 auth-card">
+                    <div class="card-body pe-md-0">
+                        <div class="row align-items-center gx-0 gy-7">
+                            <div class="col-auto bg-100 dark__bg-1100 rounded-3 position-relative overflow-hidden auth-title-box">
+                                <div class="bg-holder" style="background-image:url(/public/assets/img/bg/38.png);">
+                                </div>
+                                <!--/.bg-holder-->
+                                <br>
+                                <div class="position-relative px-4 px-lg-7 pt-7 pb-7 pb-sm-5 text-center text-md-start pb-lg-7 card-sign-up">
+                                    <h3 class="mb-3 text-black fs-1">프랜차이즈 RPA(업무자동화)</h3>
+                                    <p class="text-700">식당은 작은 규모의 장사 같지만 치열한 경쟁 속에서 살아남기 위해 끊임없이 연구해야 하는 업입니다 <br></p>
+                                    <p class="text-700">좋은 맛의 음식을 알리고 홍보해야 하는 마케팅적인 요소도 포함하고 있고,<span style="color:red;font-weight:bold">재무,회계,전략과 기획 등 </span>다양한 분야에 월등해야만 주변 경쟁자들과 치열한 전투에서 살아남을 수 있는 사업입니다 <span style="color:red;font-weight:bold"></span></p>
+                                    <ul class="list-unstyled mb-0 w-max-content w-md-auto mx-auto">
+                                        <li class="d-flex align-items-center"><span class="uil uil-check-circle text-success me-2"></span><span class="text-700 fw-semi-bold">빠른 문의 답변</span></li>
+                                        <li class="d-flex align-items-center"><span class="uil uil-check-circle text-success me-2"></span><span class="text-700 fw-semi-bold">전국 매장 알림</span></li>
+                                        <li class="d-flex align-items-center"><span class="uil uil-check-circle text-success me-2"></span><span class="text-700 fw-semi-bold">자원 인력 공유</span></li>
+                                        <li class="d-flex align-items-center"><span class="uil uil-check-circle text-success me-2"></span><span class="text-700 fw-semi-bold">최고의 결재 시스템</span></li>
+                                    </ul>
+                                </div>
+                                <div class="position-relative z-index--1 mb-6 d-none d-md-block text-center mt-md-15"><img class="auth-title-box-img d-dark-none" src="/public/assets/img/spot-illustrations/auth.png" alt="" /><img class="auth-title-box-img d-light-none" src="/resources/public/assets/img/spot-illustrations/auth-dark.png" alt="" /></div>
+                            </div>
+                            <div class="col mx-auto">
+                                <div class="auth-form-box">
+                                    <div class="text-center mb-7"><a class="d-flex flex-center text-decoration-none mb-4" href="/public/index.html">
+                                    </a>
+                                        <div class="d-flex align-items-center fw-bolder fs-5 d-inline-block"><img src="/images/logo7.png" alt="phoenix" class=" w-100 mb-3" />
+                                        </div>
+                                        <h3 class="text-1000">회원가입</h3>
+                                        <!--        <p class="text-700">회원 가입을 해주세요</p> -->
+                                    </div>
+                                    <div class="position-relative mt-3">
+                                        <hr class="bg-200" />
+                                        <div class="col-sm-10 col-md-8 col-lg-5 col-xl-5 col-xxl-3"><a class="d-flex flex-center text-decoration-none mb-1" href="/public/index.html">
+
+                                        </a>
+                                        </div>
+
+                                        <br>
+                                        <div class="mb-3 text-start">
+                                            <input class="form-control" id="phone" type="text" title="전화번호 입력" placeholder="전화번호 입력">
+                                            <button id="phoneChk" class="btn btn-primary"  onclick="phoneChk()">인증번호 전송</button><br />
+                                            <br>
+                                            <input class="form-control" id="phone2" type="text" name="phone2" title="인증번호 입력" required />
+
+                                            <input class="form-control" id="Confirm" type="hidden">
+                                            <button  id="phoneChk2" class="btn btn-primary" onclick="confirmNum()">본인인증</button><br>
+                                            <br>
+                                            <form action="/member/create" method="post" th:object="${memberForm}"   enctype="multipart/form-data">
+
+                                               <!-- <form th:action="@{/member/create}" th:object="${memberForm}" method="post"enctype="multipart/form-data">
+
+                                                    <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
+                                                        <div th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+                                                    </div>-->
+
+                                                <div class="mb-3 text-start">
+                                                    <input class="form-control " id="username" name="username" type="text" placeholder="아이디를 입력하세요"/>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-6 text-start">
+                                                        <input class="form-control" id="password" name="password" type="password" placeholder="비밀번호" />
+                                                    </div>
+
+                                                    <div class="col-md-6 text-start">
+                                                        <input class="form-control" id="password2" name="password2" type="password" placeholder="비밀번호 확인" />
+                                                    </div>
+                                                </div>
+                                                <br>
+
+                                                <div class="mb-3 text-start">
+                                                    <input class="form-control" type="text" name="name" placeholder="이름을 입력하세요" />
+                                                </div>
+
+                                                <div class="mb-3 text-start">
+                                                    <input class="form-control"  name="phone" type="text" placeholder="연락처를 입력하세요" />
+                                                </div>
+                                                <div class="mb-3 text-start">
+                                                    <input class="form-control"  name="address" type="text" placeholder="주소를 입력하세요" />
+                                                </div>
+
+                                                <div class="mb-3 text-start">
+                                                    <input class="form-control"  name="filename" type="file" placeholder="이미지는 필수로 넣어주세요" required/>
+                                                </div>
 
 
-        <p>아이디:<input type="text" name="username" />
-        <p>비밀번호:<input type="password" name="password"  />
-        <p>비밀번호 확인:<input type="text" name="confirmPassword"  />
-        <p>이름:<input type="text" name="name"  />
-        <p>핸드폰<input type="text" name="phone"  /><br>
-        <p>주소:<input type="text" name="address"/>
-            <select name="belong">
-                <option value="본사">본사</option>
-                <option value="가맹점">가맹점</option>
-            </select>
-        <p>프로필사진:<input type="file" name="filename" /><br><br>
 
-            <input class="btn btn-primary rounded-pill py-3 px-5 submit-button" type="submit" value="회원 가입"></input>
-    </form>
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+                                                <input class="btn btn-primary rounded-pill py-3 px-5 submit-button" type="submit" value="회원 가입"></input>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+
+
+<!-- ===============================================-->
+<!--    JavaScripts-->
+<!-- ===============================================-->
+<script src="/vendors/popper/popper.min.js"></script>
+<script src="/vendors/bootstrap/bootstrap.min.js"></script>
+<script src="/vendors/anchorjs/anchor.min.js"></script>
+<script src="/vendors/is/is.min.js"></script>
+<script src="/vendors/fontawesome/all.min.js"></script>
+<script src="/vendors/lodash/lodash.min.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+<script src="/vendors/list.js/list.min.js"></script>
+<script src="/vendors/feather-icons/feather.min.js"></script>
+<script src="/vendors/dayjs/dayjs.min.js"></script>
+<script src="/assets/js/phoenix.js"></script>
 
 </body>
+
 </html>
