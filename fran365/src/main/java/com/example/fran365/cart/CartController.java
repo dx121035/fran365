@@ -50,4 +50,9 @@ public class CartController {
         return response;
     }
 
+    @PostMapping("/delete")
+    @ResponseBody
+    public void deleteItem(@RequestParam int itemId) {
+        cartService.deleteItem(itemId);
+    }
 }

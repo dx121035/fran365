@@ -22,6 +22,8 @@ public class Social {
 
     private LocalDateTime createDate;
 
+    private String status; // 1 = public 0 = private
+
     @OneToMany(mappedBy = "social", cascade = CascadeType.REMOVE)
     private
     List<Comment> commentList;
