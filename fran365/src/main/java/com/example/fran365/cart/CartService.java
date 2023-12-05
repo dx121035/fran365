@@ -10,6 +10,8 @@ public interface CartService {
 
     void delete();
 
+    void deleteItem(int itemId);
+
     Cart updateQuantity(int itemId, Integer quantity);
 
     int TotalPrice(Cart updatedCart);

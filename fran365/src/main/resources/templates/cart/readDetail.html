@@ -60,7 +60,7 @@
         <td class="column-2">[[${item.name}]]</td>
         <td class="column-3">[[${item.price}]]</td>
         <input type="number" name="quantity" class="quantity" th:value="${item.quantity}"  th:attr="data-id=${item.id}"/>
-
+        <button class="delete" th:attr="data-id=${item.id}">삭제</button>
 
     </th:block>
     <div class="size-209">
@@ -94,6 +94,28 @@
                 }
             });
         });
+
+        $(".delete").click(function() {
+
+            var itemId = $(this).data("id");
+
+            $.ajax({
+                type: "POST",
+                url: "/cart/delete",
+                data: {
+                    itemId: itemId
+                },
+                success: function() {
+                        $("button[data-id='" + itemId + "']").parent().remove();
+                        location.reload();
+                },
+                error: function(err) {
+                    console.log(err);
+                }
+            });
+        });
+
+
     </script>
 </div>
 </html>
