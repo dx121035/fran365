@@ -19,4 +19,8 @@ public interface AdminService {
 	
 	Map<Object, Object> getPosition();
 	
+	void updatePosition(String username, Integer newPosition);
+	
+	int getDeliveyNotComplete();
+	
 }
