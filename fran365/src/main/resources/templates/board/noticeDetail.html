@@ -14,7 +14,7 @@ mail: inew3w@gmail.com-->
             <div class="card-header p-4 border-bottom border-300 bg-soft">
                 <div class="row g-3 justify-content-between align-items-center">
                     <div class="col-12 col-md">
-                        <h5 class="text-900 mb-0 text-center fs-5" data-anchor="data-anchor" >Question & Answer</h5>
+                        <h5 class="text-900 mb-0 text-center fs-5" data-anchor="data-anchor" >notice</h5>
                     </div>
                 </div>
             </div>
@@ -22,18 +22,16 @@ mail: inew3w@gmail.com-->
                 <div class="border-bottom mb-3">
                     <div class="d-flex align-items-center mb-3">
                         <div class="btn-reveal-trigger d-flex">
-                            <div class="flex-1" style="font-size: 35px;">[[${board.category}]]> [[${board.title}]]</div>
+                            <div class="flex-1" style="font-size: 35px;"> [[${board.title}]]</div>
                         </div>
                     </div>
-
                     <div class="d-flex align-items-center mb-3">
                         <p><a th:text="${#temporals.format(board.createDate, 'yyyy년 MM월 dd일 HH시 mm분')}"></a>
                         </p>
                     </div>
-
                     <div class="flex-1" style="font-size: 25px;" th:utext="${board.content}"></div>
 
-                    <div th:if="${#authentication.name == 'admin' or #authentication.name == board.writer}">
+                    <div th:if="${#authentication.name == 'admin'}">
                         <br><br><br>
                         <a th:href="@{|/board/update?id=${board.id}|}"
                            class="border border-300 rounded-2 p-2 mb-2 text-center bg-outline-danger dark__bg-1000 shadow-sm ml-2"
@@ -56,25 +54,23 @@ mail: inew3w@gmail.com-->
                 </div>
             </div>
         </div>
-
-
         <div class="col-12">
             <div class="card h-200">
                 <div class="card-body">
                     <h3 class="mb-4">댓글</h3>
-                    <div th:if="${#authentication.name == 'admin'}">
-                        <form action="/reply/create" method="post" class="w-100">
-                            <input type="hidden" name="id" th:value="${board.id}">
 
-                            <input type="hidden" name="rwriter" th:value="${#authentication.name}">
+                    <form action="/reply/create" method="post" class="w-100">
+                        <input type="hidden" name="id" th:value="${board.id}">
 
-                            <textarea class="form-control" type="text" name="content" placeholder="답변을 입력하세요"
-                                      rows="4"></textarea>
-                            <button class="btn btn-primary w-100 mb-4" name="content">등록</button>
-                        </form>
-                    </div>
+                        <input type="hidden" name="rwriter" th:value="${board.writer}">
+
+                        <textarea class="form-control" type="text" name="content" placeholder="답변을 입력하세요"
+                                  rows="4"></textarea>
+                        <button class="btn btn-primary w-100 mb-4" name="content">등록</button>
+                    </form>
+
                     <th:block class="table-primary" th:each="reply: ${board.replyList}">
-                        <div class="fs--1 fw-semi-bold pb-3 mb-4 border-bottom border-dashed border-300">
+                        <div class="fs&#45;&#45;1 fw-semi-bold pb-3 mb-4 border-bottom border-dashed border-300">
                             <div class="d-flex justify-content-between">
                                 <div class="text-1000 mb-1"
                                      th:utext="${#strings.replace(reply.content, ',', '')}"></div>

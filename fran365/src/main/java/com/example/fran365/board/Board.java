@@ -29,7 +29,7 @@ public class Board{
 
     private String category;
 
-    private String image;
+    private String status;
 
     private LocalDateTime createDate;
 

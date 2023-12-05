@@ -38,8 +38,8 @@ public class BoardController {
     }
 
     @PostMapping("/create")
-    public String create(Board board, MultipartFile tempfile, @RequestParam String category) throws IOException {
-        boardService.create(board, tempfile, category);
+    public String create(Board board, @RequestParam String category) throws IOException {
+        boardService.create(board, category);
 
         // Redirect to the appropriate URL based on the category
         if ("공지".equals(category)) {
@@ -51,10 +51,10 @@ public class BoardController {
         }
     }
     @GetMapping("/list")
-    public String list(Model model,@RequestParam (value="page",defaultValue="0")int page){
+    public String list(Model model) {
         List<String> categories = Arrays.asList("상품", "배송", "재고");
-        Page<Board> paging = boardService.getAllBoardsByCategories(categories,page);
-        model.addAttribute("paging", paging);
+        List<Board> allBoards = boardService.getAllBoardsByCategories(categories);
+        model.addAttribute("boards", allBoards);
         return "board/list";
     }
     @GetMapping("/notice")
@@ -78,9 +78,33 @@ public class BoardController {
 
         model.addAttribute("board", boardService.detail(id));
         model.addAttribute("awspath", awspath);
-        return "board/detail";
-    }
 
+            return "board/detail";
+    }
+    @GetMapping("/noticeDetail")
+    public String readDetail(Model model,@RequestParam Integer id) {
+
+        Board board = boardService.detail(id);
+        Member member = memberService.readDetailUsername();
+        boardService.hit(board,member);
+
+        model.addAttribute("board", boardService.detail(id));
+        model.addAttribute("awspath", awspath);
+            return "board/noticeDetail";
+
+    }
+    @GetMapping("/FAQDetail")
+    public String FAQ(Model model,@RequestParam Integer id) {
+
+        Board board = boardService.detail(id);
+        Member member = memberService.readDetailUsername();
+        boardService.hit(board,member);
+
+        model.addAttribute("board", boardService.detail(id));
+        model.addAttribute("awspath", awspath);
+        return "board/FAQDetail";
+
+    }
     @GetMapping("/update")
     public String update(Model model,@RequestParam Integer id){
         Board board = boardService.detail(id);
@@ -92,9 +116,9 @@ public class BoardController {
         return "board/update";
     }
     @PostMapping("/update")
-    public String update(Board board,@RequestParam Integer id, MultipartFile tempfile,@RequestParam String category) throws IOException {
+    public String update(Board board, @RequestParam("category") String category) throws IOException {
 
-        boardService.update(board,tempfile, category);
+        boardService.update(board, category);
         if ("공지".equals(category)) {
             return "redirect:/board/notice";
         } else if ("FAQ".equals(category)) {
