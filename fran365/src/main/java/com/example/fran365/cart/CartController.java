@@ -30,11 +30,13 @@ public class CartController {
     public String readDetail(Model model){
 
         Cart cart = cartService.readDetailUsername();
-        List<Item> item = cart.getItemList();
+        List<Item> itemList = cart.getItemList();
 
         model.addAttribute("member", memberService.readDetailUsername());
         model.addAttribute("cart", cartService.readDetailUsername());
         model.addAttribute("total", cartService.TotalPrice(cart));
+        model.addAttribute("itemName", itemList.get(0).getName());
+        model.addAttribute("itemSize", itemList.size() - 1);
         return "cart/readDetail";
     }
 

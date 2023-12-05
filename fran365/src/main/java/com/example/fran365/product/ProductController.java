@@ -6,11 +6,13 @@
 
 package com.example.fran365.product;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,17 +31,21 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping("/create")
-    public String create() {
+    public String create(ProductCreateForm productCreateForm) {
 
         return "product/create";
     }
 
     @PostMapping("/create")
-    public String create(Product product,
+    public String create(@Valid ProductCreateForm productCreateForm, BindingResult bindingResult,
                          @RequestParam("filename") MultipartFile file
     ) throws IOException {
 
-        productService.create(product, file);
+        if (bindingResult.hasErrors()) {
+            return "product/create";
+        }
+
+        productService.create(productCreateForm.getName(), productCreateForm.getPrice(),file);
 
         return "redirect:/product/readList";
     }
@@ -56,18 +62,23 @@ public class ProductController {
     }
 
     @GetMapping("/update")
-    public String update(Model model, @RequestParam("id") Integer id) {
+    public String update(Model model, @RequestParam("id") Integer id, ProductCreateForm productCreateForm) {
 
         model.addAttribute("details", productService.readDetail(id));
         return "product/update";
     }
 
     @PostMapping("/update")
-    public String update(Product product,
+    public String update(Model model, @Valid ProductCreateForm productCreateForm, BindingResult bindingResult, @RequestParam Integer id,
                          @RequestParam("filename") MultipartFile file
     ) throws IOException {
 
-        productService.update(product, file);
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("details", productService.readDetail(id));
+            return "product/update";
+        }
+
+        productService.update(productCreateForm.getName(), productCreateForm.getPrice(),id,file);
 
         return "redirect:/product/readList";
     }
