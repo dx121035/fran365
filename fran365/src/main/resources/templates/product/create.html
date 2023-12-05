@@ -10,11 +10,15 @@ mail : leeseulaseula@gmail.com
     <title>Title</title>
 </head>
 <body>
-<form action="/product/create" method="post" enctype="multipart/form-data">
+<form action="/product/create" th:object="${productCreateForm}" method="post" enctype="multipart/form-data">
+    <div class="alert alert-danger" role="alert"
+         th:if="${#fields.hasAnyErrors()}">
+        <div th:each="err : ${#fields.allErrors()}">
+            <span th:text="${err}"></span>
+        </div>
+    </div>
 
-    <p>상품 번호 <input type="Text" name="productId"></p>
     <p>제품명 <input type="Text" name="name">
-    <p>재고 <input type="Text" name="stock">
     <p>제품가격 <input type="Text" name="price">
     <p>제품사진 <input type="file" name="filename">
     <p><input type="submit" value="등록">

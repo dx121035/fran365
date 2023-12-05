@@ -2,7 +2,7 @@ package com.example.fran365.cart;
 
 
 import com.example.fran365.item.Item;
-import com.example.fran365.item.ItemService;
+import com.example.fran365.item.ItemRepository;
 import com.example.fran365.member.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -18,6 +18,8 @@ public class CartServiceImpl implements CartService{
     @Autowired
     private CartRepository cartRepository;
 
+    @Autowired
+    private ItemRepository itemRepository;
 
     @Override
     public void create(Member member) {
@@ -47,6 +49,29 @@ public class CartServiceImpl implements CartService{
         Cart cart = oc.get();
 
         cartRepository.delete(cart);
+    }
+
+    @Override
+    public void deleteItem(int itemId) {
+        // 아이템을 삭제하기 전에 해당 아이템이 존재하는지 확인
+        Optional<Item> oi = itemRepository.findById(itemId);
+        if(!oi.isPresent()) {
+            throw new RuntimeException("상품을 찾을 수 없습니다.");
+        }
+
+        Item item = oi.get();
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+
+        Optional<Cart> oc = cartRepository.findByUsername(username);
+        Cart cart = oc.get();
+
+        cart.getItemList().remove(item);
+
+        itemRepository.delete(item);
+
+        cartRepository.save(cart);
     }
 
     @Override

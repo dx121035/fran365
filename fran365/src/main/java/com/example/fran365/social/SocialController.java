@@ -29,11 +29,17 @@ public class SocialController {
 
     @PostMapping("/create")
     public String create(Social social){
-
         socialService.create(social);
 
         return "redirect:/social/social";
     }
 
+    @PostMapping("/feedStatus")
+    @ResponseBody
+    public void updateStatus(Integer postId, String status) {
+
+            socialService.updateStatus(postId, status);
+
+    }
 
 }

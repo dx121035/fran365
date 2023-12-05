@@ -25,8 +25,6 @@ public class Product {
 
     private int price;
 
-    private int stock;
-
     private String image;
 
     private LocalDateTime createDate;

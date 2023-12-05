@@ -39,6 +39,8 @@ public class SocialServiceImpl implements SocialService {
 
         social.setUsername(username);
         social.setCreateDate(LocalDateTime.now());
+        social.setStatus("1");
+        social.setContent(social.getContent());
         socialRepository.save(social);
 
     }
@@ -54,8 +56,9 @@ public class SocialServiceImpl implements SocialService {
 
     @Override
     public List<Social> readDetail() {
-
-        return socialRepository.findAll();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        return socialRepository.findPublicPostsOrByUsername(username);
     }
 
     @Override
@@ -71,6 +74,16 @@ public class SocialServiceImpl implements SocialService {
         socialRepository.delete(sp.get());
     }
 
+    @Override
+    public void updateStatus(Integer postId, String status) {
+
+
+        Optional<Social> os = socialRepository.findById(postId);
+        Social social = os.get();
+
+        social.setStatus(status);
+        socialRepository.save(social);
+    }
 
 
 }

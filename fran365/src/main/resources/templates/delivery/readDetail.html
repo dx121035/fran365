@@ -24,11 +24,10 @@
         <td>[[${delivery.total}]]</td>
         <td>[[${status.tracking}]]</td>
         <td><span th:switch="${status.step}">
-                    <span th:case="결제완료">Payment completed</span>
-                    <span th:case="상품준비중">Product in preparation</span>
-                    <span th:case="배송준비중">Preparing for delivery</span>
-                    <span th:case="배송중">Delivery</span>
-                    <span th:case="배송완료">Delivery completed</span>
+                    <span th:case="결제완료"> <img th:src="@{|/images/delivery1.jpg|}"></span>
+                    <span th:case="상품준비중"><img th:src="@{|/images/delivery2.jpg|}"></span>
+                    <span th:case="배송중"><img th:src="@{|/images/delivery3.jpg|}"></span>
+                    <span th:case="배송완료"><img th:src="@{|/images/delivery4.jpg|}"></span>
         </span></td>
     </tr>
     </tbody>

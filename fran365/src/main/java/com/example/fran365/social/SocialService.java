@@ -15,4 +15,6 @@ public interface SocialService {
 
     void delete(Integer id);
 
+    void updateStatus(Integer postId, String status);
+
 }

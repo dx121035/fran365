@@ -8,4 +8,5 @@ import org.springframework.data.repository.query.Param;
 public interface ItemRepository extends JpaRepository<Item, Integer> {
 
     Item findByCartAndProductId(Cart cart, Integer productId);
+
 }

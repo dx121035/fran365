@@ -14,7 +14,29 @@ mail : leeseulaseula@gmail.com
     <br>[[${product.name}]]<img th:src="@{|${awspath}/${product.image}|}" width="200px" height="300px" style="border-radius: 2%;">
     /&#8361; [[${product.price}]]/[[${product.stock}]]
 
-    <a th:href="@{|/product/delete?id=${product.id}|}">삭제</a>
+
+    <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">삭제</button>
+    <div class="modal fade" id="staticBackdrop" tabindex="-1" data-bs-backdrop="static" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <h5 class="modal-title text-white" id="staticBackdropLabel">제품삭제</h5>
+                    <button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close"><span class="fas fa-times fs--1 text-white"></span></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-700 lh-lg mb-0">삭제하시겠습니까?</p>
+                </div>
+                <div class="modal-footer">
+                    <a th:href="@{|/product/update?id=${product.id}|}" class="btn btn-primary" type="button">삭제</a>
+                    <button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">취소</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
     <a th:href="@{|/product/update?id=${product.id}|}">수정</a>
 
     <form th:action="@{|/item/create?id=${product.id}|}" method="post">
