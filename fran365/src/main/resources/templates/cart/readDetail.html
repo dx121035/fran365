@@ -14,12 +14,17 @@
 
         function requestPay() {
             console.log(uuid());
+            if([[${itemSize}]] == 0){
+                item = "[[${itemName}]]"
+            } else {
+                item = "[[${itemName}]] 외 [[${itemSize}]]개"
+            }
             IMP.request_pay(
                 {
                     pg: "danal_tpay",
                     pay_method: "card",
                     merchant_uid: "ORD"+uuid(),
-                    name: "장바구니결제test",
+                    name: item,
                     amount: "[[${total}]]",
                     buyer_email: "[[${member.username}]]"
 

@@ -13,13 +13,13 @@ import java.util.List;
 
 public interface ProductService {
 
-    void create(Product product, MultipartFile multipartFile) throws IOException;
+    void create(String name, int price, MultipartFile multipartFile) throws IOException;
 
     Page<Product> getList(int page);
 
     Product readDetail(Integer id);
 
-    void update(Product product, MultipartFile multipartFile) throws IOException;
+    void update(String name, int price, Integer id, MultipartFile multipartFile) throws IOException;
 
     void delete(Integer id);
 

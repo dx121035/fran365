@@ -37,7 +37,11 @@ public class ProductServiceImpl implements ProductService{
     private ProductRepository productRepository;
 
     @Override
-    public void create(Product product, MultipartFile multipartFile) throws IOException {
+    public void create(String name, int price, MultipartFile multipartFile) throws IOException {
+
+        Product product = new Product();
+        product.setName(name);
+        product.setPrice(price);
 
         File file = new File(multipartFile.getOriginalFilename());
 
@@ -76,8 +80,13 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public void update(Product product, MultipartFile multipartFile) throws IOException {
+    public void update(String name, int price, Integer id, MultipartFile multipartFile) throws IOException {
         String filecheck = multipartFile.getOriginalFilename();
+
+        Optional<Product> op = productRepository.findById(id);
+        Product product = op.get();
+        product.setName(name);
+        product.setPrice(price);
 
         if (filecheck != null && !filecheck.trim().isEmpty()) {
 
@@ -94,6 +103,7 @@ public class ProductServiceImpl implements ProductService{
 
             product.setImage(filename);
         }
+        product.setCreateDate(LocalDateTime.now());
         productRepository.save(product);
 
 
