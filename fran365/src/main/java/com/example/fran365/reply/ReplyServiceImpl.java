@@ -28,6 +28,7 @@ public class ReplyServiceImpl implements ReplyService {
     public void create(Integer id, String content) {
 
         Board board = boardService.detail(id);
+        board.setStatus("답변완료");
         Reply c = new Reply();
         c.setContent(content);
         c.setBoard(board);

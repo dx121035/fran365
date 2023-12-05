@@ -2,155 +2,82 @@
 date:2023/11/23
 mail: inew3w@gmail.com-->
 
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout=http:www.ultraq.net.nz/thymeleaf/layout
+      layout:decorate="~{fragments/layout1}">
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>게시판 등록</title>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<div th:replace="fragments/header::header"></div>
+<div layout:fragment="content">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
-    <!-- ===============================================-->
-    <!--    Favicons-->
-    <!-- ===============================================-->
-    <link rel="apple-touch-icon" sizes="180x180" href="../../assets/img/favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/img/favicons/favicon-16x16.png">
-    <link rel="shortcut icon" type="image/x-icon" href="../../assets/img/favicons/favicon.ico">
-    <link rel="manifest" href="../../assets/img/favicons/manifest.json">
-    <meta name="msapplication-TileImage" content="../../assets/img/favicons/mstile-150x150.png">
-    <meta name="theme-color" content="#ffffff">
-    <script src="../../vendors/imagesloaded/imagesloaded.pkgd.min.js"></script>
-    <script src="../../vendors/simplebar/simplebar.min.js"></script>
-    <script src="../../assets/js/config.js"></script>
-
-    <!-- ===============================================-->
-    <!--    Stylesheets-->
-    <!-- ===============================================-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet">
-    <link href="../../vendors/simplebar/simplebar.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
-    <link href="../../assets/css/theme-rtl.min.css" type="text/css" rel="stylesheet" id="style-rtl">
-    <link href="../../assets/css/theme.min.css" type="text/css" rel="stylesheet" id="style-default">
-    <link href="../../assets/css/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
-    <link href="../../assets/css/user.min.css" type="text/css" rel="stylesheet" id="user-style-default">
-    <script>
-        var phoenixIsRTL = window.config.config.phoenixIsRTL;
-        if (phoenixIsRTL) {
-            var linkDefault = document.getElementById('style-default');
-            var userLinkDefault = document.getElementById('user-style-default');
-            linkDefault.setAttribute('disabled', true);
-            userLinkDefault.setAttribute('disabled', true);
-            document.querySelector('html').setAttribute('dir', 'rtl');
-        } else {
-            var linkRTL = document.getElementById('style-rtl');
-            var userLinkRTL = document.getElementById('user-style-rtl');
-            linkRTL.setAttribute('disabled', true);
-            userLinkRTL.setAttribute('disabled', true);
-        }
-    </script>
-
-</head>
-<body>
-<div class="container">
-<div class="card shadow-none border border-300 my-4" data-component-card="data-component-card">
-    <div class="card-header p-4 border-bottom border-300 bg-soft">
-        <div class="row g-3 justify-content-between align-items-center">
-            <div class="col-12 col-md">
-                <h2 class="text-900 mb-0 text-center fs-5" data-anchor="data-anchor">게시판 등록</h2><br><br>
+    <div class="container">
+        <div class="card shadow-none border border-300 my-4" data-component-card="data-component-card">
+            <div class="card-header p-4 border-bottom border-300 bg-soft">
+                <div class="row g-3 justify-content-between align-items-center">
+                    <div class="col-12 col-md">
+                        <h2 class="text-900 mb-0 text-center fs-5" data-anchor="data-anchor">게시판 등록</h2><br><br>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="card-body p-0">
-        <div class="p-4 code-to-copy">
-                <form action="/board/create" method="post" enctype="multipart/form-data">
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label" for="title">제목</label>
-                        <div class="col-sm-10">
-                            <input class="form-control" id="title" name="title" type="text" placeholder="제목을 입력하세요" required />
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label" >작성자</label>
-                        <div class="col-sm-10">
-                            <input class="form-control" name="writer" type="text"  th:value="${#authentication.principal.username}" readonly>
-
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label" >카테고리</label>
-                        <div class="col-sm-10">
-                        <div th:if="${#authentication.name == 'admin'}">
-                            <select class="form-select" name="category" id="category">
-                                <option selected="selected" disabled>유형 선택</option>
-                                <optgroup label="Admin">
-                                    <option value="공지">공지</option>
-                                    <option value="FAQ">FAQ</option>
-                                </optgroup>
-                            </select>
-                        </div>
-                            <div th:if="${#authentication.name != 'admin'}">
-                            <select class="form-select" name="category" id="category">
-                                <option selected="selected" disabled>유형 선택</option>
-                                <optgroup label="Member">
-                                    <option value="상품">상품</option>
-                                    <option value="배송">배송</option>
-                                    <option value="재고">재고</option>
-                                </optgroup>
-                            </select>
+            <div class="card-body p-0">
+                <div class="p-4 code-to-copy">
+                    <form action="/board/create" method="post" enctype="multipart/form-data">
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label" for="title">제목</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" id="title" name="title" type="text" placeholder="제목을 입력하세요" required />
                             </div>
                         </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label" for="image">첨부 파일 </label>
-                        <div class="col-sm-10">
-                            <input class="form-control" id="image" name="tempfile" type="file" required />
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label" >작성자</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" name="writer" type="text"  th:value="${#authentication.principal.username}" readonly>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label" >내용</label>
-                        <div class="col-sm-10">
-                            <textarea class="form-control" id="summernote" name="content" type="text" placeholder="내용을 입력하세요" required ></textarea>
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label" >카테고리</label>
+                            <div class="col-sm-10">
+                                <div th:if="${#authentication.name == 'admin'}">
+                                    <select class="form-select" name="category" id="category">
+                                        <option selected="selected" disabled>유형 선택</option>
+                                        <optgroup label="Admin">
+                                            <option value="공지">공지</option>
+                                            <option value="FAQ">FAQ</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                                <div th:if="${#authentication.name != 'admin'}">
+                                    <select class="form-select" name="category" id="category">
+                                        <option selected="selected" disabled>유형 선택</option>
+                                        <optgroup label="Member">
+                                            <option value="상품">상품</option>
+                                            <option value="배송">배송</option>
+                                            <option value="재고">재고</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <input type="hidden" name="state" th:value="${board?.state != null} ? ${board.state} : '답변대기'" />
-                    <br><br>
-                    <div class="vstack gap-2 col-md-5 mx-auto">
-                        <button class="btn btn-primary" type="submit">등록</button>
-                    </div>
-                </form>
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label" >내용</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" id="summernote" name="content" type="text" placeholder="내용을 입력하세요" required ></textarea>
+                            </div>
+                        </div>
+                        <input type="hidden" name="status" th:value="${board?.status != null} ? ${board.status} : '답변대기'" />
+                        <br><br>
+                        <div class="vstack gap-2 col-md-5 mx-auto">
+                            <button class="btn btn-primary" type="submit">등록</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<script>
-    $('#summernote').summernote({
-        tabsize: 2,
-        height: 200,
-    });
-</script>
-<!-- ===============================================-->
-<!--    JavaScripts-->
-<!-- ===============================================-->
-<script src="../../vendors/popper/popper.min.js"></script>
-<script src="../../vendors/bootstrap/bootstrap.min.js"></script>
-<script src="../../vendors/anchorjs/anchor.min.js"></script>
-<script src="../../vendors/is/is.min.js"></script>
-<script src="../../vendors/fontawesome/all.min.js"></script>
-<script src="../../vendors/lodash/lodash.min.js"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
-<script src="../../vendors/list.js/list.min.js"></script>
-<script src="../../vendors/feather-icons/feather.min.js"></script>
-<script src="../../vendors/dayjs/dayjs.min.js"></script>
-<script src="../../assets/js/phoenix.js"></script>
-</body>
-</html>
+    <script>
+        $('#summernote').summernote({
+            tabsize: 2,
+            height: 200,
+        });
+    </script>
+</div>
+<div th:replace="fragments/footer::footer"></div>

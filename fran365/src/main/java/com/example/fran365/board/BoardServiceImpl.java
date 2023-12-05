@@ -28,30 +28,12 @@ import java.util.Optional;
 @Service
 public class BoardServiceImpl implements BoardService {
 
-    @Value("bucket-va1rkc")
-    private String bucketName;
-
-    @Autowired
-    AmazonS3 amazonS3;
-
     @Autowired
     BoardRepository boardRepository;
 
     @Override
-    public void create(Board board, MultipartFile multipartFile,String category)throws IOException {
+    public void create(Board board,String category)throws IOException {
 
-        File file =new File(multipartFile.getOriginalFilename());
-
-        try (FileOutputStream fos = new FileOutputStream(file)){
-            fos.write(multipartFile.getBytes());
-        }
-
-        String fileName= System.currentTimeMillis()+"_"+multipartFile.getOriginalFilename();
-        amazonS3.putObject(new PutObjectRequest(bucketName, fileName, file));
-
-        file.delete();
-
-        board.setImage(fileName);
         board.setCreateDate(LocalDateTime.now());
         board.setCategory(category);
         boardRepository.save(board);
@@ -70,23 +52,8 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public void update(Board board, MultipartFile multipartFile,String category) throws IOException{
+    public void update(Board board, String category) throws IOException{
 
-        File file =new File(multipartFile.getOriginalFilename());
-        //aws s3 multipartFile을 막바로 올릴 수 없다. 따라서 파일을 일단 저장한 후에 그 파일을  aws로 올리고 삭제한다.
-
-        try (FileOutputStream fos = new FileOutputStream(file)){
-            fos.write(multipartFile.getBytes());
-        }
-
-        //역시 보안등의 이유로 uuid를 사용해도 좋지만 이번엔 다른 방법을 사용해보자
-        String fileName= System.currentTimeMillis()+"_"+multipartFile.getOriginalFilename();
-        amazonS3.putObject(new PutObjectRequest(bucketName, fileName, file));
-
-        //파일을 s3로 올리고 서버에 저장했던 파일은 이제 완전히 삭제한다.
-        file.delete();
-
-        board.setImage(fileName);
         board.setCategory(category);
         board.setCreateDate(LocalDateTime.now());
         boardRepository.save(board);
@@ -115,11 +82,9 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public Page<Board> getAllBoardsByCategories(List<String> categories, int page) {
-        List<Sort.Order> sorts = new ArrayList<>();
-        sorts.add(Sort.Order.desc("createDate"));
-        Pageable pageable = PageRequest.of(page, 5,Sort.by(sorts));
-        return boardRepository.findByCategoryIn(categories,pageable);
+    public List<Board> getAllBoardsByCategories(List<String> categories) {
+        List<Sort.Order> sorts = List.of(Sort.Order.desc("createDate"));
+        return boardRepository.findByCategoryIn(categories, Sort.by(sorts));
     }
 
     @Override
