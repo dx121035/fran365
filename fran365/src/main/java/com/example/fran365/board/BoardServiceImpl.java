@@ -34,6 +34,9 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public void create(Board board,String category)throws IOException {
 
+        if (!board.getCategory().equals("공지") && !board.getCategory().equals("FAQ")) {
+            board.setStatus("답변대기");
+        }
         board.setCreateDate(LocalDateTime.now());
         board.setCategory(category);
         boardRepository.save(board);
@@ -93,4 +96,5 @@ public class BoardServiceImpl implements BoardService {
         a.add(member);
         boardRepository.save(board);
     }
+
 }

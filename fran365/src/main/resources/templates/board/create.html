@@ -62,7 +62,6 @@ mail: inew3w@gmail.com-->
                                 <textarea class="form-control" id="summernote" name="content" type="text" placeholder="내용을 입력하세요" required ></textarea>
                             </div>
                         </div>
-                        <input type="hidden" name="status" th:value="${board?.status != null} ? ${board.status} : '답변대기'" />
                         <br><br>
                         <div class="vstack gap-2 col-md-5 mx-auto">
                             <button class="btn btn-primary" type="submit">등록</button>

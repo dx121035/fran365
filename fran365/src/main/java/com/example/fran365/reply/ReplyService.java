@@ -6,7 +6,10 @@ mail: inew3w@gmail.com
 package com.example.fran365.reply;
 
 public interface ReplyService {
-    void create(Integer id, String content);
+    void create(Integer id, String content,String writer);
+
+    void noticeCreate(Integer id, String content,String writer);
     Reply detail(Integer id);
-    void sendSimpleMessage (String to, String subject, String text);
+
+    Reply noticeDetail(Integer id);
 }

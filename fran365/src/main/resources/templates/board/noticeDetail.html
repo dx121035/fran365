@@ -59,14 +59,13 @@ mail: inew3w@gmail.com-->
                 <div class="card-body">
                     <h3 class="mb-4">댓글</h3>
 
-                    <form action="/reply/create" method="post" class="w-100">
+                    <form action="/reply/noticeCreate" method="post" class="w-100">
                         <input type="hidden" name="id" th:value="${board.id}">
-
-                        <input type="hidden" name="rwriter" th:value="${board.writer}">
+                        <input type="hidden" name="writer" th:value="${#authentication.name}">
 
                         <textarea class="form-control" type="text" name="content" placeholder="답변을 입력하세요"
                                   rows="4"></textarea>
-                        <button class="btn btn-primary w-100 mb-4" name="content">등록</button>
+                        <button class="btn btn-primary w-100 mb-4" >등록</button>
                     </form>
 
                     <th:block class="table-primary" th:each="reply: ${board.replyList}">
@@ -74,7 +73,7 @@ mail: inew3w@gmail.com-->
                             <div class="d-flex justify-content-between">
                                 <div class="text-1000 mb-1"
                                      th:utext="${#strings.replace(reply.content, ',', '')}"></div>
-                                <div class="text-1000 mb-1 ml-auto" th:text="${#authentication.name} "></div>
+                                <div class="text-1000 mb-1 ml-auto" th:text="${reply.writer} "></div>
                             </div>
                             <div class="text-end">
                                 <p class="text-600 mb-0"
