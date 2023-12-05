@@ -267,7 +267,12 @@
                     <td class="city align-middle white-space-nowrap text-1100">[[${member.address}]]</td>
                     <td class="position1 align-middle white-space-nowrap text-1100">[[${member.belong}]]</td>
                     <td class="position2 align-middle white-space-nowrap text-1100">
-						<span th:text="${positionMap.get(T(java.lang.Integer).parseInt(member.position ?: '0'))}"></span>
+						<select style="color: black;" th:onchange="updatePosition([[${member.username}]], this)">
+						    <option selected th:text="${positionMap.get(T(java.lang.Integer).parseInt(member.position ?: '0'))}"></option>
+						    <th:block th:each="position : ${positionMap}">
+						    <option th:value="${position.key}">[[${position.value}]]</option>
+							</th:block>
+						</select>
 					</td>
                     <td class="joined align-middle white-space-nowrap text-1100" th:text="${#temporals.format(member.createDate, 'yyyy-MM-dd HH:mm')}"></td>
                   </tr>
@@ -325,6 +330,27 @@
           navbarVertical.classList.add('navbar-darker');
         }
       </script>
+      
+      <script>
+		  function updatePosition(username, newPosition) {
+			  
+			$.ajax({
+            type: 'POST',
+            url: '/admin/updatePosition',
+            data: {
+                "username" : username,
+                "newPosition" : newPosition.value
+            },
+            success: function (response) {
+                alert('변경되었습니다.');
+            },
+            error: function (error) {
+                alert('변경을 실패했습니다.');
+            }
+        });
+		  }
+		  
+	  </script>
             
     </main>
 

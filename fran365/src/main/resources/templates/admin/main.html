@@ -254,7 +254,7 @@
                 <div class="d-flex align-items-center"><span class="fs-4 lh-1 uil uil-invoice text-warning-500"></span>
                   <div class="ms-2">
                     <div class="d-flex align-items-end">
-                      <span class="fs-1 fw-semi-bold text-900">발주 신청</span><h2 class="mb-0 ms-2">23</h2><span class="fs-1 fw-semi-bold text-900">건</span>
+                      <span class="fs-1 fw-semi-bold text-900">발주 신청</span><h2 class="mb-0 ms-2">[[${deliveyNotComplete}]]</h2><span class="fs-1 fw-semi-bold text-900">건</span>
                     </div>
                   </div>
                 </div>
@@ -290,7 +290,7 @@
               <div class="row g-3 mb-3">
                 <div class="col-12 col-md-6">
                   <h2 class="text-1100" style="font-size: 24px;">전국 지역별 지점현황</h2>
-                  <p class="text-700 mb-md-7">2023-11-28 기준</p>
+                  <p class="text-700 mb-md-7">[[${date}]] 기준</p>
                   <div class="d-flex align-items-center justify-content-between">
                     <p class="mb-0 fw-bold">지역별 지점 수 </p>
                     <p class="mb-0 fs--1">전체 <span class="fw-bold">51</span></p>
@@ -327,8 +327,8 @@
             </div>
             <div class="col-12 col-xl-5 col-xxl-6">
               
-            <h2 class="text-1100" style="font-size: 24px;">11월 지점별 매출현황</h2>
-            <p class="text-700">2023-11-28 기준</p>
+            <h2 class="text-1100" style="font-size: 24px;">[[${#dates.format(date, 'MM')}]]월 지점별 매출현황</h2>
+            <p class="text-700">[[${date}]] 기준</p>
             <p class="text-500 mb-md-2" style="font-size: 0.8rem;">매출액 (만원)</p>
             <div class="echart-basic-bar-chart-example1" style="min-height:300px"></div>
               

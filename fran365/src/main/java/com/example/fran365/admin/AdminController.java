@@ -1,5 +1,6 @@
 package com.example.fran365.admin;
 
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -40,6 +41,8 @@ public class AdminController {
 		model.addAttribute("user", memberService.readDetailUsername());
 		model.addAttribute("members", adminService.memberReadList());
 		model.addAttribute("events", eventService.readList());
+		model.addAttribute("deliveyNotComplete", adminService.getDeliveyNotComplete());
+		model.addAttribute("date", LocalDate.now());
 		
 		return "admin/main";
 	}
@@ -116,9 +119,9 @@ public class AdminController {
 	
 	@ResponseBody
 	@PostMapping("/updatePosition")
-	public int updatePosition(Integer id) {
+	public int updatePosition(String username, Integer newPosition) {
 		
-		
+		adminService.updatePosition(username, newPosition);
 		
 		return 1;
 	}

@@ -8,9 +8,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.fran365.delivery.Delivery;
 import com.example.fran365.member.Member;
 import com.example.fran365.member.MemberRepository;
 import com.example.fran365.position.PositionService;
+import com.example.fran365.status.StatusRepository;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -20,6 +22,9 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Autowired
 	private PositionService positionService;
+	
+	@Autowired
+	private StatusRepository statusRepository;
 
 	@Override
 	public List<Member> memberReadList() {
@@ -75,6 +80,25 @@ public class AdminServiceImpl implements AdminService {
 		}
 
 		return map;
+	}
+
+	@Override
+	public void updatePosition(String username, Integer newPosition) {
+
+		Optional<Member> om = memberRepository.findByUsername(username);
+		Member member = om.get();
+		
+		member.setPosition(newPosition);
+		memberRepository.save(member);
+	}
+
+	@Override
+	public int getDeliveyNotComplete() {
+		
+		List<Delivery> getDeliveyNotComplete = statusRepository.findByStepNot();
+		int DeliveyNotComplete = getDeliveyNotComplete.size();
+
+		return DeliveyNotComplete;
 	}
 	
 }
