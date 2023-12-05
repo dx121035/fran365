@@ -11,4 +11,6 @@ public interface SalesService {
     void update(Sales sales);
 
     void delete(Integer id);
+
+
 }

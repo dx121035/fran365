@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form action="/stock/stockUpdate" method="post">
+
+    <div th:each="stock : ${stocks}">
+        <input type="hidden" name="id" th:value="${stock.id}" />
+        <p>[[${stock.name}]] : <input type="text" name="name" th:value="${stock.name}" ></p>
+        <p>[[${stock.quantity}]] : <input type="text" name="quantity" th:value="${stock.quantity}" ></p>
+    </div>
+    <input type="submit" value="전송">
+</form>
+
+</body>
+</html>

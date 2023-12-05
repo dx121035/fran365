@@ -106,6 +106,15 @@ public class MemberServiceImpl implements MemberService {
 		return member;
 	}
 
+	@Override
+	public String findUsername(){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+		String username = auth.getName();
+
+		return username;
+	}
+
 
 	@Override
 	public void update(Member member, MultipartFile multipartFile) throws IOException {
