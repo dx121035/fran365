@@ -11,6 +11,9 @@ public interface MemberService {
 	Member create(Member member, MultipartFile file ) throws IOException;
 	List<Member> readList();
 	Member readDetailUsername();
+
+	String findUsername();
+
 	void update(Member member, MultipartFile multipartFile) throws IOException;
 	Optional<Member> findIdUser(String paramString1, String paramString2);
 	//임시 비밀번호로 업데이트

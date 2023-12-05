@@ -1,6 +1,11 @@
 package com.example.fran365.resource;
 
+import com.example.fran365.brand.Brand;
 import com.example.fran365.brand.BrandRepository;
+import com.example.fran365.member.MemberRepository;
+import com.example.fran365.member.MemberService;
+import com.example.fran365.sales.Sales;
+import com.example.fran365.sales.SalesRepository;
 import com.example.fran365.sales.SalesService;
 import com.example.fran365.stock.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +15,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequestMapping("/resource")
 @Controller
@@ -23,6 +30,12 @@ public class ResourceController {
 
     @Autowired
     private StockService stockService;
+
+    @Autowired
+    private MemberService memberService;
+
+    @Autowired
+    private SalesRepository salesRepository;
 
     @GetMapping("/create")
     public String create() {
@@ -44,10 +57,14 @@ public class ResourceController {
     public String readList(Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
 
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = auth.getName();
+       String username = memberService.findUsername();
 
-        model.addAttribute("brand",brandRepository.findByUsername(username));
+        Brand brand = brandRepository.findByUsername(username);
+
+        model.addAttribute("brand",brand);
+        model.addAttribute("sales", salesRepository.findByBrand_IdOrderByIdDesc(brand.getId()));
+        model.addAttribute("member", memberService.readDetailUsername());
+
         Page<Resource> paging = resourceService.getList(page);
         model.addAttribute("paging", paging);
 
