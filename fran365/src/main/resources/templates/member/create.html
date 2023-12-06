@@ -125,7 +125,7 @@
 </script>
 <main class="main" id="top">
     <div class="container-fluid bg-300 dark__bg-1200">
-        <div class="bg-holder bg-auth-card-overlay" style="background-image:url(/public/assets/img/bg/37.png);">
+        <div class="bg-holder bg-auth-card-overlay" style="background-image:url(/assets/img/bg/37.png);">
         </div>
         <!--/.bg-holder-->
 
@@ -135,7 +135,7 @@
                     <div class="card-body pe-md-0">
                         <div class="row align-items-center gx-0 gy-7">
                             <div class="col-auto bg-100 dark__bg-1100 rounded-3 position-relative overflow-hidden auth-title-box">
-                                <div class="bg-holder" style="background-image:url(/public/assets/img/bg/38.png);">
+                                <div class="bg-holder" style="background-image:url(/assets/img/bg/38.png);">
                                 </div>
                                 <!--/.bg-holder-->
                                 <br>
@@ -178,13 +178,14 @@
                                             <input class="form-control" id="Confirm" type="hidden">
                                             <button  id="phoneChk2" class="btn btn-primary" onclick="confirmNum()">본인인증</button><br>
                                             <br>
-                                            <form action="/member/create" method="post" th:object="${memberForm}"   enctype="multipart/form-data">
+                                           <!-- <form action="/member/create" method="post" th:object="${memberForm}"   enctype="multipart/form-data">-->
 
-                                               <!-- <form th:action="@{/member/create}" th:object="${memberForm}" method="post"enctype="multipart/form-data">
+                                               <form th:action="@{/member/create}" th:object="${memberForm}" method="post"enctype="multipart/form-data">
 
                                                     <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
                                                         <div th:each="err : ${#fields.allErrors()}" th:text="${err}" />
-                                                    </div>-->
+
+                                                    </div>
 
                                                 <div class="mb-3 text-start">
                                                     <input class="form-control " id="username" name="username" type="text" placeholder="아이디를 입력하세요"/>
@@ -196,7 +197,7 @@
                                                     </div>
 
                                                     <div class="col-md-6 text-start">
-                                                        <input class="form-control" id="password2" name="password2" type="password" placeholder="비밀번호 확인" />
+                                                        <input class="form-control" id="confirmPassword" name="confirmPassword" type="password" placeholder="비밀번호 확인" />
                                                     </div>
                                                 </div>
                                                 <br>
