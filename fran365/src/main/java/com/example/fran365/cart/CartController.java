@@ -1,10 +1,8 @@
 package com.example.fran365.cart;
 
 import com.example.fran365.item.Item;
-import com.example.fran365.item.ItemService;
 import com.example.fran365.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,9 +20,6 @@ public class CartController {
 
     @Autowired
     private MemberService memberService;
-
-    @Autowired
-    private ItemService itemService;
 
     @GetMapping("/readDetail")
     public String readDetail(Model model){
