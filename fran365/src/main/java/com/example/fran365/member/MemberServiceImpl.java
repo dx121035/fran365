@@ -65,11 +65,11 @@ public class MemberServiceImpl implements MemberService {
 
 		member.setPassword(passwordEncoder.encode(member.getPassword()));
 		member.setUsername(member.getUsername());
-		member.setPassword(member.getPassword());
 		member.setCreateDate(LocalDateTime.now());
 		member.setImage(filename);
 		member.setRole("ROLE_USER");
 		member.setPosition(null);
+		member.setEnabled(0);
 
 		memberRepository.save(member);
 
