@@ -7,9 +7,9 @@ mail: inew3w@gmail.com-->
 
 <div th:replace="fragments/header::header"></div>
 <div layout:fragment="content">
-
     <br><br><br><br><br>
     <div class="container">
+        <div class="col-md-10 offset-md-1">
         <div class="card shadow-none border border-300 mb-3"
              data-component-card="data-component-card">
             <div class="card-header p-4 border-bottom border-300 bg-soft">
@@ -48,11 +48,11 @@ mail: inew3w@gmail.com-->
                                 <tbody class="list">
                                 <th:block th:each="board : ${boards}">
                                     <tr>
-                                        <td class="align-middle ps-3 id" th:text="${board.id}"></td>
-                                        <td class="align-middle title" ><a th:text="${board.title}" th:href="@{|/board/detail?id=${board.id}|}"></a></td>
-                                        <td class="align-middle title" th:text="${board.writer}"></td>
-                                        <td class="align-middle createDate" th:text="${#temporals.format(board.createDate, 'yyyy년 MM월 dd일')}"></td>
-                                        <td class="align-middle status text-end py-3 pe-3" >
+                                        <td class="col-2 align-middle ps-3 id" th:text="${board.id}"></td>
+                                        <td class="col-3 align-middle title" ><a th:text="${board.title}" th:href="@{|/board/detail?id=${board.id}|}"></a></td>
+                                        <td class="col-3 align-middle title" th:text="${board.writer}"></td>
+                                        <td class="col-3 align-middle createDate" th:text="${#temporals.format(board.createDate, 'yyyy년 MM월 dd일')}"></td>
+                                        <td class="col-1 align-middle status text-end py-3 pe-3" >
                                             <div th:if="${board.status eq '답변대기'}" class="badge badge-phoenix fs--2 badge-phoenix-warning">
                                                 <span class="fw-bold" th:text="${board.status}"></span>
                                                 <span class="ms-1 fas fa-stream"></span>
@@ -87,6 +87,7 @@ mail: inew3w@gmail.com-->
 
             </div>
         </div>
+    </div>
     </div>
 </div>
 <div th:replace="fragments/footer::footer"></div>
