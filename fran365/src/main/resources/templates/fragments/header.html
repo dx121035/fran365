@@ -27,44 +27,20 @@
             <ul class="navbar-nav navbar-nav-top" data-dropdown-on-hover="data-dropdown-on-hover">
 
 
-                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle lh-1" href="#!" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false"><span class="uil fs-0 me-2" data-feather="bell"></span>공지사항</a>
-                    <ul class="dropdown-menu navbar-dropdown-caret">
-                        <li><a class="dropdown-item" href="noti/readlist">
-                            <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="heart"></span>공지목록
-                            </div>
-                        </a>
-                        </li>
-
-                    </ul>
+                <li class="nav-item">
+                    <a class="nav-link lh-1" href="/board/notice">
+                        <span class="uil fs-0 me-2" data-feather="bell"></span>공지사항
+                    </a>
                 </li>
-                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle lh-1" href="#!" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false"><span class="uil fs-0 me-2" data-feather="help-circle"></span>QnA</a>
-                    <ul class="dropdown-menu navbar-dropdown-caret">
-                        <li><a class="dropdown-item" href="qnab/readlist">
-                            <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="heart"></span>Q&A게시판
-                            </div>
-                        </a>
-                        </li>
-
-                    </ul>
+                <li class="nav-item">
+                    <a class="nav-link lh-1" href="/board/list">
+                        <span class="uil fs-0 me-2" data-feather="help-circle"></span>Q&A게시판
+                    </a>
                 </li>
-                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle lh-1" href="#!" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false"><span class="uil fs-0 me-2" data-feather="check-square"></span>결재관리</a>
-                    <ul class="dropdown-menu navbar-dropdown-caret">
-                        <li><a class="dropdown-item" href="/docu/create">
-                            <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="heart"></span>결재 신청
-                            </div>
-                        </a>
-                        </li>
-                        <li><a class="dropdown-item" href="/docu/readlist">
-                            <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="heart"></span>결재 목록
-                            </div>
-                        </a>
-                        </li>
-                        <li><a class="dropdown-item" href="/docu/readlisttemp">
-                            <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="heart"></span>임시저장 목록
-                            </div>
-                        </a>
-                        </li>
-                    </ul>
+                <li class="nav-item">
+                    <a class="nav-link lh-1" href="/board/FAQ">
+                        <span class="uil fs-0 me-2" data-feather="check-square"></span>F.A.Q
+                    </a>
                 </li>
                 <li class="nav-item dropdown"><a class="nav-link dropdown-toggle lh-1" href="#!" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false"><span class="uil fs-0 me-2" data-feather="share-2"></span>자원공유</a>
                     <ul class="dropdown-menu navbar-dropdown-caret">
@@ -78,12 +54,12 @@
                 </li>
                 <li class="nav-item dropdown"><a class="nav-link dropdown-toggle lh-1" href="#!" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false"><span class="uil fs-0 me-2" data-feather="map-pin"></span>지점현황</a>
                     <ul class="dropdown-menu navbar-dropdown-caret">
-                        <li><a class="dropdown-item" href="/bran/create">
+                        <li><a class="dropdown-item" href="/brand/create">
                             <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="heart"></span>지점 등록
                             </div>
                         </a>
                         </li>
-                        <li><a class="dropdown-item" href="/bran/readlist">
+                        <li><a class="dropdown-item" href="/brand/list">
                             <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="heart"></span>지점 목록
                             </div>
                         </a>
@@ -91,15 +67,10 @@
 
                     </ul>
                 </li>
-                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle lh-1" href="#!" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false"><span class="uil fs-0 me-2" data-feather="send"></span>창업문의</a>
+                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle lh-1" href="#!" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false"><span class="uil fs-0 me-2" data-feather="send"></span>F.Q.A</a>
                     <ul class="dropdown-menu navbar-dropdown-caret">
-                        <li><a class="dropdown-item" href="/bran/guide">
-                            <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="info"></span>모집 안내
-                            </div>
-                        </a>
-                        </li>
-                        <li><a class="dropdown-item" href="/bran/inquiry">
-                            <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="message-circle"></span>1:1 문의
+                        <li><a class="dropdown-item" href="/board/FAQ">
+                            <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="info"></span>F.Q.A게시판
                             </div>
                         </a>
                         </li>
@@ -116,7 +87,7 @@
             <li class="nav-item"><a class="nav-link px-2 icon-indicator " href="../../../apps/e-commerce/landing/cart.html" role="button"><span class="text-700" data-feather="shopping-cart" style="height:20px;width:20px;"></span></a></li>
             <li class="nav-item dropdown"><a class="nav-link lh-1 pe-0" id="navbarDropdownUser" href="#!" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
                 <div class="avatar avatar-l ">
-                    <img class="rounded-circle " src="../assets/img/team/40x40/57.webp" alt="" />
+                    <img class="rounded-circle " th:src="@{|${awspath}/${member.image}|}"  alt="" />
 
                 </div>
             </a>
@@ -125,10 +96,10 @@
                         <div class="card-body p-0">
                             <div class="text-center pt-4 pb-3">
                                 <div class="avatar avatar-xl ">
-                                    <img class="rounded-circle " src="../assets/img/team/72x72/57.webp" alt="" />
+                                    <img class="rounded-circle " th:src="@{|${awspath}/${member.image}|}"  alt="" />
 
                                 </div>
-                                <div style="color:papayawhip" th:text="${#authentication.name} + ' 님 로그인 중'"></div>
+                                <h6 class="mt-2 text-black">[[${member.name}]]</h6>
                             </div>
 
                         </div>

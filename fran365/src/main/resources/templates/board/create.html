@@ -7,19 +7,27 @@ mail: inew3w@gmail.com-->
 
 <div th:replace="fragments/header::header"></div>
 <div layout:fragment="content">
+    <br><br><br><br>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
     <div class="container">
         <div class="card shadow-none border border-300 my-4" data-component-card="data-component-card">
             <div class="card-header p-4 border-bottom border-300 bg-soft">
                 <div class="row g-3 justify-content-between align-items-center">
                     <div class="col-12 col-md">
-                        <h2 class="text-900 mb-0 text-center fs-5" data-anchor="data-anchor">게시판 등록</h2><br><br>
+                        <h4 class="text-900 mb-0" data-anchor="data-anchor">게시물 등록</h4>
                     </div>
                 </div>
             </div>
             <div class="card-body p-0">
                 <div class="p-4 code-to-copy">
-                    <form action="/board/create" method="post" enctype="multipart/form-data">
+                    <form action="/board/create" method="post" >
                         <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="title">제목</label>
                             <div class="col-sm-10">
