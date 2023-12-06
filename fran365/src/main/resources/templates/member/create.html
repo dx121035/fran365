@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en-US" dir="ltr">
+<html lang="en-US" dir="ltr" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -11,16 +11,13 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>Phoenix</title>
+    <title>Fran365</title>
 
 
     <!-- ===============================================-->
     <!--    Favicons-->
     <!-- ===============================================-->
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png">
-    <link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicons/favicon.ico">
     <link rel="manifest" href="/assets/img/favicons/manifest.json">
     <meta name="msapplication-TileImage" content="/assets/img/favicons/mstile-150x150.png">
     <meta name="theme-color" content="#ffffff">
@@ -62,67 +59,6 @@
 
 <body>
 
-<script>
-    // 페이지 로드 시 회원가입 버튼을 숨김
-    $(document).ready(function() {
-        updateSubmitButton();
-    });
-
-    // 본인인증 완료 여부를 저장하는 변수 추가
-    var isVerified = false;
-
-    // 본인인증 인증번호 문자 발송
-    function phoneChk(){
-
-        var phone = $("#phone").val();
-        $.ajax({
-            type:"Post",
-            url:"/member/phoneCheck?phone=" + phone,
-            dataType:"json",
-            data:{"phone" : $("#phone").val()},
-            success:function(data){
-                alert("인증번호가 발송되었습니다.");
-                $("#Confirm").val(data);
-            }
-        });
-    }
-    // 발송한 인증번호와 사용자의 인증번호 입력값 비교
-    function confirmNum(){
-
-        var number1 = $("#phone2").val();
-        var number2 = $("#Confirm").val();
-
-        if(number1 == null || number1 == "" || number1 != number2){
-            $(".successPhoneChk").text("인증번호가 일치하지 않습니다. 확인해주시기 바랍니다.");
-            $(".successPhoneChk").css("color","red");
-        }else{
-            $(".successPhoneChk").text("인증번호가 일치합니다.");
-            $(".successPhoneChk").css("color","green");
-
-            // 본인인증이 성공하면 isVerified를 true로 설정하고, 버튼의 가시성 업데이트
-            isVerified = true;
-            updateSubmitButton();
-
-        }
-    }
-
-    // 본인인증 완료 여부에 따라 회원가입 버튼의 가시성을 업데이트하는 함수
-    function updateSubmitButton() {
-        if (isVerified) {
-            $(".submit-button").show();
-        } else {
-            $(".submit-button").hide();
-        }
-    }
-
-
-    // 전화번호 입력 칸의 내용이 변경되면 아래 전화번호 칸에 같은 내용을 입력
-    $("#phone").change(function() {
-        var phone = $(this).val();
-        $("input[name='phone']").val(phone);
-    });
-
-</script>
 <main class="main" id="top">
     <div class="container-fluid bg-300 dark__bg-1200">
         <div class="bg-holder bg-auth-card-overlay" style="background-image:url(/assets/img/bg/37.png);">
@@ -178,9 +114,8 @@
                                             <input class="form-control" id="Confirm" type="hidden">
                                             <button  id="phoneChk2" class="btn btn-primary" onclick="confirmNum()">본인인증</button><br>
                                             <br>
-                                           <!-- <form action="/member/create" method="post" th:object="${memberForm}"   enctype="multipart/form-data">-->
 
-                                               <form th:action="@{/member/create}" th:object="${memberForm}" method="post"enctype="multipart/form-data">
+                                               <form th:action="@{/member/create}" th:object="${memberForm}" method="post" enctype="multipart/form-data">
 
                                                     <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
                                                         <div th:each="err : ${#fields.allErrors()}" th:text="${err}" />
@@ -252,6 +187,68 @@
 <script src="/vendors/feather-icons/feather.min.js"></script>
 <script src="/vendors/dayjs/dayjs.min.js"></script>
 <script src="/assets/js/phoenix.js"></script>
+
+<script>
+    // 페이지 로드 시 회원가입 버튼을 숨김
+    $(document).ready(function() {
+        updateSubmitButton();
+    });
+
+    // 본인인증 완료 여부를 저장하는 변수 추가
+    var isVerified = false;
+
+    // 본인인증 인증번호 문자 발송
+    function phoneChk(){
+
+        var phone = $("#phone").val();
+        $.ajax({
+            type:"Post",
+            url:"/member/phoneCheck?phone=" + phone,
+            dataType:"json",
+            data:{"phone" : $("#phone").val()},
+            success:function(data){
+                alert("인증번호가 발송되었습니다.");
+                $("#Confirm").val(data);
+            }
+        });
+    }
+    // 발송한 인증번호와 사용자의 인증번호 입력값 비교
+    function confirmNum(){
+
+        var number1 = $("#phone2").val();
+        var number2 = $("#Confirm").val();
+
+        if(number1 == null || number1 == "" || number1 != number2){
+            $(".successPhoneChk").text("인증번호가 일치하지 않습니다. 확인해주시기 바랍니다.");
+            $(".successPhoneChk").css("color","red");
+        }else{
+            $(".successPhoneChk").text("인증번호가 일치합니다.");
+            $(".successPhoneChk").css("color","green");
+
+            // 본인인증이 성공하면 isVerified를 true로 설정하고, 버튼의 가시성 업데이트
+            isVerified = true;
+            updateSubmitButton();
+
+        }
+    }
+
+    // 본인인증 완료 여부에 따라 회원가입 버튼의 가시성을 업데이트하는 함수
+    function updateSubmitButton() {
+        if (isVerified) {
+            $(".submit-button").show();
+        } else {
+            $(".submit-button").hide();
+        }
+    }
+
+
+    // 전화번호 입력 칸의 내용이 변경되면 아래 전화번호 칸에 같은 내용을 입력
+    $("#phone").change(function() {
+        var phone = $(this).val();
+        $("input[name='phone']").val(phone);
+    });
+
+</script>
 
 </body>
 
