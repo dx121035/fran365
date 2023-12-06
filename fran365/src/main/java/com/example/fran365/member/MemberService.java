@@ -8,8 +8,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface MemberService {
 
-	Member create(Member member, MultipartFile file ) throws IOException;
+	void create(Member member, MultipartFile file ) throws IOException;
+	
 	List<Member> readList();
+	
 	Member readDetailUsername();
 
 	String findUsername();

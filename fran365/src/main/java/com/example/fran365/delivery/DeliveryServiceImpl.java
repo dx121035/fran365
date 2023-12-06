@@ -1,22 +1,22 @@
 package com.example.fran365.delivery;
 
 
-import com.example.fran365.cart.Cart;
-import com.example.fran365.cart.CartService;
-import com.example.fran365.item.Item;
-import com.example.fran365.item.ItemService;
-import com.example.fran365.member.Member;
-import com.example.fran365.member.MemberService;
-import com.example.fran365.status.Status;
-import com.example.fran365.status.StatusService;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
+import com.example.fran365.cart.Cart;
+import com.example.fran365.cart.CartService;
+import com.example.fran365.item.Item;
+import com.example.fran365.member.Member;
+import com.example.fran365.member.MemberService;
+import com.example.fran365.status.Status;
+import com.example.fran365.status.StatusService;
 
 @Service
 public class DeliveryServiceImpl implements DeliveryService{
@@ -26,9 +26,6 @@ public class DeliveryServiceImpl implements DeliveryService{
 
     @Autowired
     private StatusService statusService;
-
-    @Autowired
-    private ItemService itemService;
 
     @Autowired
     private MemberService memberService;
