@@ -32,7 +32,9 @@ public class BoardController {
     private String awspath;
 
     @GetMapping("/create")
-    public String create() {
+    public String create(Model model) {
+        model.addAttribute("awspath", awspath);
+        model.addAttribute("member",memberService.readDetailUsername());
         return "board/create";
     }
 
@@ -54,11 +56,12 @@ public class BoardController {
         List<String> categories = Arrays.asList("상품", "배송", "재고");
         List<Board> allBoards = boardService.getAllBoardsByCategories(categories);
         model.addAttribute("boards", allBoards);
+        model.addAttribute("awspath", awspath);
+        model.addAttribute("member",memberService.readDetailUsername());
         return "board/list";
     }
     @GetMapping("/notice")
     public String notice(Model model,@RequestParam (value="page",defaultValue="0")int page) {
-        System.out.println("여기까진 성ㅇ공");
         Page<Board> paging = boardService.getNoticeBoards("공지",page);
         model.addAttribute("paging",paging);
         model.addAttribute("awspath", awspath);
@@ -69,6 +72,8 @@ public class BoardController {
     public String FAQ(Model model,@RequestParam (value="page",defaultValue="0")int page) {
         Page<Board> paging = boardService.getNoticeBoards("FAQ",page);
         model.addAttribute("paging",paging);
+            model.addAttribute("awspath", awspath);
+            model.addAttribute("member",memberService.readDetailUsername());
         return "board/FAQ";
     }
     @GetMapping("/detail")
@@ -79,6 +84,8 @@ public class BoardController {
         boardService.hit(board,member);
 
         model.addAttribute("board", boardService.detail(id));
+        model.addAttribute("awspath", awspath);
+        model.addAttribute("member",memberService.readDetailUsername());
 
             return "board/detail";
     }
@@ -90,6 +97,8 @@ public class BoardController {
         boardService.hit(board,member);
 
         model.addAttribute("board", boardService.detail(id));
+        model.addAttribute("awspath", awspath);
+        model.addAttribute("member",memberService.readDetailUsername());
             return "board/noticeDetail";
 
     }
@@ -101,6 +110,8 @@ public class BoardController {
         boardService.hit(board,member);
 
         model.addAttribute("board", boardService.detail(id));
+        model.addAttribute("awspath", awspath);
+        model.addAttribute("member",memberService.readDetailUsername());
         return "board/FAQDetail";
 
     }
@@ -111,6 +122,8 @@ public class BoardController {
         boardService.hit(board,member);
 
         model.addAttribute("board", boardService.detail(id));
+        model.addAttribute("awspath", awspath);
+        model.addAttribute("member",memberService.readDetailUsername());
         return "board/update";
     }
     @PostMapping("/update")
@@ -127,8 +140,10 @@ public class BoardController {
     }
 
     @GetMapping("/delete")
-    public String delete(@RequestParam Integer id,@RequestParam String category) {
+    public String delete(Model model,@RequestParam Integer id,@RequestParam String category) {
         boardService.delete(id);
+        model.addAttribute("awspath", awspath);
+        model.addAttribute("member",memberService.readDetailUsername());
         if ("공지".equals(category)) {
             return "redirect:/board/notice";
         } else if ("FAQ".equals(category)) {
