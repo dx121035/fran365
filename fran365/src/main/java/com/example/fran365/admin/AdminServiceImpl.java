@@ -29,7 +29,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<Member> memberReadList() {
 		
-		return memberRepository.findAll();
+		return memberRepository.findByEnabled(1);
 	}
 
 	@Override
