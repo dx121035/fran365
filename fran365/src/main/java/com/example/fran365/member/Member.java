@@ -22,7 +22,7 @@ public class Member implements UserDetails {
 
     private String password;
 
-    private boolean enabled;
+    private Integer enabled;
 
     private String name;
 
@@ -82,7 +82,7 @@ public class Member implements UserDetails {
     @Override
     public boolean isEnabled() {
 
-        return true;
+    	return true;
     }
 
 }
