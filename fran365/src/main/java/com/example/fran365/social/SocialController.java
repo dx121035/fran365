@@ -1,5 +1,6 @@
 package com.example.fran365.social;
 
+import ch.qos.logback.core.CoreConstants;
 import com.example.fran365.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,22 @@ public class SocialController {
     @PostMapping("/create")
     public String create(Social social){
         socialService.create(social);
+
+        return "redirect:/social/social";
+    }
+
+    @PostMapping("/update")
+    public String update(@RequestParam Integer id,
+                         @RequestParam String content,
+                         @RequestParam String username,
+                         @RequestParam String status){
+        System.out.println(id);
+        System.out.println(id);
+        System.out.println(id);
+        System.out.println(id);
+        System.out.println(id);
+
+        socialService.update(id,content,username,status);
 
         return "redirect:/social/social";
     }
