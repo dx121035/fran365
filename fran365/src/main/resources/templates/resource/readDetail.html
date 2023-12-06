@@ -4,11 +4,10 @@
 <div layout:fragment="content">
 
   작성자 : <a th:text="${resource.writer}"></a><br>
-  제목 : <a th:text="${resource.title}"></a><br>
-  카테고리 : <a th:text="${resource.category}"></a><br>
+  품명 : <a th:text="${resource.category}"></a><br>
   수량 : <a th:text="${resource.amount} + 개"></a><br>
   가격 : <a th:text="${resource.price} + 원"></a><br>
-  지점 : <a th:text="${resource.addr}"></a><br>
+  지점 : <a th:text="${resource.address}"></a><br>
   유통기한 : <a th:text="${resource.expiration}"></a><br>
 <!--  <a th:href="@{|/question/delete?id=${list.id}|}">삭제</a>-->
 <!--  <a th:href="@{|/question/update?id=${list.id}|}">수정</a>-->

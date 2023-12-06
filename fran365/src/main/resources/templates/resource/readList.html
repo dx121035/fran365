@@ -187,8 +187,18 @@
 
         </tbody>
     </table>
+    <div class="col-12 gy-6" style="margin-top: 10px">
+        <div class="row g-3 justify-content-end">
+            <div class="col-auto">
+                <!-- form 속성 추가 -->
+                <button onclick="location.href='/resource/create'" class="btn btn-primary px-5 px-sm-10">재고 판매</button>
+            </div>
+        </div>
+    </div>
 </div>
 </div>
+
+
 <script th:inline="javascript">
     /*<![CDATA[*/
     function purchase(id, index, category) {
@@ -205,6 +215,7 @@
 
     /*]]>*/
 </script>
+
 <div style="margin-top: 50px;">
     <nav aria-label="Page navigation example">
         <div th:if="${!paging.isEmpty()}">

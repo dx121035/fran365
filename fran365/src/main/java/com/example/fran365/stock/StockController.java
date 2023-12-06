@@ -9,7 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Array;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RequestMapping("/stock")
 @Controller
@@ -33,9 +36,10 @@ public class StockController {
     }
 
     @PostMapping("/stockUpdate")
-    public String update(List<Stock> stocks){
+    public String update(StockList stockList) {
 
-        stockService.update(stocks);
+        ArrayList<Stock> list = (ArrayList<Stock>) stockList.getStockList();
+        stockService.update(list);
         return "redirect:/resource/readList";
     }
 

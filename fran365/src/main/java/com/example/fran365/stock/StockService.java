@@ -6,5 +6,5 @@ public interface StockService {
 
     void trade(Integer id, int amount, String category);
 
-    void update(List<Stock> stocks);
+    void update(List<Stock> updateStocks);
 }

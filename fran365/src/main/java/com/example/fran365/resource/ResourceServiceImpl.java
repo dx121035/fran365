@@ -1,14 +1,12 @@
 // 작성자 : 임지호
 package com.example.fran365.resource;
 
-import com.example.fran365.brand.Brand;
+import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.example.fran365.brand.BrandRepository;
-import com.example.fran365.brand.BrandService;
 import com.example.fran365.member.Member;
 import com.example.fran365.member.MemberService;
 import com.example.fran365.stock.StockRepository;
-import org.springframework.orm.ObjectOptimisticLockingFailureException;
-import org.springframework.transaction.TransactionStatus;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,17 +14,24 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.support.DefaultTransactionDefinition;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.amazonaws.services.s3.AmazonS3;
+
+
 @Service
 public class ResourceServiceImpl implements ResourceService {
+
+    @Autowired
+    private AmazonS3 amazonS3;
 
     @Autowired
     private ResourceRepository resourceRepository;
@@ -34,11 +39,8 @@ public class ResourceServiceImpl implements ResourceService {
     @Autowired
     private MemberService memberService;
 
-    @Autowired
-    private StockRepository stockRepository;
-
-    @Autowired
-    private BrandRepository brandRepository;
+    @Value("bucket-va1rkc")
+    private String bucketName;
 
     @Override
     public List<Resource> readList() {
@@ -53,7 +55,20 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     @Override
-    public void create(Resource resource) {
+    public void create(Resource resource, MultipartFile multipartFile) throws IOException {
+
+        //aws file upload
+        File file = new File(multipartFile.getOriginalFilename());
+
+        try (FileOutputStream fos = new FileOutputStream(file)) {
+            fos.write(multipartFile.getBytes());
+        }
+
+        String filename = System.currentTimeMillis() + "_" + multipartFile.getOriginalFilename();
+        amazonS3.putObject(new PutObjectRequest(bucketName, filename, file));
+
+        file.delete();
+        resource.setImage(filename);
 
         Member member = memberService.readDetailUsername();
 

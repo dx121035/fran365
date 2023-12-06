@@ -2,7 +2,6 @@ package com.example.fran365.stock;
 
 import com.example.fran365.brand.Brand;
 import com.example.fran365.brand.BrandRepository;
-import com.example.fran365.member.Member;
 import com.example.fran365.member.MemberService;
 import com.example.fran365.resource.Resource;
 import com.example.fran365.resource.ResourceRepository;
@@ -76,6 +75,11 @@ public class StockServiceImpl implements StockService {
     @Override
     public void update(List<Stock> updateStocks) {
 
+        if (updateStocks == null) {
+            // null에 대한 처리 로직을 추가하세요.
+            return;
+        }
+
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
 
@@ -85,11 +89,12 @@ public class StockServiceImpl implements StockService {
         for (Stock inven : stocks) {
             for (Stock updateStock : updateStocks) {
 
+                System.out.println(updateStock.getId());
 
-                if (inven.getName().equals(updateStock.getName())) {
+                if (inven.getId().equals(updateStock.getId())) {
 
                     inven.setQuantity(updateStock.getQuantity());
-                    stockRepository.save(inven);
+                    stockRepository.saveAndFlush(inven);
                 }
             }
 
