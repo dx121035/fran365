@@ -59,10 +59,11 @@
 
 <br>
 <th:block th:each="list:${lists}">
-
     <button class="set-status" th:if="${list.status == '0'}" th:data-post-id="${list.id}" data-status="1">공개</button>
     <button class="set-status" th:if="${list.status == '1'}" th:data-post-id="${list.id}" data-status="0">비공개</button>
 
+
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" th:data-bs-whatever="${list.id}" th:data-content="${list.content}">수정</button>
     [(${list.content})]
     <div th:text="${#temporals.format(list.createDate, 'yyyy년 MM월 dd일 HH:mm')}"></div>
 </th:block>
@@ -211,7 +212,7 @@
                                 <div class="border-bottom mb-3">
                                     <div class="d-flex align-items-center mb-3"><a href="../../apps/social/profile.html">
                                         <div class="avatar avatar-xl  me-2">
-                                            <img class="rounded-circle " src="../../assets/img//team/59.webp" alt="" />
+                                            <img class="rounded-circle " src="../../assets/img/team/59.webp" alt="" />
 
                                         </div>
                                     </a>
@@ -241,7 +242,7 @@
                             <div class="bg-100 border-top p-3 p-sm-4">
                                 <div class="d-flex align-items-start"><a href="../../apps/social/profile.html">
                                     <div class="avatar avatar-m  me-2">
-                                        <img class="rounded-circle " src="../../assets/img//team/23.webp" alt="" />
+                                        <img class="rounded-circle " src="../../assets/img/team/23.webp" alt="" />
 
                                     </div>
                                 </a>
@@ -251,7 +252,7 @@
                                         <button class="btn btn-link p-0 text-900 fw-bolder mb-2" type="button"><span class="fa-solid fa-reply fs--2 me-1"></span><span class="fw-bold fs--2">Reply</span></button>
                                         <div class="d-flex align-items-start mb-3"><a href="../../apps/social/profile.html">
                                             <div class="avatar avatar-m  me-2">
-                                                <img class="rounded-circle " src="../../assets/img//team/62.webp" alt="" />
+                                                <img class="rounded-circle " src="../../assets/img/team/62.webp" alt="" />
 
                                             </div>
                                         </a>
@@ -264,7 +265,7 @@
                                 </div>
                                 <div class="d-flex align-items-center"><a href="../../apps/social/profile.html">
                                     <div class="avatar avatar-m  me-2">
-                                        <img class="rounded-circle " src="../../assets/img//team/59.webp" alt="" />
+                                        <img class="rounded-circle " src="../../assets/img/team/59.webp" alt="" />
 
                                     </div>
                                 </a>
@@ -294,11 +295,32 @@
 
 
 
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" style="height: 80%;">
+        <div class="modal-content">
+            <form action="/social/update" method="post">
+                <input type="hidden" id="post-id" name="id" value="">
+            <div class="modal-header">
+                <h3 class="modal-title fs-5" id="exampleModalLabel">게시물 수정</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
 
+                    <div class="mb-3">
+                        <label  class="col-form-label">Message:</label>
+                        <textarea type="text" id="summernote2" name="content"></textarea>
+                    </div>
 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 
-
-
+                <input type="submit" value="수정" class="btn btn-primary"></input>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 
 
@@ -311,6 +333,8 @@
             tabsize: 2,
             height: 200,
         });
+
+
 
         $(".set-status").click(function() {
             var postId = $(this).data('post-id');
@@ -332,9 +356,34 @@
                 }
             });
         });
+
+
+    const exampleModal = document.getElementById('exampleModal');
+    if (exampleModal) {
+        exampleModal.addEventListener('show.bs.modal', event => {
+            const button = event.relatedTarget; // Button that triggered the modal
+            const recipient = button.getAttribute('data-bs-whatever'); // Extract info from data-bs-* attributes
+            const content = button.getAttribute('data-content'); // Extract the 'content' from the data attribute
+            const modalTitle = exampleModal.querySelector('.modal-title');
+            const postId = button.getAttribute('data-id'); // Assuming 'data-id' contains the post id
+            const modalPostIdInput = exampleModal.querySelector('#post-id');  // Get the 'id' input field
+
+            modalTitle.textContent = `${recipient} 게시물 수정`;
+            modalPostIdInput.value = postId;
+
+            $('#summernote2').summernote('code', content);
+        });
+    }
+
+    $('#summernote2').summernote({
+        tabsize: 2,
+        height: 200,
     });
 
+    });
 </script>
+
+
 
 <!-- ===============================================-->
 <!--    JavaScripts-->
@@ -353,5 +402,6 @@
 <script src="../../assets/js/phoenix.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
 </body>
 </html>
