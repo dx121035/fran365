@@ -1,0 +1,17 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout1}">
+
+<div layout:fragment="content">
+
+    <h2>이번 달 매출</h2>
+    <form action="/sales/update" method="post">
+
+        <p>월: [[${sales.month}]] <input type="text" name="month" th:value="${sales.month}" readonly></p>
+        <p>수입:  <input type="text" name="income" th:value="${sales.income}"></p>
+        <input type="hidden" name="id" th:value="${sales.id}">
+        <input type="hidden" name="brand.id" th:value="${sales.brand.id}">
+
+        <button type="submit">업데이트</button>
+    </form>
+</div>
+</html>

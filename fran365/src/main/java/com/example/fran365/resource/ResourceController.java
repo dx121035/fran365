@@ -23,6 +23,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 @RequestMapping("/resource")
 @Controller
@@ -44,16 +45,21 @@ public class ResourceController {
     private SalesRepository salesRepository;
 
     @Value("${aws.s3.awspath}")
+    private String awspath;
 
     @GetMapping("/create")
-    public String create() {
+    public String create(Model model) {
 
+        model.addAttribute("awspath", awspath);
+        model.addAttribute("member",memberService.readDetailUsername());
 
         return "resource/create";
     }
 
     @PostMapping("/create")
     public String create(Resource resource,  @RequestParam("filename") MultipartFile file) throws IOException {
+
+
 
         resourceService.create(resource, file);
 
@@ -66,10 +72,13 @@ public class ResourceController {
 //                .format(DateTimeFormatter.ofPattern("yyyy-MM"));
 //        System.out.println(customLocalDateTimeFormat);
 
+
        String username = memberService.findUsername();
 
         Brand brand = brandRepository.findByUsername(username);
 
+        model.addAttribute("awspath", awspath);
+        model.addAttribute("member",memberService.readDetailUsername());
         model.addAttribute("brand",brand);
         model.addAttribute("sales", salesRepository.findByBrand_IdOrderByIdDesc(brand.getId()));
         model.addAttribute("member", memberService.readDetailUsername());
@@ -84,7 +93,9 @@ public class ResourceController {
     @GetMapping("/readDetail")
     public String readDetail(@RequestParam Integer id, Model model) {
 
-       model.addAttribute("resource", resourceService.readDetail(id));
+        model.addAttribute("awspath", awspath);
+        model.addAttribute("member",memberService.readDetailUsername());
+        model.addAttribute("resource", resourceService.readDetail(id));
 
        return "resource/readDetail";
     }
@@ -94,17 +105,19 @@ public class ResourceController {
 
         Resource resource = resourceService.readDetail(id);
 
+        model.addAttribute("awspath", awspath);
+        model.addAttribute("member",memberService.readDetailUsername());
         model.addAttribute("resource", resource);
 
-        return "resource/readDetail";
+        return "resource/update";
     }
 
     @PostMapping("/update")
-    public String update(Resource resource) {
+    public String update(Resource resource,  @RequestParam("filename") MultipartFile multipartFile) throws IOException {
 
         Integer id = resource.getId();
 
-        resourceService.update(resource);
+        resourceService.update(resource, multipartFile);
 
         return "redirect:/resource/readDetail?id=" + id;
     }

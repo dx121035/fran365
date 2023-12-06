@@ -84,11 +84,44 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     @Override
-    public void update(Resource resource) {
+    public void update(Resource resource, MultipartFile multipartFile) throws IOException {
 
-        resource.setCreateDate(LocalDateTime.now());
+        Optional <Resource> or = resourceRepository.findById(resource.getId());
+        Resource oldResource = or.get();
 
-        resourceRepository.save(resource);
+        if (multipartFile.isEmpty()) {
+            // 파일이 넘어오지 않은 경우, 이미지를 업데이트하지 않고 객체 정보만 업데이트
+            resource.setCreateDate(LocalDateTime.now());
+            resource.setImage(oldResource.getImage());
+            resourceRepository.save(resource);
+
+        } else {
+            // 파일이 넘어온 경우, 기존 이미지 삭제 및 새로운 이미지 업로드 후 객체 정보 업데이트
+
+
+
+            // 기존 이미지 삭제
+            String oldImage = oldResource.getImage();
+            if (oldImage != null && !oldImage.isEmpty()) {
+                amazonS3.deleteObject(bucketName, oldImage);
+            }
+
+            // 새로운 이미지 업로드
+            File file = new File(multipartFile.getOriginalFilename());
+            try (FileOutputStream fos = new FileOutputStream(file)) {
+                fos.write(multipartFile.getBytes());
+            }
+
+            String filename = System.currentTimeMillis() + "_" + multipartFile.getOriginalFilename();
+            amazonS3.putObject(new PutObjectRequest(bucketName, filename, file));
+
+            file.delete();
+
+            // 객체 정보 업데이트
+            resource.setImage(filename);
+            resource.setCreateDate(LocalDateTime.now());
+            resourceRepository.save(resource);
+        }
 
     }
 

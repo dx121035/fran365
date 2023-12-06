@@ -80,7 +80,7 @@
                             <div class="col-12 col-sm-auto">
                                 <input class="d-none" id="avatarFile" type="file"/>
                                 <label class="cursor-pointer avatar avatar-5xl" for="avatarFile"><img
-                                        class="rounded-circle" src="../../../assets/img/team/15.webp" alt=""/></label>
+                                        class="rounded-circle" th:src="@{|${awspath}/${member.image}|}" alt=""/></label>
                             </div>
                             <div class="col-12 col-sm-auto flex-1">
                                 <h3 th:text="${member.getName()} + ' 님'"></h3>
@@ -93,14 +93,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="d-flex flex-between-center pt-4">
+                    <div class="d-flex flex-between-center pt-7">
                         <div th:each="sale, iterStat : ${sales}" th:if="${iterStat.index lt 3}">
                             <div>
                                 <h6 class="mb-1 text-800"
-                                    th:text="${(iterStat.index == 0) ? '저번 달 매출' : sale.month + '월 매출'}"></h6>
+                                    th:text="${(iterStat.index == 0) ? '이번 달 매출' : sale.month + '월 매출'}"></h6>
                                 <h4 class="fs-1 text-1000 mb-0" th:text="${sale.income} + '원'"></h4>
                             </div>
                         </div>
+                        <a th:href="@{|/sales/update?brand_id=${brand.getId()}|}" class="btn btn-lg btn-warning rounded-pill w-5">
+                            <span class="fas fa-shopping-cart me-2"></span>매출관리
+                        </a>
                     </div>
                 </div>
             </div>
@@ -150,7 +153,6 @@
 
         <thead style="background-color: #007bff; color: #fff; font-size: 1.5em;">
         <tr>
-            <th class="sort white-space-nowrap align-middle ps-4" scope="col" style="width:200px;">제품 사진</th>
             <th class="sort white-space-nowrap align-middle ps-4" scope="col" style="width:200px;">제품명</th>
             <th class="sort white-space-nowrap align-middle ps-4" scope="col" style="width:200px;">주소</th>
             <th class="sort white-space-nowrap align-middle ps-4" scope="col" style="width:200px;">유통기한</th>
@@ -164,8 +166,6 @@
         <!--            <td class="align-middle white-space-nowrap py-0"><a class="d-block border rounded-2" href="../apps/e-commerce/landing/product-details.html"><img src="../assets/img//products/1.png" alt="" width="53" /></a></td>-->
         <!--            <td class="product align-middle ps-4"><a href="../apps/e-commerce/landing/product-details.html">도우</a></td>-->
         <tr th:each="resource, loop : ${paging}">
-            <td class="align-middle white-space-nowrap py-0"><a class="d-block border rounded-2"><img
-                    src="../assets/img//products/1.png" alt="" width="20"/></a></td>
             <td class = "sort white-space-nowrap align-middle ps-4">
                 <a th:href="@{|/resource/readDetail?id=${resource.id}|}" th:text="${resource.category}"></a>
             </td>
