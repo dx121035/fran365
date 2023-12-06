@@ -13,5 +13,5 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
     
     Optional<Member> findByNameAndPhone(@Param("name") String paramString1, @Param("phone") String paramString2);
 
-    List<Member> findByEnabled(boolean enabled);
+    List<Member> findByEnabled(Integer enabled);
 }
