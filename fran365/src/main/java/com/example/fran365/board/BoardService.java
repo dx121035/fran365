@@ -21,6 +21,7 @@ public interface BoardService {
     void update (Board board, String category) throws IOException;
     void delete (Integer id);
     Page <Board> getNoticeBoards(String category,int page);
+    List<Board> readFAQList(String category);
     Page <Board> getFAQBoards(String category,int page);
     List<Board> getAllBoardsByCategories(List<String> categories);
     void hit (Board board, Member member);

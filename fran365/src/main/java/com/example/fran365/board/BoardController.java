@@ -58,6 +58,8 @@ public class BoardController {
         model.addAttribute("boards", allBoards);
         model.addAttribute("awspath", awspath);
         model.addAttribute("member",memberService.readDetailUsername());
+        model.addAttribute("FAQ",boardService.readFAQList("FAQ"));
+
         return "board/list";
     }
     @GetMapping("/notice")
@@ -68,12 +70,13 @@ public class BoardController {
         model.addAttribute("member",memberService.readDetailUsername());
         return "board/notice";
     }
-        @GetMapping("/FAQ")
+    @GetMapping("/FAQ")
     public String FAQ(Model model,@RequestParam (value="page",defaultValue="0")int page) {
         Page<Board> paging = boardService.getNoticeBoards("FAQ",page);
         model.addAttribute("paging",paging);
-            model.addAttribute("awspath", awspath);
-            model.addAttribute("member",memberService.readDetailUsername());
+        model.addAttribute("awspath", awspath);
+        model.addAttribute("member",memberService.readDetailUsername());
+
         return "board/FAQ";
     }
     @GetMapping("/detail")
