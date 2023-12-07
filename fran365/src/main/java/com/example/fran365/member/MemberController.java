@@ -142,8 +142,8 @@ public class MemberController {
 
 	@PostMapping("/update")
 	public String update(Model model, Member member, MultipartFile file) throws IOException {
-		memberService.update(member, file);
 
+		memberService.update(member, file);
 
 		model.addAttribute("member", memberService.readDetailUsername());
 		return "member/readDetail";
