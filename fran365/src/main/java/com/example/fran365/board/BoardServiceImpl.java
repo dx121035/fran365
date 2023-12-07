@@ -77,6 +77,11 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
+    public List<Board> readFAQList(String category) {
+        return boardRepository.findByCategory(category);
+    }
+
+    @Override
     public Page<Board> getFAQBoards(String category, int page) {
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("createDate"));

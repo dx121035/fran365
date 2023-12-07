@@ -3,9 +3,9 @@ date:2023/11/30
 mail: inew3w@gmail.com-->
 
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout=http:www.ultraq.net.nz/thymeleaf/layout
+      xmlns:sec="http://www.w3.org/1999/xhtml"
       layout:decorate="~{fragments/layout1}">
 
-<div th:replace="fragments/header::header"></div>
 <div layout:fragment="content">
 
 <div class="container">
@@ -59,7 +59,7 @@ mail: inew3w@gmail.com-->
                         class="fas fa-search search-box-icon"></span>
                 </form>
             </div>
-            <div th:if="${#authentication.name == 'admin'}">
+            <div sec:authorize="hasRole('ROLE_ADMIN')">
             <a href="/brand/create">작성</a>
             </div>
         </div>
@@ -146,4 +146,4 @@ mail: inew3w@gmail.com-->
 </div>
 </div>
 </div>
-<div th:replace="fragments/footer::footer"></div>
+

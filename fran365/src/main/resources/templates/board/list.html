@@ -5,10 +5,30 @@ mail: inew3w@gmail.com-->
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout=http:www.ultraq.net.nz/thymeleaf/layout
       layout:decorate="~{fragments/layout1}">
 
-<div th:replace="fragments/header::header"></div>
 <div layout:fragment="content">
     <div class="container">
         <div class="col-md-10 offset-md-1">
+            <h2 class="mb-5">F.A.Q <span style="font-size: 0.6em;">자주하는 질문</span></h2>
+            <div class="accordion">
+                <th:block th:each="faq: ${FAQ}">
+                    <div class="accordion-item border-top border-300">
+                        <h2 class="accordion-header" th:id="'heading-' + ${#strings.replace(faq.title, ' ', '-').toLowerCase()}">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    th:data-bs-target="'#collapse-' + ${#strings.replace(faq.title, ' ', '-').toLowerCase()}"
+                                    aria-expanded="false" aria-controls="'collapse-' + ${#strings.replace(faq.title, ' ', '-').toLowerCase()}">
+                                [[${faq.title}]]
+                            </button>
+                        </h2>
+                        <div class="accordion-collapse collapse show"
+                             th:id="'collapse-' + ${#strings.replace(faq.title, ' ', '-').toLowerCase()}"
+                             aria-labelledby="'heading-' + ${#strings.replace(faq.title, ' ', '-').toLowerCase()}"
+                             data-bs-parent="#accordionExample">
+                            <div class="accordion-body pt-0">[[${faq.content}]]</div>
+                        </div>
+                    </div>
+                </th:block>
+            </div>
+            <br><br>
         <div class="card shadow-none border border-300 mb-3"
              data-component-card="data-component-card">
             <div class="card-header p-4 border-bottom border-300 bg-soft">
@@ -87,6 +107,6 @@ mail: inew3w@gmail.com-->
             </div>
         </div>
     </div>
-    </div>
+
 </div>
-<div th:replace="fragments/footer::footer"></div>
+</div>
