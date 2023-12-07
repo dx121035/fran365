@@ -70,6 +70,7 @@ public class MemberServiceImpl implements MemberService {
 		member.setImage(filename);
 		member.setRole("ROLE_USER");
 		member.setPosition(null);
+		member.setEnabled(0);
 
 		memberRepository.save(member);
 
@@ -108,6 +109,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void update(Member member, MultipartFile multipartFile) throws IOException {
+
 		String filecheck = multipartFile.getOriginalFilename();
 
 		if (filecheck != null && !filecheck.trim().isEmpty()) {
@@ -131,16 +133,13 @@ public class MemberServiceImpl implements MemberService {
 
 			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-			member.setPassword(passwordEncoder.encode(member.getPassword()));
-			member.setCreateDate(LocalDateTime.now());
-			member.setImage(filename);
+			System.out.println("1111111111111" + member.getPassword());
 
-			//member.setRole(Role.ROLE_USER);
+			member.setPassword(passwordEncoder.encode(member.getPassword()));
+			System.out.println("22222222222222" + member.getPassword());
+			member.setImage(filename);
 
 			memberRepository.save(member);
-
-			member.setImage(filename);
-
 		}
 
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
