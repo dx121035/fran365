@@ -58,7 +58,7 @@ public class BoardController {
     }
     @GetMapping("/notice")
     public String notice(Model model,@RequestParam (value="page",defaultValue="0")int page) {
-        System.out.println("여기까진 성ㅇ공");
+
         Page<Board> paging = boardService.getNoticeBoards("공지",page);
         model.addAttribute("paging",paging);
         model.addAttribute("awspath", awspath);
