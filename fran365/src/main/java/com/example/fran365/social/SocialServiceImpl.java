@@ -81,12 +81,12 @@ public class SocialServiceImpl implements SocialService {
     }
 
     @Override
-    public void update(Integer id, String content, String username, String status) {
+    public void update(Integer id, String content, String status) {
 
         Optional<Social> os = socialRepository.findById(id);
         Social social = os.get();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        username = auth.getName();
+        String username = auth.getName();
 
         social.setContent(String.valueOf(content));
         social.setStatus(status);

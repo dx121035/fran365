@@ -11,7 +11,7 @@ public interface SocialService {
 
     List<Social> readDetail();
 
-    void update(Integer id, String content, String username, String status);
+    void update(Integer id, String content, String status);
 
     void delete(Integer id);
 
