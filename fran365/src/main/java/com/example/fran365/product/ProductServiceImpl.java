@@ -63,12 +63,9 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public Page<Product> getList(int page) {
-        List<Sort.Order> sorts = new ArrayList<>();
-        sorts.add(Sort.Order.desc("createDate"));
+    public List<Product> readList() {
 
-        Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
-        return productRepository.findAll(pageable);
+        return productRepository.findAll();
     }
 
 

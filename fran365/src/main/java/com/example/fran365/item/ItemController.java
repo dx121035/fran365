@@ -18,6 +18,7 @@ public class ItemController {
     @PostMapping("/create")
     public String create(@RequestParam Integer id,
                          @RequestParam String name,
+                         @RequestParam String image,
                          @RequestParam Integer quantity,
                          @RequestParam int price
                          ){
@@ -25,6 +26,7 @@ public class ItemController {
         Item item = new Item();
         item.setProductId(id);
         item.setName(name);
+        item.setName(image);
         item.setPrice(price);
         item.setQuantity(quantity);
         item.setCreateDate(LocalDateTime.now());
