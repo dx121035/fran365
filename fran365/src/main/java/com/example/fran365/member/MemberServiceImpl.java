@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.example.fran365.cart.CartService;
 
 
 @Service
@@ -33,32 +34,21 @@ public class MemberServiceImpl implements MemberService {
 	private AmazonS3 amazonS3;
 
 	@Autowired
-	private MemberRepository mr;
-
-	@Autowired
 	private JavaMailSender mailSender;
-	//@Autowired
-	//private CartService cartService;
+	
+	@Autowired
+	private CartService cartService;
 
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
-
 
 	MailDto mailDto;
 
 	@Value("bucket-va1rkc")
 	private String bucketName;
 
-
-
-
-
-
-
-
-
 	@Override
-	public Member create(Member member, MultipartFile multipartFile) throws IOException {
+	public void create(Member member, MultipartFile multipartFile) throws IOException {
 
 		File file = new File(multipartFile.getOriginalFilename());
 
@@ -71,7 +61,6 @@ public class MemberServiceImpl implements MemberService {
 
 		file.delete();
 
-
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 		member.setPassword(passwordEncoder.encode(member.getPassword()));
@@ -82,11 +71,10 @@ public class MemberServiceImpl implements MemberService {
 		member.setRole("ROLE_USER");
 		member.setPosition(null);
 
-
-		return memberRepository.save(member);
+		memberRepository.save(member);
 
 		// 카트 생성
-		//cartService.create(user);
+		cartService.create(member);
 	}
 
 	@Override
@@ -232,25 +220,21 @@ public class MemberServiceImpl implements MemberService {
 		Optional<Member> memberOptional = memberRepository.findByUsername(username);
 
 		if (memberOptional.isPresent()) {
-			// User exists, proceed with sending the temporary password
 			String temporaryPassword = getTempPassword();
 			String encryptedPassword = passwordEncoder.encode(temporaryPassword);
 
-			// Update the user's password in the database with the encrypted temporary password
 			updatePassword(encryptedPassword, username);
 
-			// Send the email with the temporary password
 			MailDto mailDto = new MailDto();
-			mailDto.setAddress(memberOptional.get().getUsername()); // Set the recipient email
+			mailDto.setAddress(memberOptional.get().getUsername());
 			mailDto.setTitle("Temporary Password");
 			mailDto.setMessage("Your temporary password is: " + temporaryPassword);
 
-			mailSend(mailDto); // Assuming mailSend method is implemented correctly
+			mailSend(mailDto);
 
-			// You might want to log or handle the success here
 			System.out.println("Temporary password sent successfully to: " + memberOptional.get().getUsername());
 		} else {
-			// User does not exist, handle this case (e.g., log an error)
+			
 			System.err.println("User with username " + username + " does not exist.");
 		}
 	}
@@ -258,11 +242,8 @@ public class MemberServiceImpl implements MemberService {
 
 	@Transactional
 	public MailDto createMailAndChangePassword(String username) {
-		// Your implementation logic here
-		// ...
 
-		return mailDto;  // A
-
+		return mailDto;
 	}
 
 }

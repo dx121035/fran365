@@ -53,7 +53,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<Member> memberApprove() {
 
-		return memberRepository.findByEnabled(false);
+		return memberRepository.findByEnabled(0);
 	}
 
 	@Override
@@ -62,7 +62,7 @@ public class AdminServiceImpl implements AdminService {
 		Optional<Member> om = memberRepository.findById(id);
 		Member member = om.get();
 		
-		member.setEnabled(true);
+		member.setEnabled(1);
 		member.setPosition(number);
 		memberRepository.save(member);
 	}

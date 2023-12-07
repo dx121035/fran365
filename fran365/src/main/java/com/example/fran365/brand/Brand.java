@@ -9,6 +9,7 @@ import com.example.fran365.sales.Sales;
 import com.example.fran365.stock.Stock;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -40,11 +41,13 @@ public class Brand {
 
     private String username;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "brand", cascade = CascadeType.REMOVE)
     private List<Sales> salesList;
 
     private LocalDateTime createDate;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "brand", cascade = CascadeType.REMOVE)
     private List<Stock> stockList;
 

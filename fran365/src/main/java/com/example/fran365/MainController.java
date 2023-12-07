@@ -1,20 +1,41 @@
 package com.example.fran365;
 
 import com.example.fran365.auth.UserDetailService;
+import com.example.fran365.member.Member;
+import com.example.fran365.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
+
 @Controller
 public class MainController {
+	@Value("${aws.s3.awspath}")
+	private String awspath;
+
+	@Autowired
+	private MemberService memberService;
 
 	@Autowired
 	private UserDetailService userDetailService;
 	@GetMapping("/")
-	public String index() {
+	public String index(Model model, Principal principal) {
 		
-		return "index";
+		if (principal != null) {
+			Member member = memberService.readDetailUsername();
+			if (member.getEnabled() != 0) {
+			model.addAttribute("awspath", awspath);
+			model.addAttribute("member", memberService.readDetailUsername());
+			
+			return "index";
+			}
+			return "redirect:/board/notice";
+		}
+		return "login";
 	}
 
 	@GetMapping("/login")

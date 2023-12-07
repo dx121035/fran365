@@ -8,16 +8,16 @@ mail: inew3w@gmail.com-->
 <div th:replace="fragments/header::header"></div>
 <div layout:fragment="content">
     <div class="container">
-        <input type="hidden" name="id" th:value="${board.id}">
-        <br><br><br>
-        <div class="card shadow-none border border-300 my-4" data-component-card="data-component-card">
-            <div class="card-header p-4 border-bottom border-300 bg-soft">
-                <div class="row g-3 justify-content-between align-items-center">
-                    <div class="col-12 col-md">
-                        <h5 class="text-900 mb-0 text-center fs-5" data-anchor="data-anchor" >Question & Answer</h5>
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow-none border border-300 mb-3"
+                 data-component-card="data-component-card">
+                <div class="card-header p-4 border-bottom border-300 bg-soft">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="col-12 col-md">
+                            <h4 class="text-900 mb-0" data-anchor="data-anchor">Question & Answer</h4>
+                        </div>
                     </div>
                 </div>
-            </div>
             <div class="card-body p-3 p-sm-4">
                 <div class="border-bottom mb-3">
                     <div class="d-flex align-items-center mb-3">
@@ -25,7 +25,6 @@ mail: inew3w@gmail.com-->
                             <div class="flex-1" style="font-size: 35px;">[[${board.category}]]> [[${board.title}]]</div>
                         </div>
                     </div>
-
                     <div class="d-flex align-items-center mb-3">
                         <p><a th:text="${#temporals.format(board.createDate, 'yyyy년 MM월 dd일 HH시 mm분')}"></a>
                         </p>
@@ -56,9 +55,9 @@ mail: inew3w@gmail.com-->
                 </div>
             </div>
         </div>
-
-
+        </div><br>
         <div class="col-12">
+            <div class="col-md-8 offset-md-2">
             <div class="card h-200">
                 <div class="card-body">
                     <h3 class="mb-4">댓글</h3>
@@ -89,6 +88,7 @@ mail: inew3w@gmail.com-->
                 </div>
             </div>
             <br>
+        </div>
         </div>
         <br><br><br>
     </div>

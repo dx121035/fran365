@@ -9,13 +9,19 @@ import com.example.fran365.sales.SalesRepository;
 import com.example.fran365.sales.SalesService;
 import com.example.fran365.stock.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RequestMapping("/resource")
@@ -37,6 +43,8 @@ public class ResourceController {
     @Autowired
     private SalesRepository salesRepository;
 
+    @Value("${aws.s3.awspath}")
+
     @GetMapping("/create")
     public String create() {
 
@@ -45,17 +53,18 @@ public class ResourceController {
     }
 
     @PostMapping("/create")
-    public String create(Resource resource) {
+    public String create(Resource resource,  @RequestParam("filename") MultipartFile file) throws IOException {
 
-
-        resourceService.create(resource);
+        resourceService.create(resource, file);
 
         return "redirect:/resource/readList";
     }
 
     @GetMapping("/readList")
     public String readList(Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
-
+//        String customLocalDateTimeFormat =LocalDate.now()
+//                .format(DateTimeFormatter.ofPattern("yyyy-MM"));
+//        System.out.println(customLocalDateTimeFormat);
 
        String username = memberService.findUsername();
 

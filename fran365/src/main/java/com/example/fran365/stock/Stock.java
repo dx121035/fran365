@@ -4,6 +4,8 @@ import com.example.fran365.brand.Brand;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Entity
 @Data
 public class Stock {
@@ -18,4 +20,9 @@ public class Stock {
 
     @ManyToOne
     private Brand brand;
+
+    public Stock() {
+        // 기본 생성자
+    }
+
 }
