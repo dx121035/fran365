@@ -41,6 +41,11 @@ public class ReplyController {
     @PostMapping("/noticeCreate")
     public String noticeCreate(@RequestParam Integer id,  @RequestParam String content, @RequestParam String writer) {
         replyService.create(id,content,writer);
+        
+        if (writer.equals("관리자")) {
+        	
+        	return "redirect:/admin/noticeReadDetail?id=" + id;
+        }
         return "redirect:/board/noticeDetail?id=" + id;
     }
 
