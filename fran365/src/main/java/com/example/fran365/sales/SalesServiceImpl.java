@@ -47,4 +47,10 @@ public class SalesServiceImpl implements SalesService {
 
     }
 
+    @Override
+    public List<Sales> findTopId(Integer brand_id) {
+
+        return salesRepository.findTopByBrandIdOrderBySalesIdDesc(brand_id);
+    }
+
 }

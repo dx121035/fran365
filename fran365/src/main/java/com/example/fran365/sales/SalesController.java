@@ -1,10 +1,19 @@
 package com.example.fran365.sales;
 
+
+import com.example.fran365.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
+import java.util.Optional;
 
 @RequestMapping("/sales")
 @Controller
@@ -13,20 +22,42 @@ public class SalesController {
     @Autowired
     private SalesService salesService;
 
-    @GetMapping("/create")
-    public String create(){
+    @Autowired
+    private SalesRepository salesRepository;
 
-        return"sales/create";
+    @Value("${aws.s3.awspath}")
+    private String awspath;
+
+    @Autowired
+    private MemberService memberService;
+
+    @GetMapping("/update")
+    public String update(@RequestParam Integer brand_id, Model model){
+
+        List<Sales> sales = salesService.findTopId(brand_id);
+
+
+        model.addAttribute("awspath", awspath);
+        model.addAttribute("member",memberService.readDetailUsername());
+
+        if (!sales.isEmpty()) {
+            Sales latestSales = sales.get(0);
+            System.out.println("세일 :" + latestSales);
+            model.addAttribute("sales", latestSales);
+        } else {
+            // Sales가 없을 경우에 대한 처리
+        }
+        return "sales/update";
     }
 
-    @PostMapping("/create")
-    public String create(Sales sales){
+    @PostMapping("/update")
+    public String update(Sales sales){
 
-        salesService.create(sales);
-
-        return "redirect:resource/readlist";
-
+        System.out.println(sales.getId());
+        salesService.update(sales);
+        return "redirect:/resource/readList";
     }
+
 
 
 }
