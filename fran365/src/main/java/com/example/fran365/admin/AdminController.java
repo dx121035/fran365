@@ -125,5 +125,25 @@ public class AdminController {
 		
 		return 1;
 	}
+	
+	@GetMapping("/noticeReadList")
+	public String noticeReadList(Model model) {
+		
+		model.addAttribute("awspath", awspath);
+		model.addAttribute("user", memberService.readDetailUsername());
+		model.addAttribute("notices", adminService.noticeReadList());
+		
+		return "admin/noticeReadList";
+	}
+	
+	@GetMapping("/noticeReadDetail")
+	public String noticeReadDetail(Model model, Integer id) {
+		
+		model.addAttribute("awspath", awspath);
+		model.addAttribute("user", memberService.readDetailUsername());
+		model.addAttribute("notice", adminService.noticeReadDetail(id));
+		
+		return "admin/noticeReadDetail";
+	}
 
 }

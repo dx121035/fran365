@@ -3,6 +3,7 @@ package com.example.fran365.admin;
 import java.util.List;
 import java.util.Map;
 
+import com.example.fran365.board.Board;
 import com.example.fran365.member.Member;
 
 public interface AdminService {
@@ -22,5 +23,9 @@ public interface AdminService {
 	void updatePosition(String username, Integer newPosition);
 	
 	int getDeliveyNotComplete();
+	
+	List<Board> noticeReadList();
+	
+	Board noticeReadDetail(Integer id);
 	
 }

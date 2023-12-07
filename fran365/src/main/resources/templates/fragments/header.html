@@ -104,7 +104,9 @@
 
 
                 <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
-                    <a class="nav-link"  th:href="@{~/admin/main}">관리자 페이지</a>
+                    <a class="nav-link lh-1" href="/admin/main">
+                        <span class="uil fs-0 me-2" data-feather="lock"></span>관리자페이지
+                    </a>
                 </li>
             </ul>
         </div>

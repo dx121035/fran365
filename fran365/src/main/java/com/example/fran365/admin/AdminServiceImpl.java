@@ -6,8 +6,11 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.example.fran365.board.Board;
+import com.example.fran365.board.BoardRepository;
 import com.example.fran365.delivery.Delivery;
 import com.example.fran365.member.Member;
 import com.example.fran365.member.MemberRepository;
@@ -25,11 +28,14 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Autowired
 	private StatusRepository statusRepository;
+	
+	@Autowired
+	private BoardRepository boardRepsitory;
 
 	@Override
 	public List<Member> memberReadList() {
 		
-		return memberRepository.findAll();
+		return memberRepository.findByEnabled(1);
 	}
 
 	@Override
@@ -99,6 +105,21 @@ public class AdminServiceImpl implements AdminService {
 		int DeliveyNotComplete = getDeliveyNotComplete.size();
 
 		return DeliveyNotComplete;
+	}
+
+	@Override
+	public List<Board> noticeReadList() {
+
+		return boardRepsitory.findByCategory("공지", Sort.by(Sort.Direction.DESC, "id"));
+	}
+
+	@Override
+	public Board noticeReadDetail(Integer id) {
+
+		Optional<Board> ob = boardRepsitory.findById(id);
+		Board board = ob.get();
+		
+		return board;
 	}
 	
 }
