@@ -60,10 +60,10 @@ public class ProductController {
 
 
     @GetMapping("/readList")
-    public String readList(Model model, @RequestParam(value="page", defaultValue="0") int page) {
+    public String readList(Model model) {
 
-        Page<Product> paging = productService.getList(page);
-        model.addAttribute("paging", paging);
+
+        model.addAttribute("product", productService.readList());
         model.addAttribute("awspath", awspath);
         model.addAttribute("member",memberService.readDetailUsername());
 

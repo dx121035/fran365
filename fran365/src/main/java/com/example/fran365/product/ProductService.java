@@ -15,7 +15,7 @@ public interface ProductService {
 
     void create(String name, int price, MultipartFile multipartFile) throws IOException;
 
-    Page<Product> getList(int page);
+    List<Product> readList();
 
     Product readDetail(Integer id);
 
