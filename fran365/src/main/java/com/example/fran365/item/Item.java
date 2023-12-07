@@ -23,6 +23,8 @@ public class Item {
 
     private Integer quantity;
 
+    private String image;
+
     private LocalDateTime createDate;
 
     @ManyToOne

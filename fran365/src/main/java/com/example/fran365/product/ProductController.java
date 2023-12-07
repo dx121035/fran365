@@ -6,6 +6,8 @@
 
 package com.example.fran365.product;
 
+import com.example.fran365.member.Member;
+import com.example.fran365.member.MemberService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,9 +31,15 @@ public class ProductController {
     private String awspath;
     @Autowired
     private ProductService productService;
+    @Autowired
+    private MemberService memberService;
+
 
     @GetMapping("/create")
-    public String create(ProductCreateForm productCreateForm) {
+    public String create(Model model, ProductCreateForm productCreateForm) {
+
+        model.addAttribute("awspath", awspath);
+        model.addAttribute("member",memberService.readDetailUsername());
 
         return "product/create";
     }
@@ -57,6 +65,7 @@ public class ProductController {
         Page<Product> paging = productService.getList(page);
         model.addAttribute("paging", paging);
         model.addAttribute("awspath", awspath);
+        model.addAttribute("member",memberService.readDetailUsername());
 
         return "product/readList";
     }
@@ -65,6 +74,8 @@ public class ProductController {
     public String update(Model model, @RequestParam("id") Integer id, ProductCreateForm productCreateForm) {
 
         model.addAttribute("details", productService.readDetail(id));
+        model.addAttribute("awspath", awspath);
+        model.addAttribute("member",memberService.readDetailUsername());
         return "product/update";
     }
 

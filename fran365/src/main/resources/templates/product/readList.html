@@ -3,13 +3,11 @@ name : SEULA LEE
 date : 2023/11/22
 mail : leeseulaseula@gmail.com
  -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout=http:www.ultraq.net.nz/thymeleaf/layout
+      layout:decorate="~{fragments/layout1}">
+
+<div layout:fragment="content">
 <div class="content">
 
     <div class="mb-9">
@@ -31,7 +29,6 @@ mail : leeseulaseula@gmail.com
                     </div>
 
                     <div class="ms-xxl-auto">
-                        <button class="btn btn-link text-900 me-4 px-0"><span class="fa-solid fa-file-export fs--1 me-2"></span>Export</button>
                         <button class="btn btn-primary" id="addBtn"><span class="fas fa-plus me-2"></span>Add product</button>
                     </div>
                 </div>
@@ -43,7 +40,7 @@ mail : leeseulaseula@gmail.com
                         <thead>
                         <tr>
                             <th class="sort white-space-nowrap align-middle fs--2" scope="col" style="width:70px;"></th>
-                            <th class="sort white-space-nowrap align-middle ps-4" scope="col" style="width:350px;" data-sort="name">제품 이름</th>
+                            <th class="sort white-space-nowrap align-middle ps-4" scope="col" style="width:350px;" data-sort="name">제품명</th>
                             <th class="sort align-middle text-end ps-4" scope="col" data-sort="price" style="width:150px;">가격</th>
                             <th class="sort align-middle ps-4" scope="col" style="width:150px;">수량</th>
                             <th class="sort align-middle ps-3" scope="col" style="width:250px;">장바구니 담기</th>
@@ -57,23 +54,22 @@ mail : leeseulaseula@gmail.com
                         <th:block th:each="product, loop : ${paging}">
                             <tr class="position-static">
 
-                                <td class="align-middle white-space-nowrap py-0"><img th:src="@{|${awspath}/${product.image}|}" alt="" width="53" height="53" class ="d-block border rounded-2"/></a></td>
+                                <td class="align-middle white-space-nowrap py-0"><img th:src="@{|${awspath}/${product.image}|}" alt="" width="53" height="53" class ="d-block border rounded-2"/></td>
                                 <td class="product align-middle ps-4">[[${product.name}]]</td>
                                 <td class="price align-middle white-space-nowrap text-end fw-bold text-700 ps-4">&#8361; [[${product.price}]]</td>
                                 <form th:action="@{|/item/create?id=${product.id}|}" method="post">
                                     <td class="quantity align-middle white-space-nowrap text-600 fs--1 ps-4 fw-semi-bold">
                                         <div class="d-flex justify-content-between align-items-end">
                                             <div class="d-flex flex-between-center" data-quantity="quantity">
-                                                <button class="btn btn-phoenix-primary px-3" data-type="minus"><span class="fas fa-minus"></span></button>
-                                                <input class="form-control text-center input-spin-none bg-transparent border-0 outline-none" style="width:50px;" type="number" min="1" value="1" name="quantity" />
-                                                <button class="btn btn-phoenix-primary px-3" data-type="plus"><span class="fas fa-plus"></span></button>
+                                                <input  type="number" style="width:80px; font-size: large" min="1" value="1" name="quantity" />
                                             </div>
                                         </div>
 
                                         <input type="hidden" name="name" th:value="${product.name}">
                                         <input type="hidden" name="price" th:value="${product.price}">
+                                        <input type="hidden" name="image" th:value="${product.image}">
                                     </td>
-                                    <td class="tags align-middle review pb-2 ps-3" style="min-width:225px;"> <input type="submit" class="btn btn-outline-primary" value="담기"> </td>
+                                    <td class="tags align-middle review pb-2 ps-3" style="min-width:225px;"><button class="btn btn-primary fs--2"><span class="fas fa-shopping-cart me-1 fs--2"></span>Add to cart</button></td>
                                 </form>
 
                                 <td th:text="${#temporals.format(product.createDate, 'yyyy/MM/dd HH:mm')}" class="createDate align-middle white-space-nowrap text-600 ps-4"></td>
@@ -126,5 +122,23 @@ mail : leeseulaseula@gmail.com
 
 
 <a href="/cart/readDetail">장바구니</a>
+
+<div class="modal fade" id="staticBackdrop" tabindex="-1" data-bs-backdrop="static" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-white" id="staticBackdropLabel">제품삭제</h5>
+                <button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close"><span class="fas fa-times fs--1 text-white"></span></button>
+            </div>
+            <div class="modal-body">
+                <p class="text-700 lh-lg mb-0">삭제하시겠습니까?</p>
+            </div>
+            <div class="modal-footer">
+                <a th:href="@{|/product/update?id=${product.id}|}" class="btn btn-primary" type="button">삭제</a>
+                <button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">취소</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
-</html>
+</div>>

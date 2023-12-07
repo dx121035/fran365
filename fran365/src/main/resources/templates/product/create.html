@@ -3,15 +3,15 @@ name : SEULA LEE
 date : 2023/11/22
 mail : leeseulaseula@gmail.com
  -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout=http:www.ultraq.net.nz/thymeleaf/layout
+      layout:decorate="~{fragments/layout1}">
+
+<div layout:fragment="content">
+
 <body>
 
-<div class="container">
+<div class="container" style="padding: 100px;">
     <form action="/product/create" th:object="${productCreateForm}" method="post" enctype="multipart/form-data">
         <div class="row g-3 flex-between-end mb-5">
             <div class="col-auto">
@@ -27,10 +27,10 @@ mail : leeseulaseula@gmail.com
                         <span th:text="${err}"></span>
                     </div>
                 </div>
-                <h4 class="mb-3">제품이름</h4>
-                <input class="form-control mb-5" type="text" name="name" placeholder="제품 이름을 입력하세요"/>
+                <h4 class="mb-3">제품명</h4>
+                <input class="form-control mb-5" type="text" name="name" placeholder="제품명을 입력하세요"/>
                 <h4 class="mb-3">제품가격</h4>
-                <input class="form-control mb-5" type="text" name="price" placeholder="제품 가격을 입력하세요" value="0"/>
+                <input class="form-control mb-5" type="text" name="price" placeholder="제품가격을 입력하세요" />
                 <h4 class="mb-3">제품사진</h4>
                 <div class="dropzone dropzone-multiple p-0 mb-5" id="my-awesome-dropzone">
                     <div class="fallback">
@@ -48,4 +48,4 @@ mail : leeseulaseula@gmail.com
     </form>
 </div>
 </body>
-</html>
+</div>
