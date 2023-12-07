@@ -38,7 +38,6 @@ public class SocialController {
     @PostMapping("/update")
     public String update(@RequestParam Integer id,
                          @RequestParam String content,
-                         @RequestParam String username,
                          @RequestParam String status){
         System.out.println(id);
         System.out.println(id);
@@ -46,7 +45,7 @@ public class SocialController {
         System.out.println(id);
         System.out.println(id);
 
-        socialService.update(id,content,username,status);
+        socialService.update(id,content,status);
 
         return "redirect:/social/social";
     }

@@ -3,6 +3,7 @@ package com.example.fran365.cart;
 import com.example.fran365.item.Item;
 import com.example.fran365.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,9 @@ import java.util.Map;
 @RequestMapping("/cart")
 @Controller
 public class CartController {
+
+    @Value("${aws.s3.awspath}")
+    private String awspath;
 
     @Autowired
     private CartService cartService;
@@ -32,6 +36,7 @@ public class CartController {
         model.addAttribute("total", cartService.TotalPrice(cart));
         model.addAttribute("itemName", itemList.get(0).getName());
         model.addAttribute("itemSize", itemList.size() - 1);
+        model.addAttribute("awspath", awspath);
         return "cart/readDetail";
     }
 
