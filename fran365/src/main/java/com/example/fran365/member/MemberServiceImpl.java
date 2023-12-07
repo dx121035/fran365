@@ -108,7 +108,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void update(Member member, MultipartFile multipartFile) throws IOException {
-
+		
 		String filecheck = multipartFile.getOriginalFilename();
 
 		if (filecheck != null && !filecheck.trim().isEmpty()) {
@@ -132,20 +132,18 @@ public class MemberServiceImpl implements MemberService {
 
 			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-			System.out.println("1111111111111" + member.getPassword());
-
 			member.setPassword(passwordEncoder.encode(member.getPassword()));
-			System.out.println("22222222222222" + member.getPassword());
 			member.setImage(filename);
 
 			memberRepository.save(member);
-		}
+		} else {
 
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 		member.setPassword(passwordEncoder.encode(member.getPassword()));
 
 		memberRepository.save(member);
+		}
 	}
 
 	@Override
