@@ -96,6 +96,7 @@ public class ProductController {
 
     @GetMapping("/delete")
     public String delete(@RequestParam Integer id) {
+        System.out.println("컨트롤러 :" + id);
         productService.delete(id);
         return "redirect:/product/readList";
     }
