@@ -2,6 +2,7 @@ package com.example.fran365.delivery;
 
 import com.example.fran365.member.MemberService;
 import com.example.fran365.product.ProductService;
+import com.example.fran365.status.StatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,9 @@ public class DeliveryController {
     @Autowired
     private DeliveryService deliveryService;
 
+    @Autowired
+    private StatusRepository statusRepository;
+
     @GetMapping("/pay")
     public String pay(String uid){
         deliveryService.create(uid);
@@ -35,6 +39,7 @@ public class DeliveryController {
     public String readList(Model model){
 
         model.addAttribute("deliveries", deliveryService.readList());
+
         model.addAttribute("awspath", awspath);
         model.addAttribute("member",memberService.readDetailUsername());
 

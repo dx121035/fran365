@@ -103,7 +103,7 @@
                                     <button class="set-status" th:if="${list.status == '1'}" th:data-post-id="${list.id}" data-status="0">비공개</button>
 
 
-                                    <div class="fw-semi-bold mb-0" th:id="'content-' + ${list.id}" th:data-id="${list.id}" th:data-status="${list.status}" th:utext="${list.content}"></div>
+                                    <div class="listPictureRemove mb-0" th:id="'content-' + ${list.id}" th:data-id="${list.id}"  th:utext="${list.content}"></div>
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" th:data-status="${list.status}" th:data-id="${list.id}" th:data-content="${list.content}">수정</button></p>
                                 <p class="text-700 mb-0"><div th:text="${#temporals.format(list.createDate, 'yyyy년 MM월 dd일 HH:mm')}"></div></p>
 
@@ -350,8 +350,6 @@
             height: 200,
         });
 
-
-
         $(".set-status").click(function() {
             var postId = $(this).data('post-id');
             var status = $(this).data('status');
@@ -373,7 +371,6 @@
             });
         });
 
-
     const exampleModal = document.getElementById('exampleModal');
     if (exampleModal) {
         exampleModal.addEventListener('show.bs.modal', event => {
@@ -384,7 +381,6 @@
             const modalPostIdInput = exampleModal.querySelector('#post-id');  // Get the 'id' input field
             const status = button.getAttribute('data-status');
             const modalStatusInput = exampleModal.querySelector('#status');
-
 
             modalTitle.textContent = ` 게시물 수정`;
             modalPostIdInput.value = postId;
@@ -409,23 +405,15 @@
 
 <script>
     window.onload = function() {
-        var contents = document.querySelectorAll('.fw-semi-bold');
+        var contents = document.querySelectorAll('.listPictureRemove');
         contents.forEach(function(content) {
-            var id = content.getAttribute('data-id');
-            var status = content.getAttribute('data-status');
-            if (status === '1' || status === '0') {
                 var div = document.createElement('div');
                 div.innerHTML = content.innerHTML;
                 var images = div.getElementsByTagName('img');
                 while(images.length > 0) {
                     images[0].parentNode.removeChild(images[0]);
-                    images[1].parentNode.removeChild(images[1]);
-                    images[2].parentNode.removeChild(images[2]);
-                    images[3].parentNode.removeChild(images[3]);
-                    images[4].parentNode.removeChild(images[4]);
                 }
                 content.innerHTML = div.innerHTML;
-            }
         });
     };
 </script>
