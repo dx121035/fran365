@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
-
 @Controller
 @RequestMapping("/comment")
 public class CommentController {
@@ -22,6 +20,6 @@ public class CommentController {
 
         commentService.create(id, content);
 
-        return "redirect:/notice/readDetail?id=" + id;
+        return "redirect:/social/social;?id=" + id;
     }
 }

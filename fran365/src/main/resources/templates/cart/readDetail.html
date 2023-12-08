@@ -85,17 +85,9 @@
                                         <td class="quantity align-middle fs-0 ps-5">
                                             <div class="quantity input-group input-group-sm flex-nowrap" data-quantity="data-quantity" th:value="${item.quantity}" th:attr="data-id=${item.id}">
 
-
-
-
-
                                                 <button class="btn btn-sm px-2" data-type="minus">-</button>
                                                 <input class="quantity form-control text-center input-spin-none bg-transparent border-0 px-0" type="number" name="quantity" min="1" value="1" th:value="${item.quantity}" th:attr="data-id=${item.id}"/>
                                                 <button class="btn btn-sm px-2" data-type="plus">+</button>
-
-
-
-
 
                                             </div>
                                         </td>
@@ -167,6 +159,14 @@
     </section>
 
 
+    <th:block th:each="item : ${cart.itemList}">
+        <br>
+        <td class="column-2">[[${item.name}]]</td>
+        <td class="column-3">[[${item.price}]]</td>
+        <input type="number" name="quantity" class="quantity" th:value="${item.quantity}"  th:attr="data-id=${item.id}"/>
+<!--        <button class="delete" th:attr="data-id=${item.id}">삭제</button>-->
+
+    </th:block>
     <div class="size-209">
 								<span class="total">
 									[[${total}]]원
@@ -183,46 +183,13 @@
 
 
 
-    <script>
-        // jQuery document ready function
-        $(document).ready(function () {
-            // Event listener for minus button
-            $('button[data-type="minus"]').click(function () {
-                // Get the input element
-                var inputElement = $(this).next('input');
 
-                // Get the current value
-                var currentValue = parseInt(inputElement.val());
-
-                // Update the value if greater than the minimum
-                if (currentValue > inputElement.attr('min')) {
-                    inputElement.val(currentValue - 1);
-                }
-            });
-
-            // Event listener for plus button
-            $('button[data-type="plus"]').click(function () {
-                // Get the input element
-                var inputElement = $(this).prev('input');
-
-                // Get the current value
-                var currentValue = parseInt(inputElement.val());
-
-                // Update the value
-                inputElement.val(currentValue + 1);
-            });
-        });
-    </script>
 
     <script>
-
-
         $(".quantity").change(function() {
             var itemId = $(this).data("id");
             var quantity = $(this).val();
 
-            alert("itemId");
-            alert("quantity");
             $.ajax({
                 type: "POST",
                 url: "/cart/update",
