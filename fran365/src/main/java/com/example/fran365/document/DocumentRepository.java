@@ -12,4 +12,6 @@ public interface DocumentRepository extends JpaRepository<Document, Integer> {
 
     //Document findByUsername(String username);
 
+    List<Document> findByReceiver(String receiver);
+
 }

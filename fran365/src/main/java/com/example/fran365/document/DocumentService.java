@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface DocumentService {
 
-    void create(Document document, MultipartFile multipartFile) throws IOException;
+    void create(Document document, MultipartFile multipartFile, String receiver) throws IOException;
 
     void createtemp(Document document, MultipartFile multipartFile) throws IOException;
 

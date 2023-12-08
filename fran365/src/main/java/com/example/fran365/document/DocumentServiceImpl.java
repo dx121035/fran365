@@ -6,6 +6,8 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -34,7 +36,7 @@ public class DocumentServiceImpl implements DocumentService{
 
 
     @Override
-    public void create(Document docuemnt, MultipartFile multipartFile) throws IOException {
+    public void create(Document docuemnt, MultipartFile multipartFile, String receiver) throws IOException {
 
         File file = new File(multipartFile.getOriginalFilename());
 
@@ -51,6 +53,7 @@ public class DocumentServiceImpl implements DocumentService{
         docuemnt.setImage(filename);
         docuemnt.setStatus("1");
         docuemnt.setCreateDate(LocalDateTime.now());
+        docuemnt.setReceiver(receiver);
 
         documentRepository.save(docuemnt);
 
@@ -76,6 +79,7 @@ public class DocumentServiceImpl implements DocumentService{
         docuemnt.setStatus("0");
         docuemnt.setCreateDate(LocalDateTime.now());
 
+
         documentRepository.save(docuemnt);
 
     }
@@ -94,7 +98,10 @@ public class DocumentServiceImpl implements DocumentService{
 
     @Override
     public List<Document> readList() {
-        return documentRepository.findAll();
+        // Fetch documents sent to the currently logged-in user
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String receiver = authentication.getName();
+        return documentRepository.findByReceiver(receiver);
     }
 
 

@@ -38,10 +38,11 @@ public class DocumentController {
 
     @PostMapping("/create")
     public String create(Document document,
+                         @RequestParam("receiver") String receiver,
                          @RequestParam("filename") MultipartFile file
     ) throws IOException {
 
-        documentService.create(document, file);
+        documentService.create(document, file,receiver);
 
         return "redirect:/";
     }
@@ -65,9 +66,6 @@ public class DocumentController {
 
         return "redirect:/";
     }
-
-
-
 
 
 
