@@ -3,6 +3,7 @@ package com.example.fran365.document;
 
 
 
+import com.example.fran365.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.ui.Model;
 import java.io.IOException;
+import java.security.Principal;
+import java.util.Map;
 
 
 @Controller
@@ -22,8 +25,13 @@ public class DocumentController {
     @Autowired
     private DocumentService documentService;
 
+    @Autowired
+    private MemberService memberService;
+
     @GetMapping("/create")
     public String create() {
+
+
 
         return "document/create";
     }
@@ -37,6 +45,31 @@ public class DocumentController {
 
         return "redirect:/";
     }
+
+
+
+    @GetMapping("/createtemp")
+    public String createtemp() {
+
+
+
+        return "document/createtemp";
+    }
+
+    @PostMapping("/createtemp")
+    public String createtemp(Document document,
+                         @RequestParam("filename") MultipartFile file
+    ) throws IOException {
+
+        documentService.createtemp(document, file);
+
+        return "redirect:/";
+    }
+
+
+
+
+
 
 //    @GetMapping("/readList")
 //    public String readList(Model model, @RequestParam(value="page", defaultValue="0") int page) {

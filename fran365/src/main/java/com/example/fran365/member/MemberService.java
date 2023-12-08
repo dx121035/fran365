@@ -2,6 +2,7 @@ package com.example.fran365.member;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -29,6 +30,9 @@ public interface MemberService {
 
 	//임시번호 암호화 하기
 	void sendTemporaryPassword(String username);
+
+
+
 
 
 }

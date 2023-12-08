@@ -49,6 +49,31 @@ public class DocumentServiceImpl implements DocumentService{
 
 
         docuemnt.setImage(filename);
+        docuemnt.setStatus("1");
+        docuemnt.setCreateDate(LocalDateTime.now());
+
+        documentRepository.save(docuemnt);
+
+    }
+
+
+    @Override
+    public void createtemp(Document docuemnt, MultipartFile multipartFile) throws IOException {
+
+        File file = new File(multipartFile.getOriginalFilename());
+
+        try (FileOutputStream fos = new FileOutputStream(file)) {
+            fos.write(multipartFile.getBytes());
+        }
+
+        String filename = System.currentTimeMillis() + "_" + multipartFile.getOriginalFilename();
+        amazonS3.putObject(new PutObjectRequest(bucketName, filename, file));
+
+        file.delete();
+
+
+        docuemnt.setImage(filename);
+        docuemnt.setStatus("0");
         docuemnt.setCreateDate(LocalDateTime.now());
 
         documentRepository.save(docuemnt);

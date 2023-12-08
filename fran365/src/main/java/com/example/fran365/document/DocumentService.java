@@ -11,6 +11,8 @@ public interface DocumentService {
 
     void create(Document document, MultipartFile multipartFile) throws IOException;
 
+    void createtemp(Document document, MultipartFile multipartFile) throws IOException;
+
   //  Page<Document> getList(int page);
 
     List<Document> readList();
