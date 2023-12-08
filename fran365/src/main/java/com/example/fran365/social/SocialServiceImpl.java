@@ -1,17 +1,17 @@
 package com.example.fran365.social;
 
 import com.amazonaws.services.s3.AmazonS3;
-import com.example.fran365.board.Board;
-import com.example.fran365.cart.CartController;
 import com.example.fran365.member.MemberRepository;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -54,6 +54,7 @@ public class SocialServiceImpl implements SocialService {
 
         return socialRepository.findByUsername(username);
     }
+
 
     @Override
     public List<Social> readDetail() {
