@@ -28,6 +28,8 @@ public class Document {
 
     private String deadline;
 
+    private  String receiver;
+
     private LocalDateTime createDate;
 
                                             //private String position;
