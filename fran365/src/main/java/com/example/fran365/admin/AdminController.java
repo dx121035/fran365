@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.fran365.board.BoardService;
 import com.example.fran365.event.EventService;
 import com.example.fran365.member.MemberService;
 import com.example.fran365.position.PositionService;
@@ -33,6 +34,9 @@ public class AdminController {
 	
 	@Autowired
 	private PositionService positionService;
+	
+	@Autowired
+	private BoardService boardService;
 	
 	@GetMapping("/main")
 	public String adminMain(Model model) {
@@ -147,9 +151,22 @@ public class AdminController {
 	}
 	
 	@GetMapping("/noticeCreate")
-	public String noticeCreate() {
+	public String noticeCreate(Model model) {
+		
+		model.addAttribute("awspath", awspath);
+		model.addAttribute("user", memberService.readDetailUsername());
 		
 		return "admin/noticeCreate";
+	}
+	
+	@GetMapping("/noticeUpdate")
+	public String noticeUpdate(Model model, Integer id) {
+		
+		model.addAttribute("awspath", awspath);
+		model.addAttribute("user", memberService.readDetailUsername());
+		model.addAttribute("notice", boardService.readDetail(id));
+		
+		return "admin/noticeUpdate";
 	}
 
 }

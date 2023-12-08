@@ -44,6 +44,10 @@ public class BoardController {
 
         // Redirect to the appropriate URL based on the category
         if ("공지".equals(category)) {
+        	if (board.getWriter().equals("관리자")) {
+            	
+            	return "redirect:/admin/noticeReadList";
+        	}
             return "redirect:/board/notice";
         } else if ("FAQ".equals(category)) {
             return "redirect:/board/FAQ";
@@ -134,6 +138,10 @@ public class BoardController {
 
         boardService.update(board, category);
         if ("공지".equals(category)) {
+        	if (board.getWriter().equals("관리자")) {
+            	
+            	return "redirect:/admin/noticeReadDetail?id=" + board.getId();
+        	}
             return "redirect:/board/notice";
         } else if ("FAQ".equals(category)) {
             return "redirect:/board/FAQ";
@@ -143,11 +151,15 @@ public class BoardController {
     }
 
     @GetMapping("/delete")
-    public String delete(Model model,@RequestParam Integer id,@RequestParam String category) {
+    public String delete(Model model,@RequestParam Integer id,@RequestParam String category, String writer) {
         boardService.delete(id);
         model.addAttribute("awspath", awspath);
         model.addAttribute("member",memberService.readDetailUsername());
         if ("공지".equals(category)) {
+        	if (writer.equals("관리자")) {
+            	
+            	return "redirect:/admin/noticeReadList";
+        	}
             return "redirect:/board/notice";
         } else if ("FAQ".equals(category)) {
             return "redirect:/board/FAQ";
