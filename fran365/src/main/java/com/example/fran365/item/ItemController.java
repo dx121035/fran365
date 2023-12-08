@@ -26,7 +26,7 @@ public class ItemController {
         Item item = new Item();
         item.setProductId(id);
         item.setName(name);
-        item.setName(image);
+        item.setImage(image);
         item.setPrice(price);
         item.setQuantity(quantity);
         item.setCreateDate(LocalDateTime.now());

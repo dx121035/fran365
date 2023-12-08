@@ -65,7 +65,7 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public List<Product> readList() {
 
-        return productRepository.findAll();
+       return productRepository.findAll(Sort.by(Sort.Direction.DESC, "createDate"));
     }
 
 
@@ -108,7 +108,11 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public void delete(Integer id) {
+
+        System.out.println("서비스 :" + id);
+        
         Optional<Product> op = productRepository.findById(id);
+        
 
         productRepository.delete(op.get());
 
