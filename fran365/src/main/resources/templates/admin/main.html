@@ -294,7 +294,7 @@
                 <div class="d-flex align-items-center"><span class="fs-4 lh-1 uil uil-refresh text-danger-500"></span>
                   <div class="ms-2">
                     <div class="d-flex align-items-end">
-                      <span class="fs-1 fw-semi-bold text-900">미처리 문의</span><h2 class="mb-0 ms-2">3</h2><span class="fs-1 fw-semi-bold text-900">건</span>
+                      <span class="fs-1 fw-semi-bold text-900">미처리 문의</span><h2 class="mb-0 ms-2"><a th:text="${#lists.size(QuestionNotComplete)}"></a></h2><span class="fs-1 fw-semi-bold text-900">건</span>
                     </div>
                   </div>
                 </div>

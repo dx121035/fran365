@@ -32,4 +32,5 @@ public interface AdminService {
 	
 	List<Board> faqReadList();
 	
+	List<Board> getQuestionNotComplete();
 }

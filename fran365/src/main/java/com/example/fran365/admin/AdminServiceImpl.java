@@ -137,4 +137,9 @@ public class AdminServiceImpl implements AdminService {
 		return boardRepository.findByCategory("FAQ");
 	}
 	
+	@Override
+	public List<Board> getQuestionNotComplete() {
+        return boardRepository.findByStatus("답변대기");
+    }
+	
 }

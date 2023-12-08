@@ -22,4 +22,6 @@ public interface BoardRepository extends JpaRepository<Board, Integer> {
     List<Board> findByCategoryIn(List<String> categories, Sort sort );
 
     List<Board> findByCategory(String category, Sort sort);
+    
+    List<Board> findByStatus(String status);
 }

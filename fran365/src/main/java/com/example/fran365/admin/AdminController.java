@@ -46,6 +46,7 @@ public class AdminController {
 		model.addAttribute("members", adminService.memberReadList());
 		model.addAttribute("events", eventService.readList());
 		model.addAttribute("deliveyNotComplete", adminService.getDeliveyNotComplete());
+		model.addAttribute("QuestionNotComplete", adminService.getQuestionNotComplete());
 		model.addAttribute("date", LocalDate.now());
 		
 		return "admin/main";
