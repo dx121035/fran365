@@ -48,6 +48,9 @@ dependencies {
 	
 	// s3
 	implementation 'com.amazonaws:aws-java-sdk-s3:1.12.529'
+
+	implementation 'org.jsoup:jsoup:1.14.3'
+
 }
 
 tasks.named('bootBuildImage') {
