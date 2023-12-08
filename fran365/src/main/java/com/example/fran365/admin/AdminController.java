@@ -217,5 +217,15 @@ public class AdminController {
 		
 		return "admin/faqReadDetail";
 	}
+	
+	@GetMapping("/faqUpdate")
+	public String faqUpdate(Model model, Integer id) {
+		
+		model.addAttribute("awspath", awspath);
+		model.addAttribute("user", memberService.readDetailUsername());
+		model.addAttribute("faq", boardService.readDetail(id));
+		
+		return "admin/faqUpdate";
+	}
 
 }

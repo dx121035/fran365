@@ -147,6 +147,10 @@ public class BoardController {
         	}
             return "redirect:/board/notice";
         } else if ("FAQ".equals(category)) {
+        	if (board.getWriter().equals("관리자")) {
+            	
+            	return "redirect:/admin/faqReadDetail?id=" + board.getId();
+        	}
             return "redirect:/board/FAQ";
         } else {
             return "redirect:/board/list";
