@@ -145,5 +145,11 @@ public class AdminController {
 		
 		return "admin/noticeReadDetail";
 	}
+	
+	@GetMapping("/noticeCreate")
+	public String noticeCreate() {
+		
+		return "admin/noticeCreate";
+	}
 
 }
