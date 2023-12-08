@@ -1,5 +1,6 @@
 package com.example.fran365.admin;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +31,7 @@ public class AdminServiceImpl implements AdminService {
 	private StatusRepository statusRepository;
 	
 	@Autowired
-	private BoardRepository boardRepsitory;
+	private BoardRepository boardRepository;
 
 	@Override
 	public List<Member> memberReadList() {
@@ -110,16 +111,30 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<Board> noticeReadList() {
 
-		return boardRepsitory.findByCategory("공지", Sort.by(Sort.Direction.DESC, "id"));
+		return boardRepository.findByCategory("공지", Sort.by(Sort.Direction.DESC, "id"));
 	}
 
 	@Override
-	public Board noticeReadDetail(Integer id) {
+	public Board boardReadDetail(Integer id) {
 
-		Optional<Board> ob = boardRepsitory.findById(id);
+		Optional<Board> ob = boardRepository.findById(id);
 		Board board = ob.get();
 		
 		return board;
+	}
+
+	@Override
+	public List<Board> questionReadList() {
+		
+	    List<String> categories = Arrays.asList("상품", "배송", "재고");
+	    
+	    return boardRepository.findByCategoryIn(categories, Sort.by(Sort.Direction.DESC, "id"));
+	}
+
+	@Override
+	public List<Board> faqReadList() {
+
+		return boardRepository.findByCategory("FAQ");
 	}
 	
 }

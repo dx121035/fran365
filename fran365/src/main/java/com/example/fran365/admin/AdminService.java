@@ -26,6 +26,10 @@ public interface AdminService {
 	
 	List<Board> noticeReadList();
 	
-	Board noticeReadDetail(Integer id);
+	Board boardReadDetail(Integer id);
+	
+	List<Board> questionReadList();
+	
+	List<Board> faqReadList();
 	
 }

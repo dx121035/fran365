@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.List;
 
 public interface BoardService {
-    void create (Board board, String category) throws IOException;
+    void create (Board board, String category, String username) throws IOException;
     Board detail(Integer id);
 
     Board readDetail(Integer id);

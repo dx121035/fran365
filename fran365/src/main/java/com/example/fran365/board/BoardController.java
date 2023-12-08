@@ -39,10 +39,9 @@ public class BoardController {
     }
 
     @PostMapping("/create")
-    public String create(Board board, @RequestParam String category) throws IOException {
-        boardService.create(board, category);
+    public String create(Board board, @RequestParam String category, String username) throws IOException {
+        boardService.create(board, category, username);
 
-        // Redirect to the appropriate URL based on the category
         if ("공지".equals(category)) {
         	if (board.getWriter().equals("관리자")) {
             	
@@ -50,6 +49,10 @@ public class BoardController {
         	}
             return "redirect:/board/notice";
         } else if ("FAQ".equals(category)) {
+        	if (board.getWriter().equals("관리자")) {
+            	
+            	return "redirect:/admin/faqReadList";
+        	}
             return "redirect:/board/FAQ";
         } else {
             return "redirect:/board/list";
@@ -151,19 +154,27 @@ public class BoardController {
     }
 
     @GetMapping("/delete")
-    public String delete(Model model,@RequestParam Integer id,@RequestParam String category, String writer) {
+    public String delete(Model model,@RequestParam Integer id,@RequestParam String category, String role) {
         boardService.delete(id);
         model.addAttribute("awspath", awspath);
         model.addAttribute("member",memberService.readDetailUsername());
         if ("공지".equals(category)) {
-        	if (writer.equals("관리자")) {
+        	if (role.equals("ROLE_ADMIN")) {
             	
             	return "redirect:/admin/noticeReadList";
         	}
             return "redirect:/board/notice";
         } else if ("FAQ".equals(category)) {
+        	if (role.equals("ROLE_ADMIN")) {
+        		
+        		return "redirect:/admin/faqReadList";
+        	}
             return "redirect:/board/FAQ";
         } else {
+        	if (role.equals("ROLE_ADMIN")) {
+        		
+        		return "redirect:/admin/questionReadList";
+        	}
             return "redirect:/board/list";
         }
     }

@@ -37,7 +37,7 @@ mail: inew3w@gmail.com-->
                         <a th:href="@{|/board/update?id=${board.id}|}"
                            class="border border-300 rounded-2 p-2 mb-2 text-center bg-outline-danger dark__bg-1000 shadow-sm ml-2"
                            style="text-decoration: none;">수정</a>
-                        <a th:href="@{|/board/delete?id=${board.id}&category=${board.category}|}"
+                        <a th:href="@{|/board/delete?id=${board.id}&category=${board.category}&role=${member.role}|}"
                            class="border border-300 rounded-2 p-2 mb-2 text-center bg-outline-danger dark__bg-1000 shadow-sm ml-2"
                            style="text-decoration: none;">삭제</a>
                     </div>

@@ -145,7 +145,7 @@ public class AdminController {
 		
 		model.addAttribute("awspath", awspath);
 		model.addAttribute("user", memberService.readDetailUsername());
-		model.addAttribute("notice", adminService.noticeReadDetail(id));
+		model.addAttribute("notice", adminService.boardReadDetail(id));
 		
 		return "admin/noticeReadDetail";
 	}
@@ -167,6 +167,55 @@ public class AdminController {
 		model.addAttribute("notice", boardService.readDetail(id));
 		
 		return "admin/noticeUpdate";
+	}
+	
+	@GetMapping("/questionReadList")
+	public String questionReadList(Model model) {
+		
+		model.addAttribute("awspath", awspath);
+		model.addAttribute("user", memberService.readDetailUsername());
+		model.addAttribute("questions", adminService.questionReadList());
+		
+		return "admin/questionReadList";
+	}
+	
+	@GetMapping("/questionReadDetail")
+	public String questionReadDetail(Model model, Integer id) {
+		
+		model.addAttribute("awspath", awspath);
+		model.addAttribute("user", memberService.readDetailUsername());
+		model.addAttribute("question", adminService.boardReadDetail(id));
+		
+		return "admin/questionReadDetail";
+	}
+	
+	@GetMapping("/faqReadList")
+	public String faqReadList(Model model) {
+		
+		model.addAttribute("awspath", awspath);
+		model.addAttribute("user", memberService.readDetailUsername());
+		model.addAttribute("faqs", adminService.faqReadList());
+		
+		return "admin/faqReadList";
+	}
+	
+	@GetMapping("/faqCreate")
+	public String faqCreate(Model model) {
+		
+		model.addAttribute("awspath", awspath);
+		model.addAttribute("user", memberService.readDetailUsername());
+		
+		return "admin/faqCreate";
+	}
+	
+	@GetMapping("/faqReadDetail")
+	public String faqReadDetail(Model model, Integer id) {
+		
+		model.addAttribute("awspath", awspath);
+		model.addAttribute("user", memberService.readDetailUsername());
+		model.addAttribute("faq", adminService.boardReadDetail(id));
+		
+		return "admin/faqReadDetail";
 	}
 
 }

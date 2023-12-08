@@ -35,6 +35,10 @@ public class ReplyController {
     @PostMapping("/create")
     public String create(@RequestParam Integer id,  @RequestParam String content, @RequestParam String writer) {
         replyService.create(id,content,writer);
+        if (writer.equals("관리자")) {
+        	
+        	return "redirect:/admin/questionReadDetail?id=" + id;
+        }
         return "redirect:/board/detail?id=" + id;
     }
 
