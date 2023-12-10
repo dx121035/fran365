@@ -1,0 +1,20 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+</head>
+<body>
+
+
+
+
+    deadline : <a th:text="${docu.deadline}"></a><br>
+    category : <a th:text="${docu.category}"></a><br>
+
+
+    <a th:href="@{|/document/delete?id=${docu.id}|}">삭제</a>
+    <a th:href="@{|/document/updateTemp?id=${docu.id}|}">수정</a>
+
+
+</body>
+</html>
