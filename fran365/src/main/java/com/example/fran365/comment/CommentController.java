@@ -20,6 +20,6 @@ public class CommentController {
 
         commentService.create(id, content);
 
-        return "redirect:/social/social;?id=" + id;
+        return "redirect:/social/social?id=" + id;
     }
 }
