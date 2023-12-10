@@ -58,7 +58,7 @@ public class ResourceController {
     public String create(Model model) {
 
         model.addAttribute("awspath", awspath);
-        model.addAttribute("member",memberService.readDetailUsername());
+        model.addAttribute("member", memberService.readDetailUsername());
         model.addAttribute("resourceForm", new ResourceForm());
         return "resource/create";
     }
@@ -71,8 +71,6 @@ public class ResourceController {
                          Model model) throws IOException {
 
 
-
-
         int requestedAmount = resourceForm.getAmount();
         Brand brand = brandRepository.findByUsername(memberService.findUsername());
         List<Stock> stockList = brand.getStockList();
@@ -81,8 +79,8 @@ public class ResourceController {
         Stock foundStock = null;
 
         //현재 로그인한 브랜드의 해당 제품 재고량 가져오기
-        for(Stock stock : stockList){
-            if(stock.getName().equals(resource.getCategory())){
+        for (Stock stock : stockList) {
+            if (stock.getName().equals(resource.getCategory())) {
                 totalStockQuantity += stock.getQuantity();
 
                 // 변경할 재고
@@ -117,13 +115,13 @@ public class ResourceController {
 //        System.out.println(customLocalDateTimeFormat);
 
 
-       String username = memberService.findUsername();
+        String username = memberService.findUsername();
 
         Brand brand = brandRepository.findByUsername(username);
 
         model.addAttribute("awspath", awspath);
-        model.addAttribute("member",memberService.readDetailUsername());
-        model.addAttribute("brand",brand);
+        model.addAttribute("member", memberService.readDetailUsername());
+        model.addAttribute("brand", brand);
         model.addAttribute("sales", salesRepository.findByBrand_IdOrderByIdDesc(brand.getId()));
         model.addAttribute("member", memberService.readDetailUsername());
 
@@ -138,10 +136,10 @@ public class ResourceController {
     public String readDetail(@RequestParam Integer id, Model model) {
 
         model.addAttribute("awspath", awspath);
-        model.addAttribute("member",memberService.readDetailUsername());
+        model.addAttribute("member", memberService.readDetailUsername());
         model.addAttribute("resource", resourceService.readDetail(id));
 
-       return "resource/readDetail";
+        return "resource/readDetail";
     }
 
     @GetMapping("/update")
@@ -150,14 +148,14 @@ public class ResourceController {
         Resource resource = resourceService.readDetail(id);
 
         model.addAttribute("awspath", awspath);
-        model.addAttribute("member",memberService.readDetailUsername());
+        model.addAttribute("member", memberService.readDetailUsername());
         model.addAttribute("resource", resource);
 
         return "resource/update";
     }
 
     @PostMapping("/update")
-    public String update(Resource resource,  @RequestParam("filename") MultipartFile multipartFile) throws IOException {
+    public String update(Resource resource, @RequestParam("filename") MultipartFile multipartFile) throws IOException {
 
         Integer id = resource.getId();
 
@@ -167,15 +165,30 @@ public class ResourceController {
     }
 
     @GetMapping("/delete")
-    public String delete(@RequestParam Integer id) {
+    public String delete(@RequestParam Integer id, int amount, String stockName) {
 
         resourceService.delete(id);
+
+        Brand brand = brandRepository.findByUsername(memberService.findUsername());
+        List<Stock> stockList = brand.getStockList();
+
+        Stock foundStock = null;
+
+        for (Stock stock : stockList) {
+            if (stock.getName().equals(stockName)) {
+
+                foundStock = stock;
+                int updateQuantity = stock.getQuantity() + amount;
+                foundStock.setQuantity(updateQuantity);
+            }
+        }
+        stockService.resourceUpdate(foundStock);
 
         return "redirect:/resource/readList";
     }
 
     @GetMapping("/purchase")
-    public String purchase(@RequestParam Integer id, @RequestParam int amount, @RequestParam String category){
+    public String purchase(@RequestParam Integer id, @RequestParam int amount, @RequestParam String category) {
 
         resourceService.updateProductStock(id, amount);
         stockService.trade(id, amount, category);

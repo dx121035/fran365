@@ -128,7 +128,10 @@ public class ResourceServiceImpl implements ResourceService {
 
     @Override
     public void delete(Integer id) {
+
         resourceRepository.deleteById(id);
+
+
     }
 
     @Override
