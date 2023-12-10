@@ -26,5 +26,5 @@ public class Comment {
     private Social social;
 
     @OneToMany(mappedBy = "comment", cascade = CascadeType.REMOVE)
-    private List<Comment2> comment2;
+    private List<Comment2> comment2List;
 }

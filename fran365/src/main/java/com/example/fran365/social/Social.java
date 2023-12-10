@@ -7,6 +7,7 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -29,6 +30,6 @@ public class Social {
 
     //추천  조아요
     @ManyToMany
-    List<Member> voter;
+    Set<Member> liker;
 
 }

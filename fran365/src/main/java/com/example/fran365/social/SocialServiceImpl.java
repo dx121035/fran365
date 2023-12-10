@@ -1,6 +1,7 @@
 package com.example.fran365.social;
 
 import com.amazonaws.services.s3.AmazonS3;
+import com.example.fran365.member.Member;
 import com.example.fran365.member.MemberRepository;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class SocialServiceImpl implements SocialService {
@@ -81,6 +83,7 @@ public class SocialServiceImpl implements SocialService {
         socialRepository.save(social);
     }
 
+
     @Override
     public void update(Integer id, String content, String status) {
 
@@ -95,6 +98,15 @@ public class SocialServiceImpl implements SocialService {
 
         socialRepository.save(social);
 
+
+
+    }
+
+    @Override
+    public void like(Social social, Member member) {
+        Set<Member> a = social.getLiker();
+        a.add(member);
+        socialRepository.save(social);
 
 
     }
