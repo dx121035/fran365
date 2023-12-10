@@ -10,6 +10,10 @@ public interface DocumentRepository extends JpaRepository<Document, Integer> {
 
     Page<Document> findAll(Pageable pageable);
 
+    List<Document> findByStatus(Integer status);
+
+    List<Document> findByReceiver(String receiver);
+
     //Document findByUsername(String username);
 
 }

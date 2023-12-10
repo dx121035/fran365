@@ -7,15 +7,11 @@ import com.example.fran365.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.ui.Model;
 import java.io.IOException;
-import java.security.Principal;
-import java.util.Map;
+
 
 
 @Controller
@@ -36,16 +32,17 @@ public class DocumentController {
         return "document/create";
     }
 
+
     @PostMapping("/create")
     public String create(Document document,
+                         @RequestParam("receiver") String receiver,
                          @RequestParam("filename") MultipartFile file
     ) throws IOException {
 
-        documentService.create(document, file);
+        documentService.create(document, file,receiver);
 
         return "redirect:/";
     }
-
 
 
     @GetMapping("/createtemp")
@@ -81,6 +78,9 @@ public class DocumentController {
 //        return "document/readList";
 //    }
 
+
+
+
     @GetMapping("/readList")
     public String readList(Model model) {
         model.addAttribute("docus", documentService.readList());
@@ -90,14 +90,34 @@ public class DocumentController {
     }
 
 
+    @GetMapping("/readListTemp")
+    public String readListTemp(Model model) {
+        model.addAttribute("docus", documentService.readListTemp());
+
+
+        return "document/readListTemp";
+    }
+
+
     @GetMapping("/readDetail")
-    public String detail(Model model,@RequestParam Integer id) {
+    public String readDetail(Model model,@RequestParam Integer id) {
 
         Document document = documentService.readDetail(id);
 
         model.addAttribute("docu", documentService.readDetail(id));
 
         return "document/readDetail";
+    }
+
+
+    @GetMapping("/readDetailTemp")
+    public String readDetailTemp(Model model,@RequestParam Integer id) {
+
+        Document document = documentService.readDetail(id);
+
+        model.addAttribute("docu", documentService.readDetail(id));
+
+        return "document/readDetailTemp";
     }
     @GetMapping("/update")
     public String update(Model model,@RequestParam Integer id) {
@@ -113,6 +133,21 @@ public class DocumentController {
         return "redirect:/document/readList";
     }
 
+
+    @GetMapping("/updateTemp")
+    public String updateTemp(Model model,@RequestParam Integer id) {
+        Document document = documentService.readDetail(id);
+
+        model.addAttribute("docu", documentService.readDetail(id));
+        return "document/updateTemp";
+    }
+    @PostMapping("/updateTemp")
+    public String updateTemp(Document document) {
+
+        documentService.update(document);
+        return "redirect:/document/readList";
+    }
+
     @GetMapping("/delete")
     public String delete(@RequestParam Integer id) {
         documentService.delete(id);
@@ -120,9 +155,29 @@ public class DocumentController {
     }
 
 
+    // 결재 버튼 처리
+    @PostMapping("/approval/{documentId}")
+    public String approval(@PathVariable("documentId") Integer documentId) {
+        documentService.updateDocumentStatus(documentId, 1);
+        return "redirect:/document/readList";
+    }
+
+    // 반려 버튼 처리
+    @PostMapping("/reject/{documentId}")
+    public String reject(@PathVariable("documentId") Integer documentId) {
+        documentService.updateDocumentStatus(documentId, 100);
+        return "redirect:/document/readList";
+    }
+
+
+
+
 
 
     }
+
+
+
 
 
 

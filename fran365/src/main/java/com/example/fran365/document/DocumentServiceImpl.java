@@ -34,7 +34,7 @@ public class DocumentServiceImpl implements DocumentService{
 
 
     @Override
-    public void create(Document docuemnt, MultipartFile multipartFile) throws IOException {
+    public void create(Document docuemnt, MultipartFile multipartFile, String receiver) throws IOException {
 
         File file = new File(multipartFile.getOriginalFilename());
 
@@ -49,8 +49,9 @@ public class DocumentServiceImpl implements DocumentService{
 
 
         docuemnt.setImage(filename);
-        docuemnt.setStatus("1");
+        docuemnt.setStatus(1);
         docuemnt.setCreateDate(LocalDateTime.now());
+        docuemnt.setReceiver(receiver);
 
         documentRepository.save(docuemnt);
 
@@ -73,7 +74,7 @@ public class DocumentServiceImpl implements DocumentService{
 
 
         docuemnt.setImage(filename);
-        docuemnt.setStatus("0");
+        docuemnt.setStatus(0);
         docuemnt.setCreateDate(LocalDateTime.now());
 
         documentRepository.save(docuemnt);
@@ -99,13 +100,37 @@ public class DocumentServiceImpl implements DocumentService{
 
 
     @Override
+    public List<Document> readListTemp() {
+        return documentRepository.findByStatus(0);
+    }
+
+
+
+
+
+    @Override
     public Document readDetail(Integer id) {
-        Optional< Document > document =  documentRepository.findById(id);
+        Optional<Document> document =  documentRepository.findById(id);
         return document.get();
     }
 
     @Override
+    public Document readDetailTemp(Integer id) {
+        Optional<Document> document =  documentRepository.findById(id);
+        return document.get();
+    }
+
+
+
+    @Override
     public void update(Document document) {
+        document.setCreateDate(LocalDateTime.now());
+        documentRepository.save(document);
+    }
+
+
+    @Override
+    public void updateTemp(Document document) {
         document.setCreateDate(LocalDateTime.now());
         documentRepository.save(document);
     }
@@ -115,4 +140,20 @@ public class DocumentServiceImpl implements DocumentService{
         Optional<Document> document =  documentRepository.findById(id);
         documentRepository.delete(document.get());
     }
+
+
+
+    public void updateDocumentStatus(Integer documentId, int increment) {
+        Document document = documentRepository.findById(documentId)
+                .orElseThrow(() -> new RuntimeException("Document not found with id: " + documentId));
+
+        // status를 주어진 값만큼 증가시킴
+        document.setStatus(document.getStatus() + increment);
+
+        // 저장
+        documentRepository.save(document);
+    }
+
+
+
 }
