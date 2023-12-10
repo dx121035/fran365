@@ -64,12 +64,15 @@
     <div class="container-small" style="margin-top: 70px">
         <div class="row g-3 mb-6">
             <h1 >재고 판매 등록</h1> <br><br><br>
-            <form action="/resource/create" method="post" id="resourceForm" enctype="multipart/form-data">
+            <form th:action="@{/resource/create}"  th:object="${resourceForm}" method="post" enctype="multipart/form-data">
+
                 <div class="row">
                     <div class="col-xl-9">
                         <!-- 중첩된 form 제거 -->
                         <div class="row g-3 mb-6">
+
                             <div class="col-sm-6 col-md-8">
+
                                 <div class="form-floating">
                                     <input class="form-control" id="floatingInputGrid" type="text" name="title"/>
                                     <label for="floatingInputGrid">제목</label>
@@ -90,10 +93,13 @@
                             </div>
                             <div class="col-sm-6 col-md-4">
                                 <div class="form-floating">
-                                    <input class="form-control" type="text" name="amount"/>
+                                    <input class="form-control" type="text" id="amount" name="amount" th:field="*{amount}"/>
                                     <label for="floatingInputGrid">수량</label>
+                                    <div th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"></div>
                                 </div>
+
                             </div>
+
                             <div class="w-100"></div>
                             <div class="col-sm-6 col-md-4">
                                 <div class="form-floating">
@@ -168,8 +174,9 @@
                             <div class="col-12 gy-6">
                                 <div class="row g-3 justify-content-end">
                                     <div class="col-auto">
+
                                         <!-- form 속성 추가 -->
-                                        <button type="submit" class="btn btn-primary px-5 px-sm-15">재고 공유</button>
+                                        <input type="submit" class="btn btn-primary px-5 px-sm-15" value="재고 공유"></input>
                                     </div>
                                 </div>
                             </div>
