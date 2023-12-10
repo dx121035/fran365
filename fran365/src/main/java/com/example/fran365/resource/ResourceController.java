@@ -7,7 +7,10 @@ import com.example.fran365.member.MemberService;
 import com.example.fran365.sales.Sales;
 import com.example.fran365.sales.SalesRepository;
 import com.example.fran365.sales.SalesService;
+import com.example.fran365.stock.Stock;
+import com.example.fran365.stock.StockRepository;
 import com.example.fran365.stock.StockService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -15,6 +18,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -39,6 +43,9 @@ public class ResourceController {
     private StockService stockService;
 
     @Autowired
+    private StockRepository stockRepository;
+
+    @Autowired
     private MemberService memberService;
 
     @Autowired
@@ -52,15 +59,52 @@ public class ResourceController {
 
         model.addAttribute("awspath", awspath);
         model.addAttribute("member",memberService.readDetailUsername());
-
+        model.addAttribute("resourceForm", new ResourceForm());
         return "resource/create";
     }
 
     @PostMapping("/create")
-    public String create(Resource resource,  @RequestParam("filename") MultipartFile file) throws IOException {
+    public String create(@Valid @ModelAttribute ResourceForm resourceForm,
+                         Resource resource,
+                         @RequestParam("filename") MultipartFile file,
+                         BindingResult bindingResult,
+                         Model model) throws IOException {
 
 
 
+
+        int requestedAmount = resourceForm.getAmount();
+        Brand brand = brandRepository.findByUsername(memberService.findUsername());
+        List<Stock> stockList = brand.getStockList();
+
+        int totalStockQuantity = 0;
+        Stock foundStock = null;
+
+        //현재 로그인한 브랜드의 해당 제품 재고량 가져오기
+        for(Stock stock : stockList){
+            if(stock.getName().equals(resource.getCategory())){
+                totalStockQuantity += stock.getQuantity();
+
+                // 변경할 재고
+                foundStock = stock;
+
+                System.out.println(totalStockQuantity);
+            }
+        }
+
+        //게시글을 작성한 재고보다 현재 재고량이 적으면 에러 출력
+        if (requestedAmount > totalStockQuantity) {
+            bindingResult.rejectValue("amount", "amount.mismatch", "입력하신 양보다 현재 재고가 부족합니다.");
+
+            return "resource/create";
+        }
+
+        // 재고 공유 글을 작성하였으므로 작성한 재고만큼 브랜드의 재고 감소
+        int updateQuantity = totalStockQuantity - requestedAmount;
+        foundStock.setQuantity(updateQuantity);
+        stockService.resourceUpdate(foundStock);
+
+        //재고 공유 게시글 작성
         resourceService.create(resource, file);
 
         return "redirect:/resource/readList";

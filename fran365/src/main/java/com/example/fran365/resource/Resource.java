@@ -15,6 +15,7 @@ public class Resource {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(unique = true)
     private String title;
 
     private String content;
@@ -27,7 +28,7 @@ public class Resource {
 
     private String category;
 
-    private int amount;
+    private Integer amount;
 
     private int price;
 

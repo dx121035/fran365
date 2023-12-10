@@ -2,6 +2,7 @@
 package com.example.fran365.resource;
 
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.example.fran365.brand.Brand;
 import com.example.fran365.brand.BrandRepository;
 import com.example.fran365.member.Member;
 import com.example.fran365.member.MemberService;
