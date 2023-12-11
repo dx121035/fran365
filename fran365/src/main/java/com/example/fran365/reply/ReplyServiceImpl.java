@@ -65,5 +65,11 @@ public class ReplyServiceImpl implements ReplyService {
         return reply.get();
     }
 
+  /*  @Override
+    public void delete(Integer id) {
+        Optional<Reply> reply = replyRepository.findById(id);
+        replyRepository.delete(reply.get());
+    }*/
+
 
 }

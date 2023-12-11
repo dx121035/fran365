@@ -7,6 +7,7 @@ package com.example.fran365.board;
 
 import com.example.fran365.member.Member;
 import com.example.fran365.member.MemberService;
+import com.example.fran365.reply.ReplyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -27,6 +28,7 @@ import java.util.List;
 public class BoardController {
 
     @Autowired private BoardService boardService;
+    @Autowired private ReplyService replyService;
     @Autowired private MemberService memberService;
     @Value("${aws.s3.awspath}")
     private String awspath;
@@ -91,6 +93,7 @@ public class BoardController {
 
         Board board = boardService.detail(id);
         Member member = memberService.readDetailUsername();
+        //replyService.delete(id);
         boardService.hit(board,member);
 
         model.addAttribute("board", boardService.detail(id));
