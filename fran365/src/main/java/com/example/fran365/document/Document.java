@@ -16,8 +16,6 @@ public class Document {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String depart;
-
     private String category;
 
     // 0:임시저장  1:기본값 (결재시 1씩 증가),(반려시 100)

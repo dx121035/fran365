@@ -3,6 +3,7 @@ package com.example.fran365.document;
 
 
 
+import com.example.fran365.member.Member;
 import com.example.fran365.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -25,6 +26,8 @@ public class DocumentController {
     @Autowired
     private MemberService memberService;
 
+
+
     @Value("${aws.s3.awspath}")
     private String awspath;
 
@@ -33,6 +36,7 @@ public class DocumentController {
 
         model.addAttribute("awspath", awspath);
         model.addAttribute("member",memberService.readDetailUsername());
+
 
 
 

@@ -40,6 +40,8 @@ public class Member implements UserDetails {
 
     private Integer position;
 
+    private  String depart;
+
     private LocalDateTime createDate;
 
     @Override
