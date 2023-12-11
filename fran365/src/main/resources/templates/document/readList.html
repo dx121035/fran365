@@ -4,7 +4,7 @@
 <div layout:fragment="content">
 
     <!-- 카테고리별 글 개수 표시 -->
-    <div class="card flex-1 h-100 phoenix-offcanvas-container" style="padding:20px;">
+    <div class="card flex-1 h-100 phoenix-offcanvas-container" style="padding:40px;">
         <br>
 
         <!-- 카테고리별 글 개수 표시 -->
@@ -13,15 +13,15 @@
                 <div class="col-12 col-md-auto">
                     <div class="d-flex align-items-center"><span class="fa-stack" style="min-height: 46px;min-width: 46px;"><span class="fa-solid fa-square fa-stack-2x text-success-300" data-fa-transform="down-4 rotate--10 left-4"></span><span class="fa-solid fa-circle fa-stack-2x stack-circle text-success-100" data-fa-transform="up-4 right-3 grow-2"></span><span class="fa-stack-1x fa-solid fa-star text-success " data-fa-transform="shrink-2 up-8 right-6"></span></span>
                         <div class="ms-3">
-                            <h4 class="mb-0">${docu1} 미결재</h4>
-                            <p class="text-800 fs--1 mb-0">미결제 서류가 있습니다..</p>
+                            <h4 class="mb-0">[[${count1}]] 미결재</h4>
+                            <p class="text-800 fs--1 mb-0">미결제 서류가 있습니다.</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-12 col-md-auto">
                     <div class="d-flex align-items-center"><span class="fa-stack" style="min-height: 46px;min-width: 46px;"><span class="fa-solid fa-square fa-stack-2x text-warning-300" data-fa-transform="down-4 rotate--10 left-4"></span><span class="fa-solid fa-circle fa-stack-2x stack-circle text-warning-100" data-fa-transform="up-4 right-3 grow-2"></span><span class="fa-stack-1x fa-solid fa-pause text-warning " data-fa-transform="shrink-2 up-8 right-6"></span></span>
                         <div class="ms-3">
-                            <h4 class="mb-0">${docu2} 결재중</h4>
+                            <h4 class="mb-0">[[${count2}]]  결재중</h4>
                             <p class="text-800 fs--1 mb-0">결재 중인 서류가 있습니다.</p>
                         </div>
                     </div>
@@ -29,7 +29,7 @@
                 <div class="col-12 col-md-auto">
                     <div class="d-flex align-items-center"><span class="fa-stack" style="min-height: 46px;min-width: 46px;"><span class="fa-solid fa-square fa-stack-2x text-secondary-300" data-fa-transform="down-4 rotate--10 left-4"></span><span class="fa-solid fa-circle fa-stack-2x stack-circle text-primary-100" data-fa-transform="up-4 right-3 grow-2"></span><span class="fa-stack-1x fa-solid fa-adobe text-secondary " data-fa-transform="shrink-2 up-8 right-6"></span></span>
                         <div class="ms-3">
-                            <h4 class="mb-0">${docu3} 결제완료</h4>
+                            <h4 class="mb-0">[[${count3}]]결제완료</h4>
                             <p class="text-800 fs--1 mb-0">결재 완료되었습니다</p>
                         </div>
                     </div>
@@ -37,7 +37,7 @@
                 <div class="col-12 col-md-auto">
                     <div class="d-flex align-items-center"><span class="fa-stack" style="min-height: 46px;min-width: 46px;"><span class="fa-solid fa-square fa-stack-2x text-danger-300" data-fa-transform="down-4 rotate--10 left-4"></span><span class="fa-solid fa-circle fa-stack-2x stack-circle text-danger-100" data-fa-transform="up-4 right-3 grow-2"></span><span class="fa-stack-1x fa-solid fa-dolly text-danger " data-fa-transform="shrink-2 up-8 right-6"></span></span>
                         <div class="ms-3">
-                            <h4 class="mb-0">${docu4} 결재 반려</h4>
+                            <h4 class="mb-0">[[${count4}]]결재 반려</h4>
                             <p class="text-800 fs--1 mb-0">결재가 반려 되었습니다.</p>
                         </div>
                     </div>
@@ -45,7 +45,7 @@
                 <div class="col-12 col-md-auto">
                     <div class="d-flex align-items-center"><span class="fa-stack" style="min-height: 46px;min-width: 46px;"><span class="fa-solid fa-square fa-stack-2x text-info-300" data-fa-transform="down-4 rotate--10 left-4"></span><span class="fa-solid fa-circle fa-stack-2x stack-circle text-info-100" data-fa-transform="up-4 right-3 grow-2"></span><span class="fa-stack-1x fa-solid fa-comments text-info " data-fa-transform="shrink-2 up-8 right-6"></span></span>
                         <div class="ms-3">
-                            <h4 class="mb-0">${docu5} 임시저장</h4>
+                            <h4 class="mb-0">[[${count0}]]  임시저장</h4>
                             <p class="text-800 fs--1 mb-0">임시저장된 서류가 있습니다</p>
                         </div>
                     </div>
@@ -53,12 +53,11 @@
             </div>
         </div>
         <br>
-        <div id="tableExample3"
-             data-list='{"valueNames":["id","category","deadline","createDate","state"],"page":10,"pagination":true, "filter":{"key":"status"}}'>
+
+        <div id="tableExample4" data-list='{"valueNames":["id","category","deadline","createDate","status"],"page":5,"pagination":true,"filter":{"key":"status"}}'>
             <div class="row justify-content-end g-0">
                 <div class="col-auto px-3">
-                    <select class="form-select form-select-sm mb-3" name="state"
-                            data-list-filter="data-list-filter">
+                    <select class="form-select form-select-sm mb-3" data-list-filter="data-list-filter">
                         <option selected="" value="">상태</option>
                         <option value="미결재">미결재</option>
                         <option value="결재중">결재중</option>
@@ -71,76 +70,51 @@
             <div class="table-responsive">
                 <table class="table table-sm fs--1 mb-0">
                     <thead>
-                    <tr>
+                    <tr class="bg-light">
                         <th class="sort border-top ps-3" data-sort="id">번호</th>
                         <th class="sort border-top" data-sort="category">카테고리</th>
                         <th class="sort border-top" data-sort="createDate">작성일</th>
                         <th class="sort border-top" data-sort="deadline">마감일</th>
-                        <th class="sort border-top text-end pe-3" data-sort="state">상태</th>
+                        <th class="sort border-top text-end pe-3" data-sort="status">상태</th>
                     </tr>
                     </thead>
                     <tbody class="list">
                     <th:block th:each="docu : ${docus}">
                         <tr>
-                        <tr>
                             <td class="col-2 align-middle ps-3 id" th:text="${docu.id}"></td>
-                            <td class="col-3 align-middle title" ><a th:text="${docu.category}" th:href="@{|/document/readDetail?id=${docu.id}|}"></a></td>
+                            <td class="col-3 align-middle category" ><a th:text="${docu.category}" th:href="@{|/document/readDetail?id=${docu.id}|}"></a></td>
                             <td class="col-3 align-middle createDate" th:text="${#temporals.format(docu.createDate, 'yyyy년 MM월 dd일')}"></td>
-                            <td class="col-3 align-middle title" th:text="${docu.deadline}"></td>
-
-                            <td class="col-1 align-middle status text-end py-3 pe-3" >
-                                <div th:if="${docu.status == 1 }" class="badge badge-phoenix fs--2 badge-phoenix-warning">
-                                    미결재<span class="ms-1 fas fa-stream"></span>
-                                </div>
-
-                                <div th:if="${docu.status == 2 } " class="badge badge-phoenix fs--2 badge-phoenix-warning">
-                                     결재중<span class="ms-1 fas fa-stream"> </span>
-                                </div>
-
-                                <div th:if="${docu.status == 3 }" class="badge badge-phoenix fs--2 badge-phoenix-success">
-                                   결재완료 <span class="ms-1 fas fa-stream"></span>
-                                  </div>
-
-                                <div th:if="${docu.status == 4 }" class="badge badge-phoenix fs--2 badge-phoenix-secondary">
-                                    결재반려<span class="ms-1 fas fa-check"></span>
-                                </div>
-
-                                <div th:if="${docu.status == 5 }" class="badge badge-phoenix fs--2 badge-phoenix-info">
-                                    임시저장<span class="ms-1 fas fa-check"></span>
-                                </div>
-
+                            <td class="col-3 align-middle deadline" th:text="${docu.deadline}"></td>
+                            <td class="align-middle status text-end py-3 pe-3">
+                                <div th:if="${docu.status == 1}" class="badge badge-phoenix fs--2 badge-phoenix-success"><span class="fw-bold">미결재</span><span class="ms-1 fas fa-check"></span></div>
+                                <div th:if="${docu.status == 2}" class="badge badge-phoenix fs--2 badge-phoenix-warning"><span class="fw-bold">결재중</span><span class="ms-1 fas fa-check"></span></div>
+                                <div th:if="${docu.status == 3 }" class="badge badge-phoenix fs--2 badge-phoenix-secondary"><span class="fw-bold">결재완료</span><span class="ms-1 fas fa-check"></span></div>
+                                <div th:if="${docu.status == 4}" class="badge badge-phoenix fs--2 badge-phoenix-success"><span class="fw-bold">결재반려</span><span class="ms-1 fas fa-check"></span></div>
+                                <div th:if="${docu.status == 0}" class="badge badge-phoenix fs--2 badge-phoenix-warning"><span class="fw-bold">임시저장</span><span class="ms-1 fas fa-check"></span></div>
                             </td>
-
                         </tr>
                     </th:block>
+
                     </tbody>
                 </table>
             </div>
-            <div class="d-flex justify-content-between mt-3">
-         <span class="d-none d-sm-inline-block"
-               data-list-info="data-list-info"></span>
-                <div class="d-flex">
-                    <button class="page-link" data-list-pagination="prev">
-                        <span class="fas fa-chevron-left"></span>
-                    </button>
-                    <ul class="mb-0 pagination"></ul>
-                    <button class="page-link pe-0" data-list-pagination="next">
-                        <span class="fas fa-chevron-right"></span>
-                    </button>
-                </div>
-            </div>
+            <br><br>
+
             <div class="search-box mb-3 mx-auto">
                 <form class="position-relative" data-bs-toggle="search"
                       data-bs-display="static">
-                    <input class="form-control search-input search form-control-sm"
+                    <input id="searchInput" class="form-control search-input search form-control-sm"
                            type="search" placeholder="Search" aria-label="Search" /> <span
                         class="fas fa-search search-box-icon"></span>
 
                 </form>
             </div>
-        </div>
-    </div>
-    <div th:replace="fragments/footer::footer">
+            <div class="d-flex justify-content-center mt-3">
+                <button class="page-link" data-list-pagination="prev"><span class="fas fa-chevron-left"></span></button>
+                <ul class="mb-0 pagination"></ul>
+                <button class="page-link pe-0" data-list-pagination="next"><span class="fas fa-chevron-right"></span></button>
 
+            </div>
+        </div>
     </div>
 </div>

@@ -103,6 +103,13 @@ public class DocumentServiceImpl implements DocumentService{
         return documentRepository.findByReceiver(receiver);
     }
 
+    @Override
+    public int findByStatusAndReceiver(Integer status, String receiver) {
+        List<Document> list = documentRepository.findByStatusAndReceiver(status,receiver);
+
+        return list.size();
+    }
+
 
     @Override
     public List<Document> readListTemp() {

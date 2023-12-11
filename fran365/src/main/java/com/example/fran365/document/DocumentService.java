@@ -24,6 +24,8 @@ public interface DocumentService {
 
     Document readDetailTemp(Integer id);
 
+    int findByStatusAndReceiver(Integer status, String receiver);
+
 
 
 
