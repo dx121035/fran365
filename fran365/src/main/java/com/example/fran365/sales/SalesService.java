@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface SalesService {
 
-    void create(Sales sales);
+    void create();
 
     List<Sales> readlist(int brand_id);
 

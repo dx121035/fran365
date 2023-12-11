@@ -1,207 +1,207 @@
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{fragments/layout1}">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
 
-<div layout:fragment="content">
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-    <!-- ===============================================-->
-    <!--    Document Title-->
-    <!-- ===============================================-->
-    <title>Phoenix</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-    <!-- ===============================================-->
-    <!--    Favicons-->
-    <!-- ===============================================-->
-    <link rel="apple-touch-icon" sizes="180x180" href="../../assets/img/favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/img/favicons/favicon-16x16.png">
-    <link rel="shortcut icon" type="image/x-icon" href="../../assets/img/favicons/favicon.ico">
-    <link rel="manifest" href="../../assets/img/favicons/manifest.json">
-    <meta name="msapplication-TileImage" content="../../assets/img/favicons/mstile-150x150.png">
-    <meta name="theme-color" content="#ffffff">
-    <script src="../../vendors/imagesloaded/imagesloaded.pkgd.min.js"></script>
-    <script src="../../vendors/simplebar/simplebar.min.js"></script>
-    <script src="../../assets/js/config.js"></script>
+<!-- ===============================================-->
+<!--    Document Title-->
+<!-- ===============================================-->
+<title>Phoenix</title>
 
 
-    <!-- ===============================================-->
-    <!--    Stylesheets-->
-    <!-- ===============================================-->
-    <link href="../../vendors/choices/choices.min.css" rel="stylesheet">
-    <link href="../../vendors/flatpickr/flatpickr.min.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap"
-          rel="stylesheet">
-    <link href="../../vendors/simplebar/simplebar.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
-    <link href="../../assets/css/theme-rtl.min.css" type="text/css" rel="stylesheet" id="style-rtl">
-    <link href="../../assets/css/theme.min.css" type="text/css" rel="stylesheet" id="style-default">
-    <link href="../../assets/css/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
-    <link href="../../assets/css/user.min.css" type="text/css" rel="stylesheet" id="user-style-default">
-    <script>
-        var phoenixIsRTL = window.config.config.phoenixIsRTL;
-        if (phoenixIsRTL) {
-            var linkDefault = document.getElementById('style-default');
-            var userLinkDefault = document.getElementById('user-style-default');
-            linkDefault.setAttribute('disabled', true);
-            userLinkDefault.setAttribute('disabled', true);
-            document.querySelector('html').setAttribute('dir', 'rtl');
-        } else {
-            var linkRTL = document.getElementById('style-rtl');
-            var userLinkRTL = document.getElementById('user-style-rtl');
-            linkRTL.setAttribute('disabled', true);
-            userLinkRTL.setAttribute('disabled', true);
-        }
-    </script>
+<!-- ===============================================-->
+<!--    Favicons-->
+<!-- ===============================================-->
+<link rel="apple-touch-icon" sizes="180x180" href="../../assets/img/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../assets/img/favicons/favicon-16x16.png">
+<link rel="shortcut icon" type="image/x-icon" href="../../assets/img/favicons/favicon.ico">
+<link rel="manifest" href="../../assets/img/favicons/manifest.json">
+<meta name="msapplication-TileImage" content="../../assets/img/favicons/mstile-150x150.png">
+<meta name="theme-color" content="#ffffff">
+<script src="../../vendors/imagesloaded/imagesloaded.pkgd.min.js"></script>
+<script src="../../vendors/simplebar/simplebar.min.js"></script>
+<script src="../../assets/js/config.js"></script>
 
 
-    <div class="container-small" style="margin-top: 70px">
-        <div class="row g-3 mb-6">
-            <h1 >재고 판매 등록</h1> <br><br><br>
-            <form th:action="@{/resource/create}"  th:object="${resourceForm}" method="post" enctype="multipart/form-data">
+<!-- ===============================================-->
+<!--    Stylesheets-->
+<!-- ===============================================-->
+<link href="../../vendors/choices/choices.min.css" rel="stylesheet">
+<link href="../../vendors/flatpickr/flatpickr.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap"
+      rel="stylesheet">
+<link href="../../vendors/simplebar/simplebar.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+<link href="../../assets/css/theme-rtl.min.css" type="text/css" rel="stylesheet" id="style-rtl">
+<link href="../../assets/css/theme.min.css" type="text/css" rel="stylesheet" id="style-default">
+<link href="../../assets/css/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
+<link href="../../assets/css/user.min.css" type="text/css" rel="stylesheet" id="user-style-default">
+<script>
+    var phoenixIsRTL = window.config.config.phoenixIsRTL;
+    if (phoenixIsRTL) {
+        var linkDefault = document.getElementById('style-default');
+        var userLinkDefault = document.getElementById('user-style-default');
+        linkDefault.setAttribute('disabled', true);
+        userLinkDefault.setAttribute('disabled', true);
+        document.querySelector('html').setAttribute('dir', 'rtl');
+    } else {
+        var linkRTL = document.getElementById('style-rtl');
+        var userLinkRTL = document.getElementById('user-style-rtl');
+        linkRTL.setAttribute('disabled', true);
+        userLinkRTL.setAttribute('disabled', true);
+    }
+</script>
 
-                <div class="row">
-                    <div class="col-xl-9">
-                        <!-- 중첩된 form 제거 -->
-                        <div class="row g-3 mb-6">
 
-                            <div class="col-sm-6 col-md-8">
+<div class="container-small" style="margin-top: 70px">
+    <div class="row g-3 mb-6">
+        <h1>재고 판매 등록</h1> <br><br><br>
 
+        <form th:action="@{/resource/create}" th:object="${resourceForm}" method="post" enctype="multipart/form-data">
+
+            <div class="row">
+                <div class="col-xl-9">
+                    <!-- 중첩된 form 제거 -->
+                    <div class="row g-3 mb-6">
+
+                        <div class="col-sm-6 col-md-8">
+                            <div class="form-floating">
+                                <input class="form-control" id="floatingInputGrid" type="text" name="title"/>
+                                <label for="floatingInputGrid">제목</label>
+                            </div>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-sm-6 col-md-4">
+                            <div class="form-floating">
+                                <select class="form-select" id="floatingSelectTask" name="category">
+                                    <option value="도우">도우</option>
+                                    <option value="페퍼로니">페퍼로니</option>
+                                    <option value="감자">감자</option>
+                                    <option value="올리브">올리브</option>
+                                    <option value="토마토 소스">토마토 소스</option>
+                                </select>
+                                <label for="floatingSelectTask">품목</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <input class="form-control" type="text" name="amount"th:class="${#fields.hasErrors('amount')}? 'form-control fieldError' : 'form-control'"/>
+                            <p th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}">Incorrect date</p>
+                        </div>
+
+                        <div class="w-100"></div>
+                        <div class="col-sm-6 col-md-4">
+                            <div class="form-floating">
+                                <input class="form-control" type="text" name="price"/>
+                                <label for="floatingInputGrid">가격</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+                            <div class="flatpickr-input-container">
                                 <div class="form-floating">
-                                    <input class="form-control" id="floatingInputGrid" type="text" name="title"/>
-                                    <label for="floatingInputGrid">제목</label>
+                                    <input class="form-control datetimepicker" id="floatingInputStartDate"
+                                           type="text"
+                                           placeholder="end date" data-options='{"disableMobile":true}'
+                                           name="expiration"/>
+                                    <label class="ps-6" for="floatingInputStartDate">유통기한</label><span
+                                        class="uil uil-calendar-alt flatpickr-icon text-700"></span>
                                 </div>
                             </div>
-                            <div class="w-100"></div>
-                            <div class="col-sm-6 col-md-4">
-                                <div class="form-floating">
-                                    <select class="form-select" id="floatingSelectTask" name="category">
-                                        <option value="도우">도우</option>
-                                        <option value="페퍼로니">페퍼로니</option>
-                                        <option value="감자">감자</option>
-                                        <option value="올리브">올리브</option>
-                                        <option value="토마토 소스">토마토 소스</option>
-                                    </select>
-                                    <label for="floatingSelectTask">품목</label>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-4">
-                                <div class="form-floating">
-                                    <input class="form-control" type="text" id="amount" name="amount" th:field="*{amount}"/>
-                                    <label for="floatingInputGrid">수량</label>
-                                    <div th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"></div>
-                                </div>
+                        </div>
 
-                            </div>
-
-                            <div class="w-100"></div>
-                            <div class="col-sm-6 col-md-4">
-                                <div class="form-floating">
-                                    <input class="form-control" type="text" name="price"/>
-                                    <label for="floatingInputGrid">가격</label>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-4">
-                                <div class="flatpickr-input-container">
-                                    <div class="form-floating">
-                                        <input class="form-control datetimepicker" id="floatingInputStartDate"
-                                               type="text"
-                                               placeholder="end date" data-options='{"disableMobile":true}'
-                                               name="expiration"/>
-                                        <label class="ps-6" for="floatingInputStartDate">유통기한</label><span
-                                            class="uil uil-calendar-alt flatpickr-icon text-700"></span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-12 gy-6">
-                                <div class="form-floating">
+                        <div class="col-12 gy-6">
+                            <div class="form-floating">
                             <textarea class="form-control" id="floatingProjectOverview" name="content"
                                       placeholder="내용을 작성해주세요"
                                       style="height: 100px"></textarea>
-                                    <label for="floatingProjectOverview">project overview</label>
+                                <label for="floatingProjectOverview">project overview</label>
+                            </div>
+                        </div>
+
+                        <div class="dropzone dropzone-multiple p-0" id="dropzone" data-dropzone="data-dropzone"
+                             data-options='{"url":"valid/url","maxFiles":1,"dictDefaultMessage":"Choose or Drop a file here"}'>
+                            <div class="fallback">
+                                <input type="file" name="filename"/>
+                            </div>
+                            <div class="dz-message" data-dz-message="data-dz-message">
+                                <div class="dz-message-text"><img class="me-2"
+                                                                  src="../../../assets/img/icons/cloud-upload.svg"
+                                                                  width="25" alt=""/>Drop your file here
                                 </div>
                             </div>
-
-                            <div class="dropzone dropzone-multiple p-0" id="dropzone" data-dropzone="data-dropzone"
-                                 data-options='{"url":"valid/url","maxFiles":1,"dictDefaultMessage":"Choose or Drop a file here"}'>
-                                <div class="fallback">
-                                    <input type="file" name="filename"/>
-                                </div>
-                                <div class="dz-message" data-dz-message="data-dz-message">
-                                    <div class="dz-message-text"><img class="me-2"
-                                                                      src="../../../assets/img/icons/cloud-upload.svg"
-                                                                      width="25" alt=""/>Drop your file here
-                                    </div>
-                                </div>
-                                <div class="dz-preview dz-preview-multiple m-0 d-flex flex-column">
-                                    <div class="d-flex pb-3 border-bottom media px-2">
-                                        <div class="border border-300 p-2 rounded-2 me-2"><img
-                                                class="rounded-2 dz-image" src="../../../assets/img/icons/file.png"
-                                                alt="..." data-dz-thumbnail="data-dz-thumbnail"/></div>
-                                        <div class="flex-1 d-flex flex-between-center">
-                                            <div>
-                                                <h6 data-dz-name="data-dz-name"></h6>
-                                                <div class="d-flex align-items-center">
-                                                    <p class="mb-0 fs--1 text-400 lh-1" data-dz-size="data-dz-size"></p>
-                                                    <div class="dz-progress"><span class="dz-upload"
-                                                                                   data-dz-uploadprogress=""></span>
-                                                    </div>
+                            <div class="dz-preview dz-preview-multiple m-0 d-flex flex-column">
+                                <div class="d-flex pb-3 border-bottom media px-2">
+                                    <div class="border border-300 p-2 rounded-2 me-2"><img
+                                            class="rounded-2 dz-image" src="../../../assets/img/icons/file.png"
+                                            alt="..." data-dz-thumbnail="data-dz-thumbnail"/></div>
+                                    <div class="flex-1 d-flex flex-between-center">
+                                        <div>
+                                            <h6 data-dz-name="data-dz-name"></h6>
+                                            <div class="d-flex align-items-center">
+                                                <p class="mb-0 fs--1 text-400 lh-1" data-dz-size="data-dz-size"></p>
+                                                <div class="dz-progress"><span class="dz-upload"
+                                                                               data-dz-uploadprogress=""></span>
                                                 </div>
-                                                <span class="fs--2 text-danger"
-                                                      data-dz-errormessage="data-dz-errormessage"></span>
                                             </div>
-                                            <div class="dropdown font-sans-serif">
-                                                <button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal dropdown-caret-none"
-                                                        type="button" data-bs-toggle="dropdown" aria-haspopup="true"
-                                                        aria-expanded="false"><span class="fas fa-ellipsis-h"></span>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-end border py-2"><a
-                                                        class="dropdown-item" href="#!" data-dz-remove="data-dz-remove">Remove
-                                                    File</a></div>
-                                            </div>
+                                            <span class="fs--2 text-danger"
+                                                  data-dz-errormessage="data-dz-errormessage"></span>
+                                        </div>
+                                        <div class="dropdown font-sans-serif">
+                                            <button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal dropdown-caret-none"
+                                                    type="button" data-bs-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false"><span class="fas fa-ellipsis-h"></span>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end border py-2"><a
+                                                    class="dropdown-item" href="#!" data-dz-remove="data-dz-remove">Remove
+                                                File</a></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="col-12 gy-6">
-                                <div class="row g-3 justify-content-end">
-                                    <div class="col-auto">
+                        <div class="col-12 gy-6">
+                            <div class="row g-3 justify-content-end">
+                                <div class="col-auto">
 
-                                        <!-- form 속성 추가 -->
-                                        <input type="submit" class="btn btn-primary px-5 px-sm-15" value="재고 공유"></input>
-                                    </div>
+                                    <!-- form 속성 추가 -->
+                                    <input type="submit" class="btn btn-primary px-5 px-sm-15" value="재고 공유"></input>
                                 </div>
                             </div>
-
                         </div>
+
                     </div>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
-            <br><br><br>
+</div>
+<br><br><br>
 
-            <script src="../../vendors/popper/popper.min.js"></script>
-            <script src="../../vendors/bootstrap/bootstrap.min.js"></script>
-            <script src="../../vendors/anchorjs/anchor.min.js"></script>
-            <script src="../../vendors/is/is.min.js"></script>
-            <script src="../../vendors/fontawesome/all.min.js"></script>
-            <script src="../../vendors/lodash/lodash.min.js"></script>
-            <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
-            <script src="../../vendors/list.js/list.min.js"></script>
-            <script src="../../vendors/feather-icons/feather.min.js"></script>
-            <script src="../../vendors/dayjs/dayjs.min.js"></script>
-            <script src="../../vendors/choices/choices.min.js"></script>
-            <script src="../../assets/js/phoenix.js"></script>
-        </div>
+<script src="../../vendors/popper/popper.min.js"></script>
+<script src="../../vendors/bootstrap/bootstrap.min.js"></script>
+<script src="../../vendors/anchorjs/anchor.min.js"></script>
+<script src="../../vendors/is/is.min.js"></script>
+<script src="../../vendors/fontawesome/all.min.js"></script>
+<script src="../../vendors/lodash/lodash.min.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+<script src="../../vendors/list.js/list.min.js"></script>
+<script src="../../vendors/feather-icons/feather.min.js"></script>
+<script src="../../vendors/dayjs/dayjs.min.js"></script>
+<script src="../../vendors/choices/choices.min.js"></script>
+<script src="../../assets/js/phoenix.js"></script>
+</body>
 
 
 </html>

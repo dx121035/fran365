@@ -2,11 +2,8 @@ package com.example.fran365.resource;
 
 import com.example.fran365.brand.Brand;
 import com.example.fran365.brand.BrandRepository;
-import com.example.fran365.member.MemberRepository;
 import com.example.fran365.member.MemberService;
-import com.example.fran365.sales.Sales;
 import com.example.fran365.sales.SalesRepository;
-import com.example.fran365.sales.SalesService;
 import com.example.fran365.stock.Stock;
 import com.example.fran365.stock.StockRepository;
 import com.example.fran365.stock.StockService;
@@ -14,20 +11,17 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.time.Month;
 import java.util.List;
-import java.util.Optional;
 
 @RequestMapping("/resource")
 @Controller
@@ -55,23 +49,24 @@ public class ResourceController {
     private String awspath;
 
     @GetMapping("/create")
-    public String create(Model model) {
+    public String create(ResourceForm resourceForm) {
 
-        model.addAttribute("awspath", awspath);
-        model.addAttribute("member", memberService.readDetailUsername());
-        model.addAttribute("resourceForm", new ResourceForm());
         return "resource/create";
     }
 
     @PostMapping("/create")
-    public String create(@Valid @ModelAttribute ResourceForm resourceForm,
+    public String create(@Valid ResourceForm resourceForm,
+                         BindingResult bindingResult,
                          Resource resource,
                          @RequestParam("filename") MultipartFile file,
-                         BindingResult bindingResult,
                          Model model) throws IOException {
 
+        if (bindingResult.hasErrors()) {
 
-        int requestedAmount = resourceForm.getAmount();
+            return "resource/create";
+        }
+
+        int requestedAmount = resource.getAmount();
         Brand brand = brandRepository.findByUsername(memberService.findUsername());
         List<Stock> stockList = brand.getStockList();
 
@@ -119,6 +114,8 @@ public class ResourceController {
 
         Brand brand = brandRepository.findByUsername(username);
 
+
+
         model.addAttribute("awspath", awspath);
         model.addAttribute("member", memberService.readDetailUsername());
         model.addAttribute("brand", brand);
@@ -127,7 +124,6 @@ public class ResourceController {
 
         Page<Resource> paging = resourceService.getList(page);
         model.addAttribute("paging", paging);
-
 
         return "resource/readList";
     }

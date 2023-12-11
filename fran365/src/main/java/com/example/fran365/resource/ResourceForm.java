@@ -12,4 +12,10 @@ public class ResourceForm {
     @NotNull(message = "빈칸을 입력해주세요")
     @Min(value = 1, message = "수량은 1 이상이어야 합니다.")
     private Integer amount;
+
+    @NotEmpty(message = "빈칸을 입력해주세요")
+    private String title;
+
+    @NotEmpty(message = "빈칸을 입력해주세요")
+    private String category;
 }

@@ -33,32 +33,11 @@ public class StockServiceImpl implements StockService {
 
         String username = memberService.findUsername();
 
-
-        Optional<Resource> or = resourceRepository.findById(id);
-        Resource resource = or.get();
-
-        System.out.println(resource.getId());
-
-        //판매자 brand 추출
-        Brand seller = brandRepository.findByUsername(resource.getUsername());
-
         //구매자 brand 추출
         Brand purchaser = brandRepository.findByUsername(username);
 
-        List<Stock> stockList = seller.getStockList();
-
         List<Stock> purchaserStockList = purchaser.getStockList();
 
-        for (Stock stock : stockList) {
-            // 판매자의 id를 갖고 있는 재고 찾기
-            if (stock.getBrand().getId().equals(seller.getId()) && stock.getName().equals(category)) {
-                // 현재 재고 - 판매한 재고
-                int updatedQuantity = stock.getQuantity() - amount;
-                stock.setQuantity(updatedQuantity);
-                stockRepository.save(stock);
-
-            }
-        }
 
         for (Stock stock : purchaserStockList) {
             //구매자의 id를 갖고 있는 재고 찾기
@@ -74,11 +53,6 @@ public class StockServiceImpl implements StockService {
 
     @Override
     public void update(List<Stock> updateStocks) {
-
-        if (updateStocks == null) {
-            // null에 대한 처리 로직을 추가하세요.
-            return;
-        }
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();

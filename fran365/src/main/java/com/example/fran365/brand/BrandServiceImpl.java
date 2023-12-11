@@ -5,6 +5,7 @@ mail: inew3w@gmail.com
 
 package com.example.fran365.brand;
 
+import com.example.fran365.sales.SalesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +19,15 @@ public class BrandServiceImpl implements BrandService{
     @Autowired
     private BrandRepository brandRepository;
 
+    @Autowired
+    private SalesService salesService;
+
     @Override
     public void create(Brand brand) {
         brand.setCreateDate(LocalDateTime.now());
         brandRepository.save(brand);
+
+        salesService.create();
     }
 
     @Override
