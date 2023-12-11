@@ -68,40 +68,21 @@
 
                     </ul>
                 </li>
-                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle lh-1" href="#!" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false"><span class="uil fs-0 me-2" data-feather="send"></span>F.Q.A</a>
-                    <ul class="dropdown-menu navbar-dropdown-caret">
-                        <li><a class="dropdown-item" href="/board/FAQ">
-                            <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="info"></span>F.Q.A게시판
-                            </div>
-                        </a>
-                        </li>
-                    </ul>
+                <li class="nav-item">
+                    <a class="nav-link lh-1" href="/product/readList">
+                        <span class="uil fs-0 me-2" data-feather="truck"></span>발주
+                    </a>
                 </li>
-
-
-
-
-                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle lh-1" href="#!" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false"><span class="uil fs-0 me-2" data-feather="check-square"></span>소셜,발주</a>
-                    <ul class="dropdown-menu navbar-dropdown-caret">
-                        <li><a class="dropdown-item" href="/social/social">
-                            <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="heart"></span>소셜
-                            </div>
-                        </a>
-                        </li>
-                        <li><a class="dropdown-item" href="/cart/readDetail">
-                            <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="heart"></span>장바구니
-                            </div>
-                        </a>
-                        </li>
-                        <li><a class="dropdown-item" href="/delivery/readList">
-                            <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="heart"></span>배송목록
-                            </div>
-                        </a>
-                        </li>
-                    </ul>
+                <li class="nav-item">
+                    <a class="nav-link lh-1" href="/social/main">
+                        <span class="uil fs-0 me-2" data-feather="users"></span>소셜
+                    </a>
                 </li>
-
-
+                <li class="nav-item">
+                    <a class="nav-link lh-1" href="/cart/readDetail">
+                        <span class="uil fs-0 me-2" data-feather="shopping-cart"></span>장바구니
+                    </a>
+                </li>
 
 
                 <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
