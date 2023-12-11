@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout1}">
+
+<div layout:fragment="content">
 
 <form action="update" method="post" enctype="multipart/form-data">
     <input type="text" name="category" placeholder="category" th:value="${docu.category}">
@@ -17,5 +14,5 @@
 </form>
 
 
-</body>
+</div>
 </html>

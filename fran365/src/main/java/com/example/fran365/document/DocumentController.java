@@ -19,17 +19,21 @@ import java.io.IOException;
 @RequestMapping("/document")
 public class DocumentController {
 
-    @Value("${aws.s3.awspath}")
-    private String awspath;
-
     @Autowired
     private DocumentService documentService;
 
     @Autowired
     private MemberService memberService;
 
+    @Value("${aws.s3.awspath}")
+    private String awspath;
+
     @GetMapping("/create")
-    public String create() {
+    public String create(Model model) {
+
+        model.addAttribute("awspath", awspath);
+        model.addAttribute("member",memberService.readDetailUsername());
+
 
 
 
@@ -50,8 +54,10 @@ public class DocumentController {
 
 
     @GetMapping("/createtemp")
-    public String createtemp() {
+    public String createtemp(Model model) {
 
+        model.addAttribute("awspath", awspath);
+        model.addAttribute("member",memberService.readDetailUsername());
 
 
         return "document/createtemp";
@@ -95,7 +101,8 @@ public class DocumentController {
     @GetMapping("/readListTemp")
     public String readListTemp(Model model) {
         model.addAttribute("docus", documentService.readListTemp());
-
+        model.addAttribute("awspath", awspath);
+        model.addAttribute("member",memberService.readDetailUsername());
 
         return "document/readListTemp";
     }
@@ -118,7 +125,8 @@ public class DocumentController {
     public String readDetailTemp(Model model,@RequestParam Integer id) {
 
         Document document = documentService.readDetail(id);
-
+        model.addAttribute("awspath", awspath);
+        model.addAttribute("member",memberService.readDetailUsername());
         model.addAttribute("docu", documentService.readDetail(id));
 
         return "document/readDetailTemp";
@@ -126,7 +134,8 @@ public class DocumentController {
     @GetMapping("/update")
     public String update(Model model,@RequestParam Integer id) {
         Document document = documentService.readDetail(id);
-
+        model.addAttribute("awspath", awspath);
+        model.addAttribute("member",memberService.readDetailUsername());
         model.addAttribute("docu", documentService.readDetail(id));
         return "document/update";
     }
@@ -143,6 +152,8 @@ public class DocumentController {
         Document document = documentService.readDetail(id);
 
         model.addAttribute("docu", documentService.readDetail(id));
+        model.addAttribute("awspath", awspath);
+        model.addAttribute("member",memberService.readDetailUsername());
         return "document/updateTemp";
     }
     @PostMapping("/updateTemp")

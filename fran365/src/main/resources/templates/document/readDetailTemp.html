@@ -1,9 +1,7 @@
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Insert title here</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout1}">
+
+<div layout:fragment="content">
 
 
 
@@ -16,5 +14,6 @@
     <a th:href="@{|/document/updateTemp?id=${docu.id}|}">수정</a>
 
 
-</body>
+
+</div>
 </html>

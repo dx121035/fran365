@@ -1,30 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout1}">
 
-<form id="myForm" enctype="multipart/form-data">
-    <input type="text" name="category" placeholder="카테고리">
-    <input type="text" name="status" placeholder="상태">
-    <input type="text" name="depart" placeholder="부서">
-    <input type="text" name="deadline" placeholder="마감일">
-    <input type="text" name="receiver" placeholder="수신자">
-    <input type="file" name="filename" placeholder="파일">
-    <input type="button" value="전송" onclick="postData('create')">
-    <input type="button" value="임시 저장" onclick="postData('createtemp')">
-</form>
+<div layout:fragment="content">
 
-<script>
-    function postData(action) {
-        var form = document.getElementById('myForm');
-        form.action = action;
-        form.method = 'post';
-        form.submit();
-    }
-</script>
+    <form id="myForm" enctype="multipart/form-data">
+        <input type="text" name="category" placeholder="카테고리">
+        <input type="text" name="status" placeholder="상태">
+        <input type="text" name="depart" placeholder="부서">
+        <input type="text" name="deadline" placeholder="마감일">
+        <input type="text" name="receiver" placeholder="수신자">
+        <input type="file" name="filename" placeholder="파일">
+        <input type="button" value="전송" onclick="postData('create')">
+        <input type="button" value="임시 저장" onclick="postData('createtemp')">
+    </form>
 
-</body>
+    <script>
+        function postData(action) {
+            var form = document.getElementById('myForm');
+            form.action = action;
+            form.method = 'post';
+            form.submit();
+        }
+    </script>
+</div>
 </html>
