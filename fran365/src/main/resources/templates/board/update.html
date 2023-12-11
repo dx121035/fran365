@@ -43,7 +43,7 @@ mail: inew3w@gmail.com-->
                             <label class="col-sm-2 col-form-label" >카테고리</label>
                             <div class="col-sm-10">
                                     <select class="form-select" name="category" id="category" th:value="${board.category}">
-                                        <option selected="selected" th:value="${board.category}" disabled>[[${board.category}]]</option>
+                                        <option selected="selected" th:value="${board.category}" readonly>[[${board.category}]]</option>
                                         <optgroup label="Member">
                                             <option value="상품">상품</option>
                                             <option value="배송">배송</option>
