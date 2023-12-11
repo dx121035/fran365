@@ -57,7 +57,9 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public void update(Board board, String category) throws IOException{
-
+        if (!board.getCategory().equals("공지") && !board.getCategory().equals("FAQ")) {
+            board.setStatus("답변대기");
+        }
         board.setCategory(category);
         board.setCreateDate(LocalDateTime.now());
         boardRepository.save(board);
