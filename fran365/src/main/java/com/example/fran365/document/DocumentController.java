@@ -6,6 +6,7 @@ package com.example.fran365.document;
 import com.example.fran365.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,6 +18,9 @@ import java.io.IOException;
 @Controller
 @RequestMapping("/document")
 public class DocumentController {
+
+    @Value("${aws.s3.awspath}")
+    private String awspath;
 
     @Autowired
     private DocumentService documentService;
@@ -81,7 +85,8 @@ public class DocumentController {
     @GetMapping("/readList")
     public String readList(Model model) {
         model.addAttribute("docus", documentService.readList());
-
+        model.addAttribute("awspath", awspath);
+        model.addAttribute("member",memberService.readDetailUsername());
 
         return "document/readList";
     }
@@ -102,6 +107,8 @@ public class DocumentController {
         Document document = documentService.readDetail(id);
 
         model.addAttribute("docu", documentService.readDetail(id));
+        model.addAttribute("awspath", awspath);
+        model.addAttribute("member",memberService.readDetailUsername());
 
         return "document/readDetail";
     }
