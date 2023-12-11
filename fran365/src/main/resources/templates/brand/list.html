@@ -22,20 +22,16 @@ mail: inew3w@gmail.com-->
                     <tr>
                         <th class="sort border-top border-200 ps-0 align-middle" scope="col" data-sort="title" style="width:10%">매장이름</th>
                         <th class="sort border-top border-200 align-middle text-center" scope="col" data-sort="address" style="width:25%">매장 주소</th>
-                        <th class="sort border-top border-200 text-center" scope="col" data-sort="mail" style="width:10%">이메일</th>
                         <th class="sort border-top border-200 text-center" scope="col" data-sort="tel" style="width:15%">전화번호</th>
                         <th class="sort border-top border-200 text-center" scope="col" data-sort="time" style="width:15%">영업시간</th>
-                        <th class="sort border-top border-200 text-center" scope="col" data-sort="phone" style="width:15%">점주 핸드폰</th>
                     </tr>
                     </thead>
                     <tbody class="list" id="table-regions-by-revenue">
                     <tr th:each="brand: ${brand}">
                         <td class="title white-space-nowrap ps-1 country" ><a th:href="@{|/brand/detail?id=${brand.id}|}" th:text="${brand.title}"></a></td>
                         <td class="address align-middle text-center" th:text="${brand.address2}"></td>
-                        <td class="email align-middle text-center" th:text="${brand.email}"></td>
                         <td class="tel align-middle text-center" th:text="${brand.tel}"></td>
                         <td class="time align-middle text-center" th:text="${brand.time}"></td>
-                        <td class="phone align-middle text-center" th:text="${brand.phone}"></td>
                     </tr>
                     </tbody>
                 </table>
