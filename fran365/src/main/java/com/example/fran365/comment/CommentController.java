@@ -2,6 +2,7 @@ package com.example.fran365.comment;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +21,18 @@ public class CommentController {
 
         commentService.create(id, content);
 
-        return "redirect:/social/social?id=" + id;
+        return "redirect:/social/main?id=" + id;
     }
+
+    @GetMapping("/delete")
+    public String delete(@RequestParam Integer id) {
+        commentService.delete(id);
+        return "redirect:/social/main";
+    }
+
+
+
+
+
+
 }

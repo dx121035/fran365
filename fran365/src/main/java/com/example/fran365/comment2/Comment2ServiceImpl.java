@@ -7,6 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class Comment2ServiceImpl implements Comment2Service{
@@ -30,5 +31,11 @@ public class Comment2ServiceImpl implements Comment2Service{
         comment2.setCreateDate(LocalDateTime.now());
         comment2Repository.save(comment2);
 
+    }
+
+    @Override
+    public void delete(Integer id) {
+        Optional<Comment2> oc = comment2Repository.findById(id);
+        comment2Repository.delete(oc.get());
     }
 }

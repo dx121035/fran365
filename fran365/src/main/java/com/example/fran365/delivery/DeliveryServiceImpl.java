@@ -63,7 +63,7 @@ public class DeliveryServiceImpl implements DeliveryService{
         if (itemSize == 0) {
             name = firstItem;
         } else {
-            name= firstItem + "외" + itemSize + "개";
+            name= firstItem + " 외 " + itemSize + "개";
         }
 
         int total = cartService.TotalPrice(cart);

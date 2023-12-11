@@ -28,7 +28,7 @@ public class SocialController {
     @Autowired
     private MemberService memberService;
 
-    @GetMapping("/social")
+    @GetMapping("/main")
     public String allSocial(Model model){
 
         model.addAttribute("details", socialService.readDetail());
@@ -36,14 +36,14 @@ public class SocialController {
         model.addAttribute("member",memberService.readDetailUsername());
         model.addAttribute("lists", socialService.readList());
 
-        return "social/social";
+        return "social/main";
     }
 
     @PostMapping("/create")
     public String create(Social social){
         socialService.create(social);
 
-        return "redirect:/social/social";
+        return "redirect:/social/main";
     }
 
     @PostMapping("/update")
@@ -53,7 +53,7 @@ public class SocialController {
 
         socialService.update(id,content,status);
 
-        return "redirect:/social/social";
+        return "redirect:/social/main";
     }
 
     @PostMapping("/feedStatus")
@@ -72,7 +72,13 @@ public class SocialController {
         Member member = memberService.readDetailUsername();
         socialService.like(social, member);
 
-        return "redirect:/social/social?id=" + id;
+        return "redirect:/social/main?id=" + id;
+    }
+
+    @GetMapping("/delete")
+    public String delete(@RequestParam Integer id) {
+        socialService.delete(id);
+        return "redirect:/social/main";
     }
 
 

@@ -67,9 +67,9 @@ public class SocialServiceImpl implements SocialService {
 
     @Override
     public void delete(Integer id) {
-        Optional<Social> sp = socialRepository.findById(id);
+        Optional<Social> os = socialRepository.findById(id);
 
-        socialRepository.delete(sp.get());
+        socialRepository.delete(os.get());
     }
 
     @Override

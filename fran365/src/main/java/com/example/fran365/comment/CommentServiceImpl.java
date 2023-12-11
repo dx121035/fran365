@@ -42,5 +42,11 @@ public class CommentServiceImpl implements CommentService{
         return oc.get();
     }
 
+    @Override
+    public void delete(Integer id) {
+        Optional<Comment> oc = commentRepository.findById(id);
+        commentRepository.delete(oc.get());
+    }
+
 
 }

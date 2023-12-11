@@ -116,17 +116,12 @@
                 </div>
 
 
-
-
-
-
-
                 <div class="mb-8 mt-6">
                     <div class="d-flex flex-between-center pb-3 border-bottom border-dashed border-300">
                         <h3 class="mb-0">Messages<span class="text-700 ms-2 fw-normal">(97)</span></h3>
                         <div class="btn-reveal-trigger">
                             <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none d-flex btn-reveal" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h"></span></button>
-                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">Edit</a><a class="dropdown-item text-danger" href="#!">Delete</a><a class="dropdown-item" href="#!">Download</a><a class="dropdown-item" href="#!">Report abuse</a></div>
+                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">Edit</a><a class="dropdown-item text-danger"></a></div>
                         </div>
                     </div>
                     <div class="d-flex py-3 align-items-center border-bottom border-dashed">
@@ -223,7 +218,6 @@
                             <div class="card-body p-3 p-sm-4">
 
 
-
                                 <div class="border-bottom mb-3">
                                     <div class="d-flex align-items-center mb-3"><a href="../../apps/social/profile.html">
                                         <div class="avatar avatar-xl  me-2">
@@ -237,36 +231,39 @@
                                         </div>
                                         <div class="btn-reveal-trigger">
                                             <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none d-flex btn-reveal" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h"></span></button>
-                                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">Edit</a><a class="dropdown-item text-danger" href="#!">Delete</a><a class="dropdown-item" href="#!">Download</a><a class="dropdown-item" href="#!">Report abuse</a></div>
+                                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">수정</a><a class="dropdown-item text-danger" th:href="@{|/social/delete?id=${detail.id}|}">삭제</a></div>
                                         </div>
                                     </div>
 
                                     [(${detail.content})]
                                 </div>
-
-
-
-
                                 <div class="d-flex">
                                     <a href="javascript:void(0);" class="btn btn-link p-0 me-3 fs--2 fw-bolder recommend" th:data-uri="@{|/social/like?id=${detail.id}|}">
-                                        <span class="fa-solid fa-heart me-1"></span>  <span th:utext="${#lists.size(detail.liker)}"></span>
+                                        <span class="fa-solid fa-heart me-1"></span><span th:utext="${#lists.size(detail.liker)}"></span>
                                     </a>
                                     <button class="btn btn-link text-900 p-0 fs--2 me-3 fw-bolder" type="button"><span class="fa-solid fa-comment me-1"></span><span th:utext="${#lists.size(detail.commentList)}"></span>
                                     </button>
                                 </div>
                             </div>
-                            <div class="bg-100 border-top p-3 p-sm-4">
 
+
+                            <div class="bg-white border-top p-3 p-sm-4">
+                                <th:block th:each="comment: ${detail.commentList}">
                                 <div class="d-flex align-items-start">
+
                                     <!--comment-->
-                                    <th:block th:each="comment: ${detail.commentList}"><br>
-                                    <div class="avatar avatar-m  me-2">
+
+                                    <div class="avatar avatar-m me-2">
                                         <img class="rounded-circle " src="../../assets/img/team/23.webp" alt="" />
                                     </div>
 
                                     <div class="flex-1">
                                         <div class="d-flex align-items-center">[[${comment.username}]]<span class="text-600 fw-semi-bold fs--2 ms-2">[[${#temporals.format(comment.createDate, 'yyyy년 MM월 dd일 HH:mm')}]]</span></div>
                                         <p class="mb-0">[[${comment.content}]]</p>
+
+                                        <!--작성자만-->
+                                        <a th:href="@{|/comment/delete?id=${comment.id}|}"><span class="far fa-times-circle fs--1 me-1"></span><span class="fw-bold fs--1">삭제</span></a>
+
                                         <button class="btn btn-link p-0 text-900 fw-bolder mb-2"><span class="fa-solid fa-reply fs--2 me-1"></span><span class="fw-bold fs--2">Reply</span></button>
 
                                         <!--comment2-->
@@ -277,8 +274,6 @@
                                             <input type="submit" class="btn btn-primary" value="대댓등록">
                                         </form>
                                     <th:block th:if="${comment.comment2List != null and #lists.size(comment.comment2List) > 0}" th:each="comment2 : ${comment.comment2List}">
-
-
                                         <div class="d-flex align-items-start mb-3">
                                             <div class="avatar avatar-m  me-2">
                                                 <img class="rounded-circle " src="../../assets/img/team/62.webp" alt="" />
@@ -286,15 +281,20 @@
                                             <div class="flex-1">
                                                 <div class="d-flex align-items-center">[[${comment2.username}]]<span class="text-600 fw-semi-bold fs--2 ms-2">[[${#temporals.format(comment2.createDate, 'yyyy년 MM월 dd일 HH:mm')}]]</span></div>
                                                 <p class="mb-0">[[${comment2.content}]]</p>
+
+                                                <!--작성자만-->
+                                                <a th:href="@{|/comment2/delete?id=${comment2.id}|}"><span class="far fa-times-circle fs--1 me-1"></span><span class="fw-bold fs--1">삭제</span></a>
+
                                             </div>
                                         </div>
                                     </th:block>
-                                    </th:block>
                                     </div>
-
+                                </div>
+                                </th:block>
                                 </div>
 
                                 <!--input-->
+                            <div class="container" style="padding: 10px;">
                                 <div class="d-flex align-items-center">
                                     <div class="avatar avatar-m  me-2">
                                         <img class="rounded-circle " src="../../assets/img/team/59.webp" alt="" />
@@ -304,16 +304,15 @@
                                             <textarea class="form-control" type="text" name="content" placeholder="댓글 추가"></textarea>
                                             <input type="hidden" class="post-id" name="id" th:value="${detail.id}" data-post-id="${detail.id}" />
                                             <input type="hidden" name="username" value="${detail.username}">
-                                            <input type="submit" class="create-comment btn btn-primary" value="등록">
+                                            <input type="submit" class="create-comment btn btn-primary" style="margin-top: 5px;" value="등록">
                                         </form>
                                     </div>
                                 </div>
+
+                        </div>
                             </div>
                         </div>
-                    </div>
                     </th:block>
-
-
 
 
 
