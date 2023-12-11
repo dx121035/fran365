@@ -27,9 +27,9 @@ public interface DocumentService {
 
 
 
-    void update (Document document);
+    void update(Document document, MultipartFile filename, String receiver) throws IOException;
 
-    void updateTemp (Document document);
+  //  void updateTemp (Document document);
 
     void delete (Integer id);
 

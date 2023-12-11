@@ -143,29 +143,41 @@ public class DocumentController {
         model.addAttribute("docu", documentService.readDetail(id));
         return "document/update";
     }
+//    @PostMapping("/update")
+//    public String update(Document document) {
+//
+//        documentService.update(document);
+//        return "redirect:/document/readList";
+//    }
+
+
     @PostMapping("/update")
-    public String update(Document document) {
+    public String update(Document document,
+                         @RequestParam("receiver") String receiver,
+                         @RequestParam("filename") MultipartFile filename
+    ) throws IOException {
 
-        documentService.update(document);
+        documentService.update(document, filename,receiver);
+
         return "redirect:/document/readList";
     }
 
 
-    @GetMapping("/updateTemp")
-    public String updateTemp(Model model,@RequestParam Integer id) {
-        Document document = documentService.readDetail(id);
-
-        model.addAttribute("docu", documentService.readDetail(id));
-        model.addAttribute("awspath", awspath);
-        model.addAttribute("member",memberService.readDetailUsername());
-        return "document/updateTemp";
-    }
-    @PostMapping("/updateTemp")
-    public String updateTemp(Document document) {
-
-        documentService.update(document);
-        return "redirect:/document/readList";
-    }
+//    @GetMapping("/updateTemp")
+//    public String updateTemp(Model model,@RequestParam Integer id) {
+//        Document document = documentService.readDetail(id);
+//
+//        model.addAttribute("docu", documentService.readDetail(id));
+//        model.addAttribute("awspath", awspath);
+//        model.addAttribute("member",memberService.readDetailUsername());
+//        return "document/updateTemp";
+//    }
+//    @PostMapping("/updateTemp")
+//    public String updateTemp(Document document) {
+//
+//        documentService.update(document);
+//        return "redirect:/document/readList";
+//    }
 
     @GetMapping("/delete")
     public String delete(@RequestParam Integer id) {

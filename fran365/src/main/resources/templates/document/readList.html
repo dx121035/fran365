@@ -54,7 +54,7 @@
         </div>
         <br>
         <div id="tableExample3"
-             data-list='{"valueNames":["id","category","depart","deadline","createDate","state"],"page":10,"pagination":true, "filter":{"key":"status"}}'>
+             data-list='{"valueNames":["id","category","deadline","createDate","state"],"page":10,"pagination":true, "filter":{"key":"status"}}'>
             <div class="row justify-content-end g-0">
                 <div class="col-auto px-3">
                     <select class="form-select form-select-sm mb-3" name="state"
@@ -74,7 +74,6 @@
                     <tr>
                         <th class="sort border-top ps-3" data-sort="id">번호</th>
                         <th class="sort border-top" data-sort="category">카테고리</th>
-                        <th class="sort border-top" data-sort="depart">부서</th>
                         <th class="sort border-top" data-sort="createDate">작성일</th>
                         <th class="sort border-top" data-sort="deadline">마감일</th>
                         <th class="sort border-top text-end pe-3" data-sort="state">상태</th>
@@ -86,7 +85,6 @@
                         <tr>
                             <td class="col-2 align-middle ps-3 id" th:text="${docu.id}"></td>
                             <td class="col-3 align-middle title" ><a th:text="${docu.category}" th:href="@{|/document/readDetail?id=${docu.id}|}"></a></td>
-                            <td class="col-3 align-middle title" th:text="${docu.depart}"></td>
                             <td class="col-3 align-middle createDate" th:text="${#temporals.format(docu.createDate, 'yyyy년 MM월 dd일')}"></td>
                             <td class="col-3 align-middle title" th:text="${docu.deadline}"></td>
 

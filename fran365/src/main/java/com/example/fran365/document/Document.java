@@ -29,6 +29,11 @@ public class Document {
 
     private  String receiver;
 
+    private String comment;
+
+    private  String title;
+
+
     private LocalDateTime createDate;
 
                                             //private String position;

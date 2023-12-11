@@ -3,29 +3,114 @@
 
 <div layout:fragment="content">
 
-    <form id="myForm" enctype="multipart/form-data">
-<!--        <input type="text" name="category" placeholder="카테고리">-->
-<!--        <input type="text" name="status" placeholder="상태">-->
-<!--        <input type="text" name="depart" placeholder="부서">-->
-<!--        <input type="text" name="deadline" placeholder="마감일">-->
-<!--        <input type="text" name="receiver" placeholder="수신자">-->
-<!--        <input type="file" name="filename" placeholder="파일">-->
-<!--        <input type="button" value="전송" onclick="postData('create')">-->
-<!--        <input type="button" value="임시 저장" onclick="postData('createtemp')">-->
+    <div class="container">
+
+    <h2 class="mb-4">서류 결재</h2>
 
 
-        <input type="text" name="name" placeholder="category" th:value="${member.name}">
-        <input type="text" name="depart" placeholder="부서">
-        <input type="text" name="depart" placeholder="직급">
-        <input type="text" name="depart" placeholder="카테고리">
-        <input type="text" name="depart" placeholder="기한일">
-        <input type="text" name="depart" placeholder="수신자">
-        <input type="text" name="depart" placeholder="파일">
 
-                <input type="button" value="전송" onclick="postData('create')">
-                <input type="button" value="임시 저장" onclick="postData('createtemp')">
+
+
+    <form class="row g-3 mb-6" id="myForm" enctype="multipart/form-data">
+
+        <div class="col-sm-6 col-md-4">
+            <div class="form-floating">
+                <input class="form-control" name="name" id="name"
+                       placeholder="작성자" th:value="${member.name}" readonly>
+                <label for="name">작성자</label>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+            <div class="form-floating">
+                <input class="form-control" name="depart" id="depart"
+                       placeholder="부서" th:value="${member.depart}" readonly>
+                <label  for="depart">부서</label>
+            </div>
+        </div>
+
+
+
+        <div class="col-sm-6 col-md-4">
+            <div class="form-floating">
+                <input class="form-control" name="category" id="category"
+                       placeholder="카테고리">
+                <label for="category">카테고리</label>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="col-md-6 gy-6">
+            <div class="flatpickr-input-container">
+                <div class="form-floating">
+                    <input class="form-control" id="deadline" type="date"
+                           name="deadline" placeholder="기한일">
+                    <label class="ps-6" for="deadline">기한일</label>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 gy-6">
+            <div class="flatpickr-input-container">
+                <div class="form-floating">
+                    <input class="form-control" id="receiver" type="text" name="receiver" placeholder="수신자">
+                    <label class="ps-6" for="receiver">수신자</label>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 gy-6">
+            <div class="flatpickr-input-container">
+                <div class="form-floating">
+                    <input class="form-control" id="comment" type="text" name="comment" placeholder="내용">
+                    <label class="ps-6" for="comment">내용</label>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 gy-6">
+            <div class="flatpickr-input-container">
+                <div class="form-floating">
+                    <input class="form-control" id="title" type="text" name="title" placeholder="내용">
+                    <label class="ps-6" for="title">제목</label>
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-12 gy-6">
+
+            <input class="form-control" id="filename" type="file" name="filename">
+
+
+        </div>
+
 
     </form>
+    </div>
+    <div class="col-auto container d-flex justify-content-end ml-20">
+
+        <button class="btn btn-primary px-5 px-sm-15" id='createtemp' onclick="postData('createtemp')">임시저장</button>
+        <button class="btn btn-primary px-5 px-sm-15 ms-2" type="button" onclick="postData('create')">결재</button>
+    </div>
+
+
+
+
+
+
+
+
+
+
 
     <script>
         function postData(action) {
