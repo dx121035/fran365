@@ -21,8 +21,7 @@ import java.util.Optional;
 @Service
 public class DocumentServiceImpl implements DocumentService{
 
-//    @Autowired
-//    private AmazonS3 amazonS3;
+
 
     @Autowired
     private AmazonS3 amazonS3;

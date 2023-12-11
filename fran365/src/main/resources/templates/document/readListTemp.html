@@ -1,9 +1,7 @@
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <title>Insert title here</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+       layout:decorate="~{fragments/layout1}">
+
+<div layout:fragment="content">
 
 <th:block th:each="docu : ${docus}">
   id: <a th:text="${docu.id}" th:href="@{|/document/readDetailTemp?id=${docu.id}|}"></a>
@@ -18,5 +16,7 @@
 
   <br><br>
 </th:block>
-</body>
+
+
+</div>
 </html>

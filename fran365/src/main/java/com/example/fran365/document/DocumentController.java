@@ -3,9 +3,11 @@ package com.example.fran365.document;
 
 
 
+import com.example.fran365.member.Member;
 import com.example.fran365.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,8 +26,18 @@ public class DocumentController {
     @Autowired
     private MemberService memberService;
 
+
+
+    @Value("${aws.s3.awspath}")
+    private String awspath;
+
     @GetMapping("/create")
-    public String create() {
+    public String create(Model model) {
+
+        model.addAttribute("awspath", awspath);
+        model.addAttribute("member",memberService.readDetailUsername());
+
+
 
 
 
@@ -46,8 +58,10 @@ public class DocumentController {
 
 
     @GetMapping("/createtemp")
-    public String createtemp() {
+    public String createtemp(Model model) {
 
+        model.addAttribute("awspath", awspath);
+        model.addAttribute("member",memberService.readDetailUsername());
 
 
         return "document/createtemp";
@@ -81,7 +95,8 @@ public class DocumentController {
     @GetMapping("/readList")
     public String readList(Model model) {
         model.addAttribute("docus", documentService.readList());
-
+        model.addAttribute("awspath", awspath);
+        model.addAttribute("member",memberService.readDetailUsername());
 
         return "document/readList";
     }
@@ -90,7 +105,8 @@ public class DocumentController {
     @GetMapping("/readListTemp")
     public String readListTemp(Model model) {
         model.addAttribute("docus", documentService.readListTemp());
-
+        model.addAttribute("awspath", awspath);
+        model.addAttribute("member",memberService.readDetailUsername());
 
         return "document/readListTemp";
     }
@@ -102,6 +118,8 @@ public class DocumentController {
         Document document = documentService.readDetail(id);
 
         model.addAttribute("docu", documentService.readDetail(id));
+        model.addAttribute("awspath", awspath);
+        model.addAttribute("member",memberService.readDetailUsername());
 
         return "document/readDetail";
     }
@@ -111,7 +129,8 @@ public class DocumentController {
     public String readDetailTemp(Model model,@RequestParam Integer id) {
 
         Document document = documentService.readDetail(id);
-
+        model.addAttribute("awspath", awspath);
+        model.addAttribute("member",memberService.readDetailUsername());
         model.addAttribute("docu", documentService.readDetail(id));
 
         return "document/readDetailTemp";
@@ -119,7 +138,8 @@ public class DocumentController {
     @GetMapping("/update")
     public String update(Model model,@RequestParam Integer id) {
         Document document = documentService.readDetail(id);
-
+        model.addAttribute("awspath", awspath);
+        model.addAttribute("member",memberService.readDetailUsername());
         model.addAttribute("docu", documentService.readDetail(id));
         return "document/update";
     }
@@ -136,6 +156,8 @@ public class DocumentController {
         Document document = documentService.readDetail(id);
 
         model.addAttribute("docu", documentService.readDetail(id));
+        model.addAttribute("awspath", awspath);
+        model.addAttribute("member",memberService.readDetailUsername());
         return "document/updateTemp";
     }
     @PostMapping("/updateTemp")
