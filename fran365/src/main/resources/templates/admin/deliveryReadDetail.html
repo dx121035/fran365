@@ -242,57 +242,64 @@
       </nav>
       
       
-		<div class="content mb-6">
-        <h2 class="text-bold text-1100 mb-5">문의 상세보기</h2>
-        <div class="row gx-lg-9">
-            <div class="col-xl-8">
-			 <div class="card mb-6">
-              <div class="card-body pb-10">
-              <h5 class="text-bold text-1100 mb-4 mb-xxl-8">[[${question.title}]]</h4>
-              <div class="text-end mb-4">
-			    <span th:text="${question.writer}"></span>&nbsp;&nbsp;|&nbsp;&nbsp;<span th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></span>
-			 </div>
-              [(${question.content})]
-              <div class="row g-2 mt-6">
-                    <div class="col-6 col-sm-auto">
-			    <button class="btn btn-phoenix-primary w-100" type="button">답변&nbsp;&nbsp;<span th:text="${#lists.size(question.replyList)}"></span></button>
-			  </div>
-			  <div class="col-auto ms-auto">
-			    <a class="btn btn-phoenix-danger" th:href="@{|/board/delete?id=${question.id}&category=${question.category}&role=${user.role}|}"><span class="fa-solid fa-trash-can me-2"></span>삭제</a>
-			  </div>
-              </div>
-              <div class="border-top mt-4 mb-6"></div>
-              
-              <form action="/reply/create" method="post" class="d-flex w-100">
-			    <div style="flex: 1;">
-			        <input type="hidden" name="id" th:value="${question.id}">
-			        <input type="hidden" name="writer" value="관리자">
-			        <textarea class="form-control" type="text" name="content" placeholder="답변을 입력하세요." rows="4"></textarea>
-			    </div>
-			    <button class="btn btn-primary ms-2" style="height: 38px; margin-top: 54px;" type="submit">등록</button>
-			  </form>
+		<div class="content">
+        <h2 class="text-bold text-1100 mb-5">발주현황</h2>
+        <div id="members" data-list='{"valueNames":["customer","email","mobile_number","city","last_active","joined"],"page":10,"pagination":true}'>
+          <div class="row align-items-center justify-content-between g-3 mb-4">
+            <div class="col col-auto">
+              <div class="search-box">
+                <form class="position-relative" data-bs-toggle="search" data-bs-display="static">
+                  <input class="form-control search-input search" type="search" placeholder="발주내역을 검색하세요." aria-label="Search" />
+                  <span class="fas fa-search search-box-icon"></span>
 
-                    <th:block class="table-primary" th:each="reply: ${question.replyList}">
-                        <div class="fs&#45;&#45;1 fw-semi-bold pb-3 mt-6 mb-4 border-bottom border-dashed border-300">
-                            <div class="d-flex justify-content-between">
-                                <div class="text-1000 mb-1"
-                                     th:utext="${#strings.replace(reply.content, ',', '')}"></div>
-                                <div class="text-1000 mb-1 ms-auto me-2" th:text="${reply.writer} "></div>
-                                <a class="btn-close" th:href="@{|/admin/replyDelete?replyId=${reply.id}&boardId=${reply.board.id}|}" type="button" aria-label="Close"></a>
-                            </div>
-                            <div class="text-end">
-                                <p class="text-600 mb-0"
-                                   th:text="${#temporals.format(reply.createDate, 'yyyy-MM-dd HH:mm')}">
-                                </p>
-                            </div>
-                        </div>
-                    </th:block>
-              
+                </form>
+              </div>
             </div>
+          </div>
+          <div class="mx-n4 mx-lg-n6 px-4 px-lg-6 mb-9 bg-white border-y border-300 mt-2 position-relative top-1">
+            <div class="table-responsive scrollbar ms-n1 ps-1">
+              <table class="table table-md fs--1 mb-0">
+                <thead>
+                  <tr>
+                    <th class="sort align-middle" scope="col" data-sort="customer" style="width:18%;">주문번호</th>
+                    <th class="sort align-middle" scope="col" data-sort="email" style="width:18%;">송장번호</th>
+                    <th class="sort align-middle pe-3" scope="col" data-sort="mobile_number" style="width:10%;">주문목록</th>
+                    <th class="sort align-middle pe-3" scope="col" data-sort="mobile_number" style="width:10%;">회원ID</th>
+                    <th class="sort align-middle" scope="col" data-sort="city" style="width:10%;">배송상태</th>
+                    <th class="sort align-middle" scope="col" data-sort="joined" style="width:10%;">처리일자</th>
+                  </tr>
+                </thead>
+                <tbody class="list" id="members-table-body">
+					
+					
+				  <th:block th:each="status : ${delivery.statusList}">
+                  <tr class="hover-actions-trigger btn-reveal-trigger position-static">
+                    <td class="email align-middle white-space-nowrap text-1100">[[${delivery.uid}]]</td>
+                    <td class="mobile_number align-middle white-space-nowrap text-1100">[[${status.tracking}]]</td>
+                    <td class="city align-middle white-space-nowrap text-1100">[[${delivery.allAbout}]]</td>
+                    <td class="position1 align-middle white-space-nowrap text-1100">[[${delivery.username}]]</td>
+                    <td class="delivery_type align-middle white-space-nowrap text-900 fs--1 text-start">
+						<div class="badge badge-phoenix fs--1 badge-phoenix-success" style="width: 70%;">
+		                  <span class="fw-bold" th:text="${delivery.statusList[#lists.size(delivery.statusList)-1].step}"></span>
+					</td>
+                    <td class="joined align-middle white-space-nowrap text-1100" th:text="${#temporals.format(status.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+                  </tr>
+                  </th:block>
+                </tbody>
+              </table>
             </div>
-            
+            <div class="row align-items-center justify-content-between py-2 pe-0 fs--1">
+              <div class="col-auto d-flex">
+                <p class="mb-0 d-none d-sm-block me-3 fw-semi-bold text-900" data-list-info="data-list-info"></p><a class="fw-semi-bold" href="#!" data-list-view="*">전체보기<span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a><a class="fw-semi-bold d-none" href="#!" data-list-view="less">View Less<span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a>
+              </div>
+              <div class="col-auto d-flex">
+                <button class="page-link" data-list-pagination="prev"><span class="fas fa-chevron-left"></span></button>
+                <ul class="mb-0 pagination"></ul>
+                <button class="page-link pe-0" data-list-pagination="next"><span class="fas fa-chevron-right"></span></button>
+              </div>
             </div>
-        
+          </div>
+        </div>
         <footer class="footer position-absolute">
           <div class="row g-0 justify-content-between align-items-center h-100">
             <div class="col-12 col-sm-auto text-center">
@@ -332,6 +339,48 @@
         }
       </script>
       
+      <script>
+		  function updatePosition(username, newPosition) {
+			  
+			$.ajax({
+            type: 'POST',
+            url: '/admin/updatePosition',
+            data: {
+                "username" : username,
+                "newPosition" : newPosition.value
+            },
+            success: function (response) {
+                alert('변경되었습니다.');
+            },
+            error: function (error) {
+                alert('변경을 실패했습니다.');
+            }
+        });
+		  }
+		  
+	  </script>
+	  
+	  <script>
+		  function updateDepartment(username, newDepartment) {
+			  
+			$.ajax({
+            type: 'POST',
+            url: '/admin/updateDepartment',
+            data: {
+                "username" : username,
+                "newDepartment" : newDepartment.value
+            },
+            success: function (response) {
+                alert('변경되었습니다.');
+            },
+            error: function (error) {
+                alert('변경을 실패했습니다.');
+            }
+        });
+		  }
+		  
+	  </script>
+            
     </main>
 
     <!-- ===============================================-->

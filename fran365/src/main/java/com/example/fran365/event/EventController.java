@@ -22,7 +22,7 @@ public class EventController {
 		
 		eventService.create(event);
 		
-		return "redirect:/admin/main";
+		return "redirect:/admin/schedule";
 	}
 	
 	@GetMapping("/delete")
@@ -30,7 +30,7 @@ public class EventController {
 		
 		eventService.delete(id);
 		
-		return "redirect:/admin/main";
+		return "redirect:/admin/schedule";
 	}
 	
 	@ResponseBody
