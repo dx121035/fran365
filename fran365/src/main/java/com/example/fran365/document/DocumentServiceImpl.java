@@ -21,8 +21,7 @@ import java.util.Optional;
 @Service
 public class DocumentServiceImpl implements DocumentService{
 
-//    @Autowired
-//    private AmazonS3 amazonS3;
+
 
     @Autowired
     private AmazonS3 amazonS3;
@@ -104,6 +103,13 @@ public class DocumentServiceImpl implements DocumentService{
         return documentRepository.findByReceiver(receiver);
     }
 
+    @Override
+    public int findByStatusAndReceiver(Integer status, String receiver) {
+        List<Document> list = documentRepository.findByStatusAndReceiver(status,receiver);
+
+        return list.size();
+    }
+
 
     @Override
     public List<Document> readListTemp() {
@@ -129,17 +135,37 @@ public class DocumentServiceImpl implements DocumentService{
 
 
     @Override
-    public void update(Document document) {
-        document.setCreateDate(LocalDateTime.now());
-        documentRepository.save(document);
+    public void update(Document docuemnt, MultipartFile filename, String receiver) throws IOException {
+        String filecheck = filename.getOriginalFilename();
+
+        if (filecheck != null && !filecheck.trim().isEmpty()) {
+            File file = new File(filename.getOriginalFilename());
+
+            try (FileOutputStream fos = new FileOutputStream(file)) {
+                fos.write(filename.getBytes());
+            }
+
+            String tfilename = System.currentTimeMillis() + "_" + filename.getOriginalFilename();
+            amazonS3.putObject(new PutObjectRequest(bucketName, tfilename, file));
+
+            file.delete();
+
+
+            docuemnt.setImage(tfilename);
+            docuemnt.setStatus(1);
+            docuemnt.setCreateDate(LocalDateTime.now());
+            docuemnt.setReceiver(receiver);
+        }
+        documentRepository.save(docuemnt);
+
     }
 
 
-    @Override
-    public void updateTemp(Document document) {
-        document.setCreateDate(LocalDateTime.now());
-        documentRepository.save(document);
-    }
+//    @Override
+//    public void updateTemp(Document document) {
+//        document.setCreateDate(LocalDateTime.now());
+//        documentRepository.save(document);
+//    }
 
     @Override
     public void delete(Integer id) {

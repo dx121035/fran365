@@ -24,12 +24,14 @@ public interface DocumentService {
 
     Document readDetailTemp(Integer id);
 
+    int findByStatusAndReceiver(Integer status, String receiver);
 
 
 
-    void update (Document document);
 
-    void updateTemp (Document document);
+    void update(Document document, MultipartFile filename, String receiver) throws IOException;
+
+  //  void updateTemp (Document document);
 
     void delete (Integer id);
 
