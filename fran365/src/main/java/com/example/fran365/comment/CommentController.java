@@ -24,4 +24,13 @@ public class CommentController {
 
         return "redirect:/notice/readDetail?id=" + id;
     }
+
+    @PostMapping("/update")
+    public String update(@RequestParam Integer id,
+                         @RequestParam String content){
+
+        commentService.update(id, content);
+
+        return "redirect:/social/social";
+    }
 }

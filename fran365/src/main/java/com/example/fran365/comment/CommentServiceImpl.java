@@ -27,12 +27,12 @@ public class CommentServiceImpl implements CommentService{
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
 
-        Comment c = new Comment();
-        c.setContent(content);
-        c.setSocial(social);
-        c.setUsername(username);
-        c.setCreateDate(LocalDateTime.now());
-        commentRepository.save(c);
+        Comment coment = new Comment();
+        coment.setContent(content);
+        coment.setSocial(social);
+        coment.setUsername(username);
+        coment.setCreateDate(LocalDateTime.now());
+        commentRepository.save(coment);
 
     }
 
@@ -40,6 +40,21 @@ public class CommentServiceImpl implements CommentService{
     public Comment readDetail(Integer id) {
         Optional<Comment> oc = commentRepository.findById(id);
         return oc.get();
+    }
+
+    @Override
+    public void update(Integer id, String content) {
+
+        Optional<Comment> os = commentRepository.findById(id);
+        Comment comment = os.get();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+
+        comment.setContent(content);
+        comment.setUsername(username);
+        comment.setCreateDate(LocalDateTime.now());
+
+        commentRepository.save(comment);
     }
 
 

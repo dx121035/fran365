@@ -1,5 +1,6 @@
 package com.example.fran365.social;
 
+import com.example.fran365.comment.CommentService;
 import com.example.fran365.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,6 +22,9 @@ public class SocialController {
     @Autowired
     private MemberService memberService;
 
+    @Autowired
+    private CommentService commentService;
+
     @GetMapping("/social")
     public String allSocial(Model model){
 
@@ -28,6 +32,7 @@ public class SocialController {
         model.addAttribute("awspath", awspath);
         model.addAttribute("member",memberService.readDetailUsername());
         model.addAttribute("lists", socialService.readList());
+        model.addAttribute("comments", commentService.)
 
         return "social/social";
     }
