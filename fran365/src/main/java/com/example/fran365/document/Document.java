@@ -16,17 +16,23 @@ public class Document {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String depart;
-
     private String category;
 
-    private String status;
+    // 0:임시저장  1:기본값 (결재시 1씩 증가),(반려시 100)
+    private Integer status;
 
     private String image;
 
     private String reason;
 
     private String deadline;
+
+    private  String receiver;
+
+    private String comment;
+
+    private  String title;
+
 
     private LocalDateTime createDate;
 

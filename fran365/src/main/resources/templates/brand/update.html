@@ -5,7 +5,6 @@ mail: inew3w@gmail.com-->
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout=http:www.ultraq.net.nz/thymeleaf/layout
       layout:decorate="~{fragments/layout1}">
 
-<div th:replace="fragments/header::header"></div>
 <div layout:fragment="content">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -27,35 +26,14 @@ mail: inew3w@gmail.com-->
             </div>
             <div class="card-body p-0">
                 <div class="p-4 code-to-copy">
-                    <form action="/brand/update" method="post">
-                        <input type="hidden" name="username" th:value="${#authentication.principal.username}">
-                        <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="title">매장 이름</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" id="title" name="title" th:value="${brand.title}" type="text" placeholder="매장 이름 등록해주세요" required />
-                            </div>
-                        </div>
+                    <form action="/brand/create" method="post">
+                        <input type="hidden" name="username" th:value="${brand.username}">
                         <div class="row mb-3">
                             <div class="col-sm-2">
-                                <label class="col-form-label" for="tel">매장 전화번호</label>
+                                <label class="col-form-label" for="title">매장 이름</label>
                             </div>
                             <div class="col-sm-4">
-                                <input class="form-control" id="tel" th:value="${brand.tel}" name="tel" type="text" placeholder="(지역번호)-000-0000" required />
-                            </div>
-
-                            <div class="col-sm-2">
-                                <label class="col-form-label" for="phone">점주 핸드폰 번호</label>
-                            </div>
-                            <div class="col-sm-4">
-                                <input class="form-control" id="phone" name="phone" th:value="${brand.phone}" type="text" placeholder="010-0000-0000" required />
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-sm-2">
-                                <label class="col-form-label" for="email">이메일</label>
-                            </div>
-                            <div class="col-sm-4">
-                                <input class="form-control" id="email" name="email" th:value="${brand.email}" type="text" placeholder="qwq123@gmail.com" required />
+                                <input class="form-control" th:value="${brand.title}" id="title" name="title" type="text" placeholder="매장 이름 등록해주세요" required />
                             </div>
 
                             <div class="col-sm-2">
@@ -63,7 +41,7 @@ mail: inew3w@gmail.com-->
                             </div>
                             <div class="col-sm-4">
                                 <select class="form-select" name="time" id="time">
-                                    <option selected="selected" th:value="${brand.time}" disabled >[[${brand.time}]]</option>
+                                    <option selected="selected" th:value="${brand.time}" readonly > [[${brand.time}]]</option>
                                     <option value="10:00-22:00">07:00 - 20:00</option>
                                     <option value="10:00-22:00">10:00 - 22:00</option>
                                     <option value="11:00-23:00">11:00 - 23:00</option>
@@ -74,11 +52,26 @@ mail: inew3w@gmail.com-->
                         </div>
                         <div class="row mb-3">
                             <div class="col-sm-2">
+                                <label class="col-form-label" for="tel">매장 전화번호</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input class="form-control" th:value="${brand.tel}" id="tel" name="tel" type="text" placeholder="(지역번호)-000-0000" required />
+                            </div>
+
+                            <div class="col-sm-2">
+                                <label class="col-form-label" for="phone">점주 핸드폰 번호</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input class="form-control" th:value="${brand.phone}" id="phone" name="phone" type="text" placeholder="010-0000-0000" required />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-2">
                                 <label class="col-form-label" for="address1">지점 주소</label>
                             </div>
                             <div class="col-sm-4">
                                 <select class="form-select" name="address1" id="address1" >
-                                    <option selected="selected" th:value="${brand.address1}" disabled>[[${brand.address1}]]</option>
+                                    <option selected="selected" th:value="${brand.address1}" readonly>[[${brand.address1}]]</option>
                                     <option value="서울" >서울</option>
                                     <option value="경기" >경기</option>
                                     <option value="인천" >인천</option>
@@ -102,7 +95,7 @@ mail: inew3w@gmail.com-->
                                 <label class="col-form-label" for="address2">상세 주소</label>
                             </div>
                             <div class="col-sm-4">
-                                <input class="form-control" name="address2" id="address2" th:value="${brand.address2}" type="text" placeholder="도로명 주소 자세히 입력해주세요" required />
+                                <input class="form-control" th:value="${brand.address2}" name="address2" id="address2" type="text" placeholder="지번 주소 자세히 입력해주세요" required />
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -128,4 +121,3 @@ mail: inew3w@gmail.com-->
         });
     </script>
 </div>
-<div th:replace="fragments/footer::footer"></div>

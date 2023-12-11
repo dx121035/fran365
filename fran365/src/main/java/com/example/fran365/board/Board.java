@@ -30,6 +30,8 @@ public class Board{
     private String category;
 
     private String status;
+    
+    private String username;
 
     private LocalDateTime createDate;
 

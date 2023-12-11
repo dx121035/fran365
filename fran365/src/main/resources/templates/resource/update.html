@@ -1,0 +1,120 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout1}">
+
+<div layout:fragment="content">
+
+
+    <div class="container-small" style="margin-top: 70px">
+        <div class="row g-3 mb-6">
+            <h1>재고 판매 등록</h1> <br><br><br>
+            <form action="/resource/update" method="post" id="resourceForm" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-xl-9">
+                        <!-- 중첩된 form 제거 -->
+                        <div class="row g-3 mb-6">
+                            <div class="col-sm-6 col-md-4">
+                                <div class="form-floating">
+                                    <input class="form-control" id="floatingInputGrid" type="text" name="writer"
+                                           th:value="${resource.writer}" readonly/>
+                                    <label for="floatingInputGrid">작성자 * 수정 불가 * </label>
+                                </div>
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="col-sm-6 col-md-4">
+                                <div class="form-floating">
+                                    <input class="form-control" type="text" name="category"
+                                           th:value="${resource.category}" readonly/>
+                                    <label for="floatingInputGrid">품목 * 수정 불가 * </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-4">
+                                <div class="form-floating">
+                                    <input class="form-control" type="text" name="amount"
+                                           th:value="${resource.amount}"/>
+                                    <label for="floatingInputGrid">수량</label>
+                                </div>
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="col-sm-6 col-md-4">
+                                <div class="form-floating">
+                                    <input class="form-control" type="text" name="price" th:value="${resource.price}"/>
+                                    <label for="floatingInputGrid">가격</label>
+                                </div>
+                            </div>
+                            <div class="col-12 gy-6">
+                                <div class="form-floating">
+                            <textarea class="form-control" id="floatingProjectOverview" name="content"
+                                      placeholder="내용을 작성해주세요"
+                                      style="height: 100px" th:text="${resource.content}"></textarea>
+                                    <label for="floatingProjectOverview">내 용</label>
+                                </div>
+                            </div>
+
+                            <div style="max-width: 150px; max-height: 150px; overflow: hidden;">
+                                현재 사진 :
+                                <img th:src="@{|${awspath}/${resource.image}|}" width="100%" height="90%" alt=""/>
+                            </div>
+                            <div class="dropzone dropzone-multiple p-0" id="dropzone" data-dropzone="data-dropzone"
+                                 data-options='{"url":"valid/url","maxFiles":1,"dictDefaultMessage":"Choose or Drop a file here"}'>
+                                <div class="fallback">
+                                    <input type="file" name="filename" th:value="${resource.image}"/>
+                                </div>
+                                <div class="dz-message" data-dz-message="data-dz-message">
+                                    <div class="dz-message-text"><img class="me-2"
+                                                                      src="../../../assets/img/icons/cloud-upload.svg"
+                                                                      width="25" alt=""/>Drop your file here
+                                    </div>
+                                </div>
+                                <div class="dz-preview dz-preview-multiple m-0 d-flex flex-column">
+                                    <div class="d-flex pb-3 border-bottom media px-2">
+                                        <div class="border border-300 p-2 rounded-2 me-2"><img
+                                                class="rounded-2 dz-image" src="../../../assets/img/icons/file.png"
+                                                alt="..." data-dz-thumbnail="data-dz-thumbnail"/></div>
+                                        <div class="flex-1 d-flex flex-between-center">
+                                            <div>
+                                                <h6 data-dz-name="data-dz-name"></h6>
+                                                <div class="d-flex align-items-center">
+                                                    <p class="mb-0 fs--1 text-400 lh-1" data-dz-size="data-dz-size"></p>
+                                                    <div class="dz-progress"><span class="dz-upload"
+                                                                                   data-dz-uploadprogress=""></span>
+                                                    </div>
+                                                </div>
+                                                <span class="fs--2 text-danger"
+                                                      data-dz-errormessage="data-dz-errormessage"></span>
+                                            </div>
+                                            <div class="dropdown font-sans-serif">
+                                                <button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal dropdown-caret-none"
+                                                        type="button" data-bs-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false"><span class="fas fa-ellipsis-h"></span>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-end border py-2"><a
+                                                        class="dropdown-item" href="#!" data-dz-remove="data-dz-remove">Remove
+                                                    File</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <input type="hidden" name="id" th:value="${resource.id}">
+                            <input type="hidden" name="expiration" th:value="${resource.expiration}">
+                            <input type="hidden" name="address" th:value="${resource.address}">
+                            <input type="hidden" name="username" th:value="${resource.username}">
+
+                            <div class="col-12 gy-6">
+                                <div class="row g-3 justify-content-end">
+                                    <div class="col-auto">
+                                        <!-- form 속성 추가 -->
+                                        <button type="submit" class="btn btn-primary px-5 px-sm-15">재고 공유</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <br><br><br><br>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</html>

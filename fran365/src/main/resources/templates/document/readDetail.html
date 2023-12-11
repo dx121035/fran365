@@ -3,13 +3,25 @@
 
 <div layout:fragment="content">
 
-
-    deadline : <a th:text="${docu.deadline}"></a><br>
-    category : <a th:text="${docu.category}"></a><br>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-      <a th:href="@{|/document/delete?id=${docu.id}|}">삭제</a>
-      <a th:href="@{|/document/update?id=${docu.id}|}">수정</a>
+deadline : <a th:text="${docu.deadline}"></a><br>
+category : <a th:text="${docu.category}"></a><br>
+
+
+<!-- Add Approval and Reject buttons with links -->
+<form th:action="@{'/document/approval/' + ${docu.id}}" method="post">
+    <button type="submit">Approve</button>
+</form>
+<form th:action="@{'/document/reject/' + ${docu.id}}" method="post">
+    <button type="submit">Reject</button>
+</form>
+
+
+<a th:href="@{|/document/delete?id=${docu.id}|}">삭제</a>
+<a th:href="@{|/document/update?id=${docu.id}|}">수정</a>
+
 
 </div>
 </html>

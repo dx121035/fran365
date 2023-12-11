@@ -32,13 +32,14 @@ public class BoardServiceImpl implements BoardService {
     BoardRepository boardRepository;
 
     @Override
-    public void create(Board board,String category)throws IOException {
+    public void create(Board board,String category, String username)throws IOException {
 
         if (!board.getCategory().equals("공지") && !board.getCategory().equals("FAQ")) {
             board.setStatus("답변대기");
         }
         board.setCreateDate(LocalDateTime.now());
         board.setCategory(category);
+        board.setUsername(username);
         boardRepository.save(board);
     }
 
@@ -56,7 +57,9 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public void update(Board board, String category) throws IOException{
-
+        if (!board.getCategory().equals("공지") && !board.getCategory().equals("FAQ")) {
+            board.setStatus("답변대기");
+        }
         board.setCategory(category);
         board.setCreateDate(LocalDateTime.now());
         boardRepository.save(board);
@@ -74,6 +77,11 @@ public class BoardServiceImpl implements BoardService {
         sorts.add(Sort.Order.desc("createDate"));
         Pageable pageable = PageRequest.of(page, 5,Sort.by(sorts));
         return boardRepository.findByCategory(category,pageable);
+    }
+
+    @Override
+    public List<Board> readFAQList(String category) {
+        return boardRepository.findByCategory(category);
     }
 
     @Override

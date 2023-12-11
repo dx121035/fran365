@@ -1,0 +1,44 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout1}">
+
+<div layout:fragment="content">
+
+
+
+    <div class="container-small" style="margin-top: 70px">
+        <div class="row g-3 mb-6">
+            <h2>이번 달 매출</h2>
+            <form action="/sales/update" method="post">
+                <div class="row">
+                    <div class="col-xl-9">
+                        <!-- 중첩된 form 제거 -->
+                        <div class="row g-3 mb-6">
+                            <div class="col-sm-6 col-md-4">
+                                <div class="form-floating">
+                                    <input class="form-control" id="floatingInputGrid" type="text" name="month"
+                                           th:value="${sales.month} + '월'" readonly/>
+                                </div>
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="col-sm-6 col-md-4">
+                                <div class="form-floating">
+                                    <input class="form-control" type="text" name="income"
+                                           th:value="${sales.income}" readonly/>
+                                    <label for="floatingInputGrid">현재 매출 : </label>
+                                </div>
+                            </div>
+                            <input type="hidden" name="id" th:value="${sales.id}">
+                            <input type="hidden" name="brand.id" th:value="${sales.brand.id}">
+                            <div class="w-100"></div>
+                            <div class="w-100"></div>
+                            <div class="w-100"></div>
+
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary px-5 px-sm-10">업데이트</button>
+            </form>
+        </div>
+    </div>
+</div>
+</html>

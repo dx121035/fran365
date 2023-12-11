@@ -3,14 +3,72 @@
 
 <div layout:fragment="content">
 
-  작성자 : <a th:text="${resource.writer}"></a><br>
-  품명 : <a th:text="${resource.category}"></a><br>
-  수량 : <a th:text="${resource.amount} + 개"></a><br>
-  가격 : <a th:text="${resource.price} + 원"></a><br>
-  지점 : <a th:text="${resource.address}"></a><br>
-  유통기한 : <a th:text="${resource.expiration}"></a><br>
-<!--  <a th:href="@{|/question/delete?id=${list.id}|}">삭제</a>-->
-<!--  <a th:href="@{|/question/update?id=${list.id}|}">수정</a>-->
+
+
+    <div class="pt-5 pb-9">
+            <div class="container-small">
+                <div class="row g-5 mb-5 mb-lg-8" data-product-details="data-product-details">
+                    <div class="col-12 col-lg-6">
+                        <div class="row g-3 mb-3">
+                            <div class="col-12 col-md-2 col-lg-12 col-xl-2">
+                                <div class="swiper-products-thumb swiper swiper-container theme-slider overflow-visible"
+                                     id="swiper-products-thumb"></div>
+
+                            </div>
+                            <div class="col-12 col-md-10 col-lg-12 col-xl-10">
+
+                                <div class="d-flex align-items-center border rounded-3 text-center p-5 h-100">
+                                    <img th:src="@{|${awspath}/${resource.image}|}" alt="" style="width: 100%;"/>
+                                    <div class="swiper swiper-container theme-slider"
+                                         data-thumb-target="swiper-products-thumb"
+                                         data-products-swiper='{"slidesPerView":1,"spaceBetween":16,"thumbsEl":".swiper-products-thumb"}'></div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <div class="d-flex flex-column justify-content-between h-100">
+                            <div>
+                                <h3 class="mb-3 lh-sm" th:text="${resource.title}"></h3>
+                                <div class="d-flex flex-wrap align-items-start mb-3">
+                                    <span class="badge bg-success fs--1 rounded-pill me-2 fw-semi-bold">판매중</span>
+                                    <a class="fw-semi-bold" href="#!">[[${resource.address}]]</a>
+                                </div>
+                                <div class="d-flex flex-wrap align-items-center">
+                                    <h1 class="me-3" th:text="'$ ' + ${resource.price} + '원' "></h1>
+                                </div>
+                                <br><br><br>
+                                <h3 class="mb-2 text-800" th:text="${resource.content}"></h3>
+                                <br><br><br><br>
+                                유통 기한 : <p class="text-danger-500 fw-bold mb-5 mb-lg-0"
+                                           th:text="${resource.expiration}"></p>
+                            </div>
+                            <div>
+                                <img th:src="@{|${awspath}/${resource.image}|}" alt="" width="38"/>
+
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <a th:href="@{|/resource/update?id=${resource.id}|}" class="btn btn-lg btn-outline-warning rounded-pill w-100 me-3 px-2 px-sm-4 fs--1 fs-sm-0">
+                                <span class="me-2 far fa-heart"></span>수정
+                            </a>
+
+
+                            <a th:href="@{|/resource/delete?id=${resource.id}&amount=${resource.amount}&stockName=${resource.category}|}" class="btn btn-lg btn-warning rounded-pill w-100 fs--1 fs-sm-0">
+                                <span class="fas fa-shopping-cart me-2"></span>삭 제
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </section>
+</div>
+
 
 </div>
+
 </html>

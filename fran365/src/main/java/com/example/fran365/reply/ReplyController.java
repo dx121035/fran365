@@ -11,6 +11,7 @@ import com.example.fran365.board.BoardService;
 import com.example.fran365.member.Member;
 import com.example.fran365.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,18 +30,30 @@ public class ReplyController {
     @Autowired
     private MemberService memberService;
 
+    @Value("${aws.s3.awspath}")
+    private String awspath;
+
     @Autowired
     private BoardService boardService;
 
     @PostMapping("/create")
     public String create(@RequestParam Integer id,  @RequestParam String content, @RequestParam String writer) {
         replyService.create(id,content,writer);
+        if (writer.equals("관리자")) {
+
+        	return "redirect:/admin/questionReadDetail?id=" + id;
+        }
         return "redirect:/board/detail?id=" + id;
     }
 
     @PostMapping("/noticeCreate")
     public String noticeCreate(@RequestParam Integer id,  @RequestParam String content, @RequestParam String writer) {
         replyService.create(id,content,writer);
+
+        if (writer.equals("관리자")) {
+
+        	return "redirect:/admin/noticeReadDetail?id=" + id;
+        }
         return "redirect:/board/noticeDetail?id=" + id;
     }
 
@@ -65,5 +78,10 @@ public class ReplyController {
         return "board/noticeDetail";
 
     }
+  /*  @GetMapping("/delete")
+    public String delete(Model model,@RequestParam Integer id) {
+        replyService.delete(id);
 
+        return "board/detail";
+    }*/
 }

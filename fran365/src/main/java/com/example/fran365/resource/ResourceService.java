@@ -14,7 +14,7 @@ public interface ResourceService {
 
     void create(Resource resource, MultipartFile multipartFile) throws IOException;
 
-    void update(Resource resource);
+    void update(Resource resource, MultipartFile multipartFile) throws IOException;
 
     void delete(Integer id);
 

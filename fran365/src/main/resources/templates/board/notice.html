@@ -5,7 +5,6 @@ mail: inew3w@gmail.com-->
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout=http:www.ultraq.net.nz/thymeleaf/layout
       layout:decorate="~{fragments/layout1}">
 
-<div th:replace="fragments/header::header"></div>
 <div layout:fragment="content">
 <div class="container">
     <div class="col-md-10 offset-md-1">
@@ -14,11 +13,6 @@ mail: inew3w@gmail.com-->
     <div class="card-header p-4 border-bottom border-300 bg-soft">
         <div class="d-flex justify-content-between align-items-center">
             <h4 class="text-900 mb-0" data-anchor="data-anchor">Notice</h4>
-            <div th:if="${#authentication.name == 'admin'}">
-                <a th:href="@{/board/create}"
-                   class="border border-300 rounded-2 p-2 mb-2 text-center bg-outline-danger dark__bg-1000 shadow-sm"
-                   style="text-decoration: none;">게시판 등록</a>
-            </div>
         </div>
     </div>
     <div class="card-body p-0">
@@ -104,7 +98,6 @@ mail: inew3w@gmail.com-->
         </script>
     </div>
 </div>
-    </div>
 </div>
 </div>
-<div th:replace="fragments/footer::footer"></div>
+</div>

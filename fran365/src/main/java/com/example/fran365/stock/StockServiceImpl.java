@@ -100,4 +100,11 @@ public class StockServiceImpl implements StockService {
 
         }
     }
+
+
+    @Override
+    public void resourceUpdate(Stock foundStock) {
+
+        stockRepository.save(foundStock);
+    }
 }

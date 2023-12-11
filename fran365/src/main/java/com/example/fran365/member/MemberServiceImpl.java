@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -65,11 +66,11 @@ public class MemberServiceImpl implements MemberService {
 
 		member.setPassword(passwordEncoder.encode(member.getPassword()));
 		member.setUsername(member.getUsername());
-		member.setPassword(member.getPassword());
 		member.setCreateDate(LocalDateTime.now());
 		member.setImage(filename);
 		member.setRole("ROLE_USER");
 		member.setPosition(null);
+		member.setEnabled(0);
 
 		memberRepository.save(member);
 
@@ -108,6 +109,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void update(Member member, MultipartFile multipartFile) throws IOException {
+		
 		String filecheck = multipartFile.getOriginalFilename();
 
 		if (filecheck != null && !filecheck.trim().isEmpty()) {
@@ -132,22 +134,17 @@ public class MemberServiceImpl implements MemberService {
 			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 			member.setPassword(passwordEncoder.encode(member.getPassword()));
-			member.setCreateDate(LocalDateTime.now());
 			member.setImage(filename);
-
-			//member.setRole(Role.ROLE_USER);
 
 			memberRepository.save(member);
-
-			member.setImage(filename);
-
-		}
+		} else {
 
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 		member.setPassword(passwordEncoder.encode(member.getPassword()));
 
 		memberRepository.save(member);
+		}
 	}
 
 	@Override
@@ -238,6 +235,7 @@ public class MemberServiceImpl implements MemberService {
 			System.err.println("User with username " + username + " does not exist.");
 		}
 	}
+
 
 
 	@Transactional

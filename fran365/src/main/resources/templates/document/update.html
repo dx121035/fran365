@@ -1,0 +1,122 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout1}">
+
+<div layout:fragment="content">
+
+    <div class="container">
+
+        <h2 class="mb-4">서류 결재</h2>
+
+
+
+
+
+        <form class="row g-3 mb-6" th:action="@{/document/update}" method="post" enctype="multipart/form-data">
+
+            <div class="col-sm-6 col-md-4">
+                <div class="form-floating">
+                    <input class="form-control" name="name" id="name"
+                           placeholder="작성자" th:value="${member.name}" readonly>
+                    <label for="name">작성자</label>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4">
+                <div class="form-floating">
+                    <input class="form-control" name="depart" id="depart"
+                           placeholder="부서" th:value="${member.depart}" readonly>
+                    <label  for="depart">부서</label>
+                </div>
+            </div>
+
+
+
+            <div class="col-sm-6 col-md-4">
+                <div class="form-floating">
+                    <input class="form-control" name="category" id="category"
+                           placeholder="카테고리" th:value="${docu.category}">
+                    <label for="category">카테고리</label>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="col-md-6 gy-6">
+                <div class="flatpickr-input-container">
+                    <div class="form-floating">
+                        <input class="form-control" id="deadline" type="date"
+                               name="deadline" placeholder="기한일" th:value="${docu.deadline}">
+                        <label class="ps-6" for="deadline">기한일</label>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 gy-6">
+                <div class="flatpickr-input-container">
+                    <div class="form-floating">
+                        <input class="form-control" id="receiver" type="text" name="receiver" placeholder="수신자" th:value="${docu.receiver}">
+                        <label class="ps-6" for="receiver">수신자</label>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 gy-6">
+                <div class="flatpickr-input-container">
+                    <div class="form-floating">
+                        <input class="form-control" id="comment" type="text" name="comment" placeholder="내용" th:value="${docu.comment}">
+                        <label class="ps-6" for="comment">내용</label>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 gy-6">
+                <div class="flatpickr-input-container">
+                    <div class="form-floating">
+                        <input class="form-control" id="title" type="text" name="title" placeholder="내용" th:value="${docu.title}">
+                        <label class="ps-6" for="title">제목</label>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-md-12 gy-6">
+
+                <input class="form-control" type="file" name="filename">
+
+            </div>
+
+
+
+
+            <input type="hidden" name="id" th:value="${docu.id}">
+
+<br><br><br><br><br><br><br>
+            <div class="col-auto container d-flex justify-content-end ml-20">
+
+                <button class="btn btn-primary px-5 px-sm-15 ms-2" type="submit">결재</button>
+            </div>
+
+        </form>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</html>

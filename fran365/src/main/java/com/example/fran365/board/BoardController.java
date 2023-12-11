@@ -7,6 +7,7 @@ package com.example.fran365.board;
 
 import com.example.fran365.member.Member;
 import com.example.fran365.member.MemberService;
+import com.example.fran365.reply.ReplyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -27,6 +28,7 @@ import java.util.List;
 public class BoardController {
 
     @Autowired private BoardService boardService;
+    @Autowired private ReplyService replyService;
     @Autowired private MemberService memberService;
     @Value("${aws.s3.awspath}")
     private String awspath;
@@ -39,13 +41,20 @@ public class BoardController {
     }
 
     @PostMapping("/create")
-    public String create(Board board, @RequestParam String category) throws IOException {
-        boardService.create(board, category);
+    public String create(Board board, @RequestParam String category, String username) throws IOException {
+        boardService.create(board, category, username);
 
-        // Redirect to the appropriate URL based on the category
         if ("공지".equals(category)) {
+        	if (board.getWriter().equals("관리자")) {
+            	
+            	return "redirect:/admin/noticeReadList";
+        	}
             return "redirect:/board/notice";
         } else if ("FAQ".equals(category)) {
+        	if (board.getWriter().equals("관리자")) {
+            	
+            	return "redirect:/admin/faqReadList";
+        	}
             return "redirect:/board/FAQ";
         } else {
             return "redirect:/board/list";
@@ -58,6 +67,8 @@ public class BoardController {
         model.addAttribute("boards", allBoards);
         model.addAttribute("awspath", awspath);
         model.addAttribute("member",memberService.readDetailUsername());
+        model.addAttribute("FAQ",boardService.readFAQList("FAQ"));
+
         return "board/list";
     }
     @GetMapping("/notice")
@@ -68,12 +79,13 @@ public class BoardController {
         model.addAttribute("member",memberService.readDetailUsername());
         return "board/notice";
     }
-        @GetMapping("/FAQ")
+    @GetMapping("/FAQ")
     public String FAQ(Model model,@RequestParam (value="page",defaultValue="0")int page) {
         Page<Board> paging = boardService.getNoticeBoards("FAQ",page);
         model.addAttribute("paging",paging);
-            model.addAttribute("awspath", awspath);
-            model.addAttribute("member",memberService.readDetailUsername());
+        model.addAttribute("awspath", awspath);
+        model.addAttribute("member",memberService.readDetailUsername());
+
         return "board/FAQ";
     }
     @GetMapping("/detail")
@@ -81,6 +93,7 @@ public class BoardController {
 
         Board board = boardService.detail(id);
         Member member = memberService.readDetailUsername();
+        //replyService.delete(id);
         boardService.hit(board,member);
 
         model.addAttribute("board", boardService.detail(id));
@@ -131,8 +144,16 @@ public class BoardController {
 
         boardService.update(board, category);
         if ("공지".equals(category)) {
+        	if (board.getWriter().equals("관리자")) {
+            	
+            	return "redirect:/admin/noticeReadDetail?id=" + board.getId();
+        	}
             return "redirect:/board/notice";
         } else if ("FAQ".equals(category)) {
+        	if (board.getWriter().equals("관리자")) {
+            	
+            	return "redirect:/admin/faqReadDetail?id=" + board.getId();
+        	}
             return "redirect:/board/FAQ";
         } else {
             return "redirect:/board/list";
@@ -140,15 +161,27 @@ public class BoardController {
     }
 
     @GetMapping("/delete")
-    public String delete(Model model,@RequestParam Integer id,@RequestParam String category) {
+    public String delete(Model model,@RequestParam Integer id,@RequestParam String category, String role) {
         boardService.delete(id);
         model.addAttribute("awspath", awspath);
         model.addAttribute("member",memberService.readDetailUsername());
         if ("공지".equals(category)) {
+        	if (role.equals("ROLE_ADMIN")) {
+            	
+            	return "redirect:/admin/noticeReadList";
+        	}
             return "redirect:/board/notice";
         } else if ("FAQ".equals(category)) {
+        	if (role.equals("ROLE_ADMIN")) {
+        		
+        		return "redirect:/admin/faqReadList";
+        	}
             return "redirect:/board/FAQ";
         } else {
+        	if (role.equals("ROLE_ADMIN")) {
+        		
+        		return "redirect:/admin/questionReadList";
+        	}
             return "redirect:/board/list";
         }
     }

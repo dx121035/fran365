@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.fran365.board.BoardService;
 import com.example.fran365.event.EventService;
 import com.example.fran365.member.MemberService;
 import com.example.fran365.position.PositionService;
@@ -34,6 +35,9 @@ public class AdminController {
 	@Autowired
 	private PositionService positionService;
 	
+	@Autowired
+	private BoardService boardService;
+	
 	@GetMapping("/main")
 	public String adminMain(Model model) {
 		
@@ -42,6 +46,7 @@ public class AdminController {
 		model.addAttribute("members", adminService.memberReadList());
 		model.addAttribute("events", eventService.readList());
 		model.addAttribute("deliveyNotComplete", adminService.getDeliveyNotComplete());
+		model.addAttribute("QuestionNotComplete", adminService.getQuestionNotComplete());
 		model.addAttribute("date", LocalDate.now());
 		
 		return "admin/main";
@@ -124,6 +129,104 @@ public class AdminController {
 		adminService.updatePosition(username, newPosition);
 		
 		return 1;
+	}
+	
+	@GetMapping("/noticeReadList")
+	public String noticeReadList(Model model) {
+		
+		model.addAttribute("awspath", awspath);
+		model.addAttribute("user", memberService.readDetailUsername());
+		model.addAttribute("notices", adminService.noticeReadList());
+		
+		return "admin/noticeReadList";
+	}
+	
+	@GetMapping("/noticeReadDetail")
+	public String noticeReadDetail(Model model, Integer id) {
+		
+		model.addAttribute("awspath", awspath);
+		model.addAttribute("user", memberService.readDetailUsername());
+		model.addAttribute("notice", adminService.boardReadDetail(id));
+		
+		return "admin/noticeReadDetail";
+	}
+	
+	@GetMapping("/noticeCreate")
+	public String noticeCreate(Model model) {
+		
+		model.addAttribute("awspath", awspath);
+		model.addAttribute("user", memberService.readDetailUsername());
+		
+		return "admin/noticeCreate";
+	}
+	
+	@GetMapping("/noticeUpdate")
+	public String noticeUpdate(Model model, Integer id) {
+		
+		model.addAttribute("awspath", awspath);
+		model.addAttribute("user", memberService.readDetailUsername());
+		model.addAttribute("notice", boardService.readDetail(id));
+		
+		return "admin/noticeUpdate";
+	}
+	
+	@GetMapping("/questionReadList")
+	public String questionReadList(Model model) {
+		
+		model.addAttribute("awspath", awspath);
+		model.addAttribute("user", memberService.readDetailUsername());
+		model.addAttribute("questions", adminService.questionReadList());
+		
+		return "admin/questionReadList";
+	}
+	
+	@GetMapping("/questionReadDetail")
+	public String questionReadDetail(Model model, Integer id) {
+		
+		model.addAttribute("awspath", awspath);
+		model.addAttribute("user", memberService.readDetailUsername());
+		model.addAttribute("question", adminService.boardReadDetail(id));
+		
+		return "admin/questionReadDetail";
+	}
+	
+	@GetMapping("/faqReadList")
+	public String faqReadList(Model model) {
+		
+		model.addAttribute("awspath", awspath);
+		model.addAttribute("user", memberService.readDetailUsername());
+		model.addAttribute("faqs", adminService.faqReadList());
+		
+		return "admin/faqReadList";
+	}
+	
+	@GetMapping("/faqCreate")
+	public String faqCreate(Model model) {
+		
+		model.addAttribute("awspath", awspath);
+		model.addAttribute("user", memberService.readDetailUsername());
+		
+		return "admin/faqCreate";
+	}
+	
+	@GetMapping("/faqReadDetail")
+	public String faqReadDetail(Model model, Integer id) {
+		
+		model.addAttribute("awspath", awspath);
+		model.addAttribute("user", memberService.readDetailUsername());
+		model.addAttribute("faq", adminService.boardReadDetail(id));
+		
+		return "admin/faqReadDetail";
+	}
+	
+	@GetMapping("/faqUpdate")
+	public String faqUpdate(Model model, Integer id) {
+		
+		model.addAttribute("awspath", awspath);
+		model.addAttribute("user", memberService.readDetailUsername());
+		model.addAttribute("faq", boardService.readDetail(id));
+		
+		return "admin/faqUpdate";
 	}
 
 }

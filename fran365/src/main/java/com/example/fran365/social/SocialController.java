@@ -1,12 +1,17 @@
 package com.example.fran365.social;
 
+
 import com.example.fran365.comment.CommentService;
+import com.example.fran365.member.Member;
 import com.example.fran365.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 
 @Controller
@@ -20,12 +25,17 @@ public class SocialController {
     private SocialService socialService;
 
     @Autowired
+    private SocialRepository socialRepository;
+
+    @Autowired
     private MemberService memberService;
 
     @Autowired
     private CommentService commentService;
 
-    @GetMapping("/social")
+
+    @GetMapping("/main")
+
     public String allSocial(Model model){
 
         model.addAttribute("details", socialService.readDetail());
@@ -34,14 +44,14 @@ public class SocialController {
         model.addAttribute("lists", socialService.readList());
         model.addAttribute("comments", commentService.)
 
-        return "social/social";
+        return "social/main";
     }
 
     @PostMapping("/create")
     public String create(Social social){
         socialService.create(social);
 
-        return "redirect:/social/social";
+        return "redirect:/social/main";
     }
 
     @PostMapping("/update")
@@ -51,7 +61,7 @@ public class SocialController {
 
         socialService.update(id,content,status);
 
-        return "redirect:/social/social";
+        return "redirect:/social/main";
     }
 
     @PostMapping("/feedStatus")
@@ -61,5 +71,25 @@ public class SocialController {
         socialService.updateStatus(postId, status);
 
     }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/like")
+    public String like(@RequestParam Integer id) {
+        Optional<Social> os = socialRepository.findById(id);
+        Social social = os.get();
+        Member member = memberService.readDetailUsername();
+        socialService.like(social, member);
+
+        return "redirect:/social/main?id=" + id;
+    }
+
+    @GetMapping("/delete")
+    public String delete(@RequestParam Integer id) {
+        socialService.delete(id);
+        return "redirect:/social/main";
+    }
+
+
+
 
 }
