@@ -265,7 +265,7 @@
                     <th class="sort align-middle" scope="col" data-sort="customer" style="width:18%;">주문번호</th>
                     <th class="sort align-middle" scope="col" data-sort="email" style="width:18%;">주문목록</th>
                     <th class="sort align-middle pe-3" scope="col" data-sort="mobile_number" style="width:10%;">주문금액</th>
-                    <th class="sort align-middle pe-3" scope="col" data-sort="mobile_number" style="width:10%;">회원ID</th>
+                    <th class="sort align-middle pe-3" scope="col" data-sort="mobile_number" style="width:12%;">회원ID</th>
                     <th class="sort align-middle" scope="col" data-sort="city" style="width:10%;">배송상태</th>
                     <th class="sort align-middle" scope="col" data-sort="joined" style="width:10%;">처리일자</th>
                   </tr>
@@ -273,16 +273,20 @@
                 <tbody class="list" id="members-table-body">
 					
 					
-				  <th:block th:each="delivery : ${deliveries}">
+				  <th:block th:each="delivery, loop : ${deliveries}">
                   <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-					<td class="position1 align-middle white-space-nowrap text-1100"><a href="#">#[[${delivery.id}]]</a></td>
+					<td class="position1 align-middle white-space-nowrap text-1100"><a href="#">#[[${#lists.size(deliveries)-loop.index}]]</a></td>
                     <td class="email align-middle white-space-nowrap text-1100"><a class="total align-middle fw-bold text-1000" th:text="${delivery.uid}" th:href="@{|/admin/deliveryReadDetail?id=${delivery.id}|}"></a></td>
                     <td class="mobile_number align-middle white-space-nowrap text-1100">[[${delivery.allAbout}]]</td>
                     <td class="city align-middle white-space-nowrap text-1100">[[${delivery.total}]]원</td>
                     <td class="position1 align-middle white-space-nowrap text-1100">[[${delivery.username}]]</td>
                     <td class="delivery_type align-middle white-space-nowrap text-900 fs--1 text-start">
-						<div class="badge badge-phoenix fs--1 badge-phoenix-success" style="width: 80%;">
-		                  <span class="fw-bold" th:text="${delivery.statusList[#lists.size(delivery.statusList)-1].step}"></span>
+						<div th:if="${delivery.statusList[#lists.size(delivery.statusList)-1].step eq '배송완료'}" class="badge badge-phoenix fs--1 badge-phoenix-success" style="width: 70%;">
+							<span class="fw-bold" th:text="${delivery.statusList[#lists.size(delivery.statusList)-1].step}"></span>
+						</div>
+						<div th:unless="${delivery.statusList[#lists.size(delivery.statusList)-1].step eq '배송완료'}" class="badge badge-phoenix fs--1 badge-phoenix-warning" style="width: 70%;">
+							<span class="fw-bold" th:text="${delivery.statusList[#lists.size(delivery.statusList)-1].step}"></span>
+						 </div>
 					</td>
                     <td class="joined align-middle white-space-nowrap text-1100" th:text="${#temporals.format(delivery.createDate, 'yyyy-MM-dd HH:mm')}"></td>
                   </tr>

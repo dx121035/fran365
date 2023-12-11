@@ -278,9 +278,9 @@
                 <tbody class="list" id="members-table-body">
 					
 					
-				  <th:block th:each="question : ${questions}">
+				  <th:block th:each="question, loop : ${questions}">
                   <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-					<td class="position1 align-middle white-space-nowrap text-1100"><a href="#">#[[${question.id}]]</a></td>
+					<td class="position1 align-middle white-space-nowrap text-1100"><a href="#">#[[${#lists.size(questions)-loop.index}]]</a></td>
                     <td class="customer align-middle white-space-nowrap"><a class="d-flex align-items-center text-900 text-hover-1000" th:href="@{|/admin/questionReadDetail?id=${question.id}|}">
                         <h6 class="mb-0 fw-semi-bold">[[${question.title}]]</h6>&nbsp;&nbsp;[<span th:text="${#lists.size(question.replyList)}"></span>]
                       </a></td>

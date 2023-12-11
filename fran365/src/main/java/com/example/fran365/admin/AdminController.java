@@ -15,6 +15,7 @@ import com.example.fran365.department.DepartmentService;
 import com.example.fran365.event.EventService;
 import com.example.fran365.member.MemberService;
 import com.example.fran365.position.PositionService;
+import com.example.fran365.status.Status;
 
 
 @RequestMapping("/admin")
@@ -273,6 +274,14 @@ public class AdminController {
 		model.addAttribute("delivery", adminService.deliveryReadDetail(id));
 		
 		return "admin/deliveryReadDetail";
+	}
+	
+	@PostMapping("/statusCreate")
+	public String statusCreate(Integer id, Status status) {
+		
+		adminService.statusCreate(id, status);
+		
+		return "redirect:/admin/deliveryReadDetail?id=" + id;
 	}
 
 }

@@ -243,20 +243,9 @@
       
       
 		<div class="content">
-        <h2 class="text-bold text-1100 mb-5">발주현황</h2>
+        <h2 class="text-bold text-1100 mb-5">배송관리</h2>
         <div id="members" data-list='{"valueNames":["customer","email","mobile_number","city","last_active","joined"],"page":10,"pagination":true}'>
-          <div class="row align-items-center justify-content-between g-3 mb-4">
-            <div class="col col-auto">
-              <div class="search-box">
-                <form class="position-relative" data-bs-toggle="search" data-bs-display="static">
-                  <input class="form-control search-input search" type="search" placeholder="발주내역을 검색하세요." aria-label="Search" />
-                  <span class="fas fa-search search-box-icon"></span>
-
-                </form>
-              </div>
-            </div>
-          </div>
-          <div class="mx-n4 mx-lg-n6 px-4 px-lg-6 mb-9 bg-white border-y border-300 mt-2 position-relative top-1">
+          <div class="mx-n4 mx-lg-n6 px-4 px-lg-6 mb-9 bg-white border-y border-300 mt-2 mb-10 position-relative top-1">
             <div class="table-responsive scrollbar ms-n1 ps-1">
               <table class="table table-md fs--1 mb-0">
                 <thead>
@@ -279,8 +268,12 @@
                     <td class="city align-middle white-space-nowrap text-1100">[[${delivery.allAbout}]]</td>
                     <td class="position1 align-middle white-space-nowrap text-1100">[[${delivery.username}]]</td>
                     <td class="delivery_type align-middle white-space-nowrap text-900 fs--1 text-start">
-						<div class="badge badge-phoenix fs--1 badge-phoenix-success" style="width: 70%;">
-		                  <span class="fw-bold" th:text="${delivery.statusList[#lists.size(delivery.statusList)-1].step}"></span>
+						<div th:if="${status.step eq '배송완료'}" class="badge badge-phoenix fs--1 badge-phoenix-success" style="width: 70%;">
+						    <span class="fw-bold">[[${status.step}]]</span>
+						</div>
+						<div th:unless="${status.step eq '배송완료'}" class="badge badge-phoenix fs--1 badge-phoenix-warning" style="width: 70%;">
+						    <span class="fw-bold">[[${status.step}]]</span>
+						</div>
 					</td>
                     <td class="joined align-middle white-space-nowrap text-1100" th:text="${#temporals.format(status.createDate, 'yyyy-MM-dd HH:mm')}"></td>
                   </tr>
@@ -288,17 +281,31 @@
                 </tbody>
               </table>
             </div>
-            <div class="row align-items-center justify-content-between py-2 pe-0 fs--1">
-              <div class="col-auto d-flex">
-                <p class="mb-0 d-none d-sm-block me-3 fw-semi-bold text-900" data-list-info="data-list-info"></p><a class="fw-semi-bold" href="#!" data-list-view="*">전체보기<span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a><a class="fw-semi-bold d-none" href="#!" data-list-view="less">View Less<span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a>
-              </div>
-              <div class="col-auto d-flex">
-                <button class="page-link" data-list-pagination="prev"><span class="fas fa-chevron-left"></span></button>
-                <ul class="mb-0 pagination"></ul>
-                <button class="page-link pe-0" data-list-pagination="next"><span class="fas fa-chevron-right"></span></button>
-              </div>
-            </div>
           </div>
+          
+         			 <div class="row justify-content-start">
+			 		 <div class="col-md-6" style="border: 1px solid lightslategray; border-radius: 10px; padding: 20px; margin-bottom: 10px;">
+					  <h4>배송정보 등록</h4><br>
+          			  <form th:action="@{/admin/statusCreate}" method="post">
+                        <div class="mb-6">
+                          <input class="form-control" type="text" name="tracking" th:value="${#lists.size(delivery.statusList) > 1 ? delivery.statusList[1].tracking : ''}" placeholder="송장번호">
+                        </div>
+                        <div class="mb-3">
+                          <select class="form-select" name="step" aria-label="Default select example">
+                            <option selected>배송단계</option>
+                            <option value="상품준비">상품준비</option>
+                            <option value="배송 중">배송 중</option>
+                            <option value="배송완료">배송완료</option>
+                          </select>
+                        </div>
+						<input type="hidden" name="username" th:value="${delivery.username}">
+             		    <input type="hidden" name="id" th:value="${delivery.id}">
+                        <button class="btn btn-primary mt-4" type="submit">등록</button>
+                      </form>
+                      
+                      </div>
+                      </div>
+                      
         </div>
         <footer class="footer position-absolute">
           <div class="row g-0 justify-content-between align-items-center h-100">

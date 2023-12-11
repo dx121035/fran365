@@ -42,7 +42,6 @@ public class Member implements UserDetails {
     
     private String department;
 
-
     private LocalDateTime createDate;
 
     @Override

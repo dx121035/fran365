@@ -275,9 +275,9 @@
                 <tbody class="list" id="members-table-body">
 					
 					
-				  <th:block th:each="member : ${members}">
+				  <th:block th:each="member, loop : ${members}">
                   <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-					<td class="position1 align-middle white-space-nowrap text-1100"><a href="#">#[[${member.id}]]</a></td>
+					<td class="position1 align-middle white-space-nowrap text-1100"><a href="#">#[[${loop.index+1}]]</a></td>
                     <td class="customer align-middle white-space-nowrap"><a class="d-flex align-items-center text-900 text-hover-1000" th:href="@{|/admin/memberReadDetail?id=${member.id}|}">
                         <div class="avatar avatar-m"><img class="rounded-circle" th:src="@{|${awspath}/${member.image}|}" alt="" />
                         </div>
