@@ -42,7 +42,6 @@ public class Member implements UserDetails {
     
     private String department;
 
-    private  String depart;
 
     private LocalDateTime createDate;
 
