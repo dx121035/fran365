@@ -93,10 +93,18 @@ public class DocumentController {
 
 
     @GetMapping("/readList")
-    public String readList(Model model) {
+    public String readList(Model model, Authentication authentication) {
         model.addAttribute("docus", documentService.readList());
         model.addAttribute("awspath", awspath);
         model.addAttribute("member",memberService.readDetailUsername());
+
+        String receiver = authentication.getName();
+        model.addAttribute("count1", documentService.findByStatusAndReceiver(1,receiver));
+        model.addAttribute("count2", documentService.findByStatusAndReceiver(2,receiver));
+        model.addAttribute("count3", documentService.findByStatusAndReceiver(3,receiver));
+        model.addAttribute("count4", documentService.findByStatusAndReceiver(4,receiver));
+        model.addAttribute("count0", documentService.findByStatusAndReceiver(0,receiver));
+
 
         return "document/readList";
     }
