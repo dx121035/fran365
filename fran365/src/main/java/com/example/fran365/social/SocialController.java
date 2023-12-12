@@ -42,7 +42,6 @@ public class SocialController {
         model.addAttribute("awspath", awspath);
         model.addAttribute("member",memberService.readDetailUsername());
         model.addAttribute("lists", socialService.readList());
-        model.addAttribute("comments", commentService.)
 
         return "social/main";
     }
