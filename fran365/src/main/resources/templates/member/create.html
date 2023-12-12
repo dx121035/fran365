@@ -117,22 +117,29 @@
 
                                                <form th:action="@{/member/create}" th:object="${memberForm}" method="post" enctype="multipart/form-data">
 
-                                                    <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
-                                                        <div th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+<!--                                                    <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">-->
+<!--                                                        <div th:each="err : ${#fields.allErrors()}" th:text="${err}" />-->
 
-                                                    </div>
+<!--                                                    </div>-->
 
                                                 <div class="mb-3 text-start">
-                                                    <input class="form-control " id="username" name="username" type="text" placeholder="아이디를 입력하세요"/>
+                                                    <input class="form-control " id="username" name="username" type="text" placeholder="아이디를 입력하세요" th:class="${#fields.hasErrors('username')}? 'form-control fieldError' : 'form-control'"/>
+                                                    <p class="alert alert-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Incorrect date</p>
+
+
                                                 </div>
 
                                                 <div class="row">
-                                                    <div class="col-md-6 text-start">
-                                                        <input class="form-control" id="password" name="password" type="password" placeholder="비밀번호" />
+                                                    <div class="mb-3 text-start">
+                                                        <input class="form-control" id="password" name="password" type="password" placeholder="비밀번호" th:class="${#fields.hasErrors('password')}? 'form-control fieldError' : 'form-control'"/>
+                                                        <p class="alert alert-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Incorrect date</p>
+
                                                     </div>
 
-                                                    <div class="col-md-6 text-start">
-                                                        <input class="form-control" id="confirmPassword" name="confirmPassword" type="password" placeholder="비밀번호 확인" />
+                                                    <div class="mb-3 text-start">
+                                                        <input class="form-control" id="confirmPassword" name="confirmPassword" type="password" placeholder="비밀번호 확인" th:class="${#fields.hasErrors('confirmPassword')}? 'form-control fieldError' : 'form-control'"/>
+                                                        <p class="alert alert-danger" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">Incorrect date</p>
+
                                                     </div>
                                                 </div>
                                                 <br>

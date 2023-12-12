@@ -38,6 +38,12 @@ public class MemberController {
 	public String create(@Valid MemberForm memberForm, BindingResult result, Member member,
 						 @RequestParam("filename") MultipartFile file) throws IOException {
 
+
+		if (result.hasErrors()) {
+
+			return "member/create";
+		}
+
 		// 비밀번호와 비밀번호 확인 값이 일치하는지 검사
 		if (!memberForm.getPassword().equals(memberForm.getConfirmPassword())) {
 			result.rejectValue("confirmPassword", "password.mismatch", "비밀번호가 일치하지 않습니다.");

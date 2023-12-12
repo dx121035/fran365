@@ -3,13 +3,15 @@ package com.example.fran365.document;
 
 
 
-import com.example.fran365.member.Member;
 import com.example.fran365.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.ui.Model;
@@ -201,16 +203,36 @@ public class DocumentController {
 
     // 결재 버튼 처리
     @PostMapping("/approval/{documentId}")
-    public String approval(@PathVariable("documentId") Integer documentId) {
-        documentService.updateDocumentStatus(documentId, 1);
+    public String approval(@PathVariable("documentId") Integer documentId,@RequestParam("receiver") String receiver) {
+        documentService.updateDocumentStatus(documentId, 1,receiver);
         return "redirect:/document/readList";
     }
 
     // 반려 버튼 처리
     @PostMapping("/reject/{documentId}")
-    public String reject(@PathVariable("documentId") Integer documentId) {
-        documentService.updateDocumentStatus(documentId, 100);
+    public String reject(@PathVariable("documentId") Integer documentId, @RequestParam("reason") String reason) {
+        documentService.updateDocumentStatusReject(documentId, 100,reason);
         return "redirect:/document/readList";
+    }
+
+
+    @GetMapping("/sendEmail")
+    public String sendEmail() {
+        return "member/sendEmail";
+    }
+
+
+    @Transactional
+    @PostMapping("/sendEmail")
+    public ResponseEntity<String> sendEmail(@RequestParam("username") String username) {
+        try {
+            memberService.sendTemporaryPassword(username);
+            return ResponseEntity.ok("success");
+        } catch (Exception e) {
+            // Log the exception for debugging purposes
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("error");
+        }
     }
 
 

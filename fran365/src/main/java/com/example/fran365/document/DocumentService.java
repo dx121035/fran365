@@ -3,10 +3,10 @@ package com.example.fran365.document;
 
 
 
+import com.example.fran365.member.MailDto;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 public interface DocumentService {
 
@@ -36,5 +36,10 @@ public interface DocumentService {
     void delete (Integer id);
 
 
-    void updateDocumentStatus(Integer documentId, int increment);
+    void updateDocumentStatus(Integer documentId, int increment,String receiver);
+
+    void updateDocumentStatusReject(Integer documentId, int increment, String reason);
+
+
+    void mailSend(MailDto mailDto);
 }
