@@ -19,6 +19,7 @@ public class Social {
 
     private String username;
 
+    @Column(columnDefinition = "LONGTEXT")
     private String content;
 
     private LocalDateTime createDate;

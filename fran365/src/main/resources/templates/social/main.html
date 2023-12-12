@@ -91,127 +91,66 @@
                                 </div>
 
 
+                                    <div id="tableExample3" data-list='{"valueNames":["content","createDate","status"]'>
+                                        <div class="search-box mb-3 mx-auto">
+                                            <form class="position-relative" data-bs-toggle="search" data-bs-display="static">
+                                                <input class="form-control search-input search form-control-sm" type="search" placeholder="Search" aria-label="Search" />
+                                                <span class="fas fa-search search-box-icon"></span>
+                                            </form>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-sm fs--1 mb-0">
+                                                <thead>
+                                                <tr>
+                                                    <th class="sort border-top ps-3" style="width: 45%" data-sort="content">내용</th>
+                                                    <th class="sort border-top" data-sort="createDate">작성일</th>
+                                                    <th class="sort border-top" data-sort="status">공개</th>
+                                                    <th class="sort text-end align-middle pe-0 border-top" scope="col">ACTION</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody class="list">
+                                                <th:block th:each="list:${lists}">
+                                                <tr>
+                                                    <td class="content align-middle ps-3"><div class="listPictureRemove mb-0" style="margin-top: 15px;" th:id="'content-' + ${list.id}" th:data-id="${list.id}"  th:utext="${list.content}"></div></td>
+                                                    <td class="createDate align-middle"><div th:text="${#temporals.format(list.createDate, 'yyyy년 MM월 dd일 HH:mm')}"></div></td>
+                                                    <td class="status align-middle"><button class="set-status" th:if="${list.status == '0'}" th:data-post-id="${list.id}" data-status="1">공개</button>
+                                                        <button class="set-status" th:if="${list.status == '1'}" th:data-post-id="${list.id}" data-status="0">비공개</button></td>
+                                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                                        <div class="font-sans-serif btn-reveal-trigger position-static">
+                                                            <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs--2"></span></button>
+                                                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal" th:data-status="${list.status}" th:data-id="${list.id}" th:data-content="${list.content}">수정</button>
+                                                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" th:href="@{|/social/delete?id=${list.id}|}">삭제</a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                </th:block>
+                                                </tbody>
+                                            </table>
+                                        </div>
 
+                                    </div>
 
-
-
-
-
-
-                                <th:block th:each="list:${lists}">
-                                    <button class="set-status" th:if="${list.status == '0'}" th:data-post-id="${list.id}" data-status="1">공개</button>
-                                    <button class="set-status" th:if="${list.status == '1'}" th:data-post-id="${list.id}" data-status="0">비공개</button>
-
-
-                                    <div class="listPictureRemove mb-0" th:id="'content-' + ${list.id}" th:data-id="${list.id}"  th:utext="${list.content}"></div>
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" th:data-status="${list.status}" th:data-id="${list.id}" th:data-content="${list.content}">수정</button></p>
-                                <p class="text-700 mb-0"><div th:text="${#temporals.format(list.createDate, 'yyyy년 MM월 dd일 HH:mm')}"></div></p>
-
-
-                                </th:block>
 
                             </div>
                         </div>
                     </div>
                 </div>
-
-
-                <div class="mb-8 mt-6">
-                    <div class="d-flex flex-between-center pb-3 border-bottom border-dashed border-300">
-                        <h3 class="mb-0">Messages<span class="text-700 ms-2 fw-normal">(97)</span></h3>
-                        <div class="btn-reveal-trigger">
-                            <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none d-flex btn-reveal" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h"></span></button>
-                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">Edit</a><a class="dropdown-item text-danger"></a></div>
-                        </div>
-                    </div>
-                    <div class="d-flex py-3 align-items-center border-bottom border-dashed">
-                        <div class="me-2">
-                            <div class="avatar avatar-m status-online ">
-                                <img class="rounded-circle " src="../../assets/img/team/35.webp" alt="" />
-
-                            </div>
-                        </div><a class="text-decoration-none flex-1" href="../../apps/chat.html">
-                        <h5>Stanly Drinkwater</h5>
-                        <p class="text-700 fw-semi-bold fs--1 mb-0 lh-sm line-clamp-1">When you gonna pay me back, don’t leave me hanging</p>
-                    </a>
-                    </div>
-                    <div class="d-flex py-3 align-items-center border-bottom border-dashed">
-                        <div class="me-2">
-                            <div class="avatar avatar-m status-online ">
-                                <img class="rounded-circle " src="../../assets/img/team/30.webp" alt="" />
-
-                            </div>
-                        </div><a class="text-decoration-none flex-1" href="../../apps/chat.html">
-                        <h5>Milind Mikuja</h5>
-                        <p class="text-700 fw-semi-bold fs--1 mb-0 lh-sm line-clamp-1">But the mare fact that she said that makes</p>
-                    </a>
-                    </div>
-                    <div class="d-flex py-3 align-items-center border-bottom border-dashed">
-                        <div class="me-2">
-                            <div class="avatar avatar-m status-online ">
-                                <img class="rounded-circle avatar-placeholder" src="../../assets/img/team/avatar.webp" alt="" />
-
-                            </div>
-                        </div><a class="text-decoration-none flex-1" href="../../apps/chat.html">
-                        <h5>Josef Stravinsky</h5>
-                        <p class="text-700 fw-semi-bold fs--1 mb-0 lh-sm line-clamp-1">Oi Cult.</p>
-                    </a>
-                    </div>
-                    <div class="d-flex py-3 align-items-center border-bottom border-dashed">
-                        <div class="me-2">
-                            <div class="avatar avatar-m status-online ">
-                                <img class="rounded-circle " src="../../assets/img/team/59.webp" alt="" />
-
-                            </div>
-                        </div><a class="text-decoration-none flex-1" href="../../apps/chat.html">
-                        <h5>Martina scorcese</h5>
-                        <p class="text-700 fw-semi-bold fs--1 mb-0 lh-sm line-clamp-1">Thanks for that. Sincerely.</p>
-                    </a>
-                    </div>
-                    <div class="d-flex py-3 align-items-center border-bottom border-dashed">
-                        <div class="me-2">
-                            <div class="avatar avatar-m status-online ">
-                                <img class="rounded-circle " src="../../assets/img/team/57.webp" alt="" />
-
-                            </div>
-                        </div><a class="text-decoration-none flex-1" href="../../apps/chat.html">
-                        <h5>Meekona Zikon</h5>
-                        <p class="text-700 fw-semi-bold fs--1 mb-0 lh-sm line-clamp-1">I am Outside, Come here, Lets smoke...</p>
-                    </a>
-                    </div>
-                </div>
-
-
-
-
-
             </div>
             <div class="col-lg-7 col-xl-8">
 
-
-
-                <div class="card d-flex flex-column mb-5">
+                <div class="card d-flex flex-column mb-5 bg-soft" style="border: none;">
                     <form action="/social/create" method="post">
                         <input type="hidden" id="content-id" name="contentId">
                         <textarea type="text" id="summernote" name="content"></textarea>
-                        <input type="submit" value="등록">
+                        <div style="display: flex; justify-content: center;">
+                        <input type="submit" class="btn btn-primary" style="margin-top: 5px;" value="등록">
+                        </div>
                     </form>
                 </div>
 
-
-
                 <div class="mb-9">
-
-
-                        <br>
-
-                        <br>
-
-
-                        <br>
-
-
-
+                    <br>
                     <th:block th:each="detail:${details}">
                     <div class="mb-5">
                         <div class="card mb-4">
@@ -229,10 +168,12 @@
                                             <p class="fs--2 mb-0 text-600 fw-semi-bold"><div th:text="${#temporals.format(detail.createDate, 'yyyy년 MM월 dd일 HH:mm')}"></div><span class="fa-solid fa-circle text-300" data-fa-transform="shrink-10 down-2"></span>대한민국<span class="fa-solid fa-circle text-300" data-fa-transform="shrink-10 down-2"></span><span class="fa-solid fa-earth-americas text-900"></span>
                                             </p>
                                         </div>
+                                        <!--작성자와 관리자만-->
                                         <div class="btn-reveal-trigger">
                                             <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none d-flex btn-reveal" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h"></span></button>
-                                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">수정</a><a class="dropdown-item text-danger" th:href="@{|/social/delete?id=${detail.id}|}">삭제</a></div>
+                                            <div class="dropdown-menu dropdown-menu-end py-2"><button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal" th:data-status="${detail.status}" th:data-id="${detail.id}" th:data-content="${detail.content}">수정</button><a class="dropdown-item text-danger" th:href="@{|/social/delete?id=${detail.id}|}">삭제</a></div>
                                         </div>
+
                                     </div>
 
                                     [(${detail.content})]
@@ -246,7 +187,6 @@
                                 </div>
                             </div>
 
-
                             <div class="bg-white border-top p-3 p-sm-4">
                                 <th:block th:each="comment: ${detail.commentList}">
                                 <div class="d-flex align-items-start">
@@ -258,19 +198,6 @@
                                     </div>
 
                                     <div class="flex-1">
-
-
-
-
-                                        <th:block th:each="detail:${details}">
-                                        <div class="d-flex align-items-center"><a class="fw-bold mb-0 text-black" href="../../apps/social/profile.html">Mamur Fechetti</a><span class="text-600 fw-semi-bold fs--2 ms-2">35 mins ago</span></div>
-                                        <p class="mb-0">How long did it take to create this? It appears that you quickly produced the second one.</p>
-
-
-
-
-                                        <button class="btn btn-link p-0 text-900 fw-bolder mb-2" type="button"><span class="fa-solid fa-reply fs--2 me-1"></span><span class="fw-bold fs--2">Reply</span></button>
-                                        <div class="d-flex align-items-start mb-3"><a href="../../apps/social/profile.html">
 
                                         <div class="d-flex align-items-center">[[${comment.username}]]<span class="text-600 fw-semi-bold fs--2 ms-2">[[${#temporals.format(comment.createDate, 'yyyy년 MM월 dd일 HH:mm')}]]</span></div>
                                         <p class="mb-0">[[${comment.content}]]</p>
@@ -287,32 +214,25 @@
                                             <input type="hidden" class="form-control" name="sid" th:value="${detail.id}" id="recipient-name">
                                             <input type="submit" class="btn btn-primary" value="대댓등록">
                                         </form>
-                                    <th:block th:if="${comment.comment2List != null and #lists.size(comment.comment2List) > 0}" th:each="comment2 : ${comment.comment2List}">
-                                        <div class="d-flex align-items-start mb-3">
+                                        <th:block th:if="${comment.comment2List != null and #lists.size(comment.comment2List) > 0}" th:each="comment2 : ${comment.comment2List}">
+                                            <div class="d-flex align-items-start mb-3">
+                                                <div class="avatar avatar-m  me-2">
+                                                    <img class="rounded-circle " src="../../assets/img/team/62.webp" alt="" />
+                                                </div>
+                                                <div class="flex-1">
+                                                    <div class="d-flex align-items-center">[[${comment2.username}]]<span class="text-600 fw-semi-bold fs--2 ms-2">[[${#temporals.format(comment2.createDate, 'yyyy년 MM월 dd일 HH:mm')}]]</span></div>
+                                                    <p class="mb-0">[[${comment2.content}]]</p>
 
-                                            <div class="avatar avatar-m  me-2">
-                                                <img class="rounded-circle " src="../../assets/img/team/62.webp" alt="" />
+                                                    <!--작성자만-->
+                                                    <a th:href="@{|/comment2/delete?id=${comment2.id}|}"><span class="far fa-times-circle fs--1 me-1"></span><span class="fw-bold fs--1">삭제</span></a>
+
+                                                </div>
                                             </div>
-                                            <div class="flex-1">
-                                                <div class="d-flex align-items-center">[[${comment2.username}]]<span class="text-600 fw-semi-bold fs--2 ms-2">[[${#temporals.format(comment2.createDate, 'yyyy년 MM월 dd일 HH:mm')}]]</span></div>
-                                                <p class="mb-0">[[${comment2.content}]]</p>
-
-                                                <!--작성자만-->
-                                                <a th:href="@{|/comment2/delete?id=${comment2.id}|}"><span class="far fa-times-circle fs--1 me-1"></span><span class="fw-bold fs--1">삭제</span></a>
-
-                                            </div>
-                                        </div>
-
-
-
-
-                                    </th:block>
-
+                                        </th:block>
                                     </div>
                                 </div>
                                 </th:block>
-                                </div>
-
+                            </div>
                                 <!--input-->
                             <div class="container" style="padding: 10px;">
                                 <div class="d-flex align-items-center">
@@ -334,19 +254,13 @@
                         </div>
                     </th:block>
 
-
-
                     </div>
-
-
 
                 </div>
                 <div class="text-center"><a class="btn btn-link fs-0 p-0" href="#!">Load more</a></div>
             </div>
         </div>
     </div>
-
-
 
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -376,11 +290,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-
 
 
 <script>
@@ -460,12 +369,10 @@
             },
             error: function (err) {
                 console.error(err);
-                alert('댓글이 등록되었습니다.');
+                alert('error.');
             }
         });
     });
-
-
 
 </script>
 
