@@ -24,12 +24,7 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
-
-
-    /*@Autowired
-    private SmsService smsService;*/
-
-
+	
 	@Autowired
 	private MemberRepository memberRepository;
 
@@ -110,16 +105,6 @@ public class MemberController {
 		return "member/readlist";
 	}
 	
-	
-	
-
-
-
-	
-
-
-
-	
 
 	@Value("${aws.s3.awspath}")
 	private String awspath;
@@ -155,18 +140,11 @@ public class MemberController {
 		System.out.println(phone);
 		System.out.println(randomNumber);
 		String subject = "인증 번호는 " + randomNumber + "입니다.";
-		//smsService.sendSms(subject,phone);
+		//memberService.sendSms(subject,phone);
 
 
 		return Integer.toString(randomNumber);
 	}
-
-
-
-
-
-
-
 
 
 	// ... 다른 메서드들 생략 ...
