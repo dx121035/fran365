@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.fran365.board.Board;
 import com.example.fran365.board.BoardRepository;
+import com.example.fran365.brand.Brand;
+import com.example.fran365.brand.BrandRepository;
 import com.example.fran365.delivery.Delivery;
 import com.example.fran365.delivery.DeliveryRepository;
 import com.example.fran365.member.Member;
@@ -50,6 +52,9 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Autowired
 	private StatusRepository statusrepository;
+	
+	@Autowired
+	private BrandRepository brandRepositroy;
 
 	@Override
 	public List<Member> memberReadList() {
@@ -222,6 +227,12 @@ public class AdminServiceImpl implements AdminService {
 		status.setCreateDate(LocalDateTime.now());
 
 		statusrepository.save(status);
+	}
+
+	@Override
+	public List<Brand> brandReadList() {
+
+		return brandRepositroy.findAll(Sort.by(Sort.Direction.DESC, "id"));
 	}
 	
 }

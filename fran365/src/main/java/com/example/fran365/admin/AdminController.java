@@ -283,5 +283,15 @@ public class AdminController {
 		
 		return "redirect:/admin/deliveryReadDetail?id=" + id;
 	}
+	
+	@GetMapping("/brandReadList")
+	public String brandReadList(Model model) {
+		
+		model.addAttribute("awspath", awspath);
+		model.addAttribute("user", memberService.readDetailUsername());
+		model.addAttribute("brands", adminService.brandReadList());
+		
+		return "admin/brandReadList";
+	}
 
 }
