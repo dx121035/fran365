@@ -37,8 +37,6 @@ public class Brand {
 
     private String time; //영업 시간
 
-    private String email;
-
     private String username;
 
     @ToString.Exclude

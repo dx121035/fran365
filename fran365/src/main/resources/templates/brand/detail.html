@@ -41,7 +41,7 @@ mail: inew3w@gmail.com-->
                         <div class="col-auto">
                             <h5 class="text-1000 mb-0">이메일</h5>
                         </div>
-                        <div class="col-auto">[[${brand.email}]]</div>
+                        <div class="col-auto">[[${brand.username}]]</div>
                     </div>
                     <div class="row flex-between-center mb-2">
                         <div class="col-auto">
@@ -51,7 +51,7 @@ mail: inew3w@gmail.com-->
                     </div>
                 </div>
                 <br><br><br><br><br><br>
-                <div sec:authorize="hasRole('ROLE_ADMIN')">
+                <div th:if="${#authorization.expression('hasRole(''ADMIN'')')  or member.username == brand.username}">
                 <a th:href="@{|/brand/update?id=${brand.id}|}">수정</a>
                 <a th:href="@{|/brand/delete?id=${brand.id}|}">삭제</a>
                 </div>

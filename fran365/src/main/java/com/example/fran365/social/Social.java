@@ -7,6 +7,7 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -25,11 +26,10 @@ public class Social {
     private String status; // 1 = public 0 = private
 
     @OneToMany(mappedBy = "social", cascade = CascadeType.REMOVE)
-    private
-    List<Comment> commentList;
+    private List<Comment> commentList;
 
     //추천  조아요
     @ManyToMany
-    List<Member> voter;
+    Set<Member> liker;
 
 }

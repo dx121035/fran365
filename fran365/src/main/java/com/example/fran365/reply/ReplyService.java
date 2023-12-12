@@ -12,4 +12,7 @@ public interface ReplyService {
     Reply detail(Integer id);
 
     Reply noticeDetail(Integer id);
+
+ /*   void delete (Integer id);*/
+
 }

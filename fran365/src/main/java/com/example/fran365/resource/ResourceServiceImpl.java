@@ -156,7 +156,7 @@ public class ResourceServiceImpl implements ResourceService {
             resourceRepository.save(resource);
 
         } else {
-            throw new RuntimeException("Not enough stock available");
+            throw new RuntimeException("재고가 부족합니다");
         }
 
         if (resource.getAmount() == 0) {

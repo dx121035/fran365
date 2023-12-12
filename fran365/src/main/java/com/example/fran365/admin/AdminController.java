@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.fran365.board.BoardService;
+import com.example.fran365.department.DepartmentService;
 import com.example.fran365.event.EventService;
 import com.example.fran365.member.MemberService;
 import com.example.fran365.position.PositionService;
@@ -38,6 +39,9 @@ public class AdminController {
 	@Autowired
 	private BoardService boardService;
 	
+	@Autowired
+	private DepartmentService departmentService;
+	
 	@GetMapping("/main")
 	public String adminMain(Model model) {
 		
@@ -45,7 +49,7 @@ public class AdminController {
 		model.addAttribute("user", memberService.readDetailUsername());
 		model.addAttribute("members", adminService.memberReadList());
 		model.addAttribute("events", eventService.readList());
-		model.addAttribute("deliveyNotComplete", adminService.getDeliveyNotComplete());
+		model.addAttribute("deliveyNotComplete", adminService.getDeliveryNotComplete());
 		model.addAttribute("QuestionNotComplete", adminService.getQuestionNotComplete());
 		model.addAttribute("date", LocalDate.now());
 		
@@ -59,6 +63,7 @@ public class AdminController {
 		model.addAttribute("user", memberService.readDetailUsername());
 		model.addAttribute("members", adminService.memberReadList());
 		model.addAttribute("positionMap", adminService.getPosition());
+		model.addAttribute("departments", departmentService.readList());
 		
 		return "admin/memberReadList";
 	}
@@ -70,6 +75,8 @@ public class AdminController {
 		model.addAttribute("user", memberService.readDetailUsername());
 		model.addAttribute("member", adminService.memberReadDeatail(id));
 		model.addAttribute("positionMap", adminService.getPosition());
+		model.addAttribute("questions", adminService.getUserQuestions());
+		model.addAttribute("deliveries", adminService.deliveryReadListByUsername());
 		
 		return "admin/memberReadDetail";
 	}
@@ -99,15 +106,16 @@ public class AdminController {
 		model.addAttribute("user", memberService.readDetailUsername());
 		model.addAttribute("members", adminService.memberApprove());
 		model.addAttribute("positions", positionService.readList());
+		model.addAttribute("departments", departmentService.readList());
 		
 		return "admin/memberApprove";
 	}
 	
 	@ResponseBody
 	@PostMapping("/memberApprove")
-	public int memberApprove(Integer id, Integer number) {
+	public int memberApprove(Integer id, Integer number, String department) {
 		
-		adminService.memberApprove(id, number);
+		adminService.memberApprove(id, number, department);
 		
 		return 1;
 	}
@@ -118,6 +126,7 @@ public class AdminController {
 		model.addAttribute("awspath", awspath);
 		model.addAttribute("user", memberService.readDetailUsername());
         model.addAttribute("positions", positionService.readList());
+        model.addAttribute("departments", departmentService.readList());
 		
 		return "admin/memberPosition";
 	}
@@ -227,6 +236,43 @@ public class AdminController {
 		model.addAttribute("faq", boardService.readDetail(id));
 		
 		return "admin/faqUpdate";
+	}
+	
+	@GetMapping("/replyDelete")
+	public String replyDelete(Integer replyId, Integer boardId) {
+		
+		adminService.replyDelete(replyId);
+		
+		return "redirect:/admin/noticeReadDetail?id=" + boardId;
+	}
+	
+	@ResponseBody
+	@PostMapping("/updateDepartment")
+	public int updateDepartment(String username, String newDepartment) {
+		
+		adminService.updateDepartment(username, newDepartment);
+		
+		return 1;
+	}
+	
+	@GetMapping("/deliveryReadList")
+	public String deliveryReadList(Model model) {
+		
+		model.addAttribute("awspath", awspath);
+		model.addAttribute("user", memberService.readDetailUsername());
+		model.addAttribute("deliveries", adminService.deliveryReadList());
+		
+		return "admin/deliveryReadList";
+	}
+	
+	@GetMapping("/deliveryReadDetail")
+	public String deliveryReadDetail(Model model, Integer id) {
+		
+		model.addAttribute("awspath", awspath);
+		model.addAttribute("user", memberService.readDetailUsername());
+		model.addAttribute("delivery", adminService.deliveryReadDetail(id));
+		
+		return "admin/deliveryReadDetail";
 	}
 
 }
