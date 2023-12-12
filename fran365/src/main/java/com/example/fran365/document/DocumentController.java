@@ -154,7 +154,6 @@ public class DocumentController {
     }
 
 
-
     @PostMapping("/update")
     public String update(Document document,
                          @RequestParam("receiver") String receiver,
@@ -175,7 +174,6 @@ public class DocumentController {
         model.addAttribute("docu", documentService.readDetail(id));
         return "document/update";
     }
-
 
 
     @PostMapping("/updateTemp")

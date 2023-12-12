@@ -39,8 +39,9 @@ public class Member implements UserDetails {
     private String belong;
 
     private Integer position;
+    
+    private String department;
 
-    private  String department;
 
     private LocalDateTime createDate;
 
