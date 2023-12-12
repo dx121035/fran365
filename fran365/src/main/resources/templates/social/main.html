@@ -70,27 +70,14 @@
                             <div class="hover-actions end-0 bottom-0 pe-1 pb-2 text-white"><span class="fa-solid fa-camera me-2 overlay-icon"> </span></div>
                         </div>
                         <input class="d-none" id="upload-feed-porfile-picture" type="file" />
-                        <label class="avatar avatar-4xl status-online feed-avatar-profile cursor-pointer" for="upload-feed-porfile-picture"><img class="rounded-circle img-thumbnail bg-white shadow-sm" src="../../assets/img/team/59.webp" width="200" alt="" /></label>
+                        <label class="avatar avatar-4xl status-online feed-avatar-profile cursor-pointer" for="upload-feed-porfile-picture"><img class="rounded-circle img-thumbnail bg-white shadow-sm"  th:src="@{|${awspath}/${member.image}|}" width="200" alt="" /></label>
                     </div>
                     <div class="card-body" style="word-break: break-all">
                         <div class="row" >
                             <div class="col-12">
                                 <div class="d-flex flex-wrap mb-3 align-items-center">
-                                    <h3 class="me-2">Ansolo Lazinatov</h3><span class="fw-normal fs-0">u/hansolo</span>
+                                    <h3 class="me-2">[[${member.username}]]</h3><span class="fw-normal fs-0">[[${member.name}]]</span>
                                 </div>
-                                <div class="mb-3">
-                                    <div class="d-flex align-items-center flex-wrap">
-                                        <div class="d-flex me-4 mb-2"><span class="fa-solid fa-user-group fs--2 me-2 me-lg-1 me-xl-2"></span>
-                                            <h6 class="d-inline-block mb-0">1297 <span class="fw-semi-bold">Followers</span></h6>
-                                        </div>
-                                        <div class="d-flex mb-2"><span class="fa-solid fa-user-check fs--2 me-2 me-lg-1 me-xl-2"></span>
-                                            <h6 class="d-block d-xl-inline-block mb-0">
-                                                3971 <span class="fw-semi-bold">Following</span></h6>
-                                        </div>
-                                    </div>
-                                </div>
-
-
                                     <div id="tableExample3" data-list='{"valueNames":["content","createDate","status"]'>
                                         <div class="search-box mb-3 mx-auto">
                                             <form class="position-relative" data-bs-toggle="search" data-bs-display="static">
@@ -143,6 +130,7 @@
                     <form action="/social/create" method="post">
                         <input type="hidden" id="content-id" name="contentId">
                         <textarea type="text" id="summernote" name="content"></textarea>
+                        <input type="hidden" name="image" th:value="${member.image}">
                         <div style="display: flex; justify-content: center;">
                         <input type="submit" class="btn btn-primary" style="margin-top: 5px;" value="등록">
                         </div>
@@ -160,7 +148,7 @@
                                 <div class="border-bottom mb-3">
                                     <div class="d-flex align-items-center mb-3"><a href="../../apps/social/profile.html">
                                         <div class="avatar avatar-xl  me-2">
-                                            <img class="rounded-circle " src="../../assets/img/team/59.webp" alt="" />
+                                            <img class="rounded-circle " th:src="@{|${awspath}/${detail.image}|}" alt="" />
 
                                         </div>
                                     </a>
@@ -194,7 +182,7 @@
                                     <!--comment-->
 
                                     <div class="avatar avatar-m me-2">
-                                        <img class="rounded-circle " src="../../assets/img/team/23.webp" alt="" />
+                                        <img class="rounded-circle " th:src="@{|${awspath}/${comment.image}|}" alt="" />
                                     </div>
 
                                     <div class="flex-1">
@@ -205,18 +193,21 @@
                                         <button class="btn btn-link p-0 text-900 fw-bolder mb-2" data-bs-toggle="collapse" th:data-bs-target="'#collapseExample' + ${comment.id}" aria-expanded="false"><span class="fa-solid fa-reply fs--2 me-1"></span><span class="fw-bold fs--2">답글</span></button>
 
                                         <!--comment2-->
+
                                         <div class="collapse"  th:id="'collapseExample' + ${comment.id}">
                                             <form action="/comment2/create" method="post">
                                                 <textarea class="form-control" name="content" id="message-text" placeholder="내용을 입력해주세요"></textarea>
                                                 <input type="hidden" class="form-control" name="cid" th:value="${comment.id}">
                                                 <input type="hidden" class="form-control" name="sid" th:value="${detail.id}" id="recipient-name">
+                                                <input type="hidden" class="form-control" name="image" th:value="${member.image}">
                                                 <input type="submit" class="btn btn-primary" style="margin-top: 5px; margin-bottom: 5px;" value="등록">
                                             </form>
                                         </div>
+
                                         <th:block th:if="${comment.comment2List != null and #lists.size(comment.comment2List) > 0}" th:each="comment2 : ${comment.comment2List}">
                                             <div class="d-flex align-items-start mb-3">
                                                 <div class="avatar avatar-m  me-2">
-                                                    <img class="rounded-circle " src="../../assets/img/team/62.webp" alt="" />
+                                                    <img class="rounded-circle " th:src="@{|${awspath}/${comment2.image}|}" alt="" />
                                                 </div>
                                                 <div class="flex-1">
                                                     <div class="d-flex align-items-center">[[${comment2.username}]]<span class="text-600 fw-semi-bold fs--2 ms-2">[[${#temporals.format(comment2.createDate, 'yyyy년 MM월 dd일 HH:mm')}]]</span></div>
@@ -232,13 +223,14 @@
                             <div class="container" style="padding: 10px;">
                                 <div class="d-flex align-items-center">
                                     <div class="avatar avatar-m  me-2">
-                                        <img class="rounded-circle " src="../../assets/img/team/59.webp" alt="" />
+                                        <img class="rounded-circle " th:src="@{|${awspath}/${member.image}|}" alt="" />
                                     </div>
                                     <div class="flex-1">
                                         <form class="comment-form" action="/comment/create" method="post">
                                             <textarea class="form-control" type="text" name="content" placeholder="내용을 입력해주세요"></textarea>
                                             <input type="hidden" class="post-id" name="id" th:value="${detail.id}" data-post-id="${detail.id}" />
                                             <input type="hidden" name="username" value="${detail.username}">
+                                            <input type="hidden" name="image" th:value="${member.image}">
                                             <input type="submit" class="create-comment btn btn-primary" style="margin-top: 5px;" value="등록">
                                         </form>
                                     </div>

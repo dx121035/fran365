@@ -20,7 +20,7 @@ public class CommentServiceImpl implements CommentService {
     private SocialRepository socialRepository;
 
     @Override
-    public void create(Integer id, String content) {
+    public void create(Integer id, String content, String image) {
 
         Optional<Social> os = socialRepository.findById(id);
         Social social = os.get();
@@ -29,6 +29,7 @@ public class CommentServiceImpl implements CommentService {
 
 
         Comment comment = new Comment();
+        comment.setImage(image);
         comment.setContent(content);
         comment.setSocial(social);
         comment.setUsername(username);
@@ -60,11 +61,14 @@ public class CommentServiceImpl implements CommentService {
         commentRepository.save(comment);
 
 
+
     }
 
     public void delete(Integer id) {
+
         Optional<Comment> oc = commentRepository.findById(id);
         commentRepository.delete(oc.get());
 
     }
 }
+

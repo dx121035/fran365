@@ -44,17 +44,21 @@ public class DeliveryServiceImpl implements DeliveryService{
 
         StringBuilder deliveryItem = new StringBuilder();
 
-        for(int i = 0; i < itemList.size(); i++){
-            String itemName = itemList.get(i).getName();
+        for (int i = 0; i < itemList.size(); i++) {
+            Item item = itemList.get(i);
+            String itemName = item.getName();
+            int itemQuantity = item.getQuantity();
 
-            if(i != 0) {
-                deliveryItem.append(", ");  // 아이템 이름들 사이에 쉼표와 공백을 추가합니다.
+            if (i != 0) {
+                deliveryItem.append(",  ");
             }
-            deliveryItem.append(itemName);
+
+            deliveryItem.append(itemName).append(" (수량: ").append(itemQuantity).append("개)");
         }
+
         String allAbout = deliveryItem.toString();
 
-        String firstItem= itemList.get(0).getName();
+        String firstItem = itemList.get(0).getName();
 
         int itemSize = itemList.size() - 1;
 
@@ -63,7 +67,7 @@ public class DeliveryServiceImpl implements DeliveryService{
         if (itemSize == 0) {
             name = firstItem;
         } else {
-            name= firstItem + " 외 " + itemSize + "개";
+            name = firstItem + " 외 " + itemSize + "개";
         }
 
         int total = cartService.TotalPrice(cart);
@@ -88,7 +92,6 @@ public class DeliveryServiceImpl implements DeliveryService{
         Member member = memberService.readDetailUsername();
         cartService.delete();
         cartService.create(member);
-
     }
 
     @Override
