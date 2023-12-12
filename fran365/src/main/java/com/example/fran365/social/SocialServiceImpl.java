@@ -36,6 +36,7 @@ public class SocialServiceImpl implements SocialService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
 
+        social.setImage(social.getImage());
         social.setUsername(username);
         social.setCreateDate(LocalDateTime.now());
         social.setStatus("1");

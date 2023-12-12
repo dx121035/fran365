@@ -33,4 +33,5 @@ public class Social {
     @ManyToMany
     Set<Member> liker;
 
+    private String image;
 }
