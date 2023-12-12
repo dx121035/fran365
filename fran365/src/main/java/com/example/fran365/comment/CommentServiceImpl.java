@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
-public class CommentServiceImpl implements CommentService{
+public class CommentServiceImpl implements CommentService {
 
     @Autowired
     private CommentRepository commentRepository;
@@ -59,11 +59,11 @@ public class CommentServiceImpl implements CommentService{
 
         commentRepository.save(comment);
 
-    public void delete(Integer id) {
+    }
+    public void delete (Integer id){
         Optional<Comment> oc = commentRepository.findById(id);
         commentRepository.delete(oc.get());
 
     }
-
-
 }
+
