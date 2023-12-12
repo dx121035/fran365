@@ -33,7 +33,7 @@ public class SalesServiceImpl implements SalesService {
 
         LocalDate date = LocalDate.now();
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy-MM");
 
         String formattedDate = date.format(formatter);
 
@@ -75,9 +75,22 @@ public class SalesServiceImpl implements SalesService {
     }
 
     @Override
-    public List<Sales> findTopId(Integer brand_id) {
+    public Sales findTopId(Integer brand_id) {
 
-        return salesRepository.findTopByBrandIdOrderBySalesIdDesc(brand_id);
+        List<Sales> salesList = salesRepository.findTopByBrandIdOrderBySalesIdDesc(brand_id);
+
+        LocalDate date = LocalDate.now();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy-MM");
+
+        String formattedDate = date.format(formatter);
+
+        if(!salesList.get(0).getDate().equals(formattedDate) ){
+
+            create();
+        }
+
+        return salesList.get(0);
     }
 
 }
