@@ -5,5 +5,9 @@ public interface CommentService {
 
     Comment readDetail(Integer id);
 
+
+    void update(Integer id, String content);
+
     void delete(Integer id);
+
 }

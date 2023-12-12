@@ -24,6 +24,16 @@ public class CommentController {
         return "redirect:/social/main?id=" + id;
     }
 
+
+    @PostMapping("/update")
+    public String update(@RequestParam Integer id,
+                         @RequestParam String content){
+
+        commentService.update(id, content);
+
+        return "redirect:/social/social";
+    }
+
     @GetMapping("/delete")
     public String delete(@RequestParam Integer id) {
         commentService.delete(id);

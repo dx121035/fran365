@@ -88,7 +88,7 @@ public class SocialServiceImpl implements SocialService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
 
-        social.setContent(String.valueOf(content));
+        social.setContent(content);
         social.setStatus(status);
         social.setUsername(username);
 
