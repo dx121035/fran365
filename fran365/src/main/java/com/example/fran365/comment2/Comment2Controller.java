@@ -19,9 +19,10 @@ public class Comment2Controller {
     @PostMapping("/create")
     public String create(@RequestParam Integer cid,
                          @RequestParam Integer sid,
-                         @RequestParam String content) {
+                         @RequestParam String content,
+                         @RequestParam String image) {
 
-        comment2Service.create(cid, content);
+        comment2Service.create(cid, content, image);
 
         return "redirect:/social/main?id=" + sid;
     }

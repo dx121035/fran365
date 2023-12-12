@@ -27,4 +27,6 @@ public class Comment {
 
     @OneToMany(mappedBy = "comment", cascade = CascadeType.REMOVE)
     private List<Comment2> comment2List;
+
+    private String image;
 }

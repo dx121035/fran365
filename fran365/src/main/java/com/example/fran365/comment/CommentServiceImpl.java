@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
-public class CommentServiceImpl implements CommentService{
+public class CommentServiceImpl implements CommentService {
 
     @Autowired
     private CommentRepository commentRepository;
@@ -20,19 +20,22 @@ public class CommentServiceImpl implements CommentService{
     private SocialRepository socialRepository;
 
     @Override
-    public void create(Integer id, String content) {
+    public void create(Integer id, String content, String image) {
 
         Optional<Social> os = socialRepository.findById(id);
         Social social = os.get();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
 
+
         Comment comment = new Comment();
+        comment.setImage(image);
         comment.setContent(content);
         comment.setSocial(social);
         comment.setUsername(username);
         comment.setCreateDate(LocalDateTime.now());
         commentRepository.save(comment);
+
 
     }
 
@@ -43,10 +46,29 @@ public class CommentServiceImpl implements CommentService{
     }
 
     @Override
-    public void delete(Integer id) {
-        Optional<Comment> oc = commentRepository.findById(id);
-        commentRepository.delete(oc.get());
+
+    public void update(Integer id, String content) {
+
+        Optional<Comment> os = commentRepository.findById(id);
+        Comment comment = os.get();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+
+        comment.setContent(content);
+        comment.setUsername(username);
+        comment.setCreateDate(LocalDateTime.now());
+
+        commentRepository.save(comment);
+
+
+
     }
 
+    public void delete(Integer id) {
 
+        Optional<Comment> oc = commentRepository.findById(id);
+        commentRepository.delete(oc.get());
+
+    }
 }
+

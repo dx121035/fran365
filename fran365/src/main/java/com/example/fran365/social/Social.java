@@ -19,6 +19,7 @@ public class Social {
 
     private String username;
 
+    @Column(columnDefinition = "LONGTEXT")
     private String content;
 
     private LocalDateTime createDate;
@@ -32,4 +33,5 @@ public class Social {
     @ManyToMany
     Set<Member> liker;
 
+    private String image;
 }

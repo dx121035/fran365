@@ -3,10 +3,6 @@ package com.example.fran365.social;
 import com.amazonaws.services.s3.AmazonS3;
 import com.example.fran365.member.Member;
 import com.example.fran365.member.MemberRepository;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
@@ -40,6 +36,7 @@ public class SocialServiceImpl implements SocialService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
 
+        social.setImage(social.getImage());
         social.setUsername(username);
         social.setCreateDate(LocalDateTime.now());
         social.setStatus("1");
@@ -92,7 +89,7 @@ public class SocialServiceImpl implements SocialService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
 
-        social.setContent(String.valueOf(content));
+        social.setContent(content);
         social.setStatus(status);
         social.setUsername(username);
 

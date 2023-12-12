@@ -30,6 +30,4 @@ public class Item {
     @ManyToOne
     private Cart cart;
 
-    @ManyToOne
-    private Member member;
 }

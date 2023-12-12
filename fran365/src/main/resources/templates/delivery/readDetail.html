@@ -16,7 +16,7 @@
                                     <span th:switch="${status.step}">
                     <span th:case="결제완료"> <img th:src="@{|/images/delivery1.jpg|}" ></span>
                     <span th:case="상품준비"><img th:src="@{|/images/delivery2.jpg|}"></span>
-                    <span th:case="배송중"><img th:src="@{|/images/delivery3.jpg|}"></span>
+                    <span th:case="배송 중"><img th:src="@{|/images/delivery3.jpg|}"></span>
                     <span th:case="배송완료"><img th:src="@{|/images/delivery4.jpg|}"></span>
                                     </span>
 
@@ -70,16 +70,6 @@
                                     </tbody>
 
                                 </table>
-                            </div>
-                            <div class="row align-items-center justify-content-center py-2 pe-0 fs--1">
-
-                                <div class="col-auto d-flex ">
-                                    <button class="page-link" data-list-pagination="prev"><span
-                                            class="fas fa-chevron-left"></span></button>
-                                    <ul class="mb-0 pagination"></ul>
-                                    <button class="page-link pe-0" data-list-pagination="next"><span
-                                            class="fas fa-chevron-right"></span></button>
-                                </div>
                             </div>
                         </div>
                     </div>

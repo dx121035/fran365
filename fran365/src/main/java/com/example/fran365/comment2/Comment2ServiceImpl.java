@@ -17,7 +17,7 @@ public class Comment2ServiceImpl implements Comment2Service{
     @Autowired
     private Comment2Repository comment2Repository;
 
-    public void create(Integer id, String content) {
+    public void create(Integer id, String content, String image) {
 
         Comment comment = commentService.readDetail(id);
 
@@ -25,6 +25,7 @@ public class Comment2ServiceImpl implements Comment2Service{
         String username = auth.getName();
 
         Comment2 comment2 = new Comment2();
+        comment2.setImage(image);
         comment2.setContent(content);
         comment2.setComment(comment);
         comment2.setUsername(username);

@@ -22,4 +22,6 @@ public class Comment2 {
 
     @ManyToOne
     private Comment comment;
+
+    private String image;
 }

@@ -30,14 +30,18 @@ public class CartController {
 
         Cart cart = cartService.readDetailUsername();
         List<Item> itemList = cart.getItemList();
-
         model.addAttribute("member", memberService.readDetailUsername());
         model.addAttribute("cart", cartService.readDetailUsername());
         model.addAttribute("total", cartService.TotalPrice(cart));
-        model.addAttribute("itemName", itemList.get(0).getName());
-        model.addAttribute("itemSize", itemList.size() - 1);
         model.addAttribute("awspath", awspath);
-        return "cart/readDetail";
+
+        if(!itemList.isEmpty()) {
+            model.addAttribute("itemName", itemList.get(0).getName());
+            model.addAttribute("itemSize", itemList.size() - 1);
+            return "cart/readDetail";
+        } else {
+            return "cart/noItem";
+        }
     }
 
     @PostMapping("/update")
