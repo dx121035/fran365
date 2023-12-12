@@ -132,7 +132,7 @@
 				    </a>
 				</div><!-- parent pages-->
 				<div class="nav-item-wrapper" style="font-size: 16px; margin-top: 8px;">
-				    <a class="nav-link label-1" href="../pages/members.html" role="button" data-bs-toggle="" aria-expanded="false">
+				    <a class="nav-link label-1" href="/admin/brandReadList" role="button" data-bs-toggle="" aria-expanded="false">
 				        <div class="d-flex align-items-center">
 				            <span class="nav-link-icon" style="margin-bottom: 5px;"><span data-feather="map-pin"></span></span>
 				            <span class="nav-link-text-wrapper"><span class="nav-link-text">지점관리</span></span>
@@ -333,14 +333,18 @@
                         </tr>
                       </thead>
                       <tbody class="list" id="customer-order-table-body">
-                        <tr th:each="delivery : ${deliveries}" class="hover-actions-trigger btn-reveal-trigger position-static">
-                          <td class="order align-middle white-space-nowrap ps-0"><a class="fw-semi-bold" href="#">#[[${delivery.id}]]</a></td>
+                        <tr th:each="delivery, loop : ${deliveries}" class="hover-actions-trigger btn-reveal-trigger position-static">
+                          <td class="order align-middle white-space-nowrap ps-0"><a class="fw-semi-bold" href="#">#[[${#lists.size(deliveries)-loop.index}]]</a></td>
                           <td class="total align-middle fw-bold text-1000"><a class="total align-middle fw-bold text-1000" th:text="${delivery.uid}" th:href="@{|/admin/deliveryReadDetail?id=${delivery.id}|}"></a></td>
-                          <td class="payment_status align-middle white-space-nowrap text-start fw-bold text-1000">[[${delivery.allAbout}]]</td>
+                          <td class="payment_status align-middle white-space-nowrap text-start fw-bold text-1000">[[${delivery.name}]]</td>
                           <td class="fulfilment_status align-middle white-space-nowrap text-start fw-bold text-1000">[[${delivery.total}]]원</td>
                           <td class="delivery_type align-middle white-space-nowrap text-900 fs--1 text-start">
-							  <div class="badge badge-phoenix fs--1 badge-phoenix-success" style="width: 70%;">
-		                   		<span class="fw-bold" th:text="${delivery.statusList[#lists.size(delivery.statusList)-1].step}"></span>
+							  <div th:if="${delivery.statusList[#lists.size(delivery.statusList)-1].step eq '배송완료'}" class="badge badge-phoenix fs--1 badge-phoenix-success" style="width: 70%;">
+							    <span class="fw-bold" th:text="${delivery.statusList[#lists.size(delivery.statusList)-1].step}"></span>
+							  </div>
+							  <div th:unless="${delivery.statusList[#lists.size(delivery.statusList)-1].step eq '배송완료'}" class="badge badge-phoenix fs--1 badge-phoenix-warning" style="width: 70%;">
+							    <span class="fw-bold" th:text="${delivery.statusList[#lists.size(delivery.statusList)-1].step}"></span>
+						  	  </div>
 						  </td>
                           <td class="date align-middle white-space-nowrap fw-bold text-1000" th:text="${#temporals.format(delivery.createDate, 'yyyy-MM-dd HH:mm')}"></td>
                         </tr>
@@ -376,8 +380,8 @@
                         </tr>
                       </thead>
                       <tbody class="list" id="customer-wishlist-table-body">
-                        <tr th:each="question : ${questions}" class="hover-actions-trigger btn-reveal-trigger position-static">
-                          <td class="align-middle white-space-nowrap py-1"><a class="fw-semi-bold" href="#">#[[${question.id}]]</a></td>
+                        <tr th:each="question, loop : ${questions}" class="hover-actions-trigger btn-reveal-trigger position-static">
+                          <td class="align-middle white-space-nowrap py-1"><a class="fw-semi-bold" href="#">#[[${#lists.size(questions)-loop.index}]]</a></td>
                           <td class="color align-middle white-space-nowrap fw-bold text-1000">[[${question.category}]]</td>
                           <td class="products align-middle fw-bold text-1000"><a class="d-flex align-items-center text-1000 text-hover-1000" th:href="@{|/admin/questionReadDetail?id=${question.id}|}">[[${question.title}]]</a></td>
                           <td class="size align-middle white-space-nowrap fw-bold text-1000">[[${question.writer}]]</td>

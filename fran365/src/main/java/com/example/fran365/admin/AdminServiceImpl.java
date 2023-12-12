@@ -1,5 +1,6 @@
 package com.example.fran365.admin;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.fran365.board.Board;
 import com.example.fran365.board.BoardRepository;
+import com.example.fran365.brand.Brand;
+import com.example.fran365.brand.BrandRepository;
 import com.example.fran365.delivery.Delivery;
 import com.example.fran365.delivery.DeliveryRepository;
 import com.example.fran365.member.Member;
@@ -20,6 +23,7 @@ import com.example.fran365.member.MemberService;
 import com.example.fran365.position.PositionService;
 import com.example.fran365.reply.Reply;
 import com.example.fran365.reply.ReplyRepository;
+import com.example.fran365.status.Status;
 import com.example.fran365.status.StatusRepository;
 
 @Service
@@ -45,6 +49,12 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Autowired
 	private DeliveryRepository deliveryRepository;
+	
+	@Autowired
+	private StatusRepository statusrepository;
+	
+	@Autowired
+	private BrandRepository brandRepositroy;
 
 	@Override
 	public List<Member> memberReadList() {
@@ -171,7 +181,7 @@ public class AdminServiceImpl implements AdminService {
 		String username = memberService.readDetailUsername().getUsername();
 		List<String> excludedCategories = Arrays.asList("공지", "FAQ");
 
-		return boardRepository.findByUsernameAndCategoryNotIn(username, excludedCategories);
+		return boardRepository.findByUsernameAndCategoryNotIn(username, excludedCategories, Sort.by(Sort.Direction.DESC, "id"));
 	}
 
 	@Override
@@ -179,7 +189,7 @@ public class AdminServiceImpl implements AdminService {
 		
 		String username = memberService.readDetailUsername().getUsername();
 
-		return deliveryRepository.findByUsername(username);
+		return deliveryRepository.findByUsername(username, Sort.by(Sort.Direction.DESC, "id"));
 	}
 	
 	@Override
@@ -195,7 +205,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<Delivery> deliveryReadList() {
 
-		return deliveryRepository.findAll();
+		return deliveryRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
 	}
 
 	@Override
@@ -205,6 +215,24 @@ public class AdminServiceImpl implements AdminService {
 		Delivery delivery = od.get();
 		
 		return delivery;
+	}
+
+	@Override
+	public void statusCreate(Integer id, Status status) {
+		
+		Optional<Delivery> od = deliveryRepository.findById(id);
+		Delivery delivery = od.get();
+		
+		status.setDelivery(delivery);
+		status.setCreateDate(LocalDateTime.now());
+
+		statusrepository.save(status);
+	}
+
+	@Override
+	public List<Brand> brandReadList() {
+
+		return brandRepositroy.findAll(Sort.by(Sort.Direction.DESC, "id"));
 	}
 	
 }

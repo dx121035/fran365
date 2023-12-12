@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.example.fran365.board.Board;
+import com.example.fran365.brand.Brand;
 import com.example.fran365.delivery.Delivery;
 import com.example.fran365.member.Member;
+import com.example.fran365.status.Status;
 
 public interface AdminService {
 	
@@ -46,4 +48,8 @@ public interface AdminService {
 	List<Delivery> deliveryReadList();
 	
 	Delivery deliveryReadDetail(Integer id);
+	
+	void statusCreate(Integer id, Status status);
+	
+	List<Brand> brandReadList();
 }
