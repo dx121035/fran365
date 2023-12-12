@@ -12,5 +12,5 @@ public interface SalesService {
 
     void delete(Integer id);
 
-    List<Sales> findTopId(Integer brand_id);
+    Sales findTopId(Integer brand_id);
 }

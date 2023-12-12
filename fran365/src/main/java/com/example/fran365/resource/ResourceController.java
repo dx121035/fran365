@@ -3,7 +3,9 @@ package com.example.fran365.resource;
 import com.example.fran365.brand.Brand;
 import com.example.fran365.brand.BrandRepository;
 import com.example.fran365.member.MemberService;
+import com.example.fran365.sales.Sales;
 import com.example.fran365.sales.SalesRepository;
+import com.example.fran365.sales.SalesService;
 import com.example.fran365.stock.Stock;
 import com.example.fran365.stock.StockRepository;
 import com.example.fran365.stock.StockService;
@@ -41,6 +43,9 @@ public class ResourceController {
 
     @Autowired
     private MemberService memberService;
+
+    @Autowired
+    private SalesService salesService;
 
     @Autowired
     private SalesRepository salesRepository;
@@ -111,14 +116,15 @@ public class ResourceController {
 
 
         String username = memberService.findUsername();
-
         Brand brand = brandRepository.findByUsername(username);
 
+        Sales sales = salesService.findTopId(brand.getId());
 
 
         model.addAttribute("awspath", awspath);
         model.addAttribute("member", memberService.readDetailUsername());
         model.addAttribute("brand", brand);
+        model.addAttribute("currentSales", sales);
         model.addAttribute("sales", salesRepository.findByBrand_IdOrderByIdDesc(brand.getId()));
         model.addAttribute("member", memberService.readDetailUsername());
 

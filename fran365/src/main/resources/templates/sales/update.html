@@ -7,28 +7,24 @@
 
     <div class="container-small" style="margin-top: 70px">
         <div class="row g-3 mb-6">
-            <h2>이번 달 매출</h2>
+            <h2>[[${sales.date}]]월 매출</h2>
             <form action="/sales/update" method="post">
                 <div class="row">
                     <div class="col-xl-9">
                         <!-- 중첩된 form 제거 -->
                         <div class="row g-3 mb-6">
-                            <div class="col-sm-6 col-md-4">
-                                <div class="form-floating">
-                                    <input class="form-control" id="floatingInputGrid" type="text" name="month"
-                                           th:value="${sales.month} + '월'" readonly/>
-                                </div>
-                            </div>
+
                             <div class="w-100"></div>
                             <div class="col-sm-6 col-md-4">
+                                현재 매출 :
                                 <div class="form-floating">
                                     <input class="form-control" type="text" name="income"
                                            th:value="${sales.income}" readonly/>
-                                    <label for="floatingInputGrid">현재 매출 : </label>
                                 </div>
                             </div>
                             <input type="hidden" name="id" th:value="${sales.id}">
                             <input type="hidden" name="brand.id" th:value="${sales.brand.id}">
+                            <input type="hidden" name="date" th:value="${sales.date}">
                             <div class="w-100"></div>
                             <div class="w-100"></div>
                             <div class="w-100"></div>

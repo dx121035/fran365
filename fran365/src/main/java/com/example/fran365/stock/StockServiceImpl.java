@@ -2,6 +2,7 @@ package com.example.fran365.stock;
 
 import com.example.fran365.brand.Brand;
 import com.example.fran365.brand.BrandRepository;
+import com.example.fran365.brand.BrandService;
 import com.example.fran365.member.MemberService;
 import com.example.fran365.resource.Resource;
 import com.example.fran365.resource.ResourceRepository;
@@ -16,18 +17,53 @@ import java.util.Optional;
 @Service
 public class StockServiceImpl implements StockService {
 
-    @Autowired
-    private BrandRepository brandRepository;
+   @Autowired
+   private BrandRepository brandRepository;
 
-    @Autowired
-    private ResourceRepository resourceRepository;
+   @Autowired
+   private MemberService memberService;
 
-    @Autowired
-    private StockRepository stockRepository;
+   @Autowired
+   private StockRepository stockRepository;
 
-    @Autowired
-    private MemberService memberService;
 
+    @Override
+    public void create() {
+
+        Brand currentBrand = brandRepository.findByUsername(memberService.findUsername());
+
+        for (int i = 0; i < 5; i++) {
+            // Stock 객체 생성
+            Stock stock = new Stock();
+
+            // 생성된 Stock 객체의 속성 설정
+            stock.setQuantity(0);
+            stock.setBrand(currentBrand);
+
+            // name 설정
+            switch (i) {
+                case 0:
+                    stock.setName("도우");
+                    break;
+                case 1:
+                    stock.setName("페퍼로니");
+                    break;
+                case 2:
+                    stock.setName("감자");
+                    break;
+                case 3:
+                    stock.setName("올리브");
+                    break;
+                case 4:
+                    stock.setName("토마토소스");
+                    break;
+                default:
+                    break;
+            }
+            stockRepository.save(stock);
+
+        }
+    }
     @Override
     public void trade(Integer id, int amount, String category) {
 
