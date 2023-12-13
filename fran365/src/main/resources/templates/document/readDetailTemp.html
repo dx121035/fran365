@@ -3,16 +3,134 @@
 
 <div layout:fragment="content">
 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            margin: 50px;
+        }
+
+        .form-container {
+            flex: 1;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            margin-right: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .image-container {
+            flex: 1;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+        }
+
+        /* 파란색 스타일 */
+        /*.buttons form:nth-child(1) button {*/
+        /*    background-color: blue;*/
+        /*    color: white;*/
+        /*    margin-right: 5px; !* 오른쪽 여백 조절 *!*/
+        /*    width: 100px; !* 버튼의 폭을 조절합니다. 필요에 따라 크기를 조절하세요. *!*/
+        /*    height: 40px; !* 버튼의 높이를 조절합니다. 필요에 따라 크기를 조절하세요. *!*/
+        /*    !* 다른 스타일 속성도 필요에 따라 추가할 수 있습니다. *!*/
+        /*}*/
+
+        /*!* 빨간색 스타일 *!*/
+        /*.buttons form:nth-child(2) button {*
+        /*    background-color: red;*/
+        /*    color: white;*/
+        /*    width: 100px; !* 버튼의 폭을 조절합니다. 필요에 따라 크기를 조절하세요. *!*/
+        /*    height: 40px; !* 버튼의 높이를 조절합니다. 필요에 따라 크기를 조절하세요. *!*/
+        /*    !* 다른 스타일 속성도 필요에 따라 추가할 수 있습니다. *!*/
+        /*}*/
+
+
+        .space {
+            width: 4px;
+            height: auto;
+            display: inline-block;
+        }
+    </style>
+
+    <div class="container">
+        <div class="form-container">
+            <div class="form-group">
+                <label for="name">작성자:</label>
+                <input type="text" id="name" name="name" th:value="${member.name}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="department">부서:</label>
+                <input type="text" id="department" name="department" th:value="${member.department}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="title">제목:</label>
+                <input type="text" id="title" name="title" th:value="${docu.title}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="comment">내용:</label>
+                <input type="text" id="comment" name="comment" th:value="${docu.comment}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="deadline">기한일:</label>
+                <input type="text" id="deadline" name="deadline" th:value="${docu.deadline}" readonly>
+            </div>
 
 
 
-    deadline : <a th:text="${docu.deadline}"></a><br>
-    category : <a th:text="${docu.category}"></a><br>
+            <a th:href="@{|/document/updateTemp?id=${docu.id}|}" class="btn btn-primary">Update</a>
 
 
-    <a th:href="@{|/document/delete?id=${docu.id}|}">삭제</a>
-    <a th:href="@{|/document/updateTemp?id=${docu.id}|}">수정</a>
 
+
+
+        </div>
+
+
+
+        <div class="image-container">
+
+            <img th:src="@{|https://bucket-va1rkc.s3.ap-northeast-2.amazonaws.com/${docu.image}|}" height=2000px width="300px" alt="IMG-PRODUCT">
+
+        </div>
+
+
+
+    </div>
 
 
 </div>
