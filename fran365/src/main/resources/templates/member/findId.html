@@ -15,30 +15,52 @@ name= yujin
 
     <!-- jquery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        /* 가운데 정렬을 위한 스타일 */
+        .center-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* 화면 전체 높이 */
+        }
+    </style>
 </head>
 <body>
-<section class="find">
-    <div class="find_box">
-        <div class="contact">
-            <form>
-                <div class="justify-content-center formHeader">
-                    <a id="findIdForm" href="/findId"><h3>아이디 찾기</h3></a>
 
-                    <hr>
-                </div>
-                <div class="inputForm">
-                    <input name="name" type="text" id="name" placeholder="이름">
-                    <input name="phone" type="text" id="phone" placeholder="전화번호 (010-0000-0000)">
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                    <div class="BtnGroup">
-                        <button type="button" class="submit" id="findIdBtn">아이디 찾기</button>
-                        <a href="/login" type="button" class="button">취소</a>
-                    </div>
-                </div>
-            </form>
+
+
+
+<div class="center-container">
+    <form>
+        <div class="col-sm-8 col-md-12"> <!-- 수정된 부분 -->
+            <div class="form-floating">
+                <input class="form-control" name="name" id="name" placeholder="이름" type="text">
+                <label for="name">작성자</label>
+            </div>
         </div>
-    </div>
-</section>
+
+        <br>
+
+        <div class="col-sm-8 col-md-12"> <!-- 수정된 부분 -->
+            <div class="form-floating">
+                <input class="form-control" name="phone" id="phone" placeholder="전화번호 (010-0000-0000)" type="text">
+                <label for="phone">전화번호</label>
+            </div>
+        </div>
+        <br>
+
+
+
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+        <button type="button" class="submit btn btn-primary px-5 px-sm-15" id="findIdBtn">아이디 찾기</button>
+        <button class="btn btn-primary px-5 px-sm-15 ms-2" type="button" onclick="window.location.href='/login'">로그인</button>
+    </form>
+</div>
+
+
+
+
+
 
 <!-- 모달 창 -->
 <div class="modal" id="findIdModal" tabindex="-1">

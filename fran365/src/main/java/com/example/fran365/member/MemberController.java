@@ -24,7 +24,12 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
-	
+
+
+    /*@Autowired
+    private SmsService smsService;*/
+
+
 	@Autowired
 	private MemberRepository memberRepository;
 
@@ -146,7 +151,7 @@ public class MemberController {
 		System.out.println(phone);
 		System.out.println(randomNumber);
 		String subject = "인증 번호는 " + randomNumber + "입니다.";
-		//memberService.sendSms(subject,phone);
+		//smsService.sendSms(subject,phone);
 
 
 		return Integer.toString(randomNumber);
@@ -183,7 +188,7 @@ public class MemberController {
 		if (member.isPresent()) {
 			response.put("message", "찾으시는 아이디는 <span style=\"color:green\">" + member.get().getUsername()+"</span>입니다.</p>");
 		} else {
-			response.put("error", "아이디가 존재하지 않습니다<br> 이름과전화번호를 확인해주세요.");
+			response.put("error", "아이디가 존재하지 않습니다<br> 이름과 전화번호를 확인해주세요.");
 		}
 
 		return response;
