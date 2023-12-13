@@ -1,0 +1,12 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout1}">
+
+<div layout:fragment="content">
+
+    <div th:each="sell : ${history}">
+       구매자 :  <a th:text="${sell.purchaser}"></a><br>
+        품목 :  <a th:text="${sell.getStockName()}"></a><br>
+        수량 :  <a th:text="${sell.quantity}"></a><br>
+    </div>
+</div>
+</html>

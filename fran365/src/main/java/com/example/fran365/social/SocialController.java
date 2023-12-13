@@ -4,6 +4,7 @@ import com.example.fran365.member.Member;
 import com.example.fran365.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,11 +30,18 @@ public class SocialController {
 
 
     @GetMapping("/main")
-    public String allSocial(Model model){
-        model.addAttribute("details", socialService.readDetail());
+
+
+    public String allSocial(Model model, @RequestParam(value="page", defaultValue="0") int page){
+
+       // model.addAttribute("details", socialService.readDetail());
+
         model.addAttribute("awspath", awspath);
         model.addAttribute("member", memberService.readDetailUsername());
         model.addAttribute("lists", socialService.readList());
+
+        Page<Social> paging = socialService.getList(page);
+        model.addAttribute("paging", paging);
 
         return "social/main";
     }

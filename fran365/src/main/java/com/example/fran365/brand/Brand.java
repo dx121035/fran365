@@ -7,6 +7,7 @@ package com.example.fran365.brand;
 
 import com.example.fran365.sales.Sales;
 import com.example.fran365.stock.Stock;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.ToString;
@@ -39,17 +40,14 @@ public class Brand {
 
     private String username;
 
-    @ToString.Exclude
+    @JsonIgnore
     @OneToMany(mappedBy = "brand", cascade = CascadeType.REMOVE)
     private List<Sales> salesList;
 
     private LocalDateTime createDate;
 
-    @ToString.Exclude
+    @JsonIgnore
     @OneToMany(mappedBy = "brand", cascade = CascadeType.REMOVE)
     private List<Stock> stockList;
 
-    public List<Stock> getStockList() {
-        return stockList;
-    }
 }

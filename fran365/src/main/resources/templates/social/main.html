@@ -54,8 +54,10 @@
                                                     <td class="content align-middle ps-3"><div class="listPictureRemove mb-0" style="margin-top: 15px;" th:id="'content-' + ${list.id}" th:data-id="${list.id}"  th:utext="${list.content}"></div></td>
                                                     <td class="createDate align-middle"><div th:text="${#temporals.format(list.createDate, 'yyyy년 MM월 dd일 HH:mm')}"></div></td>
                                                     <td class="status align-middle">
+
                                                         <button class="set-status badge badge-phoenix fs--1 badge-phoenix-danger" th:if="${list.status == '0'}" th:data-post-id="${list.id}" data-status="1">비공개</button>
                                                         <button class="set-status badge badge-phoenix fs--1 badge-phoenix-success" th:if="${list.status == '1'}" th:data-post-id="${list.id}" data-status="0">공개</button></td>
+
                                                     <td class="align-middle white-space-nowrap text-end pe-0">
                                                         <div class="font-sans-serif btn-reveal-trigger position-static">
                                                             <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs--2"></span></button>
@@ -90,7 +92,7 @@
 
                 <div class="mb-9">
                     <br>
-                    <th:block th:each="detail:${details}">
+                    <th:block th:each="detail, loop : ${paging}">
                     <div class="mb-5">
                         <div class="card mb-4">
 
@@ -198,7 +200,16 @@
                     </th:block>
                     </div>
                 </div>
-                <div class="text-center"><a class="btn btn-link fs-0 p-0" href="#!">Load more</a></div>
+                <div class="text-center"><a class="btn btn-link fs-0 p-0" href="#!">Load more</a>
+
+                    <li class="page-item" th:classappend="${!paging.hasNext} ? disabled">
+                        <a class="page-link" th:href="@{|?page=${paging.number+1}|}">
+                            <span>더보기</span>
+                        </a>
+                    </li>
+
+
+                </div>
             </div>
         </div>
     </div>
@@ -343,6 +354,42 @@
         });
     };
 </script>
+    <script>
+        $(document).ready(function () {
+            var page = 0; // 현재 페이지
+
+            function loadMoreData(page) {
+                $.ajax({
+                    url: '/social/main?page=' + page,
+                    type: 'GET',
+                    beforeSend: function () {
+                        $('.ajax-load').show();
+                    }
+                })
+                    .done(function (data) {
+                        if (data.html == "") {
+                            $('.ajax-load').html("더 이상 데이터가 없습니다.");
+                            return;
+                        }
+                        $('.ajax-load').hide();
+                        $(".mb-5").append(data.html);
+                    })
+                    .fail(function (jqXHR, ajaxOptions, thrownError) {
+                        alert('서버에서 데이터를 로드하는 중 오류가 발생했습니다.');
+                    });
+            }
+
+            $(window).scroll(function () {
+                if ($(window).scrollTop() + $(window).height() >= $(".mb-5").height() && !$('html').hasClass('loading')) {
+                    page++;
+                    loadMoreData(page);
+                }
+            });
+        });
+
+
+
+ </script>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>

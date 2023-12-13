@@ -32,7 +32,7 @@ public class Member implements UserDetails {
 
     private String address;
 
-    private String bid; //가입한 사람 매장주소
+    private Integer bid; //가입한 사람 매장번호
 
     private String Role;
 

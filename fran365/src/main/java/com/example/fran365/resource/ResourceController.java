@@ -25,8 +25,8 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
 
-@RequestMapping("/resource")
 @Controller
+@RequestMapping("/resource")
 public class ResourceController {
 
     @Autowired
@@ -192,8 +192,7 @@ public class ResourceController {
     @GetMapping("/purchase")
     public String purchase(@RequestParam Integer id, @RequestParam int amount, @RequestParam String category) {
 
-        resourceService.updateProductStock(id, amount);
-        stockService.trade(id, amount, category);
+        resourceService.updateProductStock(id, amount, category);
 
         return "redirect:/resource/readList";
     }

@@ -1,6 +1,7 @@
 package com.example.fran365.social;
 
 import com.example.fran365.member.Member;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ public interface SocialService {
 
     List<Social> readList();
 
-    List<Social> readDetail();
+    //List<Social> readDetail();
 
     void update(Integer id, String content, String status);
 
@@ -21,5 +22,6 @@ public interface SocialService {
     void like(Social social, Member member);
 
 
+    Page<Social> getList(int page);
 
 }
