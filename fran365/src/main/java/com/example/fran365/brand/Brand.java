@@ -17,7 +17,6 @@ import java.util.List;
 
 @Entity
 @Data
-@ToString(exclude = {"salesList", "stockList"})
 public class Brand {
 
     @Id
