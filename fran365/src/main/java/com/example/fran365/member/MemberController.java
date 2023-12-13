@@ -24,7 +24,12 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
-	
+
+
+    /*@Autowired
+    private SmsService smsService;*/
+
+
 	@Autowired
 	private MemberRepository memberRepository;
 
@@ -140,7 +145,7 @@ public class MemberController {
 		System.out.println(phone);
 		System.out.println(randomNumber);
 		String subject = "인증 번호는 " + randomNumber + "입니다.";
-		//memberService.sendSms(subject,phone);
+		//smsService.sendSms(subject,phone);
 
 
 		return Integer.toString(randomNumber);
