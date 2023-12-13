@@ -1,7 +1,5 @@
 package com.example.fran365.social;
 
-
-import com.example.fran365.comment.CommentService;
 import com.example.fran365.member.Member;
 import com.example.fran365.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +27,6 @@ public class SocialController {
 
     @Autowired
     private MemberService memberService;
-
-    @Autowired
-    private CommentService commentService;
 
 
     @GetMapping("/main")

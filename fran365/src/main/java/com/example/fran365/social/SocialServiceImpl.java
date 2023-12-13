@@ -1,10 +1,7 @@
 package com.example.fran365.social;
 
-import com.amazonaws.services.s3.AmazonS3;
 import com.example.fran365.member.Member;
-import com.example.fran365.member.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -19,16 +16,7 @@ import java.util.Set;
 public class SocialServiceImpl implements SocialService {
 
     @Autowired
-    private AmazonS3 amazonS3;
-
-    @Value("ucket-va1rkc")
-    private String bucketName;
-
-    @Autowired
     private SocialRepository socialRepository;
-
-    @Autowired
-    private MemberRepository memberRepository;
 
     @Override
     public void create(Social social) {
@@ -59,6 +47,7 @@ public class SocialServiceImpl implements SocialService {
     public List<Social> readDetail() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
+
         return socialRepository.findPublicPostsOrByUsername(username);
     }
 
