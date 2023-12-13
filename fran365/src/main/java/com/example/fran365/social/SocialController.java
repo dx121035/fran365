@@ -4,13 +4,10 @@ import com.example.fran365.member.Member;
 import com.example.fran365.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 
@@ -40,8 +37,6 @@ public class SocialController {
 
         return "social/main";
     }
-
-
 
     @PostMapping("/create")
     public String create(Social social){
@@ -84,8 +79,4 @@ public class SocialController {
         socialService.delete(id);
         return "redirect:/social/main";
     }
-
-
-
-
 }
