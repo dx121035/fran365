@@ -82,15 +82,7 @@ public class DocumentController {
 
 
 
-//    @GetMapping("/readList")
-//    public String readList(Model model, @RequestParam(value="page", defaultValue="0") int page) {
-//
-//        Page<Document> paging = documentService.getList(page);
-//        model.addAttribute("paging", paging);
-//
-//
-//        return "document/readList";
-//    }
+
 
 
 
