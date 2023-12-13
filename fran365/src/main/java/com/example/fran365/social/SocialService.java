@@ -21,4 +21,6 @@ public interface SocialService {
 
     void like(Social social, Member member);
 
+
+
 }
