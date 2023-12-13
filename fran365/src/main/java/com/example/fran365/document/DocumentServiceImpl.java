@@ -4,8 +4,11 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 
 
+import com.example.fran365.member.MailDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -31,6 +34,9 @@ public class DocumentServiceImpl implements DocumentService{
 
     @Autowired
     private DocumentRepository documentRepository;
+
+    @Autowired
+    private JavaMailSender mailSender;
 
 
 
@@ -103,6 +109,13 @@ public class DocumentServiceImpl implements DocumentService{
         return documentRepository.findByReceiver(receiver);
     }
 
+    @Override
+    public int findByStatusAndReceiver(Integer status, String receiver) {
+        List<Document> list = documentRepository.findByStatusAndReceiver(status,receiver);
+
+        return list.size();
+    }
+
 
     @Override
     public List<Document> readListTemp() {
@@ -168,15 +181,42 @@ public class DocumentServiceImpl implements DocumentService{
 
 
 
-    public void updateDocumentStatus(Integer documentId, int increment) {
+    public void updateDocumentStatus(Integer documentId, int increment,String receiver) {
         Document document = documentRepository.findById(documentId)
                 .orElseThrow(() -> new RuntimeException("Document not found with id: " + documentId));
 
         // status를 주어진 값만큼 증가시킴
         document.setStatus(document.getStatus() + increment);
+        document.setReceiver(receiver);
 
         // 저장
         documentRepository.save(document);
+    }
+
+
+    public void updateDocumentStatusReject(Integer documentId, int increment, String reason) {
+        Document document = documentRepository.findById(documentId)
+                .orElseThrow(() -> new RuntimeException("Document not found with id: " + documentId));
+
+        // status를 주어진 값만큼 증가시킴
+        document.setStatus(document.getStatus() + increment);
+        document.setReason(reason);
+
+
+        // 저장
+        documentRepository.save(document);
+    }
+
+    @Override
+    public void mailSend(MailDto mailDto) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(mailDto.getAddress());
+        message.setSubject(mailDto.getTitle());
+        message.setText(mailDto.getMessage());
+        message.setFrom("seula724@naver.com");
+        message.setReplyTo("seula724@naver.com");
+        System.out.println("message" + message);
+        mailSender.send(message);
     }
 
 

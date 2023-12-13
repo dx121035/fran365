@@ -5,22 +5,176 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-deadline : <a th:text="${docu.deadline}"></a><br>
-category : <a th:text="${docu.category}"></a><br>
+        .container {
+            display: flex;
+            justify-content: space-between;
+            margin: 50px;
+        }
+
+        .form-container {
+            flex: 1;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            margin-right: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .image-container {
+            flex: 1;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+        }
+
+        /* 파란색 스타일 */
+        /*.buttons form:nth-child(1) button {*/
+        /*    background-color: blue;*/
+        /*    color: white;*/
+        /*    margin-right: 5px; !* 오른쪽 여백 조절 *!*/
+        /*    width: 100px; !* 버튼의 폭을 조절합니다. 필요에 따라 크기를 조절하세요. *!*/
+        /*    height: 40px; !* 버튼의 높이를 조절합니다. 필요에 따라 크기를 조절하세요. *!*/
+        /*    !* 다른 스타일 속성도 필요에 따라 추가할 수 있습니다. *!*/
+        /*}*/
+
+        /*!* 빨간색 스타일 *!*/
+        /*.buttons form:nth-child(2) button {*
+        /*    background-color: red;*/
+        /*    color: white;*/
+        /*    width: 100px; !* 버튼의 폭을 조절합니다. 필요에 따라 크기를 조절하세요. *!*/
+        /*    height: 40px; !* 버튼의 높이를 조절합니다. 필요에 따라 크기를 조절하세요. *!*/
+        /*    !* 다른 스타일 속성도 필요에 따라 추가할 수 있습니다. *!*/
+        /*}*/
 
 
-<!-- Add Approval and Reject buttons with links -->
-<form th:action="@{'/document/approval/' + ${docu.id}}" method="post">
-    <button type="submit">Approve</button>
-</form>
-<form th:action="@{'/document/reject/' + ${docu.id}}" method="post">
-    <button type="submit">Reject</button>
-</form>
+        .space {
+            width: 4px;
+            height: auto;
+            display: inline-block;
+        }
+    </style>
+
+    <div class="container">
+        <div class="form-container">
+            <div class="form-group">
+                <label for="name">작성자:</label>
+                <input type="text" id="name" name="name" th:value="${member.name}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="department">부서:</label>
+                <input type="text" id="department" name="department" th:value="${member.department}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="title">제목:</label>
+                <input type="text" id="title" name="title" th:value="${docu.title}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="comment">내용:</label>
+                <input type="text" id="comment" name="comment" th:value="${docu.comment}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="deadline">기한일:</label>
+                <input type="text" id="deadline" name="deadline" th:value="${docu.deadline}" readonly>
+            </div>
 
 
-<a th:href="@{|/document/delete?id=${docu.id}|}">삭제</a>
-<a th:href="@{|/document/update?id=${docu.id}|}">수정</a>
+
+
+<!--   -----------------------------------------모달-----------------------------------------  -->
+            <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">서류 결재</button>
+            <div class="modal fade" id="exampleModal" tabindex="-1" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">서류 결재</h5>
+                            <button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close"><svg class="svg-inline--fa fa-xmark fs--1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"></path></svg><!-- <span class="fas fa-times fs--1"></span> Font Awesome fontawesome.com --></button>
+                        </div>
+                        <form th:action="@{'/document/approval/' + ${docu.id}}" method="post">
+                        <div class="modal-body">
+                            <p class="text-700 lh-lg mb-0"><input type="text" name="receiver" placeholder="수신자를 입력해주세요">
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" type="submit">Approve</button>
+                            <button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                            </form>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal1">서류 반려</button>
+            <div class="modal fade" id="exampleModal1" tabindex="-1" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel1">서류 반려</h5>
+                            <button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close"><svg class="svg-inline--fa fa-xmark fs--1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"></path></svg><!-- <span class="fas fa-times fs--1"></span> Font Awesome fontawesome.com --></button>
+                        </div>
+                        <form th:action="@{'/document/reject/' + ${docu.id}}" method="post">
+                        <div class="modal-body">
+                            <p class="text-700 lh-lg mb-0"><input type="text" name="reason" placeholder="반려사유를 입력해주세요">
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" type="submit">Reject</button>
+                            <button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+           <!--    ----------------------------------------------------------------------------------  -->
+
+
+
+        </div>
+
+
+
+        <div class="image-container">
+
+            <img th:src="@{|https://bucket-va1rkc.s3.ap-northeast-2.amazonaws.com/${docu.image}|}" height=2000px width="300px" alt="IMG-PRODUCT">
+
+        </div>
+
+
+
+    </div>
 
 
 </div>

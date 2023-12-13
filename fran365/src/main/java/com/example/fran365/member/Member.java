@@ -40,7 +40,7 @@ public class Member implements UserDetails {
 
     private Integer position;
 
-    private  String depart;
+    private  String department;
 
     private LocalDateTime createDate;
 

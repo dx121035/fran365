@@ -28,8 +28,9 @@
     <!-- ===============================================-->
     <!--    Stylesheets-->
     <!-- ===============================================-->
-    <link href="../vendors/dropzone/dropzone.min.css" rel="stylesheet">
+    <link href="../vendors/fullcalendar/main.min.css" rel="stylesheet">
     <link href="../vendors/choices/choices.min.css" rel="stylesheet">
+    <link href="../vendors/dhtmlx-gantt/dhtmlxgantt.css" rel="stylesheet">
     <link href="../vendors/flatpickr/flatpickr.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
@@ -241,40 +242,71 @@
       </nav>
       
       
-		<div class="content mb-6">
-        <h2 class="text-bold text-1100 mb-5">공지등록</h2>
-        
-          <div class="row g-5">
-            <div class="col-12 col-xl-8">
-			  <form action="/board/create" method="post">
-              <input class="form-control mb-5" name="title" type="text" placeholder="제목" />
-              <div class="mb-6">
-                <textarea class="tinymce" name="content" data-tinymce='{"height":"15rem","placeholder":"내용"}'></textarea>
-              </div>
-              <div class="dropzone dropzone-multiple p-0 mb-4" id="my-awesome-dropzone" data-dropzone="data-dropzone">
-                <div class="fallback">
-                  <input name="file" type="file" multiple="multiple" />
-                </div>
-                <div class="dz-preview d-flex flex-wrap">
-                  <div class="border bg-white rounded-3 d-flex flex-center position-relative me-2 mb-2" style="height:80px;width:80px;"><img class="dz-image" src="../../../assets/img/products/23.png" alt="..." data-dz-thumbnail="data-dz-thumbnail" /><a class="dz-remove text-400" href="#!" data-dz-remove="data-dz-remove"><span data-feather="x"></span></a></div>
-                </div>
-                <div class="dz-message text-600" data-dz-message="data-dz-message">여기에 사진을 드래그하세요.<br /><img class="mt-3 me-2" src="../../../assets/img/icons/image-icon.png" width="40" alt="" />
-                </div>
-              </div>
-              <div class="col-12 col-xl-12 d-flex justify-content-end">
-              <div class="col-auto">
-              <a class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0" href="/admin/noticeReadList" type="button">취소</a>
-              <button class="btn btn-primary mb-2 mb-sm-0" type="submit">등록</button>
-              <input type="hidden" name="category" value="공지">
-              <input type="hidden" name="writer" value="관리자">
-              </form>
-            </div>
-            </div>
-              
+		<div class="content">
+        <h2 class="text-bold text-1100 mb-5">배송관리</h2>
+        <div id="members" data-list='{"valueNames":["customer","email","mobile_number","city","last_active","joined"],"page":10,"pagination":true}'>
+          <div class="mx-n4 mx-lg-n6 px-4 px-lg-6 mb-9 bg-white border-y border-300 mt-2 mb-10 position-relative top-1">
+            <div class="table-responsive scrollbar ms-n1 ps-1">
+              <table class="table table-md fs--1 mb-0">
+                <thead>
+                  <tr>
+                    <th class="sort align-middle" scope="col" data-sort="customer" style="width:18%;">주문번호</th>
+                    <th class="sort align-middle" scope="col" data-sort="email" style="width:18%;">송장번호</th>
+                    <th class="sort align-middle pe-3" scope="col" data-sort="mobile_number" style="width:10%;">주문목록</th>
+                    <th class="sort align-middle pe-3" scope="col" data-sort="mobile_number" style="width:10%;">회원ID</th>
+                    <th class="sort align-middle" scope="col" data-sort="city" style="width:10%;">배송상태</th>
+                    <th class="sort align-middle" scope="col" data-sort="joined" style="width:10%;">처리일자</th>
+                  </tr>
+                </thead>
+                <tbody class="list" id="members-table-body">
+					
+					
+				  <th:block th:each="status : ${delivery.statusList}">
+                  <tr class="hover-actions-trigger btn-reveal-trigger position-static">
+                    <td class="email align-middle white-space-nowrap text-1100">[[${delivery.uid}]]</td>
+                    <td class="mobile_number align-middle white-space-nowrap text-1100">[[${status.tracking}]]</td>
+                    <td class="city align-middle white-space-nowrap text-1100">[[${delivery.allAbout}]]</td>
+                    <td class="position1 align-middle white-space-nowrap text-1100">[[${delivery.username}]]</td>
+                    <td class="delivery_type align-middle white-space-nowrap text-900 fs--1 text-start">
+						<div th:if="${status.step eq '배송완료'}" class="badge badge-phoenix fs--1 badge-phoenix-success" style="width: 70%;">
+						    <span class="fw-bold">[[${status.step}]]</span>
+						</div>
+						<div th:unless="${status.step eq '배송완료'}" class="badge badge-phoenix fs--1 badge-phoenix-warning" style="width: 70%;">
+						    <span class="fw-bold">[[${status.step}]]</span>
+						</div>
+					</td>
+                    <td class="joined align-middle white-space-nowrap text-1100" th:text="${#temporals.format(status.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+                  </tr>
+                  </th:block>
+                </tbody>
+              </table>
             </div>
           </div>
-        
-        
+          
+         			 <div class="row justify-content-start">
+			 		 <div class="col-md-6" style="border: 1px solid lightslategray; border-radius: 10px; padding: 20px; margin-bottom: 10px;">
+					  <h4>배송정보 등록</h4><br>
+          			  <form th:action="@{/admin/statusCreate}" method="post">
+                        <div class="mb-6">
+                          <input class="form-control" type="text" name="tracking" th:value="${#lists.size(delivery.statusList) > 1 ? delivery.statusList[1].tracking : ''}" placeholder="송장번호">
+                        </div>
+                        <div class="mb-3">
+                          <select class="form-select" name="step" aria-label="Default select example">
+                            <option selected>배송단계</option>
+                            <option value="상품준비">상품준비</option>
+                            <option value="배송 중">배송 중</option>
+                            <option value="배송완료">배송완료</option>
+                          </select>
+                        </div>
+						<input type="hidden" name="username" th:value="${delivery.username}">
+             		    <input type="hidden" name="id" th:value="${delivery.id}">
+                        <button class="btn btn-primary mt-4" type="submit">등록</button>
+                      </form>
+                      
+                      </div>
+                      </div>
+                      
+        </div>
         <footer class="footer position-absolute">
           <div class="row g-0 justify-content-between align-items-center h-100">
             <div class="col-12 col-sm-auto text-center">
@@ -314,6 +346,48 @@
         }
       </script>
       
+      <script>
+		  function updatePosition(username, newPosition) {
+			  
+			$.ajax({
+            type: 'POST',
+            url: '/admin/updatePosition',
+            data: {
+                "username" : username,
+                "newPosition" : newPosition.value
+            },
+            success: function (response) {
+                alert('변경되었습니다.');
+            },
+            error: function (error) {
+                alert('변경을 실패했습니다.');
+            }
+        });
+		  }
+		  
+	  </script>
+	  
+	  <script>
+		  function updateDepartment(username, newDepartment) {
+			  
+			$.ajax({
+            type: 'POST',
+            url: '/admin/updateDepartment',
+            data: {
+                "username" : username,
+                "newDepartment" : newDepartment.value
+            },
+            success: function (response) {
+                alert('변경되었습니다.');
+            },
+            error: function (error) {
+                alert('변경을 실패했습니다.');
+            }
+        });
+		  }
+		  
+	  </script>
+            
     </main>
 
     <!-- ===============================================-->
@@ -329,10 +403,12 @@
     <script src="../vendors/list.js/list.min.js"></script>
     <script src="../vendors/feather-icons/feather.min.js"></script>
     <script src="../vendors/dayjs/dayjs.min.js"></script>
-    <script src="../vendors/tinymce/tinymce.min.js"></script>
-    <script src="../vendors/dropzone/dropzone.min.js"></script>
     <script src="../vendors/choices/choices.min.js"></script>
+    <script src="../vendors/echarts/echarts.min.js"></script>
+    <script src="../vendors/dhtmlx-gantt/dhtmlxgantt.js"></script>
     <script src="../assets/js/phoenix.js"></script>
+    <script src="../assets/js/projectmanagement-dashboard.js"></script>
+    <script src="../assets/js/echarts-example.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     
   </body>

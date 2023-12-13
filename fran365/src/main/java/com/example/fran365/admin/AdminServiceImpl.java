@@ -1,5 +1,6 @@
 package com.example.fran365.admin;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -12,10 +13,17 @@ import org.springframework.stereotype.Service;
 
 import com.example.fran365.board.Board;
 import com.example.fran365.board.BoardRepository;
+import com.example.fran365.brand.Brand;
+import com.example.fran365.brand.BrandRepository;
 import com.example.fran365.delivery.Delivery;
+import com.example.fran365.delivery.DeliveryRepository;
 import com.example.fran365.member.Member;
 import com.example.fran365.member.MemberRepository;
+import com.example.fran365.member.MemberService;
 import com.example.fran365.position.PositionService;
+import com.example.fran365.reply.Reply;
+import com.example.fran365.reply.ReplyRepository;
+import com.example.fran365.status.Status;
 import com.example.fran365.status.StatusRepository;
 
 @Service
@@ -32,6 +40,21 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Autowired
 	private BoardRepository boardRepository;
+	
+	@Autowired
+	private ReplyRepository replyRepository;
+	
+	@Autowired
+	private MemberService memberService;
+	
+	@Autowired
+	private DeliveryRepository deliveryRepository;
+	
+	@Autowired
+	private StatusRepository statusrepository;
+	
+	@Autowired
+	private BrandRepository brandRepositroy;
 
 	@Override
 	public List<Member> memberReadList() {
@@ -64,13 +87,14 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public void memberApprove(Integer id, Integer number) {
+	public void memberApprove(Integer id, Integer number, String department) {
 
 		Optional<Member> om = memberRepository.findById(id);
 		Member member = om.get();
 		
 		member.setEnabled(1);
 		member.setPosition(number);
+		member.setDepartment(department);
 		memberRepository.save(member);
 	}
 
@@ -100,12 +124,12 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public int getDeliveyNotComplete() {
+	public int getDeliveryNotComplete() {
 		
 		List<Delivery> getDeliveyNotComplete = statusRepository.findByStepNot();
-		int DeliveyNotComplete = getDeliveyNotComplete.size();
+		int DeliveryNotComplete = getDeliveyNotComplete.size();
 
-		return DeliveyNotComplete;
+		return DeliveryNotComplete;
 	}
 
 	@Override
@@ -141,5 +165,74 @@ public class AdminServiceImpl implements AdminService {
 	public List<Board> getQuestionNotComplete() {
         return boardRepository.findByStatus("답변대기");
     }
+
+	@Override
+	public void replyDelete(Integer replyId) {
+
+		Optional<Reply> or = replyRepository.findById(replyId);
+		Reply reply = or.get();
+		
+		replyRepository.delete(reply);
+	}
+
+	@Override
+	public List<Board> getUserQuestions() {
+		
+		String username = memberService.readDetailUsername().getUsername();
+		List<String> excludedCategories = Arrays.asList("공지", "FAQ");
+
+		return boardRepository.findByUsernameAndCategoryNotIn(username, excludedCategories, Sort.by(Sort.Direction.DESC, "id"));
+	}
+
+	@Override
+	public List<Delivery> deliveryReadListByUsername() {
+		
+		String username = memberService.readDetailUsername().getUsername();
+
+		return deliveryRepository.findByUsername(username, Sort.by(Sort.Direction.DESC, "id"));
+	}
+	
+	@Override
+	public void updateDepartment(String username, String newDepartment) {
+
+		Optional<Member> om = memberRepository.findByUsername(username);
+		Member member = om.get();
+		
+		member.setDepartment(newDepartment);
+		memberRepository.save(member);
+	}
+
+	@Override
+	public List<Delivery> deliveryReadList() {
+
+		return deliveryRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
+	}
+
+	@Override
+	public Delivery deliveryReadDetail(Integer id) {
+		
+		Optional<Delivery> od = deliveryRepository.findById(id);
+		Delivery delivery = od.get();
+		
+		return delivery;
+	}
+
+	@Override
+	public void statusCreate(Integer id, Status status) {
+		
+		Optional<Delivery> od = deliveryRepository.findById(id);
+		Delivery delivery = od.get();
+		
+		status.setDelivery(delivery);
+		status.setCreateDate(LocalDateTime.now());
+
+		statusrepository.save(status);
+	}
+
+	@Override
+	public List<Brand> brandReadList() {
+
+		return brandRepositroy.findAll(Sort.by(Sort.Direction.DESC, "id"));
+	}
 	
 }

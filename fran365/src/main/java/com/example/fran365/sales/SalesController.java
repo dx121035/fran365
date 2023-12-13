@@ -34,19 +34,13 @@ public class SalesController {
     @GetMapping("/update")
     public String update(@RequestParam Integer brand_id, Model model){
 
-        List<Sales> sales = salesService.findTopId(brand_id);
+        Sales sales = salesService.findTopId(brand_id);
 
 
         model.addAttribute("awspath", awspath);
         model.addAttribute("member",memberService.readDetailUsername());
+        model.addAttribute("sales", sales);
 
-        if (!sales.isEmpty()) {
-            Sales latestSales = sales.get(0);
-            System.out.println("세일 :" + latestSales);
-            model.addAttribute("sales", latestSales);
-        } else {
-            // Sales가 없을 경우에 대한 처리
-        }
         return "sales/update";
     }
 

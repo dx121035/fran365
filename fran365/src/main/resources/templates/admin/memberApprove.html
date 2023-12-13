@@ -124,7 +124,7 @@
 				    </a>
 				</div><!-- parent pages-->
                 <div class="nav-item-wrapper" style="font-size: 16px; margin-top: 8px;">
-				    <a class="nav-link label-1" href="../pages/members.html" role="button" data-bs-toggle="" aria-expanded="false">
+				    <a class="nav-link label-1" href="/admin/deliveryReadList" role="button" data-bs-toggle="" aria-expanded="false">
 				        <div class="d-flex align-items-center">
 				            <span class="nav-link-icon" style="margin-bottom: 5px;"><span data-feather="shopping-cart"></span></span>
 				            <span class="nav-link-text-wrapper"><span class="nav-link-text">발주관리</span></span>
@@ -132,7 +132,7 @@
 				    </a>
 				</div><!-- parent pages-->
 				<div class="nav-item-wrapper" style="font-size: 16px; margin-top: 8px;">
-				    <a class="nav-link label-1" href="../pages/members.html" role="button" data-bs-toggle="" aria-expanded="false">
+				    <a class="nav-link label-1" href="/admin/brandReadList" role="button" data-bs-toggle="" aria-expanded="false">
 				        <div class="d-flex align-items-center">
 				            <span class="nav-link-icon" style="margin-bottom: 5px;"><span data-feather="map-pin"></span></span>
 				            <span class="nav-link-text-wrapper"><span class="nav-link-text">지점관리</span></span>
@@ -173,7 +173,7 @@
                         <!-- more inner pages-->
                       </li>
                       <li class="nav-item"><a class="nav-link" href="/admin/memberPosition" data-bs-toggle="" aria-expanded="false">
-                          <div class="d-flex align-items-center"><span class="nav-link-text">직급관리</span>
+                          <div class="d-flex align-items-center"><span class="nav-link-text">부서/직급관리</span>
                           </div>
                         </a>
                         <!-- more inner pages-->
@@ -262,12 +262,13 @@
                 <thead>
                   <tr>
 					<th class="sort align-middle" scope="col" data-sort="id" style="width:6%; min-width:60px;">번호</th>
-                    <th class="sort align-middle" scope="col" data-sort="customer" style="width:15%; min-width:150px;">이름</th>
-                    <th class="sort align-middle" scope="col" data-sort="email" style="width:18%; min-width:180px;">아이디</th>
+                    <th class="sort align-middle" scope="col" data-sort="customer" style="width:12%; min-width:120px;">이름</th>
+                    <th class="sort align-middle" scope="col" data-sort="email" style="width:14%; min-width:140px;">아이디</th>
                     <th class="sort align-middle pe-3" scope="col" data-sort="mobile_number" style="width:13%; min-width:130px;">핸드폰번호</th>
                     <th class="sort align-middle" scope="col" data-sort="city" style="width:22%; min-width:220px;">주소</th>
-                    <th class="sort align-middle" scope="col" data-sort="position1" style="width:8%;  min-width:80px;">소속</th>
-                    <th class="sort align-middle" scope="col" data-sort="position2" style="width:8%;  min-width:80px;">직급</th>
+                    <th class="sort align-middle" scope="col" data-sort="position1" style="width:6%;  min-width:60px;">소속</th>
+                    <th class="sort align-middle" scope="col" data-sort="position1" style="width:7%;  min-width:70px;">부서</th>
+                    <th class="sort align-middle" scope="col" data-sort="position2" style="width:7%;  min-width:70px;">직급</th>
                     <th class="sort align-middle" scope="col" data-sort="joined" style="width:10%;  min-width:100px;">신청일</th>
                     <th class="align-middle" scope="col" style="width:8%;  min-width:80px;"></th>
                   </tr>
@@ -285,6 +286,12 @@
                     <td class="mobile_number align-middle white-space-nowrap text-1100">[[${member.phone}]]</td>
                     <td class="city align-middle white-space-nowrap text-1100">[[${member.address}]]</td>
                     <td class="position1 align-middle white-space-nowrap text-1100">[[${member.belong}]]</td>
+                    <td class="position2 align-middle white-space-nowrap text-1100">
+						<select style="color: black;">
+							<option selected text=""></option>
+					        <option class="number1" th:each="department : ${departments}" th:value="${department.department}" th:text="${department.department}"></option>
+					    </select>
+					</td>
                     <td class="position2 align-middle white-space-nowrap text-1100">
 						<select style="color: black;">
 							<option selected text=""></option>
@@ -352,13 +359,15 @@
       <script>
         function approveMember(memberId) {
 			 var positionNumber = $(".number:selected").val();
+			 var department = $(".number1:selected").val();
 			
             $.ajax({
                 type: "POST",
                 url: "/admin/memberApprove",
                 data: {
                     id: memberId,
-                    number: positionNumber
+                    number: positionNumber,
+                    department: department
                 },
                 success: function(data){
                 alert("회원가입 승인");

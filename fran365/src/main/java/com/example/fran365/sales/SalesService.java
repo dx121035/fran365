@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface SalesService {
 
-    void create(Sales sales);
+    void create();
 
     List<Sales> readlist(int brand_id);
 
@@ -12,5 +12,5 @@ public interface SalesService {
 
     void delete(Integer id);
 
-    List<Sales> findTopId(Integer brand_id);
+    Sales findTopId(Integer brand_id);
 }

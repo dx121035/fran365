@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en-US" dir="ltr">
+<html lang="en-US" dir="ltr" xmlns:fb="">
 
 <head>
     <meta charset="utf-8">
@@ -59,6 +59,10 @@
 
 
 <body>
+
+
+
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <!-- ===============================================-->
@@ -68,7 +72,7 @@
         <div class="container">
             <div class="row flex-center min-vh-100 py-5">
                 <div class="col-sm-10 col-md-8 col-lg-5 col-xl-5 col-xxl-3"><a class="d-flex flex-center text-decoration-none mb-4" href="/public/index.html">
-                    <div class="d-flex align-items-center fw-bolder fs-5 d-inline-block"><img src="/images/logo7.png" alt="phoenix" class=" w-100 mb-3" />
+                    <div class="d-flex align-items-center fw-bolder fs-5 d-inline-block"><img src="/images/logo2.png" alt="phoenix" class=" w-100 mb-3" />
                     </div>
                 </a>
                     <form class="form-signin" action="/login" method="post">
@@ -97,10 +101,17 @@
                     </form>
                     <a href="/member/findId">아이디 찾기</a> <a href="/member/sendEmail" style=" float: right;" >비밀번호 찾기</a>
                     <br><br>
+                    <div id="status" style="text-align: center;"></div>
                     <a href="javascript:kakaoLogin()"><img src="images/kakao.png"   class="w-10 mb-3"></img></a>
-                    <div id="naver_id_login"></div>
 
-<div class="text-center"><a class="fs--1 fw-bold" href="/member/create">회원 가입</a></div>
+                    <div style="float: right;">
+                    <div id="naver_id_login"></div>
+                      <br>
+                    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+                    </fb:login-button>
+                     </div>
+                     <br><br><br>
+                   <div class="text-center"><a class="fs--1 fw-bold" href="/member/create">회원 가입</a></div>
 </div>
 </div>
 </div>
@@ -142,7 +153,60 @@
     naver_id_login.init_naver_id_login();
 </script>
 
+<!--facebook Login-->
+<script>
 
+    function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
+        console.log('statusChangeCallback');
+        console.log(response);                   // The current login status of the person.
+        if (response.status === 'connected') {   // Logged into your webpage and Facebook.
+            testAPI();
+        } else {                                 // Not logged into your webpage or we are unable to tell.
+            document.getElementById('status').innerHTML = 'Please log ' +
+                'into this webpage.';
+        }
+    }
+
+
+    function checkLoginState() {               // Called when a person is finished with the Login Button.
+        FB.getLoginStatus(function(response) {   // See the onlogin handler
+            statusChangeCallback(response);
+        });
+    }
+
+
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '235097886090801',
+            cookie     : true,                     // Enable cookies to allow the server to access the session.
+            xfbml      : true,                     // Parse social plugins on this webpage.
+            version    : 'v18.0'           // Use this Graph API version for this call.
+        });
+
+
+        FB.getLoginStatus(function(response) {   // Called after the JS SDK has been initialized.
+            statusChangeCallback(response);        // Returns the login status.
+        });
+    };
+
+    function testAPI() {
+        console.log('Welcome! Fetching your information.... ');
+        FB.api('/me?fields=id,name,email,gender', function(response) {
+            console.log('Successful login for: ' + response.name);
+            console.log('Email: ' + response.email);
+            console.log('Gender: ' + response.gender);
+
+            // 여기서 가져온 정보를 원하는 대로 처리할 수 있습니다.
+
+            document.getElementById('status').innerHTML =
+                response.name + '님 로그인 되셨습니다.';
+        });
+    }
+
+</script>
+
+
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
 
 
 <!-- ===============================================-->

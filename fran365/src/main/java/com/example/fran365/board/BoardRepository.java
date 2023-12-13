@@ -24,4 +24,6 @@ public interface BoardRepository extends JpaRepository<Board, Integer> {
     List<Board> findByCategory(String category, Sort sort);
     
     List<Board> findByStatus(String status);
+    
+    List<Board> findByUsernameAndCategoryNotIn(String username, List<String> excludedCategories, Sort sort);
 }

@@ -1,25 +1,60 @@
-<!--
-name= yujin
--->
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout=http:www.ultraq.net.nz/thymeleaf/layout
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{fragments/layout1}">
 
-아이디:[[${member.username}]]<br>
+<div layout:fragment="content">
+    <div class="content">
+        <div class="pb-9">
+            <div class="card mb-5">
+                <div class="card-header hover-actions-trigger d-flex justify-content-center align-items-end position-relative mb-7 mb-xxl-0" style="min-height: 214px; ">
+                    <div class="bg-holder rounded-top" style="background-image:url(/assets/img/generic/cover-photo.png);">
+                    </div>
+                    <input class="d-none" id="upload-cover-image" type="file" />
+                    <label class="cover-image-file-input" for="upload-cover-image"></label>
+                    <div class="hover-actions end-0 bottom-0 pe-1 pb-2 text-white"><span class="fa-solid fa-camera me-2 overlay-icon"></span></div>
+                    <!--/.bg-holder-->
 
-<form th:action="@{|/member/updatePw?id=${member.id}|}" method="post">
-    비밀번호: *********
-</form>
-이름:[[${member.name}]]<br>
-주소:[[${member.address}]]<br>
-핸드폰:[[${member.phone}]]<br>
+                    <input class="d-none" id="upload-porfile-picture" type="file" />
+                    <div class="hoverbox feed-profile" style="width: 150px; height: 150px">
+                        <div class="hoverbox-content bg-black rounded-circle d-flex flex-center z-index-1" style="--phoenix-bg-opacity: .56;"><span class="fa-solid fa-camera fs-7 text-300 light"></span></div>
+                        <div class="position-relative bg-400 rounded-circle cursor-pointer d-flex flex-center mb-xxl-7">
+                            <div class="avatar avatar-5xl"><img class="rounded-circle rounded-circle bg-white img-thumbnail shadow-sm"  th:src="@{|${awspath}/${member.image}|}" alt="" /></div>
+                            <label class="w-100 h-100 position-absolute z-index-1" for="upload-porfile-picture"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row justify-content-xl-between">
+                        <div class="col-auto">
+                            <div class="d-flex flex-wrap mb-3 align-items-center">
+                                <h2 class="me-2">아이디:[[${member.username}]]</h2><span class="fw-semi-bold fs-1 text-1100"></span>
+                            </div>
+                            <br>
+                            <div class="mb-5">
+                                <div class="d-md-flex align-items-center">
+                                    <div class="d-flex align-items-center"><span class="fa-solid fa-key fs--1 text-700 me-2 me-lg-1 me-xl-2"></span><a class="text-1100" ><span class="fs-1 fw-bold text-600 hover-text-1100">비밀번호:<span class="fw-semi-bold ms-1 me-4">*******</span></span></a></div>
+                                    <div class="d-flex align-items-center"><span class="fa-solid fa-user-check fs--1 text-700 me-2 me-lg-1 me-xl-2"></span><a class="text-1100" ><span class="fs-1 fw-bold text-600 hover-text-1100">이름:<span class="fw-semi-bold ms-1 me-4">[[${member.name}]]</span></span></a></div>
+                                    <div class="d-flex align-items-center"><span class="fa-solid fa-location-dot fs--1 text-700 me-2 me-lg-1 me-xl-2"></span><a class="text-1100"><span class="fs-1 fw-semi-bold text-600 hover-text-1100">주소:[[${member.address}]]</span></a></div>&nbsp&nbsp&nbsp&nbsp&nbsp
+                                    <div class="d-flex align-items-center"><span class="fa-solid fa-phone fs--1 text-700 me-2 me-lg-1 me-xl-2"></span><a class="text-1100"><span class="fs-1 fw-bold text-600 hover-text-1100">핸드폰:<span class="fw-semi-bold ms-1 me-4">[[${member.phone}]]</span></span></a></div>
+                                </div>
+                            </div>
+                            <p class="fs-2 text-800">프랜차이즈 RPA(업무자동화) 솔루션 회원임을 축하드립니다.</p>
+                        </div>
+                        <div class="col-auto">
+                            <div class="row g-2">
+                                <div class="col-auto">
+                                    <div class="position-static">
+                                        <a th:href="@{|/member/update?id=${member.id}|}" class="border border-300 rounded-2 p-2 mb-2 text-center bg-outline-danger dark__bg-1000 shadow-sm ml-2" style="text-decoration: none;">수정</a>
 
-<a th:href="@{|/member/update?id=${member.id}|}">회원수정</a>
-
-</body>
-</html>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

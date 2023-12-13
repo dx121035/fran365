@@ -124,7 +124,7 @@
 				    </a>
 				</div><!-- parent pages-->
                 <div class="nav-item-wrapper" style="font-size: 16px; margin-top: 8px;">
-				    <a class="nav-link label-1" href="../pages/members.html" role="button" data-bs-toggle="" aria-expanded="false">
+				    <a class="nav-link label-1" href="/admin/deliveryReadList" role="button" data-bs-toggle="" aria-expanded="false">
 				        <div class="d-flex align-items-center">
 				            <span class="nav-link-icon" style="margin-bottom: 5px;"><span data-feather="shopping-cart"></span></span>
 				            <span class="nav-link-text-wrapper"><span class="nav-link-text">발주관리</span></span>
@@ -132,7 +132,7 @@
 				    </a>
 				</div><!-- parent pages-->
 				<div class="nav-item-wrapper" style="font-size: 16px; margin-top: 8px;">
-				    <a class="nav-link label-1" href="../pages/members.html" role="button" data-bs-toggle="" aria-expanded="false">
+				    <a class="nav-link label-1" href="/admin/brandReadList" role="button" data-bs-toggle="" aria-expanded="false">
 				        <div class="d-flex align-items-center">
 				            <span class="nav-link-icon" style="margin-bottom: 5px;"><span data-feather="map-pin"></span></span>
 				            <span class="nav-link-text-wrapper"><span class="nav-link-text">지점관리</span></span>
@@ -173,7 +173,7 @@
                         <!-- more inner pages-->
                       </li>
                       <li class="nav-item"><a class="nav-link" href="/admin/memberPosition" data-bs-toggle="" aria-expanded="false">
-                          <div class="d-flex align-items-center"><span class="nav-link-text">직급관리</span>
+                          <div class="d-flex align-items-center"><span class="nav-link-text">부서/직급관리</span>
                           </div>
                         </a>
                         <!-- more inner pages-->
@@ -243,20 +243,80 @@
       
       
 		<div class="content">
-        <h2 class="text-bold text-1100 mb-5">본사 직급관리</h2>
-        <div id="members" data-list='{"valueNames":["number","customer","position","city","last_active","joined"],"page":10,"pagination":true}'>
+		<h2 class="text-bold text-1100 mb-5">부서/직급관리</h2>
+		<div class="row">
+		<div class="col-md-6" style="border: 1px solid lightslategray; border-radius: 5px; padding: 15px; margin-bottom: 5px;">
+        <div id="members" data-list='{"valueNames":["number","customer","position","city","last_active","joined"],"page":10,"pagination":true}' style="margin-left: 50px;">
+          <div class="row align-items-center justify-content-between g-3 mb-4">
+			  
+            <div class="col">
+				<form action="/department/create" method="post">
+			    <div class="row mt-3">
+			        <div class="col-auto">
+			            <input class="form-control mb-0" type="text" name="department" placeholder="부서" />
+			        </div>
+			        <div class="row mt-4">
+			        <div class="col-auto">
+			            <button class="btn btn-primary"><span class="fas fa-plus me-2"></span>부서추가</button>
+			        </div>
+			        </div>
+			    </div>
+			    </form>
+			</div>
+			
+          </div>
+          <div class="mx-n4 mx-lg-n6 px-4 px-lg-6 mb-9 bg-white border-y border-300 mt-2 position-relative top-1" style="width: 100%;">
+            <div class="table-responsive scrollbar ms-n1 ps-1">
+              <table class="table table-sm fs--1 mb-0">
+                <thead>
+                  <tr>
+					<th class="sort align-middle" scope="col" data-sort="number" style="width:15%; min-width:100px;">부서번호</th>
+                    <th class="sort align-middle" scope="col" data-sort="customer" style="width:15%; min-width:100px;">소속</th>
+                    <th class="sort align-middle" scope="col" data-sort="position" style="width:15%; min-width:100px;">부서</th>
+                    <th class="align-middle" scope="col" style="width:20%;"></th>
+                  </tr>
+                </thead>
+                <tbody class="list" id="members-table-body">
+				  <th:block th:each="department : ${departments}">
+                  <tr class="hover-actions-trigger btn-reveal-trigger position-static">
+					<td class="number align-middle white-space-nowrap text-1100">[[${department.id}]]</td>
+                    <td class="customer align-middle white-space-nowrap text-1100">본사</td>
+                    <td class="number align-middle white-space-nowrap text-1100">[[${department.department}]]</td>
+                  	<td class="position align-middle"><button class="btn btn-danger btn-sm" style="padding: 5px 10px; font-size: 12px; margin-left: 22px;" th:onclick="deleteDepartment([[${department.id}]])">삭제</button></td>
+                  </tr>
+                  </th:block>
+                </tbody>
+              </table>
+            </div>
+            <div class="row align-items-center justify-content-between py-2 pe-0 fs--1">
+              <div class="col-auto d-flex">
+                <p class="mb-0 d-none d-sm-block me-3 fw-semi-bold text-900" data-list-info="data-list-info"></p><a class="fw-semi-bold" href="#!" data-list-view="*">전체보기<span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a><a class="fw-semi-bold d-none" href="#!" data-list-view="less">View Less<span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a>
+              </div>
+              <div class="col-auto d-flex">
+                <button class="page-link" data-list-pagination="prev"><span class="fas fa-chevron-left"></span></button>
+                <ul class="mb-0 pagination"></ul>
+                <button class="page-link pe-0" data-list-pagination="next"><span class="fas fa-chevron-right"></span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        
+        
+        <div class="col-md-6" style="border: 1px solid lightslategray; border-radius: 5px; padding: 15px; margin-bottom: 5px;">
+        <div id="members1" data-list='{"valueNames":["number","customer","position","city","last_active","joined"],"page":10,"pagination":true}' style="margin-left: 50px;">
           <div class="row align-items-center justify-content-between g-3 mb-4">
 			  
             <div class="col">
 				<form action="/position/create" method="post">
 			    <div class="row mt-3">
 			        <div class="col-auto">
-			            <input class="form-control mb-0" type="text" name="position" placeholder="직급" />
-			        </div>
-			        <div class="col-auto">
 			            <input class="form-control mb-0" type="text" name="number" placeholder="직급번호" />
 			        </div>
 			        <div class="col-auto">
+			            <input class="form-control mb-0" type="text" name="position" placeholder="직급" />
+			        </div>
+			        <div class="col-auto mt-4">
 			            <button class="btn btn-primary"><span class="fas fa-plus me-2"></span>직급추가</button>
 			        </div>
 			    </div>
@@ -264,15 +324,15 @@
 			</div>
 			
           </div>
-          <div class="mx-n4 mx-lg-n6 px-4 px-lg-6 mb-9 bg-white border-y border-300 mt-2 position-relative top-1" style="width: 60%;">
+          <div class="mx-n4 mx-lg-n6 px-4 px-lg-6 mb-9 bg-white border-y border-300 mt-2 position-relative top-1" style="width: 100%;">
             <div class="table-responsive scrollbar ms-n1 ps-1">
               <table class="table table-sm fs--1 mb-0">
                 <thead>
                   <tr>
-					<th class="sort align-middle" scope="col" data-sort="number" style="width:20%; min-width:100px;">직급번호</th>
-                    <th class="sort align-middle" scope="col" data-sort="customer" style="width:20%; min-width:100px;">소속</th>
-                    <th class="sort align-middle" scope="col" data-sort="position" style="width:20%; min-width:100px;">직급</th>
-                    <th class="align-middle" scope="col" style="width:10%;"></th>
+					<th class="sort align-middle" scope="col" data-sort="number" style="width:15%; min-width:100px;">직급번호</th>
+                    <th class="sort align-middle" scope="col" data-sort="customer" style="width:15%; min-width:100px;">소속</th>
+                    <th class="sort align-middle" scope="col" data-sort="position" style="width:15%; min-width:100px;">직급</th>
+                    <th class="align-middle" scope="col" style="width:20%;"></th>
                   </tr>
                 </thead>
                 <tbody class="list" id="members-table-body">
@@ -299,6 +359,11 @@
             </div>
           </div>
         </div>
+        </div>
+        
+        
+        
+        
         <footer class="footer position-absolute">
           <div class="row g-0 justify-content-between align-items-center h-100">
             <div class="col-12 col-sm-auto text-center">
@@ -309,6 +374,7 @@
             </div>
           </div>
         </footer>
+      </div>
       </div>
       <script>
         var navbarTopStyle = window.config.config.phoenixNavbarTopStyle;
@@ -363,6 +429,23 @@
                 url: "/position/delete",
                 data: {
                     id: positionId
+                },
+                success: function(data){
+                alert("삭제되었습니다.");
+                location.reload();
+            }
+            });
+        }
+    </script>
+    
+    <script>
+        function deleteDepartment(departmentId) {
+			
+            $.ajax({
+                type: "POST",
+                url: "/department/delete",
+                data: {
+                    id: departmentId
                 },
                 success: function(data){
                 alert("삭제되었습니다.");
