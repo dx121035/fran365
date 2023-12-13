@@ -9,12 +9,11 @@ import java.util.List;
 
 
 public interface SocialRepository extends JpaRepository<Social,Integer> {
-
-
-    List<Social> findByUsername(String username);
-    @Query("SELECT s FROM Social s WHERE s.username = :username OR s.status = '1'")
+    List<Social> findByUsernameOrderByCreateDateDesc(String username);
+    @Query("SELECT s FROM Social s WHERE s.username = :username OR s.status = '1' ORDER BY s.createDate DESC")
     List<Social> findPublicPostsOrByUsername(String username);
 
     Page<Social> findPageBy(Pageable pageable);
+
 
 }

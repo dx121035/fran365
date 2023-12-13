@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Set;
 
@@ -42,7 +43,7 @@ public class SocialServiceImpl implements SocialService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
 
-        return socialRepository.findByUsername(username);
+        return socialRepository.findByUsernameOrderByCreateDateDesc(username);
     }
 
 
@@ -53,6 +54,8 @@ public class SocialServiceImpl implements SocialService {
 
      //   return socialRepository.findPublicPostsOrByUsername(username);
    // }
+
+
 
     @Override
     public void delete(Integer id) {
