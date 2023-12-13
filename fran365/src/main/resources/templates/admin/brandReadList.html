@@ -244,6 +244,7 @@
       
 		<div class="content">
         <h2 class="text-bold text-1100 mb-5">지점목록</h2>
+        <div id="members" data-list='{"valueNames":["customer","email","mobile_number","city","last_active","joined"],"page":6,"pagination":true}'>
           <div class="row align-items-center justify-content-between g-3 mb-4">
             <div class="col col-auto">
               <div class="search-box">
@@ -253,8 +254,128 @@
                 </form>
               </div>
             </div>
+            
           </div>
-        
+          
+          
+          <div class="row">
+		  <div class="col-md-6">
+          <div class="mx-n4 mx-lg-n6 px-4 px-lg-6 mb-9 bg-white border-y border-300 mt-2 position-relative top-1">
+            <div class="table-responsive scrollbar ms-n1 ps-1">
+              <table class="table table-md fs--1 mb-0">
+                <thead>
+                  <tr>
+					<th class="sort align-middle" scope="col" data-sort="id" style="width:10%;">번호</th>
+                    <th class="sort align-middle" scope="col" data-sort="customer" style="width:10%;">지점명</th>
+                    <th class="sort align-middle" scope="col" data-sort="email" style="width:50%;">주소</th>
+                    <th class="sort align-middle" scope="col" data-sort="city" style="width:20%;">전화번호</th>
+                    <th class="sort align-middle" scope="col" data-sort="joined" style="width:10%;">영업시간</th>
+                  </tr>
+                </thead>
+                <tbody class="list" id="members-table-body">
+					
+					
+				  <th:block th:each="brand, loop : ${brands}">
+                  <tr class="hover-actions-trigger btn-reveal-trigger position-static">
+					<td class="position1 align-middle white-space-nowrap text-1100"><a href="#">&nbsp;#[[${#lists.size(brands)-loop.index}]]</a></td>
+                    <td class="customer align-middle white-space-nowrap"><a class="d-flex align-items-center text-1000 text-hover-1000" th:text="${brand.title}" th:href="@{|/admin/brandReadDetail?id=${brand.id}|}"></a></td>
+                    <td class="email align-middle white-space-nowrap text-1100">[[${brand.address1}]]&nbsp;[[${brand.address2}]]</td>
+                    <td class="city align-middle white-space-nowrap text-1100">[[${brand.tel}]]</td>
+                    <td class="joined align-middle white-space-nowrap text-1100">[[${brand.time}]]</td>
+                  </tr>
+                  </th:block>
+                </tbody>
+              </table>
+            </div>
+            <div class="row align-items-center justify-content-between py-2 pe-0 fs--1">
+              <div class="col-auto d-flex">
+                <p class="mb-0 d-none d-sm-block me-3 fw-semi-bold text-900" data-list-info="data-list-info"></p><a class="fw-semi-bold" href="#!" data-list-view="*">전체보기<span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a><a class="fw-semi-bold d-none" href="#!" data-list-view="less">View Less<span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a>
+              </div>
+              <div class="col-auto d-flex">
+                <button class="page-link" data-list-pagination="prev"><span class="fas fa-chevron-left"></span></button>
+                <ul class="mb-0 pagination"></ul>
+                <button class="page-link pe-0" data-list-pagination="next"><span class="fas fa-chevron-right"></span></button>
+              </div>
+            </div>
+          </div>
+          </div>
+          
+          
+          <div class="col-md-6">
+			  <div id="kmap" style="width: 100%; height: 450px; margin-left: 30px;"></div>
+                        
+                 <script type="text/javascript"
+                                src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9eab04f54e929879b23643109e0c42e1&libraries=services"></script>
+                        <script th:inline="javascript">
+                            var container = document
+                                    .getElementById('kmap'), // 지도를 표시할 div
+                                option = {
+                                    center : new kakao.maps.LatLng(37,127), // 지도의 중심좌표
+                                    level : 9
+                                    // 지도의 확대 레벨
+                                };
+                            var brandList = /*[[${brands}]]*/ [];
+
+                            // 지도를 생성합니다
+                            var map = new kakao.maps.Map(container,
+                                option);
+                            // 주소-좌표 변환 객체를 생성합니다
+                            var geocoder = new kakao.maps.services.Geocoder();
+
+                            brandList.forEach( function (brand) {
+                                // 주소로 좌표를 검색합니다
+                                geocoder.addressSearch(brand.address2, function(result, status) {
+                                    // 정상적으로 검색이 완료됐으면
+                                    if (status === kakao.maps.services.Status.OK) {
+                                        var coords = new kakao.maps.LatLng(
+                                            result[0].y,
+                                            result[0].x);
+
+                                        // 결과값으로 받은 위치를 마커로 표시합니다
+                                        var marker = new kakao.maps.Marker(
+                                            {
+                                                map : map,
+                                                position : coords,
+                                            });
+                                        var iwContent = '<div style="padding: 10px; font-family: Arial, sans-serif; color: #008080;">지점명: <strong style="color: red; font-weight: bold;">' + brand.title + '</strong></div>' +
+                                            '<div style="padding: 5px 0; white-space: nowrap; font-family: Arial, sans-serif; color: #777;">전화번호: ' + brand.tel + '</div>';
+                                        iwRemoveable = true;
+
+                                        // 인포윈도우로 장소에 대한 설명을 표시합니다
+                                        var infowindow = new kakao.maps.InfoWindow(
+                                            {
+                                                content : iwContent
+                                            });
+                                        // 마커에 마우스오버 이벤트를 등록합니다
+                                        kakao.maps.event.addListener
+                                        (marker,'mouseover',function() {// 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+                                            infowindow.open(map,marker);
+                                        });
+                                        // 마커에 마우스아웃 이벤트를 등록합니다
+                                        kakao.maps.event
+                                            .addListener(
+                                                marker,
+                                                'mouseout',
+                                                function() {
+                                                    // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
+                                                    infowindow
+                                                        .close();
+                                                });
+
+                                        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                                        map.setCenter(coords);
+                                    }
+                                });
+                            });
+
+                        </script>       
+                        
+                        
+		  </div>
+		  </div>
+          
+          
+        </div>
         
         <footer class="footer position-absolute">
           <div class="row g-0 justify-content-between align-items-center h-100">
