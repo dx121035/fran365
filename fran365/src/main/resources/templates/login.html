@@ -107,8 +107,15 @@
                     <div style="float: right;">
                     <div id="naver_id_login"></div>
                       <br>
-                    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-                    </fb:login-button>
+<!--                    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">-->
+<!--                    </fb:login-button>-->
+
+
+
+                        <div id="fb-root"></div>
+
+                        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v18.0&appId=7733464596705411" nonce="LXlJljbR"></script>
+                        <div class="fb-login-button" data-width="" data-size="medium" data-button-type="" data-layout="" data-auto-logout-link="false" data-use-continue-as="false"></div>
                      </div>
                      <br><br><br>
                    <div class="text-center"><a class="fs--1 fw-bold" href="/member/create">회원 가입</a></div>
