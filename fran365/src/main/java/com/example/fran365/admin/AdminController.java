@@ -53,6 +53,9 @@ public class AdminController {
 		model.addAttribute("deliveyNotComplete", adminService.getDeliveryNotComplete());
 		model.addAttribute("QuestionNotComplete", adminService.getQuestionNotComplete());
 		model.addAttribute("date", LocalDate.now());
+		model.addAttribute("brandTop4", adminService.findTop4Address1());
+		model.addAttribute("brands", adminService.brandReadList());
+		model.addAttribute("etcBrandCount", adminService.etcBrandCount());
 		
 		return "admin/main";
 	}
@@ -293,5 +296,5 @@ public class AdminController {
 		
 		return "admin/brandReadList";
 	}
-
+	
 }

@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -54,7 +56,7 @@ public class AdminServiceImpl implements AdminService {
 	private StatusRepository statusrepository;
 	
 	@Autowired
-	private BrandRepository brandRepositroy;
+	private BrandRepository brandRepository;
 
 	@Override
 	public List<Member> memberReadList() {
@@ -232,7 +234,27 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<Brand> brandReadList() {
 
-		return brandRepositroy.findAll(Sort.by(Sort.Direction.DESC, "id"));
+		return brandRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
+	}
+
+	@Override
+	public List<Object[]> findTop4Address1() {
+		
+		Pageable pageable = PageRequest.of(0, 4); // 0은 페이지 번호, 4는 페이지 크기 (상위 4개만)
+
+		return brandRepository.findTop4Address1(pageable);
+	}
+
+	@Override
+	public int etcBrandCount() {
+
+		int etcBrandCount = brandReadList().size();
+		for (int i = 0; i < findTop4Address1().size(); i++) {
+			
+		etcBrandCount = etcBrandCount - ((Long) findTop4Address1().get(i)[1]).intValue();
+		}
+		
+		return etcBrandCount;
 	}
 	
 }

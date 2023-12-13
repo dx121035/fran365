@@ -124,6 +124,14 @@
 				        </div>
 				    </a>
 				</div><!-- parent pages-->
+				<div class="nav-item-wrapper" style="font-size: 16px; margin-top: 8px;">
+				    <a class="nav-link label-1" href="/admin/productReadList" role="button" data-bs-toggle="" aria-expanded="false">
+				        <div class="d-flex align-items-center">
+				            <span class="nav-link-icon" style="margin-bottom: 5px;"><span data-feather="package"></span></span>
+				            <span class="nav-link-text-wrapper"><span class="nav-link-text">제품관리</span></span>
+				        </div>
+				    </a>
+				</div><!-- parent pages-->
                 <div class="nav-item-wrapper" style="font-size: 16px; margin-top: 8px;">
 				    <a class="nav-link label-1" href="/admin/deliveryReadList" role="button" data-bs-toggle="" aria-expanded="false">
 				        <div class="d-flex align-items-center">
@@ -313,28 +321,28 @@
                   <p class="text-700 mb-md-7">[[${date}]] 기준</p>
                   <div class="d-flex align-items-center justify-content-between">
                     <p class="mb-0 fw-bold">지역별 지점 수 </p>
-                    <p class="mb-0 fs--1">전체 <span class="fw-bold">51</span></p>
+                    <p class="mb-0 fs--1">전체 <span class="fw-bold">[[${#lists.size(brands)}]]</span></p>
                   </div>
                   <hr class="bg-200 mb-2 mt-2" />
                   <div class="d-flex align-items-center mb-1"><span class="d-inline-block bg-info-300 bullet-item me-2"></span>
-                    <p class="mb-0 fw-semi-bold text-900 lh-sm flex-1">서울</p>
-                    <h5 class="mb-0 text-900">20</h5>
+                    <p class="mb-0 fw-semi-bold text-900 lh-sm flex-1">[[${brandTop4.get(0)[0]}]]</p>
+                    <h5 class="mb-0 text-900">[[${brandTop4.get(0)[1]}]]</h5>
                   </div>
                   <div class="d-flex align-items-center mb-1"><span class="d-inline-block bg-warning-300 bullet-item me-2"></span>
-                    <p class="mb-0 fw-semi-bold text-900 lh-sm flex-1">경기</p>
-                    <h5 class="mb-0 text-900">15</h5>
+                    <p class="mb-0 fw-semi-bold text-900 lh-sm flex-1">[[${brandTop4.get(1)[0]}]]</p>
+                    <h5 class="mb-0 text-900">[[${brandTop4.get(1)[1]}]]</h5>
                   </div>
                   <div class="d-flex align-items-center mb-1"><span class="d-inline-block bg-danger-300 bullet-item me-2"></span>
-                    <p class="mb-0 fw-semi-bold text-900 lh-sm flex-1">경남</p>
-                    <h5 class="mb-0 text-900">10</h5>
+                    <p class="mb-0 fw-semi-bold text-900 lh-sm flex-1">[[${brandTop4.get(2)[0]}]]</p>
+                    <h5 class="mb-0 text-900">[[${brandTop4.get(2)[1]}]]</h5>
                   </div>
                   <div class="d-flex align-items-center mb-1"><span class="d-inline-block bg-success-300 bullet-item me-2"></span>
-                    <p class="mb-0 fw-semi-bold text-900 lh-sm flex-1">충남</p>
-                    <h5 class="mb-0 text-900">5</h5>
+                    <p class="mb-0 fw-semi-bold text-900 lh-sm flex-1">[[${brandTop4.get(3)[0]}]]</p>
+                    <h5 class="mb-0 text-900">[[${brandTop4.get(3)[1]}]]</h5>
                   </div>
                   <div class="d-flex align-items-center"><span class="d-inline-block bg-primary bullet-item me-2"></span>
-                    <p class="mb-0 fw-semi-bold text-900 lh-sm flex-1">강원</p>
-                    <h5 class="mb-0 text-900">1</h5>
+                    <p class="mb-0 fw-semi-bold text-900 lh-sm flex-1">기타</p>
+                    <h5 class="mb-0 text-900">[[${etcBrandCount}]]</h5>
                   </div>
                   <button class="btn btn-outline-primary mt-5">상세정보<span class="fas fa-angle-right ms-2 fs--2 text-center"></span></button>
                 </div>
@@ -522,11 +530,11 @@
               show: false
             },
             data: [
-              { value: 20, name: '서울' },
-              { value: 15, name: '경기' },
-              { value: 10, name: '경남' },
-              { value: 5, name: '충남' },
-              { value: 1, name: '강원' }
+              { value: '[[${brandTop4.get(0)[1]}]]', name: '[[${brandTop4.get(0)[0]}]]' },
+              { value: '[[${brandTop4.get(1)[1]}]]', name: '[[${brandTop4.get(1)[0]}]]' },
+              { value: '[[${brandTop4.get(2)[1]}]]', name: '[[${brandTop4.get(2)[0]}]]' },
+              { value: '[[${brandTop4.get(3)[1]}]]', name: '[[${brandTop4.get(3)[0]}]]' },
+              { value: '[[${etcBrandCount}]]', name: '기타' }
             ]
           }
         ],

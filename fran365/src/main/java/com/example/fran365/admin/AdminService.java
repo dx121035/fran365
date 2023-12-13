@@ -52,4 +52,8 @@ public interface AdminService {
 	void statusCreate(Integer id, Status status);
 	
 	List<Brand> brandReadList();
+	
+	List<Object[]> findTop4Address1();
+	
+	int etcBrandCount();
 }
