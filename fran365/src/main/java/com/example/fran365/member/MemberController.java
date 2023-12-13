@@ -188,7 +188,7 @@ public class MemberController {
 		if (member.isPresent()) {
 			response.put("message", "찾으시는 아이디는 <span style=\"color:green\">" + member.get().getUsername()+"</span>입니다.</p>");
 		} else {
-			response.put("error", "아이디가 존재하지 않습니다<br> 이름과전화번호를 확인해주세요.");
+			response.put("error", "아이디가 존재하지 않습니다<br> 이름과 전화번호를 확인해주세요.");
 		}
 
 		return response;

@@ -10,6 +10,15 @@ name= yujin
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <style>
+    /* 가운데 정렬을 위한 스타일 */
+    .center-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; /* 화면 전체 높이 */
+    }
+  </style>
 </head>
 
 <div id="findPw" class="modal fade">
@@ -20,11 +29,13 @@ name= yujin
         <div class="container my-auto">
           <div class="row">
             <div class="card z-index-0 fadeIn3 fadeInBottom">
-              <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+
                 <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
-                  <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">비밀번호 찾기</h4>
+                  <h4 class="bg-primary text-white font-weight-bolder text-center mt-2 mb-0 rounded">비밀번호 찾기</h4>
+
+
                 </div>
-              </div>
+
               <div class="card-body">
                 <form role="form" class="text-start" action="/member/sendEmail" method="post" name="sendEmail">
                   <p>입력한 이메일로 임시 비밀번호가 전송됩니다.</p>
@@ -46,8 +57,13 @@ name= yujin
     </div>
   </div>
 </div>
-<button type="button" class="btn btn-link" data-bs-toggle="modal"
-        data-bs-target="#findPw">비밀번호를 잊으셨나요?</button>
+<div class="center-container">
+<button type="button" class="btn btn-primary px-5 px-sm-15" data-bs-toggle="modal"
+        data-bs-target="#findPw">비밀번호 찾기</button>
+</div>
+
+
+
 
 
 <script>
@@ -65,17 +81,20 @@ name= yujin
         if(result === "success"){
           // 중복되는 것이 있다면 no == 일치하는 이메일이 있다!
           alert('임시비밀번호를 전송 했습니다.');
-          sendEmail.submit();
+
+          // 로그인 페이지로 이동
+          window.location.href = '/login';
         }else {
           alert('가입되지 않은 이메일입니다.');
         }
-
-      },error: function () {
+      },
+      error: function () {
         console.log('에러 체크!!')
       }
     })
   });
 </script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>
