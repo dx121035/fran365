@@ -7,6 +7,7 @@ import com.example.fran365.brand.BrandRepository;
 import com.example.fran365.member.Member;
 import com.example.fran365.member.MemberService;
 import com.example.fran365.stock.StockRepository;
+import com.example.fran365.stock.StockService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,9 @@ public class ResourceServiceImpl implements ResourceService {
 
     @Autowired
     private MemberService memberService;
+
+    @Autowired
+    private StockService stockService;
 
     @Value("bucket-va1rkc")
     private String bucketName;
@@ -147,7 +151,7 @@ public class ResourceServiceImpl implements ResourceService {
 
     @Override
     @Transactional
-    public void updateProductStock(Integer id, int amount) {
+    public void updateProductStock(Integer id, int amount, String category) {
 
         Resource resource = resourceRepository.findWithPessimisticLockById(id);
 
@@ -158,6 +162,8 @@ public class ResourceServiceImpl implements ResourceService {
         } else {
             throw new RuntimeException("재고가 부족합니다");
         }
+
+        stockService.trade(id, amount, category);
 
         if (resource.getAmount() == 0) {
             resourceRepository.delete(resource);

@@ -3,6 +3,7 @@ package com.example.fran365.stock;
 import com.example.fran365.brand.Brand;
 import com.example.fran365.brand.BrandRepository;
 import com.example.fran365.brand.BrandService;
+import com.example.fran365.history.HistoryService;
 import com.example.fran365.member.MemberService;
 import com.example.fran365.resource.Resource;
 import com.example.fran365.resource.ResourceRepository;
@@ -17,14 +18,20 @@ import java.util.Optional;
 @Service
 public class StockServiceImpl implements StockService {
 
-   @Autowired
-   private BrandRepository brandRepository;
+    @Autowired
+    private BrandRepository brandRepository;
 
-   @Autowired
-   private MemberService memberService;
+    @Autowired
+    private MemberService memberService;
 
-   @Autowired
-   private StockRepository stockRepository;
+    @Autowired
+    private StockRepository stockRepository;
+
+    @Autowired
+    private ResourceRepository resourceRepository;
+
+    @Autowired
+    private HistoryService historyService;
 
 
     @Override
@@ -64,6 +71,7 @@ public class StockServiceImpl implements StockService {
 
         }
     }
+
     @Override
     public void trade(Integer id, int amount, String category) {
 
@@ -71,18 +79,28 @@ public class StockServiceImpl implements StockService {
 
         //구매자 brand 추출
         Brand purchaser = brandRepository.findByUsername(username);
+        String buyer = purchaser.getUsername();
 
-        List<Stock> purchaserStockList = purchaser.getStockList();
+        //판매글 객체 추출
+        Optional<Resource> or = resourceRepository.findById(id);
+        Resource resource = or.get();
 
+        //판매자 추출
+        String seller = resource.getUsername();
 
-        for (Stock stock : purchaserStockList) {
+        for (Stock stock : purchaser.getStockList()) {
+
             //구매자의 id를 갖고 있는 재고 찾기
-            if (stock.getBrand().getId().equals(purchaser.getId()) && stock.getName().equals(category)) {
+
+            if (stock.getName().equals(category)) {
+
                 // 현재 재고 + 구매한 재고
+
                 int updatedQuantity = stock.getQuantity() + amount;
                 stock.setQuantity(updatedQuantity);
-                stockRepository.save(stock);
 
+                historyService.create(seller, buyer, stock.getName(), amount);
+                stockRepository.save(stock);
             }
         }
     }

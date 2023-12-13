@@ -20,7 +20,7 @@ public interface ResourceService {
 
     Page<Resource> getList(int page);
 
-    void updateProductStock(Integer id, int amount);
+    void updateProductStock(Integer id, int amount, String category);
 
 
 }

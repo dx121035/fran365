@@ -58,7 +58,8 @@
                                     <h6 class="text-800 mb-3"
                                         th:text="${stock.getName() + ' : ' + stock.getQuantity()}"></h6>
                                 </div>
-                                <button class="btn btn-outline-primary rounded-pill me-1 mb-1" type="button" data-bs-toggle="modal"
+                                <button class="btn btn-outline-primary rounded-pill me-1 mb-1" type="button"
+                                        data-bs-toggle="modal"
                                         data-bs-target="#exampleModal2">재고 편경
                                 </button>
                             </div>
@@ -194,18 +195,18 @@
                                             <label for="floatingInputGrid">[[${stock.name}]]</label>
                                         </div>
                                     </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-primary" type="submit">업데이트
-                        </button>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" type="submit">업데이트
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-</div>
 
 
     <script th:inline="javascript">
@@ -249,4 +250,5 @@
         </nav>
     </div>
 </div>
+
 </html>
