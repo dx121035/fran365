@@ -119,7 +119,10 @@ public class DocumentServiceImpl implements DocumentService{
 
     @Override
     public List<Document> readListTemp() {
-        return documentRepository.findByStatus(0);
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String receiver = authentication.getName();
+        return documentRepository.findByStatusAndReceiver(0,receiver);
     }
 
 
