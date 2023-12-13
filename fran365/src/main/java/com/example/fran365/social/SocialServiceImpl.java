@@ -105,7 +105,7 @@ public class SocialServiceImpl implements SocialService {
 
     @Override
     public Page<Social> getList(int page) {
-        PageRequest pageRequest = PageRequest.of(0, 4, Sort.by(Sort.Direction.DESC, "createDate"));
+        PageRequest pageRequest = PageRequest.of(page, 4, Sort.by(Sort.Direction.DESC, "createDate"));
         return socialRepository.findPageBy(pageRequest);
     }
 
