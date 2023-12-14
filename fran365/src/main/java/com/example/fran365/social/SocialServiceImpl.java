@@ -55,8 +55,6 @@ public class SocialServiceImpl implements SocialService {
      //   return socialRepository.findPublicPostsOrByUsername(username);
    // }
 
-
-
     @Override
     public void delete(Integer id) {
         Optional<Social> os = socialRepository.findById(id);
