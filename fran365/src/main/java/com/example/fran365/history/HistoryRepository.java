@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface HistoryRepository extends JpaRepository<History, Integer> {
 
-    List<History> findBySellerContaining(String username);
+    List<History> findBySellerContaining(String brandName);
 
-    List<History> findByPurchaserContaining(String username);
+    List<History> findByPurchaserContaining(String brandName);
 }

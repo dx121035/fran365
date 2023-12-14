@@ -40,6 +40,7 @@ public class Brand {
 
     private String username;
 
+
     @JsonIgnore
     @OneToMany(mappedBy = "brand", cascade = CascadeType.REMOVE)
     private List<Sales> salesList;
@@ -49,5 +50,7 @@ public class Brand {
     @JsonIgnore
     @OneToMany(mappedBy = "brand", cascade = CascadeType.REMOVE)
     private List<Stock> stockList;
+
+
 
 }

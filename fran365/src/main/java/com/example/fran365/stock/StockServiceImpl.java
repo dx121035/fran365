@@ -79,14 +79,18 @@ public class StockServiceImpl implements StockService {
 
         //구매자 brand 추출
         Brand purchaser = brandRepository.findByUsername(username);
-        String buyer = purchaser.getUsername();
+        String buyer = purchaser.getTitle();
 
         //판매글 객체 추출
         Optional<Resource> or = resourceRepository.findById(id);
         Resource resource = or.get();
 
+        int price = resource.getPrice();
+        System.out.println("가격 : " + price);
+
         //판매자 추출
-        String seller = resource.getUsername();
+        Brand brand = brandRepository.findByUsername(resource.getUsername());
+        String seller = brand.getTitle();
 
         for (Stock stock : purchaser.getStockList()) {
 
@@ -99,7 +103,7 @@ public class StockServiceImpl implements StockService {
                 int updatedQuantity = stock.getQuantity() + amount;
                 stock.setQuantity(updatedQuantity);
 
-                historyService.create(seller, buyer, stock.getName(), amount);
+                historyService.create(seller, buyer, stock.getName(), amount, price);
                 stockRepository.save(stock);
             }
         }
