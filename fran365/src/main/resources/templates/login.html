@@ -68,14 +68,14 @@
 <!-- ===============================================-->
 <!--    Main Content-->
 <!-- ===============================================-->
-    <main class="main" id="top">
-        <div class="container">
-            <div class="row flex-center min-vh-100 py-5">
-                <div class="col-sm-10 col-md-8 col-lg-5 col-xl-5 col-xxl-3"><a class="d-flex flex-center text-decoration-none mb-4" href="/public/index.html">
-                    <div class="d-flex align-items-center fw-bolder fs-5 d-inline-block"><img src="/images/logo2.png" alt="phoenix" class=" w-100 mb-3" />
-                    </div>
-                </a>
-                    <form class="form-signin" action="/login" method="post">
+<main class="main" id="top">
+    <div class="container">
+        <div class="row flex-center min-vh-100 py-5">
+            <div class="col-sm-10 col-md-8 col-lg-5 col-xl-5 col-xxl-3"><a class="d-flex flex-center text-decoration-none mb-4" href="/public/index.html">
+                <div class="d-flex align-items-center fw-bolder fs-5 d-inline-block"><img src="/images/logo2.png" alt="phoenix" class=" w-100 mb-3" />
+                </div>
+            </a>
+                <form class="form-signin" action="/login" method="post">
                     <div class="text-center mb-7">
                         <!-- <p class="text-700">Get access to your account</p> -->
                     </div>
@@ -98,30 +98,38 @@
                     <br>
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                     <button class="btn btn-primary w-100 mb-3">로그인</button>
-                    </form>
-                    <a href="/member/findId">아이디 찾기</a> <a href="/member/sendEmail" style=" float: right;" >비밀번호 찾기</a>
-                    <br><br>
-                    <div id="status" style="text-align: center;"></div>
-                    <a href="javascript:kakaoLogin()"><img src="images/kakao.png"   class="w-10 mb-3"></img></a>
-
-                    <div style="float: right;">
-                    <div id="naver_id_login"></div>
-                      <br>
-<!--                    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">-->
-<!--                    </fb:login-button>-->
+                </form>
+                <a href="/member/findId">아이디 찾기</a> <a href="/member/sendEmail" style=" float: right;" >비밀번호 찾기</a>
+                <br><br>
 
 
+                <div class="col d-flex align-items-center">
+                    <div id="fb-root"></div>
+                    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v18.0&appId=7733464596705411" nonce="LXlJljbR"></script>
+                    <div class="fb-login-button" data-width="" data-size="medium" data-button-type="" data-layout="" data-auto-logout-link="false" data-use-continue-as="false"></div>
+                    <!-- 간격 조절을 위한 여백 추가 -->
+                    <div style="margin-right: 100px;"></div>
+                    <a href="/member/create" class="btn btn-primary w-50 mx-1 mb-1">회원가입</a>
 
-                        <div id="fb-root"></div>
 
-                        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v18.0&appId=7733464596705411" nonce="LXlJljbR"></script>
-                        <div class="fb-login-button" data-width="" data-size="large" data-button-type="" data-layout="" data-auto-logout-link="false" data-use-continue-as="false"></div>
-                     </div>
-                     <br><br><br>
-                   <div class="text-center"><a class="fs--1 fw-bold" href="/member/create">회원 가입</a></div>
-</div>
-</div>
-</div>
+                </div>
+                <br>
+
+                <div class="row justify-content-between">
+                    <div class="col">
+                        <a href="javascript:kakaoLogin()"><img src="images/kakao.png"   class="w-10 mb-3"></img></a>
+                    </div>
+                    <div class="col text-end">
+                        <div id="naver_id_login"></div>
+                    </div>
+                    <br>
+                    <!--                    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">-->
+                    <!--                    </fb:login-button>-->
+
+                </div>
+            </div>
+        </div>
+    </div>
 
 </main>
 <!-- ===============================================-->
