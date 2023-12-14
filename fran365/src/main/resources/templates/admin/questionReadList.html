@@ -275,8 +275,9 @@
               <table class="table table-md fs--1 mb-0">
                 <thead>
                   <tr>
-					<th class="sort align-middle" scope="col" data-sort="id" style="width:10%; min-width:100px;">번호</th>
-                    <th class="sort align-middle" scope="col" data-sort="customer" style="width:45%; min-width:450px;">제목</th>
+					<th class="sort align-middle" scope="col" data-sort="id" style="width:8%; min-width:80px;">번호</th>
+					<th class="sort align-middle" scope="col" data-sort="id" style="width:8%; min-width:80px;">분류</th>
+                    <th class="sort align-middle" scope="col" data-sort="customer" style="width:39%; min-width:390px;">제목</th>
                     <th class="sort align-middle" scope="col" data-sort="email" style="width:10%; min-width:100px;">작성자</th>
                     <th class="sort align-middle" scope="col" data-sort="city" style="width:10%; min-width:100px;">조회수</th>
                     <th class="sort align-middle" scope="col" data-sort="joined" style="width:15%;  min-width:150px;">등록일</th>
@@ -289,6 +290,7 @@
 				  <th:block th:each="question, loop : ${questions}">
                   <tr class="hover-actions-trigger btn-reveal-trigger position-static">
 					<td class="position1 align-middle white-space-nowrap text-1100"><a href="#">#[[${#lists.size(questions)-loop.index}]]</a></td>
+					<td class="position1 align-middle white-space-nowrap text-1100">[[${question.category}]]</td>
                     <td class="customer align-middle white-space-nowrap"><a class="d-flex align-items-center text-900 text-hover-1000" th:href="@{|/admin/questionReadDetail?id=${question.id}|}">
                         <h6 class="mb-0 fw-semi-bold">[[${question.title}]]</h6>&nbsp;&nbsp;[<span th:text="${#lists.size(question.replyList)}"></span>]
                       </a></td>

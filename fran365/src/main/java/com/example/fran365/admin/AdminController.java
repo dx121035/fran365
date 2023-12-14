@@ -15,6 +15,8 @@ import com.example.fran365.department.DepartmentService;
 import com.example.fran365.event.EventService;
 import com.example.fran365.member.MemberService;
 import com.example.fran365.position.PositionService;
+import com.example.fran365.product.ProductCreateForm;
+import com.example.fran365.product.ProductService;
 import com.example.fran365.status.Status;
 
 
@@ -42,6 +44,9 @@ public class AdminController {
 	
 	@Autowired
 	private DepartmentService departmentService;
+	
+	@Autowired
+	private ProductService productService;
 	
 	@GetMapping("/main")
 	public String adminMain(Model model) {
@@ -120,7 +125,7 @@ public class AdminController {
 	public int memberApprove(Integer id, Integer number, String department) {
 		
 		adminService.memberApprove(id, number, department);
-		
+
 		return 1;
 	}
 	
@@ -295,6 +300,43 @@ public class AdminController {
 		model.addAttribute("brands", adminService.brandReadList());
 		
 		return "admin/brandReadList";
+	}
+	
+	@GetMapping("/productReadList")
+	public String productReadList(Model model) {
+		
+		model.addAttribute("awspath", awspath);
+		model.addAttribute("user", memberService.readDetailUsername());
+		model.addAttribute("products", adminService.productReadList());
+		
+		return "admin/productReadList";
+	}
+	
+	@GetMapping("/productCreate")
+	public String productCreate(Model model, ProductCreateForm productCreateForm) {
+		
+		model.addAttribute("awspath", awspath);
+		model.addAttribute("user", memberService.readDetailUsername());
+		
+		return "admin/productCreate";
+	}
+	
+	@GetMapping("/productDelete")
+	public String productDelete(Integer id) {
+		
+		adminService.productDelete(id);
+		
+		return "redirect:/admin/productReadList";
+	}
+	
+	@GetMapping("/productUpdate")
+	public String productUpdate(Model model, ProductCreateForm productCreateForm, Integer id) {
+		
+		model.addAttribute("awspath", awspath);
+		model.addAttribute("user", memberService.readDetailUsername());
+		model.addAttribute("product", productService.readDetail(id));
+		
+		return "admin/productUpdate";
 	}
 	
 }

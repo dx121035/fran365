@@ -251,21 +251,46 @@
       
       
 		<div class="content">
-		<h2 class="text-bold text-1100 mb-5">부서/직급관리</h2>
+		<h2 class="text-bold text-1100 mb-6">부서/직급관리</h2>
 		<div class="row">
-		<div class="col-md-6" style="border: 1px solid lightslategray; border-radius: 5px; padding: 15px; margin-bottom: 5px;">
-        <div id="members" data-list='{"valueNames":["number","customer","position","city","last_active","joined"],"page":10,"pagination":true}' style="margin-left: 50px;">
-          <div class="row align-items-center justify-content-between g-3 mb-4">
+		<div class="col-md-6">
+		<h3 style="margin-bottom: 15px;">부서목록</h3>
+        <div id="members" data-list='{"valueNames":["number","customer","position","city","last_active","joined"],"page":5,"pagination":true}' style="margin-left: 40px;">
+          <div class="mx-n4 mx-lg-n6 px-4 px-lg-6 mb-9 bg-white border-y border-300 mt-2 position-relative top-1" style="width: 110%;">
+            <div class="table-responsive scrollbar ms-n1 ps-1">
+              <table class="table table-sm fs--1 mb-0">
+                <thead>
+                  <tr>
+					<th class="sort align-middle" scope="col" data-sort="number" style="width:15%; min-width:110px;">번호</th>
+                    <th class="sort align-middle" scope="col" data-sort="customer" style="width:15%; min-width:110px;">소속</th>
+                    <th class="sort align-middle" scope="col" data-sort="position" style="width:15%; min-width:110px;">부서</th>
+                    <th class="align-middle" scope="col" style="width:20%;"></th>
+                  </tr>
+                </thead>
+                <tbody class="list" id="members-table-body">
+				  <th:block th:each="department, loop : ${departments}">
+                  <tr class="hover-actions-trigger btn-reveal-trigger position-static">
+					<td class="number align-middle white-space-nowrap text-1100">[[${loop.index+1}]]</td>
+                    <td class="customer align-middle white-space-nowrap text-1100">본사</td>
+                    <td class="number align-middle white-space-nowrap text-1100">[[${department.department}]]</td>
+                  	<td class="position align-middle text-end"><button class="btn btn-danger btn-sm" style="padding: 5px 10px; font-size: 12px; margin-left: 22px;" th:onclick="deleteDepartment([[${department.id}]])">삭제</button></td>
+                  </tr>
+                  </th:block>
+                </tbody>
+              </table>
+            </div>
+            
+            <div class="row align-items-center justify-content-between g-3 mb-4">
 			  
             <div class="col">
 				<form action="/department/create" method="post">
 			    <div class="row mt-3">
 			        <div class="col-auto">
-			            <input class="form-control mb-0" type="text" name="department" placeholder="부서" />
+			            <input class="form-control mb-0" type="text" name="department" placeholder="부서명" />
 			        </div>
 			        <div class="row mt-4">
 			        <div class="col-auto">
-			            <button class="btn btn-primary"><span class="fas fa-plus me-2"></span>부서추가</button>
+			            <button class="btn btn-primary btn-sm"><span class="fas fa-plus pe-2 fs--2"></span></span>부서추가</button>
 			        </div>
 			        </div>
 			    </div>
@@ -273,29 +298,7 @@
 			</div>
 			
           </div>
-          <div class="mx-n4 mx-lg-n6 px-4 px-lg-6 mb-9 bg-white border-y border-300 mt-2 position-relative top-1" style="width: 100%;">
-            <div class="table-responsive scrollbar ms-n1 ps-1">
-              <table class="table table-sm fs--1 mb-0">
-                <thead>
-                  <tr>
-					<th class="sort align-middle" scope="col" data-sort="number" style="width:15%; min-width:100px;">부서번호</th>
-                    <th class="sort align-middle" scope="col" data-sort="customer" style="width:15%; min-width:100px;">소속</th>
-                    <th class="sort align-middle" scope="col" data-sort="position" style="width:15%; min-width:100px;">부서</th>
-                    <th class="align-middle" scope="col" style="width:20%;"></th>
-                  </tr>
-                </thead>
-                <tbody class="list" id="members-table-body">
-				  <th:block th:each="department : ${departments}">
-                  <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-					<td class="number align-middle white-space-nowrap text-1100">[[${department.id}]]</td>
-                    <td class="customer align-middle white-space-nowrap text-1100">본사</td>
-                    <td class="number align-middle white-space-nowrap text-1100">[[${department.department}]]</td>
-                  	<td class="position align-middle"><button class="btn btn-danger btn-sm" style="padding: 5px 10px; font-size: 12px; margin-left: 22px;" th:onclick="deleteDepartment([[${department.id}]])">삭제</button></td>
-                  </tr>
-                  </th:block>
-                </tbody>
-              </table>
-            </div>
+          
             <div class="row align-items-center justify-content-between py-2 pe-0 fs--1">
               <div class="col-auto d-flex">
                 <p class="mb-0 d-none d-sm-block me-3 fw-semi-bold text-900" data-list-info="data-list-info"></p><a class="fw-semi-bold" href="#!" data-list-view="*">전체보기<span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a><a class="fw-semi-bold d-none" href="#!" data-list-view="less">View Less<span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a>
@@ -311,35 +314,17 @@
         </div>
         
         
-        <div class="col-md-6" style="border: 1px solid lightslategray; border-radius: 5px; padding: 15px; margin-bottom: 5px;">
-        <div id="members1" data-list='{"valueNames":["number","customer","position","city","last_active","joined"],"page":10,"pagination":true}' style="margin-left: 50px;">
-          <div class="row align-items-center justify-content-between g-3 mb-4">
-			  
-            <div class="col">
-				<form action="/position/create" method="post">
-			    <div class="row mt-3">
-			        <div class="col-auto">
-			            <input class="form-control mb-0" type="text" name="number" placeholder="직급번호" />
-			        </div>
-			        <div class="col-auto">
-			            <input class="form-control mb-0" type="text" name="position" placeholder="직급" />
-			        </div>
-			        <div class="col-auto mt-4">
-			            <button class="btn btn-primary"><span class="fas fa-plus me-2"></span>직급추가</button>
-			        </div>
-			    </div>
-			    </form>
-			</div>
-			
-          </div>
-          <div class="mx-n4 mx-lg-n6 px-4 px-lg-6 mb-9 bg-white border-y border-300 mt-2 position-relative top-1" style="width: 100%;">
+        <div class="col-md-6">
+		<h3 style="margin-left: 10px; margin-bottom: 15px;">직급목록</h3>
+        <div id="members1" data-list='{"valueNames":["number","customer","position","city","last_active","joined"],"page":5,"pagination":true}' style="margin-left: 50px;">
+          <div class="mx-n4 mx-lg-n6 px-4 px-lg-6 mb-9 bg-white border-y border-300 mt-2 position-relative top-1" style="width: 110%;">
             <div class="table-responsive scrollbar ms-n1 ps-1">
               <table class="table table-sm fs--1 mb-0">
                 <thead>
                   <tr>
-					<th class="sort align-middle" scope="col" data-sort="number" style="width:15%; min-width:100px;">직급번호</th>
-                    <th class="sort align-middle" scope="col" data-sort="customer" style="width:15%; min-width:100px;">소속</th>
-                    <th class="sort align-middle" scope="col" data-sort="position" style="width:15%; min-width:100px;">직급</th>
+					<th class="sort align-middle" scope="col" data-sort="number" style="width:15%; min-width:110px;">직급번호</th>
+                    <th class="sort align-middle" scope="col" data-sort="customer" style="width:15%; min-width:110px;">소속</th>
+                    <th class="sort align-middle" scope="col" data-sort="position" style="width:15%; min-width:110px;">직급</th>
                     <th class="align-middle" scope="col" style="width:20%;"></th>
                   </tr>
                 </thead>
@@ -349,12 +334,32 @@
 					<td class="number align-middle white-space-nowrap text-1100">[[${position.number}]]</td>
                     <td class="customer align-middle white-space-nowrap text-1100">본사</td>
                     <td class="number align-middle white-space-nowrap text-1100">[[${position.position}]]</td>
-                  	<td class="position align-middle"><button class="btn btn-danger btn-sm" style="padding: 5px 10px; font-size: 12px; margin-left: 22px;" th:onclick="deletePosition([[${position.id}]])">삭제</button></td>
+                  	<td class="position align-middle text-end"><button class="btn btn-danger btn-sm" style="padding: 5px 10px; font-size: 12px; margin-left: 22px;" th:onclick="deletePosition([[${position.id}]])">삭제</button></td>
                   </tr>
                   </th:block>
                 </tbody>
               </table>
             </div>
+            <div class="row align-items-center justify-content-between g-3 mb-4">
+			  
+            <div class="col">
+				<form action="/position/create" method="post">
+			    <div class="row mt-3">
+			        <div class="col-auto">
+			            <input class="form-control mb-0" type="text" name="number" placeholder="직급번호" />
+			        </div>
+			        <div class="col-auto">
+			            <input class="form-control mb-0" type="text" name="position" placeholder="직급명" />
+			        </div>
+			        <div class="col-auto mt-4">
+			            <button class="btn btn-primary btn-sm"><span class="fas fa-plus me-2"></span>직급추가</button>
+			        </div>
+			    </div>
+			    </form>
+			</div>
+			
+          </div>
+            
             <div class="row align-items-center justify-content-between py-2 pe-0 fs--1">
               <div class="col-auto d-flex">
                 <p class="mb-0 d-none d-sm-block me-3 fw-semi-bold text-900" data-list-info="data-list-info"></p><a class="fw-semi-bold" href="#!" data-list-view="*">전체보기<span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a><a class="fw-semi-bold d-none" href="#!" data-list-view="less">View Less<span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a>

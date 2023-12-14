@@ -50,12 +50,12 @@ public class ProductController {
     ) throws IOException {
 
         if (bindingResult.hasErrors()) {
-            return "product/create";
+            return "admin/productCreate";
         }
 
         productService.create(productCreateForm.getName(), productCreateForm.getPrice(),file);
 
-        return "redirect:/product/readList";
+        return "redirect:/admin/productReadList";
     }
 
 
@@ -91,7 +91,7 @@ public class ProductController {
 
         productService.update(productCreateForm.getName(), productCreateForm.getPrice(),id,file);
 
-        return "redirect:/product/readList";
+        return "redirect:/admin/productReadList";
     }
 
     @GetMapping("/delete")

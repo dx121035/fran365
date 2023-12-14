@@ -251,9 +251,9 @@
       
       
 		<div class="content">
-        <h2 class="text-bold text-1100 mb-5">배송관리</h2>
+        <h2 class="text-bold text-1100 mb-5">발주 상세정보</h2>
         <div id="members" data-list='{"valueNames":["customer","email","mobile_number","city","last_active","joined"],"page":10,"pagination":true}'>
-          <div class="mx-n4 mx-lg-n6 px-4 px-lg-6 mb-9 bg-white border-y border-300 mt-2 mb-10 position-relative top-1">
+          <div class="mx-n4 mx-lg-n6 px-4 px-lg-6 mb-9 bg-white border-y border-300 mt-2 position-relative top-1">
             <div class="table-responsive scrollbar ms-n1 ps-1">
               <table class="table table-md fs--1 mb-0">
                 <thead>
@@ -296,10 +296,10 @@
 					  <h4>배송정보 등록</h4><br>
           			  <form th:action="@{/admin/statusCreate}" method="post">
                         <div class="mb-6">
-                          <input class="form-control" type="text" name="tracking" th:value="${#lists.size(delivery.statusList) > 1 ? delivery.statusList[1].tracking : ''}" placeholder="송장번호">
+                          <input class="form-control" type="text" name="tracking" th:value="${#lists.size(delivery.statusList) > 1 ? delivery.statusList[1].tracking : ''}" placeholder="송장번호" style="width: 90%;">
                         </div>
                         <div class="mb-3">
-                          <select class="form-select" name="step" aria-label="Default select example">
+                          <select class="form-select" name="step" aria-label="Default select example" style="width: 90%;">
                             <option selected>배송단계</option>
                             <option value="상품준비">상품준비</option>
                             <option value="배송 중">배송 중</option>

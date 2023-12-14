@@ -7,6 +7,7 @@ import com.example.fran365.board.Board;
 import com.example.fran365.brand.Brand;
 import com.example.fran365.delivery.Delivery;
 import com.example.fran365.member.Member;
+import com.example.fran365.product.Product;
 import com.example.fran365.status.Status;
 
 public interface AdminService {
@@ -56,4 +57,8 @@ public interface AdminService {
 	List<Object[]> findTop4Address1();
 	
 	int etcBrandCount();
+	
+	List<Product> productReadList();
+	
+	void productDelete(Integer id);
 }
