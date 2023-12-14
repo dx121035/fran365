@@ -23,6 +23,8 @@ import com.example.fran365.member.Member;
 import com.example.fran365.member.MemberRepository;
 import com.example.fran365.member.MemberService;
 import com.example.fran365.position.PositionService;
+import com.example.fran365.product.Product;
+import com.example.fran365.product.ProductRepository;
 import com.example.fran365.reply.Reply;
 import com.example.fran365.reply.ReplyRepository;
 import com.example.fran365.status.Status;
@@ -57,6 +59,9 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Autowired
 	private BrandRepository brandRepository;
+	
+	@Autowired
+	private ProductRepository productRepository;
 
 	@Override
 	public List<Member> memberReadList() {
@@ -240,7 +245,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<Object[]> findTop4Address1() {
 		
-		Pageable pageable = PageRequest.of(0, 4); // 0은 페이지 번호, 4는 페이지 크기 (상위 4개만)
+		Pageable pageable = PageRequest.of(0, 4);
 
 		return brandRepository.findTop4Address1(pageable);
 	}
@@ -255,6 +260,18 @@ public class AdminServiceImpl implements AdminService {
 		}
 		
 		return etcBrandCount;
+	}
+
+	@Override
+	public List<Product> productReadList() {
+
+		return productRepository.findAll();
+	}
+
+	@Override
+	public void productDelete(Integer id) {
+
+		productRepository.deleteById(id);
 	}
 	
 }
