@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -99,7 +100,7 @@ public class DeliveryServiceImpl implements DeliveryService{
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
 
-        return deliveryRepository.findByUsername(username);
+        return deliveryRepository.findByUsername(username, Sort.by(Sort.Direction.DESC, "createDate"));
     }
 
     @Override
