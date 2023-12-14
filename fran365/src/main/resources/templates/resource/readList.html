@@ -118,10 +118,10 @@
                         </select>
                     </td>
                     <td class="sort white-space-nowrap align-middle ps-4">
-                        <a href="#"
-                           th:attr="onclick='purchase(' + ${resource.id} + ', ' + ${loop.index} + ', \'' + ${resource.category} + '\')'">구매</a>
-
+                        <a th:attr="onclick='purchase(' + ${resource.id} + ', ' + ${loop.index} + ', \'' + ${resource.category} + '\', ' + ${resource.price} + ')'"
+                           href="#">구매</a>
                     </td>
+
                 </tr>
 
                 </tbody>

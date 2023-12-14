@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface HistoryService {
 
-    void create(String seller, String purchaser, String stockName, int quantity);
+    void create(String seller, String purchaser, String stockName, int quantity, int price);
 
     List<History> getSellList();
 

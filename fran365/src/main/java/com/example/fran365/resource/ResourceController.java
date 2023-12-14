@@ -23,7 +23,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/resource")
@@ -190,7 +192,10 @@ public class ResourceController {
     }
 
     @GetMapping("/purchase")
-    public String purchase(@RequestParam Integer id, @RequestParam int amount, @RequestParam String category) {
+    public String purchase(@RequestParam Integer id,
+                           @RequestParam int amount,
+                           @RequestParam String category
+                           ) {
 
         resourceService.updateProductStock(id, amount, category);
 
