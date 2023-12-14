@@ -3,8 +3,6 @@
 
 <div layout:fragment="content">
 
-
-
     <!-- 카테고리별 글 개수 표시 -->
     <div class="card flex-1 h-100 phoenix-offcanvas-container" style="padding:40px;">
         <br>
@@ -56,7 +54,29 @@
         </div>
         <br>
 
+        <script th:inline="javascript">
+            function filterDocuments() {
+                var selectedStatus = document.getElementById("statusFilter").value;
 
+                // Get all table rows
+                var rows = document.querySelectorAll("#tableExample4 tbody tr");
+
+                // Show/hide rows based on the selected status
+                rows.forEach(function(row) {
+                    var status = row.getAttribute("data-status");
+                    if (selectedStatus === "" || status === selectedStatus) {
+                        row.style.display = "";
+                    } else {
+                        // Check for "결재반려" status specifically
+                        if (selectedStatus === "결재반려" && status === "4") {
+                            row.style.display = "";
+                        } else {
+                            row.style.display = "none";
+                        }
+                    }
+                });
+            }
+        </script>
 
         <div id="tableExample4" data-list='{"valueNames":["id","category","deadline","createDate","status"],"page":5,"pagination":true,"filter":{"key":"status"}}'>
             <div class="row justify-content-end g-0">
@@ -94,7 +114,7 @@
                                 <div th:if="${docu.status == 2}" class="badge badge-phoenix fs--2 badge-phoenix-warning"><span class="fw-bold">결재중</span><span class="ms-1 fas fa-check"></span></div>
                                 <div th:if="${docu.status == 3}" class="badge badge-phoenix fs--2 badge-phoenix-secondary"><span class="fw-bold">결재완료</span><span class="ms-1 fas fa-check"></span></div>
                                 <div th:if="${docu.status == 4}" class="badge badge-phoenix fs--2 badge-phoenix-success"><span class="fw-bold">결재반려</span><span class="ms-1 fas fa-check"></span></div>
-                                <div th:if="${docu.status == 0}" class="badge badge-phoenix fs--2 badge-phoenix-warning"><span class="fw-bold">임시저장</span><span class="ms-1 fas fa-check"></span></div>
+                                <div th:if="${docu.status == 0 }" class="badge badge-phoenix fs--2 badge-phoenix-warning"><span class="fw-bold">임시저장</span><span class="ms-1 fas fa-check"></span></div>
 
                             </td>
                         </tr>
@@ -123,7 +143,7 @@
             <a href="/document/readListTemp" class="btn btn-outline-primary me-1 mb-1 position-absolute bottom-0 end-0">내문서 임시저장이동</a>
 
         </div>
-
     </div>
 </div>
+
 </html>
