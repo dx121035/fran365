@@ -15,5 +15,4 @@ public interface SocialRepository extends JpaRepository<Social,Integer> {
     @Query("SELECT s FROM Social s WHERE s.status = '1' ORDER BY s.createDate DESC")
     Page<Social> findPageBy(Pageable pageable);
 
-
 }
