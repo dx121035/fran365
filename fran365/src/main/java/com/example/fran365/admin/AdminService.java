@@ -16,7 +16,7 @@ public interface AdminService {
 	
 	List<Member> memberApprove();
 	
-	Member memberReadDeatail(Integer id);
+	Member memberReadDetail(String username);
 	
 	void memberDelete(Integer id);
 	
@@ -40,9 +40,9 @@ public interface AdminService {
 	
 	void replyDelete(Integer replyId);
 	
-	List<Board> getUserQuestions();
+	List<Board> getUserQuestions(String username);
 	
-	List<Delivery> deliveryReadListByUsername();
+	List<Delivery> deliveryReadListByUsername(String username);
 	
 	void updateDepartment(String username, String newDepartment);
 	
@@ -61,4 +61,7 @@ public interface AdminService {
 	List<Product> productReadList();
 	
 	void productDelete(Integer id);
+	
+	Brand brandReadDetail(Integer id);
+	
 }

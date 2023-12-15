@@ -251,91 +251,159 @@
       
       
 		<div class="content">
-        <h2 class="text-bold text-1100 mb-5">회원목록</h2>
-        <div id="members" data-list='{"valueNames":["id","name","username","tel","address","belong","department","position","date"],"page":10,"pagination":true,"filter":{"key":"belong"}}'>
-          <div class="row align-items-center justify-content-between g-3 mb-4">
-            <div class="col col-auto">
-              <div class="search-box">
-                <form class="position-relative" data-bs-toggle="search" data-bs-display="static">
-                  <input class="form-control search-input search" type="search" placeholder="회원을 검색하세요." aria-label="Search" />
-                  <span class="fas fa-search search-box-icon"></span>
-
-                </form>
-              </div>
-            </div>
-            <div class="col-auto px-3">
-                <select class="form-select form-select-sm" data-list-filter="data-list-filter">
-                    <option selected="" value="">소속</option>
-                    <option value="본사">본사</option>
-                    <option value="가맹점">가맹점</option>
-                </select>
-            </div>
-          </div>
-          <div class="mx-n4 mx-lg-n6 px-4 px-lg-6 mb-9 bg-white border-y border-300 mt-2 position-relative top-1">
-            <div class="table-responsive scrollbar ms-n1 ps-1">
-              <table class="table table-sm fs--1 mb-0">
-                <thead>
-                  <tr>
-					<th class="sort align-middle" scope="col" data-sort="id" style="width:5%; min-width:50px;">번호</th>
-                    <th class="sort align-middle" scope="col" data-sort="name" style="width:12%; min-width:120px;">이름</th>
-                    <th class="sort align-middle" scope="col" data-sort="username" style="width:18%; min-width:180px;">아이디</th>
-                    <th class="sort align-middle pe-3" scope="col" data-sort="tel" style="width:14%; min-width:140px;">핸드폰번호</th>
-                    <th class="sort align-middle" scope="col" data-sort="address" style="width:22%; min-width:220px;">주소</th>
-                    <th class="sort align-middle" scope="col" data-sort="belong" style="width:7%;  min-width:70px;">소속</th>
-                    <th class="sort align-middle" scope="col" data-sort="department" style="width:7%;  min-width:70px;">부서</th>
-                    <th class="sort align-middle" scope="col" data-sort="position" style="width:7%;  min-width:70px;">직급</th>
-                    <th class="sort align-middle" scope="col" data-sort="date" style="width:11%;  min-width:110px;">가입일</th>
-                  </tr>
-                </thead>
-                <tbody class="list" id="members-table-body">
-					
-					
-				  <th:block th:each="member, loop : ${members}">
-                  <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-					<td class="id align-middle white-space-nowrap text-1100"><a href="#">#[[${loop.index+1}]]</a></td>
-                    <td class="name align-middle white-space-nowrap"><a class="d-flex align-items-center text-900 text-hover-1000" th:href="@{|/admin/memberReadDetail?username=${member.username}|}">
-                        <div class="avatar avatar-m"><img class="rounded-circle" th:src="@{|${awspath}/${member.image}|}" alt="" />
+        <h2 class="text-bold text-1100 mb-5">지점 상세정보</h2>
+        
+        <div class="row g-5 mb-4">
+            <div class="col-12 col-xxl-4">
+              <div class="row g-3 g-xxl-0 h-100">
+                <div class="col-12 col-md-4 col-xxl-12 mb-xxl-3">
+                  <div class="card h-100">
+                    <div class="card-body d-flex flex-column justify-content-between pb-3">
+                      <div class="row align-items-center g-5 mb-3 text-center text-sm-start">
+                        <div class="col-12 col-sm-auto flex-1">
+                          <h4>[[${brand.address1}]]&nbsp;[[${brand.title}]]</h4>
+                          <div class="border-top border-dashed border-300 mt-4 pt-4"></div>
+                          <div class="mb-4">
+                       		 <h5 class="text-1000">주소</h5>[[${brand.address1}]]&nbsp;[[${brand.address2}]]
+                     	  </div>
+                     	  <div class="mb-4">
+                       		 <h5 class="text-1000">영업시간</h5>[[${brand.time}]]
+                     	  </div>
+                     	  <div class="mb-4">
+                       		 <h5 class="text-1000">지점 번호</h5>[[${brand.tel}]]
+                     	  </div>
+                     	  <div class="mb-4">
+                       		 <h5 class="text-1000">점주 번호</h5>[[${brand.phone}]]
+                     	  </div>
+                     	  <div class="mb-4">
+                       		 <h5 class="text-1000">이메일</h5>[[${brand.username}]]
+                     	  </div>
+                     	  <div>
+                       		 <h5 class="text-1000">등록일</h5>[[${#temporals.format(brand.createDate, 'yyyy-MM-dd HH:mm')}]]
+                     	  </div>
                         </div>
-                        <h6 class="mb-0 ms-3 fw-semi-bold">[[${member.name}]]</h6>
-                      </a></td>
-                    <td class="username align-middle white-space-nowrap text-1100">[[${member.username}]]</td>
-                    <td class="tel align-middle white-space-nowrap text-1100">[[${member.phone}]]</td>
-                    <td class="address align-middle white-space-nowrap text-1100">[[${member.address}]]</td>
-                    <td class="belong align-middle white-space-nowrap text-1100">[[${member.belong}]]</td>
-                    <td class="department align-middle white-space-nowrap text-1100">
-						<select style="color: black;" th:onchange="updateDepartment([[${member.username}]], this)">
-						    <option selected th:text="${member.department}"></option>
-						    <th:block th:each="department : ${departments}">
-						    <option th:value="${department.department}">[[${department.department}]]</option>
-							</th:block>
-						</select>
-					</td>
-                    <td class="date align-middle white-space-nowrap text-1100">
-						<select style="color: black;" th:onchange="updatePosition([[${member.username}]], this)">
-						    <option selected th:text="${positionMap.get(T(java.lang.Integer).parseInt(member.position ?: '0'))}"></option>
-						    <th:block th:each="position : ${positionMap}">
-						    <option th:value="${position.key}">[[${position.value}]]</option>
-							</th:block>
-						</select>
-					</td>
-                    <td class="joined align-middle white-space-nowrap text-1100" th:text="${#temporals.format(member.createDate, 'yyyy-MM-dd HH:mm')}"></td>
-                  </tr>
-                  </th:block>
-                </tbody>
-              </table>
-            </div>
-            <div class="row align-items-center justify-content-between py-2 pe-0 fs--1">
-              <div class="col-auto d-flex">
-                <p class="mb-0 d-none d-sm-block me-3 fw-semi-bold text-900" data-list-info="data-list-info"></p><a class="fw-semi-bold" href="#!" data-list-view="*">전체보기<span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a><a class="fw-semi-bold d-none" href="#!" data-list-view="less">View Less<span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-8 col-xxl-12 mb-xxl-3">
+                  <div class="card h-100">
+                <div style="display: flex; width: 100%;">
+                <div id="kmap"style="width: 50%; height: 500px; float: left; position: relative"></div>
+                <div id="roadview"style="width: 50%; height: 500px; float: left; position: relative"></div>
+				</div>
+                <script type="text/javascript"
+                        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9eab04f54e929879b23643109e0c42e1&libraries=services"></script>
+                <script th:inline="javascript">
+                    var container = document.getElementById('kmap'), // 지도를 표시할 div
+                        option = { center : new kakao.maps.LatLng( 37.566826, 126.9786567), // 지도의 중심좌표
+                            level : 3 // 지도의 확대 레벨
+                        };
+                    // 지도를 생성합니다
+                    var map = new kakao.maps.Map( container, option);
+
+                    // 주소-좌표 변환 객체를 생성합니다
+                    var geocoder = new kakao.maps.services.Geocoder();
+
+                    var address = /*[[${brand.address2}]]*/ '';
+                    var title = /*[[${brand.title}]]*/ '';
+
+                    // 주소로 좌표를 검색합니다
+                    geocoder.addressSearch(address , function(result, status) {
+
+                        // 정상적으로 검색이 완료됐으면
+                        if (status === kakao.maps.services.Status.OK) {
+
+                            var coords = new kakao.maps.LatLng(
+                                result[0].y,
+                                result[0].x);
+
+                            // 결과값으로 받은 위치를 마커로 표시합니다
+                            var marker = new kakao.maps.Marker(
+                                {
+                                    map : map,
+                                    position : coords,
+                                });
+
+                            // 인포윈도우로 장소에 대한 설명을 표시합니다
+                            var infowindow = new kakao.maps.InfoWindow(
+                                {
+                                    content : '<div style="width:150px;text-align:center;padding:6px 0;">'+title+'</div>'
+                                });
+                            infowindow.open(map, marker);
+
+                            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                            map.setCenter(coords);
+
+                            // 로드 뷰는 지도와는 별도로 그릴수 있다. 지도 없이 로드뷰만 생성도 가능하다.
+
+                            var roadviewContainer = document
+                                .getElementById('roadview'); //로드뷰를 표시할 div
+                            var roadview = new kakao.maps.Roadview(
+                                roadviewContainer); //로드뷰 객체
+                            var roadviewClient = new kakao.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
+
+                            /*       var position = new kakao.maps.LatLng(37.558043, 126.919002); */
+
+                            // 특정 위치의 좌표와 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄운다.
+                            roadviewClient.getNearestPanoId(coords, 50, function(panoId) {
+                                roadview.setPanoId(panoId, coords); //panoId와 중심좌표를 통해 로드뷰 실행
+                            });
+
+                        }
+                    });
+                </script>
+                  </div>
+                </div>
+                
+                
               </div>
-              <div class="col-auto d-flex">
-                <button class="page-link" data-list-pagination="prev"><span class="fas fa-chevron-left"></span></button>
-                <ul class="mb-0 pagination"></ul>
-                <button class="page-link pe-0" data-list-pagination="next"><span class="fas fa-chevron-right"></span></button>
+            </div>
+            </div>
+            
+        	<div class="row g-5 mb-6">
+            <div class="col-12 col-xxl-4">
+              <div class="row g-3 g-xxl-0 h-100">
+                <div class="col-12 col-md-6 col-xxl-12 mb-xxl-3">
+                  <div class="card h-100">
+                    <div class="card-body d-flex flex-column justify-content-between pb-3">
+                      <div class="row align-items-center g-5 mb-3 text-center text-sm-start">
+                        <div class="col-12 col-sm-auto flex-1">
+                          <h4>재고목록</h4>
+                          <div class="border-top border-dashed border-300 mt-4 pt-4"></div>
+                          <th:block th:each="stock : ${brand.stockList}">
+                          <div class="mb-3">
+                       		 [[${stock.name}]]:&nbsp;&nbsp;[[${stock.quantity}]]
+                     	  </div>
+                          </th:block>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6 col-xxl-12 mb-xxl-3">
+                  <div class="card h-100">
+                	<div class="card-body d-flex flex-column justify-content-between pb-3">
+                      <div class="row align-items-center g-5 mb-3 text-center text-sm-start">
+                        <div class="col-12 col-sm-auto flex-1">
+                          <h4>매출현황</h4>
+                          <div class="border-top border-dashed border-300 mt-4 pt-4"></div>
+                          <th:block th:each="stock : ${brand.stockList}">
+                          <div class="mb-3">
+                       		 [[${stock.name}]]:&nbsp;&nbsp;[[${stock.quantity}]]
+                     	  </div>
+                          </th:block>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                
               </div>
             </div>
-          </div>
-        </div>
+            </div>
+        
         <footer class="footer position-absolute">
           <div class="row g-0 justify-content-between align-items-center h-100">
             <div class="col-12 col-sm-auto text-center">
@@ -375,48 +443,6 @@
         }
       </script>
       
-      <script>
-		  function updatePosition(username, newPosition) {
-			  
-			$.ajax({
-            type: 'POST',
-            url: '/admin/updatePosition',
-            data: {
-                "username" : username,
-                "newPosition" : newPosition.value
-            },
-            success: function (response) {
-                alert('변경되었습니다.');
-            },
-            error: function (error) {
-                alert('변경을 실패했습니다.');
-            }
-        });
-		  }
-		  
-	  </script>
-	  
-	  <script>
-		  function updateDepartment(username, newDepartment) {
-			  
-			$.ajax({
-            type: 'POST',
-            url: '/admin/updateDepartment',
-            data: {
-                "username" : username,
-                "newDepartment" : newDepartment.value
-            },
-            success: function (response) {
-                alert('변경되었습니다.');
-            },
-            error: function (error) {
-                alert('변경을 실패했습니다.');
-            }
-        });
-		  }
-		  
-	  </script>
-            
     </main>
 
     <!-- ===============================================-->

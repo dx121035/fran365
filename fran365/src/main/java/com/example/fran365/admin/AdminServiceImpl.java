@@ -21,7 +21,6 @@ import com.example.fran365.delivery.Delivery;
 import com.example.fran365.delivery.DeliveryRepository;
 import com.example.fran365.member.Member;
 import com.example.fran365.member.MemberRepository;
-import com.example.fran365.member.MemberService;
 import com.example.fran365.position.PositionService;
 import com.example.fran365.product.Product;
 import com.example.fran365.product.ProductRepository;
@@ -49,9 +48,6 @@ public class AdminServiceImpl implements AdminService {
 	private ReplyRepository replyRepository;
 	
 	@Autowired
-	private MemberService memberService;
-	
-	@Autowired
 	private DeliveryRepository deliveryRepository;
 	
 	@Autowired
@@ -70,9 +66,9 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public Member memberReadDeatail(Integer id) {
+	public Member memberReadDetail(String username) {
 		
-		Optional<Member> om = memberRepository.findById(id);
+		Optional<Member> om = memberRepository.findByUsername(username);
 		Member member = om.get();
 
 		return member;
@@ -183,19 +179,16 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<Board> getUserQuestions() {
+	public List<Board> getUserQuestions(String username) {
 		
-		String username = memberService.readDetailUsername().getUsername();
 		List<String> excludedCategories = Arrays.asList("공지", "FAQ");
 
 		return boardRepository.findByUsernameAndCategoryNotIn(username, excludedCategories, Sort.by(Sort.Direction.DESC, "id"));
 	}
 
 	@Override
-	public List<Delivery> deliveryReadListByUsername() {
+	public List<Delivery> deliveryReadListByUsername(String username) {
 		
-		String username = memberService.readDetailUsername().getUsername();
-
 		return deliveryRepository.findByUsername(username, Sort.by(Sort.Direction.DESC, "id"));
 	}
 	
@@ -272,6 +265,15 @@ public class AdminServiceImpl implements AdminService {
 	public void productDelete(Integer id) {
 
 		productRepository.deleteById(id);
+	}
+
+	@Override
+	public Brand brandReadDetail(Integer id) {
+		
+		Optional<Brand> ob = brandRepository.findById(id);
+		Brand brand = ob.get();
+
+		return brand;
 	}
 	
 }

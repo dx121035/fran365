@@ -78,14 +78,16 @@ public class AdminController {
 	}
 	
 	@GetMapping("/memberReadDetail")
-	public String memberReadDetail(Model model, Integer id) {
+	public String memberReadDetail(Model model, String username) {
 		
+		Integer id = adminService.memberReadDetail(username).getBid();
 		model.addAttribute("awspath", awspath);
 		model.addAttribute("user", memberService.readDetailUsername());
-		model.addAttribute("member", adminService.memberReadDeatail(id));
+		model.addAttribute("member", adminService.memberReadDetail(username));
 		model.addAttribute("positionMap", adminService.getPosition());
-		model.addAttribute("questions", adminService.getUserQuestions());
-		model.addAttribute("deliveries", adminService.deliveryReadListByUsername());
+		model.addAttribute("questions", adminService.getUserQuestions(username));
+		model.addAttribute("deliveries", adminService.deliveryReadListByUsername(username));
+		model.addAttribute("brand", adminService.brandReadDetail(id));
 		
 		return "admin/memberReadDetail";
 	}
@@ -300,6 +302,16 @@ public class AdminController {
 		model.addAttribute("brands", adminService.brandReadList());
 		
 		return "admin/brandReadList";
+	}
+	
+	@GetMapping("/brandReadDetail")
+	public String brandReadList(Model model, Integer id) {
+		
+		model.addAttribute("awspath", awspath);
+		model.addAttribute("user", memberService.readDetailUsername());
+		model.addAttribute("brand", adminService.brandReadDetail(id));
+		
+		return "admin/brandReadDetail";
 	}
 	
 	@GetMapping("/productReadList")
