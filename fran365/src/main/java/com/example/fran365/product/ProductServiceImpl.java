@@ -7,6 +7,7 @@ package com.example.fran365.product;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.example.fran365.stock.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -36,6 +37,9 @@ public class ProductServiceImpl implements ProductService{
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private StockService stockService;
+
     @Override
     public void create(String name, int price, MultipartFile multipartFile) throws IOException {
 
@@ -57,6 +61,9 @@ public class ProductServiceImpl implements ProductService{
 
         product.setImage(filename);
         product.setCreateDate(LocalDateTime.now());
+
+        // 제품 생성 시
+        stockService.newStock(product.getName());
 
         productRepository.save(product);
 

@@ -85,11 +85,7 @@
                         <div class="col-sm-6 col-md-4">
                             <div class="form-floating">
                                 <select class="form-select" id="floatingSelectTask" name="category">
-                                    <option value="도우">도우</option>
-                                    <option value="페퍼로니">페퍼로니</option>
-                                    <option value="감자">감자</option>
-                                    <option value="올리브">올리브</option>
-                                    <option value="토마토 소스">토마토 소스</option>
+                                    <option th:each="product : ${products}" th:value="${product.name}" th:text="${product.name}"></option>
                                 </select>
                                 <label for="floatingSelectTask">품목</label>
                             </div>
