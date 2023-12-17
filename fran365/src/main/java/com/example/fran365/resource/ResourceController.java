@@ -3,6 +3,7 @@ package com.example.fran365.resource;
 import com.example.fran365.brand.Brand;
 import com.example.fran365.brand.BrandRepository;
 import com.example.fran365.member.MemberService;
+import com.example.fran365.product.ProductRepository;
 import com.example.fran365.sales.Sales;
 import com.example.fran365.sales.SalesRepository;
 import com.example.fran365.sales.SalesService;
@@ -52,12 +53,16 @@ public class ResourceController {
     @Autowired
     private SalesRepository salesRepository;
 
+    @Autowired
+    private ProductRepository productRepository;
+
     @Value("${aws.s3.awspath}")
     private String awspath;
 
     @GetMapping("/create")
-    public String create(ResourceForm resourceForm) {
+    public String create(ResourceForm resourceForm, Model model) {
 
+        model.addAttribute("products", productRepository.findAll());
         return "resource/create";
     }
 
@@ -103,7 +108,6 @@ public class ResourceController {
         int updateQuantity = totalStockQuantity - requestedAmount;
         foundStock.setQuantity(updateQuantity);
         stockService.resourceUpdate(foundStock);
-
         //재고 공유 게시글 작성
         resourceService.create(resource, file);
 

@@ -5,6 +5,8 @@ import com.example.fran365.brand.BrandRepository;
 import com.example.fran365.brand.BrandService;
 import com.example.fran365.history.HistoryService;
 import com.example.fran365.member.MemberService;
+import com.example.fran365.product.Product;
+import com.example.fran365.product.ProductRepository;
 import com.example.fran365.resource.Resource;
 import com.example.fran365.resource.ResourceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,43 +35,31 @@ public class StockServiceImpl implements StockService {
     @Autowired
     private HistoryService historyService;
 
+    @Autowired
+    private ProductRepository productRepository;
+
 
     @Override
     public void create() {
 
         Brand currentBrand = brandRepository.findByUsername(memberService.findUsername());
 
-        for (int i = 0; i < 5; i++) {
-            // Stock 객체 생성
+        List<Product> products = productRepository.findAll();
+
+
+
+
+        for(Product product : products){
+
             Stock stock = new Stock();
 
-            // 생성된 Stock 객체의 속성 설정
+            stock.setName(product.getName());
             stock.setQuantity(0);
             stock.setBrand(currentBrand);
 
-            // name 설정
-            switch (i) {
-                case 0:
-                    stock.setName("도우");
-                    break;
-                case 1:
-                    stock.setName("페퍼로니");
-                    break;
-                case 2:
-                    stock.setName("감자");
-                    break;
-                case 3:
-                    stock.setName("올리브");
-                    break;
-                case 4:
-                    stock.setName("토마토소스");
-                    break;
-                default:
-                    break;
-            }
             stockRepository.save(stock);
-
         }
+
     }
 
     @Override
@@ -138,5 +128,10 @@ public class StockServiceImpl implements StockService {
     public void resourceUpdate(Stock foundStock) {
 
         stockRepository.save(foundStock);
+    }
+
+    @Override
+    public void newStock(String productName) {
+
     }
 }
