@@ -62,7 +62,6 @@ public class AdminController {
 		model.addAttribute("brands", adminService.brandReadList());
 		model.addAttribute("etcBrandCount", adminService.etcBrandCount());
 		model.addAttribute("salesTop7", adminService.findTop7Income());
-		System.out.println(adminService.findTop7Income().get(0).getBrand().getTitle());
 		
 		return "admin/main";
 	}
