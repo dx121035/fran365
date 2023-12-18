@@ -33,7 +33,7 @@ public class MainController {
 			
 			return "index";
 			}
-			return "redirect:/board/notice";
+			return "redirect:/approval";
 		}
 		return "login";
 	}
@@ -48,7 +48,7 @@ public class MainController {
 		return "naverLogin";
 	}
 
-
+	
 	@GetMapping("/logincheck") //카카오 로그인체크
 	public String logincheck(@RequestParam String email) {
 		int result = userDetailService.logincheck(email);
@@ -59,6 +59,11 @@ public class MainController {
 
 			return "redirect:/member/create";
 		}
+	}
+	
+	@GetMapping("/approval")
+	public String approval() {
+		return "approval";
 	}
 
 }
