@@ -1,6 +1,8 @@
 package com.example.fran365.admin;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -21,12 +23,13 @@ import com.example.fran365.delivery.Delivery;
 import com.example.fran365.delivery.DeliveryRepository;
 import com.example.fran365.member.Member;
 import com.example.fran365.member.MemberRepository;
-import com.example.fran365.member.MemberService;
 import com.example.fran365.position.PositionService;
 import com.example.fran365.product.Product;
 import com.example.fran365.product.ProductRepository;
 import com.example.fran365.reply.Reply;
 import com.example.fran365.reply.ReplyRepository;
+import com.example.fran365.sales.Sales;
+import com.example.fran365.sales.SalesRepository;
 import com.example.fran365.status.Status;
 import com.example.fran365.status.StatusRepository;
 
@@ -49,9 +52,6 @@ public class AdminServiceImpl implements AdminService {
 	private ReplyRepository replyRepository;
 	
 	@Autowired
-	private MemberService memberService;
-	
-	@Autowired
 	private DeliveryRepository deliveryRepository;
 	
 	@Autowired
@@ -62,6 +62,9 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private SalesRepository salesRepository;
 
 	@Override
 	public List<Member> memberReadList() {
@@ -70,9 +73,9 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public Member memberReadDeatail(Integer id) {
+	public Member memberReadDetail(String username) {
 		
-		Optional<Member> om = memberRepository.findById(id);
+		Optional<Member> om = memberRepository.findByUsername(username);
 		Member member = om.get();
 
 		return member;
@@ -183,19 +186,16 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<Board> getUserQuestions() {
+	public List<Board> getUserQuestions(String username) {
 		
-		String username = memberService.readDetailUsername().getUsername();
 		List<String> excludedCategories = Arrays.asList("공지", "FAQ");
 
 		return boardRepository.findByUsernameAndCategoryNotIn(username, excludedCategories, Sort.by(Sort.Direction.DESC, "id"));
 	}
 
 	@Override
-	public List<Delivery> deliveryReadListByUsername() {
+	public List<Delivery> deliveryReadListByUsername(String username) {
 		
-		String username = memberService.readDetailUsername().getUsername();
-
 		return deliveryRepository.findByUsername(username, Sort.by(Sort.Direction.DESC, "id"));
 	}
 	
@@ -272,6 +272,39 @@ public class AdminServiceImpl implements AdminService {
 	public void productDelete(Integer id) {
 
 		productRepository.deleteById(id);
+	}
+
+	@Override
+	public Brand brandReadDetail(Integer id) {
+		
+		Optional<Brand> ob = brandRepository.findById(id);
+		Brand brand = ob.get();
+
+		return brand;
+	}
+
+	@Override
+	public void brandDelete(Integer id) {
+
+		brandRepository.deleteById(id);
+	}
+
+	@Override
+	public List<Sales> getRecentFiveMonthsSales(Integer id) {
+
+		return salesRepository.findTop5ByBrandIdOrderByDateDesc(id);
+	}
+
+	@Override
+	public List<Sales> findTop7Income() {
+		
+		LocalDate date = LocalDate.now();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy-MM");
+
+        String formattedDate = date.format(formatter);
+		
+		return salesRepository.findTop7ByDateAndOrderByIncomeDesc(formattedDate);
 	}
 	
 }

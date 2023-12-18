@@ -18,5 +18,9 @@ public interface SalesRepository extends JpaRepository<Sales, Integer> {
     @Query("SELECT s FROM Sales s WHERE s.brand.id = :brandId ORDER BY s.id DESC")
     List<Sales> findTopByBrandIdOrderBySalesIdDesc(@Param("brandId") Integer brandId);
 
-
+    @Query("SELECT s FROM Sales s WHERE s.brand.id = :brandId ORDER BY s.date DESC")
+    List<Sales> findTop5ByBrandIdOrderByDateDesc(@Param("brandId") int brandId);
+    
+    @Query("SELECT s FROM Sales s WHERE s.date = :datePattern ORDER BY s.income DESC")
+    List<Sales> findTop7ByDateAndOrderByIncomeDesc(@Param("datePattern") String datePattern);
 }

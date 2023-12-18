@@ -61,6 +61,7 @@ public class AdminController {
 		model.addAttribute("brandTop4", adminService.findTop4Address1());
 		model.addAttribute("brands", adminService.brandReadList());
 		model.addAttribute("etcBrandCount", adminService.etcBrandCount());
+		model.addAttribute("salesTop7", adminService.findTop7Income());
 		
 		return "admin/main";
 	}
@@ -78,14 +79,16 @@ public class AdminController {
 	}
 	
 	@GetMapping("/memberReadDetail")
-	public String memberReadDetail(Model model, Integer id) {
+	public String memberReadDetail(Model model, String username) {
 		
+		Integer id = adminService.memberReadDetail(username).getBid();
 		model.addAttribute("awspath", awspath);
 		model.addAttribute("user", memberService.readDetailUsername());
-		model.addAttribute("member", adminService.memberReadDeatail(id));
+		model.addAttribute("member", adminService.memberReadDetail(username));
 		model.addAttribute("positionMap", adminService.getPosition());
-		model.addAttribute("questions", adminService.getUserQuestions());
-		model.addAttribute("deliveries", adminService.deliveryReadListByUsername());
+		model.addAttribute("questions", adminService.getUserQuestions(username));
+		model.addAttribute("deliveries", adminService.deliveryReadListByUsername(username));
+		model.addAttribute("brand", adminService.brandReadDetail(id));
 		
 		return "admin/memberReadDetail";
 	}
@@ -302,6 +305,17 @@ public class AdminController {
 		return "admin/brandReadList";
 	}
 	
+	@GetMapping("/brandReadDetail")
+	public String brandReadList(Model model, Integer id) {
+		
+		model.addAttribute("awspath", awspath);
+		model.addAttribute("user", memberService.readDetailUsername());
+		model.addAttribute("brand", adminService.brandReadDetail(id));
+		model.addAttribute("sales", adminService.getRecentFiveMonthsSales(id));
+		
+		return "admin/brandReadDetail";
+	}
+	
 	@GetMapping("/productReadList")
 	public String productReadList(Model model) {
 		
@@ -337,6 +351,14 @@ public class AdminController {
 		model.addAttribute("product", productService.readDetail(id));
 		
 		return "admin/productUpdate";
+	}
+	
+	@GetMapping("/brandDelete")
+	public String brandDelete(Integer id) {
+		
+		adminService.brandDelete(id);
+		
+		return "redirect:/admin/brandReadList";
 	}
 	
 }
