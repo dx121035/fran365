@@ -251,7 +251,19 @@
       
       
 		<div class="content">
-        <h2 class="text-bold text-1100 mb-5">지점 상세정보</h2>
+        <div class="row align-items-center justify-content-between g-3 mb-4">
+            <div class="col-auto">
+              <h2 class="mb-0">지점 상세정보</h2>
+            </div>
+            <div class="col-auto">
+              <div class="row g-3">
+                <div class="col-auto">
+                  <button class="btn btn-phoenix-danger"><a th:href="@{|/admin/brandDelete?id=${brand.id}|}"><span class="fa-solid fa-trash-can me-2"></span>지점삭제</a></button>
+                </div>
+                
+              </div>
+            </div>
+          </div>
         
         <div class="row g-5 mb-4">
             <div class="col-12 col-xxl-4">
@@ -388,9 +400,9 @@
                         <div class="col-12 col-sm-auto flex-1">
                           <h4>매출현황</h4>
                           <div class="border-top border-dashed border-300 mt-4 pt-4"></div>
-                          <th:block th:each="stock : ${brand.stockList}">
+                          <th:block th:each="sales : ${sales}">
                           <div class="mb-3">
-                       		 [[${stock.name}]]:&nbsp;&nbsp;[[${stock.quantity}]]
+                       		 [[${sales.date}]]월 &nbsp;&nbsp;[[${sales.income}]]원
                      	  </div>
                           </th:block>
                         </div>

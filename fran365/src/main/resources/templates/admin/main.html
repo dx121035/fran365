@@ -318,7 +318,7 @@
               <div class="row g-3 mb-3">
                 <div class="col-12 col-md-6">
                   <h2 class="text-1100" style="font-size: 24px;">전국 지역별 지점현황</h2>
-                  <p class="text-700 mb-md-7">[[${date}]] 기준</p>
+                  <p class="text-700 mb-md-7">[[${date}]]</p>
                   <div class="d-flex align-items-center justify-content-between">
                     <p class="mb-0 fw-bold">지역별 지점 수 </p>
                     <p class="mb-0 fs--1">전체 <span class="fw-bold">[[${#lists.size(brands)}]]</span></p>
@@ -356,7 +356,7 @@
             <div class="col-12 col-xl-5 col-xxl-6">
               
             <h2 class="text-1100" style="font-size: 24px;">[[${#dates.format(date, 'MM')}]]월 지점별 매출현황</h2>
-            <p class="text-700">[[${date}]] 기준</p>
+            <p class="text-700">[[${date}]]</p>
             <p class="text-500 mb-md-2" style="font-size: 0.8rem;">매출액 (만원)</p>
             <div class="echart-basic-bar-chart-example1" style="min-height:300px"></div>
               
@@ -556,22 +556,22 @@
     const { getColor, getData } = window.phoenix.utils;
     const $chartEl = document.querySelector('.echart-basic-bar-chart-example1');
     const months = [
-      '종로점',
-      '명동점',
-      '미아점',
-      '수유점',
-      '성북점',
-      '길음점',
-      '노원점'
+      '[[${salesTop7.get(0).getBrand().getTitle()}]]',
+      '[[${salesTop7.get(1).getBrand().getTitle()}]]',
+      '[[${salesTop7.get(2).getBrand().getTitle()}]]',
+      '[[${salesTop7.get(3).getBrand().getTitle()}]]',
+      '[[${salesTop7.get(4).getBrand().getTitle()}]]',
+      '[[${salesTop7.get(5).getBrand().getTitle()}]]',
+      '[[${salesTop7.get(6).getBrand().getTitle()}]]'
     ];
     const data = [
-      14900,
-      8200,
-      5300,
-      4900,
-      2600,
-      2200,
-      1500
+      '[[${salesTop7.get(0).getIncome()/10000}]]',
+      '[[${salesTop7.get(1).getIncome()/10000}]]',
+      '[[${salesTop7.get(2).getIncome()/10000}]]',
+      '[[${salesTop7.get(3).getIncome()/10000}]]',
+      '[[${salesTop7.get(4).getIncome()/10000}]]',
+      '[[${salesTop7.get(5).getIncome()/10000}]]',
+      '[[${salesTop7.get(6).getIncome()/10000}]]'
     ];
 
     if ($chartEl) {

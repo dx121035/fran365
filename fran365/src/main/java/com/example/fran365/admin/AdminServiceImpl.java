@@ -1,6 +1,8 @@
 package com.example.fran365.admin;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +28,8 @@ import com.example.fran365.product.Product;
 import com.example.fran365.product.ProductRepository;
 import com.example.fran365.reply.Reply;
 import com.example.fran365.reply.ReplyRepository;
+import com.example.fran365.sales.Sales;
+import com.example.fran365.sales.SalesRepository;
 import com.example.fran365.status.Status;
 import com.example.fran365.status.StatusRepository;
 
@@ -58,6 +62,9 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private SalesRepository salesRepository;
 
 	@Override
 	public List<Member> memberReadList() {
@@ -274,6 +281,30 @@ public class AdminServiceImpl implements AdminService {
 		Brand brand = ob.get();
 
 		return brand;
+	}
+
+	@Override
+	public void brandDelete(Integer id) {
+
+		brandRepository.deleteById(id);
+	}
+
+	@Override
+	public List<Sales> getRecentFiveMonthsSales(Integer id) {
+
+		return salesRepository.findTop5ByBrandIdOrderByDateDesc(id);
+	}
+
+	@Override
+	public List<Sales> findTop7Income() {
+		
+		LocalDate date = LocalDate.now();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy-MM");
+
+        String formattedDate = date.format(formatter);
+		
+		return salesRepository.findTop7ByDateAndOrderByIncomeDesc(formattedDate);
 	}
 	
 }

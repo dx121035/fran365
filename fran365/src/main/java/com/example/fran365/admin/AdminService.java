@@ -8,6 +8,7 @@ import com.example.fran365.brand.Brand;
 import com.example.fran365.delivery.Delivery;
 import com.example.fran365.member.Member;
 import com.example.fran365.product.Product;
+import com.example.fran365.sales.Sales;
 import com.example.fran365.status.Status;
 
 public interface AdminService {
@@ -63,5 +64,11 @@ public interface AdminService {
 	void productDelete(Integer id);
 	
 	Brand brandReadDetail(Integer id);
+	
+	void brandDelete(Integer id);
+	
+	List<Sales> getRecentFiveMonthsSales(Integer id);
+	
+	List<Sales> findTop7Income();
 	
 }

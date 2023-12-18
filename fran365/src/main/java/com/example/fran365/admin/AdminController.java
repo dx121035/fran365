@@ -61,6 +61,8 @@ public class AdminController {
 		model.addAttribute("brandTop4", adminService.findTop4Address1());
 		model.addAttribute("brands", adminService.brandReadList());
 		model.addAttribute("etcBrandCount", adminService.etcBrandCount());
+		model.addAttribute("salesTop7", adminService.findTop7Income());
+		System.out.println(adminService.findTop7Income().get(0).getBrand().getTitle());
 		
 		return "admin/main";
 	}
@@ -310,6 +312,7 @@ public class AdminController {
 		model.addAttribute("awspath", awspath);
 		model.addAttribute("user", memberService.readDetailUsername());
 		model.addAttribute("brand", adminService.brandReadDetail(id));
+		model.addAttribute("sales", adminService.getRecentFiveMonthsSales(id));
 		
 		return "admin/brandReadDetail";
 	}
@@ -349,6 +352,14 @@ public class AdminController {
 		model.addAttribute("product", productService.readDetail(id));
 		
 		return "admin/productUpdate";
+	}
+	
+	@GetMapping("/brandDelete")
+	public String brandDelete(Integer id) {
+		
+		adminService.brandDelete(id);
+		
+		return "redirect:/admin/brandReadList";
 	}
 	
 }
