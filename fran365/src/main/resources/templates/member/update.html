@@ -27,7 +27,7 @@
                             <input class="form-control"  name="username"  id="username" type="text" th:value="${member.username}" readonly />
                         </div>
                         <div class="mb-3 text-start">
-                            <input class="form-control" type="password" name="password" />
+                            <input class="form-control" type="password" name="password" placeholder="password"/>
                         </div>
                         <div class="mb-3 text-start">
                             <input class="form-control" type="text"  id="name" name="name" th:value="${member.name}" readonly />
@@ -49,7 +49,7 @@
                         <input type="hidden" name="position" th:value="${member.position}">
                         <input type="hidden" name="image" th:value="${member.image}">
                         <input type="hidden" name="enabled" th:value="${member.enabled}">
-                        <button class="btn btn-primary w-100 mb-3"  onclick="location.href='/member/update'">Sign up</button>
+                        <button class="btn btn-primary w-100 mb-3"  onclick="location.href='/member/update'">Update</button>
                         <div class="text-center"><a class="fs--1 fw-bold" href="/pages/authentication/simple/sign-in.html">Sign in to an existing account</a></div>
                     </form>
                 </div>

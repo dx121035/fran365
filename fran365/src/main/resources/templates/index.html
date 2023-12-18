@@ -81,6 +81,8 @@
 	</div>
 	<div class="collapse navbar-collapse navbar-top-collapse order-1 order-lg-0 justify-content-center" id="navbarTopCollapse">
 		<ul class="navbar-nav navbar-nav-top" data-dropdown-on-hover="data-dropdown-on-hover">
+
+
 			<li class="nav-item">
 				<a class="nav-link lh-1" href="/board/notice">
 					<span class="uil fs-0 me-2" data-feather="bell"></span>공지사항
@@ -91,27 +93,26 @@
 					<span class="uil fs-0 me-2" data-feather="help-circle"></span>Q&A게시판
 				</a>
 			</li>
-			<li class="nav-item">
-				<a class="nav-link lh-1" href="/board/FAQ">
-					<span class="uil fs-0 me-2" data-feather="check-square"></span>F.A.Q
-				</a>
+			<li class="nav-item dropdown"><a class="nav-link dropdown-toggle lh-1" href="#!" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false"><span class="uil fs-0 me-2" data-feather="check-square"></span>서류 결재</a>
+				<ul class="dropdown-menu navbar-dropdown-caret">
+					<li><a class="dropdown-item" href="/document/create">
+						<div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="heart"></span>서류 결재
+						</div>
+					</a>
+					</li>
+
+					<li><a class="dropdown-item" href="/document/readList">
+						<div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="heart"></span>서류 결재 목록
+						</div>
+					</a>
+					</li>
+
+				</ul>
 			</li>
 			<li class="nav-item dropdown"><a class="nav-link dropdown-toggle lh-1" href="#!" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false"><span class="uil fs-0 me-2" data-feather="share-2"></span>자원공유</a>
 				<ul class="dropdown-menu navbar-dropdown-caret">
 					<li><a class="dropdown-item" href="/resource/readList">
 						<div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="heart"></span>공유게시판
-						</div>
-					</a>
-					</li>
-
-					<li><a class="dropdown-item" href="/history/purchaseList">
-						<div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="heart"></span>구매 목록
-						</div>
-					</a>
-					</li>
-
-					<li><a class="dropdown-item" href="/history/salesList">
-						<div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="heart"></span>판매 목록
 						</div>
 					</a>
 					</li>
@@ -133,33 +134,26 @@
 
 				</ul>
 			</li>
-			<li class="nav-item">
-				<a class="nav-link lh-1" href="/product/readList">
-					<span class="uil fs-0 me-2" data-feather="truck"></span>발주
-				</a>
+			<li class="nav-item dropdown"><a class="nav-link dropdown-toggle lh-1" href="#!" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false"><span class="uil fs-0 me-2" data-feather="send"></span>F.Q.A</a>
+				<ul class="dropdown-menu navbar-dropdown-caret">
+					<li><a class="dropdown-item" href="/board/FAQ">
+						<div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="info"></span>F.Q.A게시판
+						</div>
+					</a>
+					</li>
+				</ul>
 			</li>
-			<li class="nav-item">
-				<a class="nav-link lh-1" href="/social/main">
-					<span class="uil fs-0 me-2" data-feather="users"></span>소셜
-				</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link lh-1" href="/cart/readDetail">
-					<span class="uil fs-0 me-2" data-feather="shopping-cart"></span>장바구니
-				</a>
-			</li>
-
-
 			<li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
-				<a class="nav-link lh-1" href="/admin/main">
-					<span class="uil fs-0 me-2" data-feather="lock"></span>관리자페이지
-				</a>
-			</li>
+                    <a class="nav-link lh-1" href="/admin/main">
+                        <span class="uil fs-0 me-2" data-feather="lock"></span>관리자페이지
+                    </a>
+                </li>
 		</ul>
 	</div>
 	<ul class="navbar-nav navbar-nav-icons flex-row">
 
 
+		<li class="nav-item"><a class="nav-link px-2 icon-indicator " href="../../../apps/e-commerce/landing/cart.html" role="button"><span class="text-700" data-feather="shopping-cart" style="height:20px;width:20px;"></span></a></li>
 		<li class="nav-item dropdown"><a class="nav-link lh-1 pe-0" id="navbarDropdownUser" href="#!" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
 			<div class="avatar avatar-l ">
 				<img class="rounded-circle " th:src="@{|${awspath}/${member.image}|}"  alt="" />
@@ -181,9 +175,8 @@
 					<div class="overflow-auto scrollbar" style="height: 10rem;">
 						<ul class="nav d-flex flex-column mb-2 pb-1">
 							<li class="nav-item"><a class="nav-link px-3" href="/member/readDetail"> <span class="me-2 text-900" data-feather="user"></span><span>프로필</span></a></li>
-							<li class="nav-item"><a class="nav-link px-3" href="#!"><span class="me-2 text-900" data-feather="pie-chart"></span>결재현황</a></li>
 							<li class="nav-item"><a class="nav-link px-3" href="/delivery/readList"><span class="me-2 text-900" data-feather="truck"></span>나의 주문내역</a></li>
-							<li class="nav-item"><a class="nav-link px-3" href="#!"> <span class="me-2 text-900" data-feather="lock"></span>Posts &amp; 회원탈퇴</a></li>
+
 						</ul>
 
 						<div class="px-3"> <a class="btn btn-phoenix-secondary d-flex flex-center w-100" href="/logout"> <span class="me-2" data-feather="log-out"> </span>Sign out</a></div>
