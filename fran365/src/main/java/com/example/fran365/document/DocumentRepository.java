@@ -13,6 +13,9 @@ public interface DocumentRepository extends JpaRepository<Document, Integer> {
     List<Document> findByStatus(Integer status);
 
     List<Document> findByReceiver(String receiver);
+    
+    List<Document> findBySender(String sender);
+
 
     List<Document> findByStatusAndReceiver(Integer status, String receiver);
 
