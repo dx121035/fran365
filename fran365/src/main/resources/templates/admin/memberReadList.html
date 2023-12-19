@@ -252,7 +252,7 @@
       
 		<div class="content">
         <h2 class="text-bold text-1100 mb-5">회원목록</h2>
-        <div id="members" data-list='{"valueNames":["customer","email","mobile_number","city","last_active","joined"],"page":10,"pagination":true}'>
+        <div id="members" data-list='{"valueNames":["id","name","username","tel","address","belong","department","position","date"],"page":10,"pagination":true,"filter":{"key":"belong"}}'>
           <div class="row align-items-center justify-content-between g-3 mb-4">
             <div class="col col-auto">
               <div class="search-box">
@@ -263,6 +263,13 @@
                 </form>
               </div>
             </div>
+            <div class="col-auto px-3">
+                <select class="form-select form-select-sm" data-list-filter="data-list-filter">
+                    <option selected="" value="">소속</option>
+                    <option value="본사">본사</option>
+                    <option value="가맹점">가맹점</option>
+                </select>
+            </div>
           </div>
           <div class="mx-n4 mx-lg-n6 px-4 px-lg-6 mb-9 bg-white border-y border-300 mt-2 position-relative top-1">
             <div class="table-responsive scrollbar ms-n1 ps-1">
@@ -270,14 +277,14 @@
                 <thead>
                   <tr>
 					<th class="sort align-middle" scope="col" data-sort="id" style="width:5%; min-width:50px;">번호</th>
-                    <th class="sort align-middle" scope="col" data-sort="customer" style="width:12%; min-width:120px;">이름</th>
-                    <th class="sort align-middle" scope="col" data-sort="email" style="width:18%; min-width:180px;">아이디</th>
-                    <th class="sort align-middle pe-3" scope="col" data-sort="mobile_number" style="width:14%; min-width:140px;">핸드폰번호</th>
-                    <th class="sort align-middle" scope="col" data-sort="city" style="width:22%; min-width:220px;">주소</th>
-                    <th class="sort align-middle" scope="col" data-sort="position1" style="width:7%;  min-width:70px;">소속</th>
-                    <th class="sort align-middle" scope="col" data-sort="position1" style="width:7%;  min-width:70px;">부서</th>
-                    <th class="sort align-middle" scope="col" data-sort="position2" style="width:7%;  min-width:70px;">직급</th>
-                    <th class="sort align-middle" scope="col" data-sort="joined" style="width:11%;  min-width:110px;">가입일</th>
+                    <th class="sort align-middle" scope="col" data-sort="name" style="width:12%; min-width:120px;">이름</th>
+                    <th class="sort align-middle" scope="col" data-sort="username" style="width:18%; min-width:180px;">아이디</th>
+                    <th class="sort align-middle pe-3" scope="col" data-sort="tel" style="width:14%; min-width:140px;">핸드폰번호</th>
+                    <th class="sort align-middle" scope="col" data-sort="address" style="width:22%; min-width:220px;">주소</th>
+                    <th class="sort align-middle" scope="col" data-sort="belong" style="width:7%;  min-width:70px;">소속</th>
+                    <th class="sort align-middle" scope="col" data-sort="department" style="width:7%;  min-width:70px;">부서</th>
+                    <th class="sort align-middle" scope="col" data-sort="position" style="width:7%;  min-width:70px;">직급</th>
+                    <th class="sort align-middle" scope="col" data-sort="date" style="width:11%;  min-width:110px;">가입일</th>
                   </tr>
                 </thead>
                 <tbody class="list" id="members-table-body">
@@ -285,17 +292,17 @@
 					
 				  <th:block th:each="member, loop : ${members}">
                   <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-					<td class="position1 align-middle white-space-nowrap text-1100"><a href="#">#[[${loop.index+1}]]</a></td>
-                    <td class="customer align-middle white-space-nowrap"><a class="d-flex align-items-center text-900 text-hover-1000" th:href="@{|/admin/memberReadDetail?id=${member.id}|}">
+					<td class="id align-middle white-space-nowrap text-1100"><a href="#">#[[${loop.index+1}]]</a></td>
+                    <td class="name align-middle white-space-nowrap"><a class="d-flex align-items-center text-900 text-hover-1000" th:href="@{|/admin/memberReadDetail?username=${member.username}|}">
                         <div class="avatar avatar-m"><img class="rounded-circle" th:src="@{|${awspath}/${member.image}|}" alt="" />
                         </div>
                         <h6 class="mb-0 ms-3 fw-semi-bold">[[${member.name}]]</h6>
                       </a></td>
-                    <td class="email align-middle white-space-nowrap text-1100">[[${member.username}]]</td>
-                    <td class="mobile_number align-middle white-space-nowrap text-1100">[[${member.phone}]]</td>
-                    <td class="city align-middle white-space-nowrap text-1100">[[${member.address}]]</td>
-                    <td class="position1 align-middle white-space-nowrap text-1100">[[${member.belong}]]</td>
-                    <td class="position2 align-middle white-space-nowrap text-1100">
+                    <td class="username align-middle white-space-nowrap text-1100">[[${member.username}]]</td>
+                    <td class="tel align-middle white-space-nowrap text-1100">[[${member.phone}]]</td>
+                    <td class="address align-middle white-space-nowrap text-1100">[[${member.address}]]</td>
+                    <td class="belong align-middle white-space-nowrap text-1100">[[${member.belong}]]</td>
+                    <td class="department align-middle white-space-nowrap text-1100">
 						<select style="color: black;" th:onchange="updateDepartment([[${member.username}]], this)">
 						    <option selected th:text="${member.department}"></option>
 						    <th:block th:each="department : ${departments}">
@@ -303,7 +310,7 @@
 							</th:block>
 						</select>
 					</td>
-                    <td class="position2 align-middle white-space-nowrap text-1100">
+                    <td class="date align-middle white-space-nowrap text-1100">
 						<select style="color: black;" th:onchange="updatePosition([[${member.username}]], this)">
 						    <option selected th:text="${positionMap.get(T(java.lang.Integer).parseInt(member.position ?: '0'))}"></option>
 						    <th:block th:each="position : ${positionMap}">

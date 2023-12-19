@@ -25,17 +25,6 @@ public class HistoryController {
     private String awspath;
 
     @GetMapping("/salesList")
-    public String getSalesList(Model model){
-
-        model.addAttribute("awspath", awspath);
-        model.addAttribute("member", memberService.readDetailUsername());
-        model.addAttribute("history", historyService.getSellList());
-        model.addAttribute("sell", historyService.getPurchaseList());
-
-        return "history/salesList";
-    }
-
-    @GetMapping("/purchaseList")
     public String getPurchaseList(Model model){
 
         model.addAttribute("awspath", awspath);
@@ -43,7 +32,7 @@ public class HistoryController {
         model.addAttribute("history", historyService.getPurchaseList());
         model.addAttribute("sell", historyService.getSellList());
 
-        return "history/purchaseList";
+        return "history/salesList";
     }
 
     @GetMapping("/update")

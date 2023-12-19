@@ -10,4 +10,6 @@ public interface StockService {
     void update(List<Stock> updateStocks);
 
     void resourceUpdate(Stock foundStock);
+
+    void newStock(String productName);
 }

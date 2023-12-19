@@ -60,7 +60,7 @@
 
 
   <body>
-	  
+
     <!-- ===============================================-->
     <!--    Main Content-->
     <!-- ===============================================-->
@@ -87,8 +87,7 @@
 				        </div>
 				    </a>
 				</div>
-				<!-- parent pages-->
-                <div class="nav-item-wrapper" style="font-size: 16px; margin-top: 8px;">
+				<div class="nav-item-wrapper" style="font-size: 16px; margin-top: 8px;">
 					<a class="nav-link dropdown-indicator label-2" href="#nv-home1" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="nv-home1">
                     <div class="d-flex align-items-center">
                       <div class="dropdown-indicator-icon"><span class="fas fa-caret-right"></span>
@@ -190,12 +189,6 @@
             </ul>
           </div>
         </div>
-                
-              </li>
-              
-            </ul>
-          </div>
-        </div>
         <div class="navbar-vertical-footer">
           <button class="btn navbar-vertical-toggle border-0 fw-semi-bold w-100 white-space-nowrap d-flex align-items-center"><span class="uil uil-left-arrow-to-left fs-0"></span><span class="uil uil-arrow-from-right fs-0"></span><span class="navbar-vertical-footer-text ms-2">간략히 보기</span></button>
         </div>
@@ -233,7 +226,7 @@
                   <div class="card-body p-0">
                     <div class="text-center pt-4 pb-3">
                       <div class="avatar avatar-xl ">
-                        <img class="rounded-circle " th:src="@{|${awspath}/${user.image}|}"  alt="" />
+                        <img class="rounded-circle " th:src="@{|${awspath}/${user.image}|}" alt="" />
 
                       </div>
                       <h6 class="mt-2 text-black">[[${user.name}]]</h6>
@@ -257,112 +250,172 @@
       </nav>
       
       
-      <div class="content pb-0">
-        <div class="row gy-3 mb-6 justify-content-between">
-          <div class="col-md-9 col-auto">
-            <h2 class="text-1100" style="font-size: 24px;">대시보드</h2>
+		<div class="content">
+        <div class="row align-items-center justify-content-between g-3 mb-4">
+            <div class="col-auto">
+              <h2 class="mb-0">지점 상세정보</h2>
+            </div>
+            <div class="col-auto">
+              <div class="row g-3">
+                <div class="col-auto">
+                  <button class="btn btn-phoenix-danger"><a th:href="@{|/admin/brandDelete?id=${brand.id}|}"><span class="fa-solid fa-trash-can me-2"></span>지점삭제</a></button>
+                </div>
+                
+              </div>
+            </div>
           </div>
-        </div>
         
-        <div class="row mb-6 gy-6">
-          <div class="col-12 col-xxl-2">
-            <div class="row align-items-center g-3 g-xxl-0 h-100 align-content-between">
-				
-			<div class="col-12 col-sm-6 col-md-3 col-lg-6 col-xl-3 col-xxl-12">
-                <div class="d-flex align-items-center"><span class="fs-4 lh-1 uil uil-users-alt text-success-500"></span>
-                  <div class="ms-2">
-                    <div class="d-flex align-items-end">
-                      <span class="fs-1 fw-semi-bold text-900">회원</span><h2 class="mb-0 ms-2"><a th:text="${#lists.size(members)}"></a></h2><span class="fs-1 fw-semi-bold text-900">명</span>
+        <div class="row g-5 mb-4">
+            <div class="col-12 col-xxl-4">
+              <div class="row g-3 g-xxl-0 h-100">
+                <div class="col-12 col-md-4 col-xxl-12 mb-xxl-3">
+                  <div class="card h-100">
+                    <div class="card-body d-flex flex-column justify-content-between pb-3">
+                      <div class="row align-items-center g-5 mb-3 text-center text-sm-start">
+                        <div class="col-12 col-sm-auto flex-1">
+                          <h4>[[${brand.address1}]]&nbsp;[[${brand.title}]]</h4>
+                          <div class="border-top border-dashed border-300 mt-4 pt-4"></div>
+                          <div class="mb-4">
+                       		 <h5 class="text-1000">주소</h5>[[${brand.address1}]]&nbsp;[[${brand.address2}]]
+                     	  </div>
+                     	  <div class="mb-4">
+                       		 <h5 class="text-1000">영업시간</h5>[[${brand.time}]]
+                     	  </div>
+                     	  <div class="mb-4">
+                       		 <h5 class="text-1000">지점 번호</h5>[[${brand.tel}]]
+                     	  </div>
+                     	  <div class="mb-4">
+                       		 <h5 class="text-1000">점주 번호</h5>[[${brand.phone}]]
+                     	  </div>
+                     	  <div class="mb-4">
+                       		 <h5 class="text-1000">이메일</h5>[[${brand.username}]]
+                     	  </div>
+                     	  <div>
+                       		 <h5 class="text-1000">등록일</h5>[[${#temporals.format(brand.createDate, 'yyyy-MM-dd HH:mm')}]]
+                     	  </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              
-              <div class="col-12 col-sm-6 col-md-3 col-lg-6 col-xl-3 col-xxl-12">
-                <div class="d-flex align-items-center"><span class="fs-4 lh-1 uil uil-invoice text-warning-500"></span>
-                  <div class="ms-2">
-                    <div class="d-flex align-items-end">
-                      <span class="fs-1 fw-semi-bold text-900">발주 신청</span><h2 class="mb-0 ms-2">[[${deliveyNotComplete}]]</h2><span class="fs-1 fw-semi-bold text-900">건</span>
-                    </div>
+                <div class="col-12 col-md-8 col-xxl-12 mb-xxl-3">
+                  <div class="card h-100">
+                <div style="display: flex; width: 100%;">
+                <div id="kmap"style="width: 50%; height: 500px; float: left; position: relative"></div>
+                <div id="roadview"style="width: 50%; height: 500px; float: left; position: relative"></div>
+				</div>
+                <script type="text/javascript"
+                        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9eab04f54e929879b23643109e0c42e1&libraries=services"></script>
+                <script th:inline="javascript">
+                    var container = document.getElementById('kmap'), // 지도를 표시할 div
+                        option = { center : new kakao.maps.LatLng( 37.566826, 126.9786567), // 지도의 중심좌표
+                            level : 3 // 지도의 확대 레벨
+                        };
+                    // 지도를 생성합니다
+                    var map = new kakao.maps.Map( container, option);
+
+                    // 주소-좌표 변환 객체를 생성합니다
+                    var geocoder = new kakao.maps.services.Geocoder();
+
+                    var address = /*[[${brand.address2}]]*/ '';
+                    var title = /*[[${brand.title}]]*/ '';
+
+                    // 주소로 좌표를 검색합니다
+                    geocoder.addressSearch(address , function(result, status) {
+
+                        // 정상적으로 검색이 완료됐으면
+                        if (status === kakao.maps.services.Status.OK) {
+
+                            var coords = new kakao.maps.LatLng(
+                                result[0].y,
+                                result[0].x);
+
+                            // 결과값으로 받은 위치를 마커로 표시합니다
+                            var marker = new kakao.maps.Marker(
+                                {
+                                    map : map,
+                                    position : coords,
+                                });
+
+                            // 인포윈도우로 장소에 대한 설명을 표시합니다
+                            var infowindow = new kakao.maps.InfoWindow(
+                                {
+                                    content : '<div style="width:150px;text-align:center;padding:6px 0;">'+title+'</div>'
+                                });
+                            infowindow.open(map, marker);
+
+                            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                            map.setCenter(coords);
+
+                            // 로드 뷰는 지도와는 별도로 그릴수 있다. 지도 없이 로드뷰만 생성도 가능하다.
+
+                            var roadviewContainer = document
+                                .getElementById('roadview'); //로드뷰를 표시할 div
+                            var roadview = new kakao.maps.Roadview(
+                                roadviewContainer); //로드뷰 객체
+                            var roadviewClient = new kakao.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
+
+                            /*       var position = new kakao.maps.LatLng(37.558043, 126.919002); */
+
+                            // 특정 위치의 좌표와 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄운다.
+                            roadviewClient.getNearestPanoId(coords, 50, function(panoId) {
+                                roadview.setPanoId(panoId, coords); //panoId와 중심좌표를 통해 로드뷰 실행
+                            });
+
+                        }
+                    });
+                </script>
                   </div>
                 </div>
+                
+                
               </div>
-              
-              <div class="col-12 col-sm-6 col-md-3 col-lg-6 col-xl-3 col-xxl-12">
-                <div class="d-flex align-items-center"><span class="fs-4 lh-1 uil uil-books text-primary-500"></span>
-                  <div class="ms-2">
-                    <div class="d-flex align-items-end">
-                      <span class="fs-1 fw-semi-bold text-900">미처리 결재</span><h2 class="mb-0 ms-2">32</h2><span class="fs-1 fw-semi-bold text-900">건</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="col-12 col-sm-6 col-md-3 col-lg-6 col-xl-3 col-xxl-12">
-                <div class="d-flex align-items-center"><span class="fs-4 lh-1 uil uil-refresh text-danger-500"></span>
-                  <div class="ms-2">
-                    <div class="d-flex align-items-end">
-                      <span class="fs-1 fw-semi-bold text-900">미처리 문의</span><h2 class="mb-0 ms-2"><a th:text="${#lists.size(QuestionNotComplete)}"></a></h2><span class="fs-1 fw-semi-bold text-900">건</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
             </div>
-           </div>
-           </div>
-          
-        <div class="mx-n4 px-4 mx-lg-n6 px-lg-6 pt-7 pb-13 border-top border-300">
-          <div class="row">
-            <div class="col-12 col-xl-7 col-xxl-6">
-              <div class="row g-3 mb-3">
-                <div class="col-12 col-md-6">
-                  <h2 class="text-1100" style="font-size: 24px;">전국 지역별 지점현황</h2>
-                  <p class="text-700 mb-md-7">[[${date}]]</p>
-                  <div class="d-flex align-items-center justify-content-between">
-                    <p class="mb-0 fw-bold">지역별 지점 수 </p>
-                    <p class="mb-0 fs--1">전체 <span class="fw-bold">[[${#lists.size(brands)}]]</span></p>
-                  </div>
-                  <hr class="bg-200 mb-2 mt-2" />
-                  <div class="d-flex align-items-center mb-1"><span class="d-inline-block bg-info-300 bullet-item me-2"></span>
-                    <p class="mb-0 fw-semi-bold text-900 lh-sm flex-1">[[${brandTop4.get(0)[0]}]]</p>
-                    <h5 class="mb-0 text-900">[[${brandTop4.get(0)[1]}]]</h5>
-                  </div>
-                  <div class="d-flex align-items-center mb-1"><span class="d-inline-block bg-warning-300 bullet-item me-2"></span>
-                    <p class="mb-0 fw-semi-bold text-900 lh-sm flex-1">[[${brandTop4.get(1)[0]}]]</p>
-                    <h5 class="mb-0 text-900">[[${brandTop4.get(1)[1]}]]</h5>
-                  </div>
-                  <div class="d-flex align-items-center mb-1"><span class="d-inline-block bg-danger-300 bullet-item me-2"></span>
-                    <p class="mb-0 fw-semi-bold text-900 lh-sm flex-1">[[${brandTop4.get(2)[0]}]]</p>
-                    <h5 class="mb-0 text-900">[[${brandTop4.get(2)[1]}]]</h5>
-                  </div>
-                  <div class="d-flex align-items-center mb-1"><span class="d-inline-block bg-success-300 bullet-item me-2"></span>
-                    <p class="mb-0 fw-semi-bold text-900 lh-sm flex-1">[[${brandTop4.get(3)[0]}]]</p>
-                    <h5 class="mb-0 text-900">[[${brandTop4.get(3)[1]}]]</h5>
-                  </div>
-                  <div class="d-flex align-items-center"><span class="d-inline-block bg-primary bullet-item me-2"></span>
-                    <p class="mb-0 fw-semi-bold text-900 lh-sm flex-1">기타</p>
-                    <h5 class="mb-0 text-900">[[${etcBrandCount}]]</h5>
-                  </div>
-                  <button class="btn btn-outline-primary mt-5">상세정보<span class="fas fa-angle-right ms-2 fs--2 text-center"></span></button>
-                </div>
-                <div class="col-12 col-md-6">
-                  <div class="position-relative mb-sm-4 mb-xl-0">
-                    <div class="echart-issue-chart1" style="min-height:390px;width:100%"></div>
+            </div>
+            
+        	<div class="row g-5 mb-6">
+            <div class="col-12 col-xxl-4">
+              <div class="row g-3 g-xxl-0 h-100">
+                <div class="col-12 col-md-6 col-xxl-12 mb-xxl-3">
+                  <div class="card h-100">
+                    <div class="card-body d-flex flex-column justify-content-between pb-3">
+                      <div class="row align-items-center g-5 mb-3 text-center text-sm-start">
+                        <div class="col-12 col-sm-auto flex-1">
+                          <h4>재고목록</h4>
+                          <div class="border-top border-dashed border-300 mt-4 pt-4"></div>
+                          <th:block th:each="stock : ${brand.stockList}">
+                          <div class="mb-3">
+                       		 [[${stock.name}]]:&nbsp;&nbsp;[[${stock.quantity}]]
+                     	  </div>
+                          </th:block>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
+                <div class="col-12 col-md-6 col-xxl-12 mb-xxl-3">
+                  <div class="card h-100">
+                	<div class="card-body d-flex flex-column justify-content-between pb-3">
+                      <div class="row align-items-center g-5 mb-3 text-center text-sm-start">
+                        <div class="col-12 col-sm-auto flex-1">
+                          <h4>매출현황</h4>
+                          <div class="border-top border-dashed border-300 mt-4 pt-4"></div>
+                          <th:block th:each="sales : ${sales}">
+                          <div class="mb-3">
+                       		 [[${sales.date}]]월 &nbsp;&nbsp;[[${sales.income}]]원
+                     	  </div>
+                          </th:block>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                
               </div>
             </div>
-            <div class="col-12 col-xl-5 col-xxl-6">
-              
-            <h2 class="text-1100" style="font-size: 24px;">[[${#dates.format(date, 'MM')}]]월 지점별 매출현황</h2>
-            <p class="text-700">[[${date}]]</p>
-            <p class="text-500 mb-md-2" style="font-size: 0.8rem;">매출액 (만원)</p>
-            <div class="echart-basic-bar-chart-example1" style="min-height:300px"></div>
-              
             </div>
-          </div>
-        </div>
+        
         <footer class="footer position-absolute">
           <div class="row g-0 justify-content-between align-items-center h-100">
             <div class="col-12 col-sm-auto text-center">
@@ -373,8 +426,21 @@
             </div>
           </div>
         </footer>
-        </div>
-      
+      </div>
+      <script>
+        var navbarTopStyle = window.config.config.phoenixNavbarTopStyle;
+        var navbarTop = document.querySelector('.navbar-top');
+        if (navbarTopStyle === 'darker') {
+          navbarTop.classList.add('navbar-darker');
+        }
+
+        var navbarVerticalStyle = window.config.config.phoenixNavbarVerticalStyle;
+        var navbarVertical = document.querySelector('.navbar-vertical');
+        if (navbarVertical && navbarVerticalStyle === 'darker') {
+          navbarVertical.classList.add('navbar-darker');
+        }
+      </script>
+
       <script>
         var navbarTopStyle = window.config.config.phoenixNavbarTopStyle;
         var navbarTop = document.querySelector('.navbar-top');
@@ -389,7 +455,6 @@
         }
       </script>
       
-            
     </main>
 
     <!-- ===============================================-->
@@ -412,251 +477,7 @@
     <script src="../assets/js/projectmanagement-dashboard.js"></script>
     <script src="../assets/js/echarts-example.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="../vendors/fullcalendar/main.js"></script>
     
-<script>
-	const echartTabs = document.querySelectorAll('[data-tab-has-echarts]');
-  if (echartTabs) {
-    echartTabs.forEach(tab => {
-      tab.addEventListener('shown.bs.tab', e => {
-        const el = e.target;
-        const { hash } = el;
-        const id = hash || el.dataset.bsTarget;
-        const content = document.getElementById(id.substring(1));
-        const chart = content?.querySelector('[data-echart-tab]');
-        if (chart) {
-          window.echarts.init(chart).resize();
-        }
-      });
-    });
-  }
-
-  const tooltipFormatter = (params, dateFormatter = 'MMM DD') => {
-    let tooltipItem = ``;
-    params.forEach(el => {
-      tooltipItem += `<div class='ms-1'>
-        <h6 class="text-700"><span class="fas fa-circle me-1 fs--2" style="color:${
-          el.borderColor ? el.borderColor : el.color
-        }"></span>
-          ${el.seriesName} : ${
-      typeof el.value === 'object' ? el.value[1] : el.value
-    }
-        </h6>
-      </div>`;
-    });
-    return `<div>
-            <p class='mb-2 text-600'>
-              ${
-                window.dayjs(params[0].axisValue).isValid()
-                  ? window.dayjs(params[0].axisValue).format(dateFormatter)
-                  : params[0].axisValue
-              }
-            </p>
-            ${tooltipItem}
-          </div>`;
-  };
-
-  const handleTooltipPosition = ([pos, , dom, , size]) => {
-    // only for mobile device
-    if (window.innerWidth <= 540) {
-      const tooltipHeight = dom.offsetHeight;
-      const obj = { top: pos[1] - tooltipHeight - 20 };
-      obj[pos[0] < size.viewSize[0] / 2 ? 'left' : 'right'] = 5;
-      return obj;
-    }
-    return null; // else default behaviour
-  };
-  
-  
-    const issuesDiscoveredChartInit = () => {
-    const { getColor, getData } = window.phoenix.utils;
-    const issuesDiscoveredChartEl = document.querySelector('.echart-issue-chart1');
-
-    if (issuesDiscoveredChartEl) {
-      const userOptions = getData(issuesDiscoveredChartEl, 'echarts');
-      const chart = window.echarts.init(issuesDiscoveredChartEl);
-
-      const getDefaultOptions = () => ({
-        color: [
-          getColor('info-300'),
-          getColor('warning-300'),
-          getColor('danger-300'),
-          getColor('success-300'),
-          getColor('primary')
-        ],
-        tooltip: {
-          trigger: 'item',
-          position: (...params) => handleTooltipPosition(params)
-        },
-        responsive: true,
-        maintainAspectRatio: false,
-
-        series: [
-          {
-            name: '지역별 지점 수',
-            type: 'pie',
-            radius: ['48%', '90%'],
-            startAngle: 30,
-            avoidLabelOverlap: false,
-            // label: {
-            //   show: false,
-            //   position: 'center'
-            // },
-
-            label: {
-              show: false,
-              position: 'center',
-              formatter: '{x|{d}%} \n {y|{b}}',
-              rich: {
-                x: {
-                  fontSize: 31.25,
-                  fontWeight: 800,
-                  color: getColor('gray-700'),
-                  padding: [0, 0, 5, 15]
-                },
-                y: {
-                  fontSize: 12.8,
-                  color: getColor('gray-700'),
-                  fontWeight: 600
-                }
-              }
-            },
-            emphasis: {
-              label: {
-                show: true
-              }
-            },
-            labelLine: {
-              show: false
-            },
-            data: [
-              { value: '[[${brandTop4.get(0)[1]}]]', name: '[[${brandTop4.get(0)[0]}]]' },
-              { value: '[[${brandTop4.get(1)[1]}]]', name: '[[${brandTop4.get(1)[0]}]]' },
-              { value: '[[${brandTop4.get(2)[1]}]]', name: '[[${brandTop4.get(2)[0]}]]' },
-              { value: '[[${brandTop4.get(3)[1]}]]', name: '[[${brandTop4.get(3)[0]}]]' },
-              { value: '[[${etcBrandCount}]]', name: '기타' }
-            ]
-          }
-        ],
-        grid: {
-          bottom: 0,
-          top: 0,
-          left: 0,
-          right: 0,
-          containLabel: false
-        }
-      });
-      
-      // 기본 옵션 적용
-      chart.setOption(getDefaultOptions());
-    }
-  };
-  
-  const basicBarChartInit = () => {
-    const { getColor, getData } = window.phoenix.utils;
-    const $chartEl = document.querySelector('.echart-basic-bar-chart-example1');
-    const months = [
-      '[[${salesTop7.get(0).getBrand().getTitle()}]]',
-      '[[${salesTop7.get(1).getBrand().getTitle()}]]',
-      '[[${salesTop7.get(2).getBrand().getTitle()}]]',
-      '[[${salesTop7.get(3).getBrand().getTitle()}]]',
-      '[[${salesTop7.get(4).getBrand().getTitle()}]]',
-      '[[${salesTop7.get(5).getBrand().getTitle()}]]',
-      '[[${salesTop7.get(6).getBrand().getTitle()}]]'
-    ];
-    const data = [
-      '[[${salesTop7.get(0).getIncome()/10000}]]',
-      '[[${salesTop7.get(1).getIncome()/10000}]]',
-      '[[${salesTop7.get(2).getIncome()/10000}]]',
-      '[[${salesTop7.get(3).getIncome()/10000}]]',
-      '[[${salesTop7.get(4).getIncome()/10000}]]',
-      '[[${salesTop7.get(5).getIncome()/10000}]]',
-      '[[${salesTop7.get(6).getIncome()/10000}]]'
-    ];
-
-    if ($chartEl) {
-      const userOptions = getData($chartEl, 'echarts');
-      const chart2 = window.echarts.init($chartEl);
-      const getDefaultOptions = () => ({
-        tooltip: {
-          trigger: 'axis',
-          padding: [7, 10],
-          backgroundColor: getColor('gray-100'),
-          borderColor: getColor('gray-300'),
-          textStyle: { color: getColor('dark') },
-          borderWidth: 1,
-          formatter: params => tooltipFormatter(params),
-          transitionDuration: 0,
-          axisPointer: {
-            type: 'none'
-          }
-        },
-        xAxis: {
-          type: 'category',
-          data: months,
-          axisLine: {
-            lineStyle: {
-              color: getColor('gray-300'),
-              type: 'solid'
-            }
-          },
-          axisTick: { show: false },
-          axisLabel: {
-            color: getColor('gray-400'),
-            formatter: value => value,
-            margin: 15
-          },
-          splitLine: {
-            show: false
-          }
-        },
-        yAxis: {
-          type: 'value',
-          boundaryGap: true,
-          axisLabel: {
-            show: true,
-            color: getColor('gray-400'),
-            margin: 5
-          },
-          splitLine: {
-            show: true,
-            lineStyle: {
-              color: getColor('gray-200')
-            }
-          },
-          axisTick: { show: false },
-          axisLine: { show: false },
-          min: 0
-        },
-        series: [
-          {
-            type: 'bar',
-            name: '매출액',
-            data,
-            lineStyle: { color: getColor('primary') },
-            itemStyle: {
-              color: getColor('primary'),
-              barBorderRadius: [3, 3, 0, 0]
-            },
-            showSymbol: false,
-            symbol: 'circle',
-            smooth: false,
-            hoverAnimation: true
-          }
-        ],
-        grid: { right: '3%', left: '10%', bottom: '10%', top: '5%' }
-      });
-      
-      // 기본 옵션 적용
-      chart2.setOption(getDefaultOptions());
-    }
-  };
-  
-    // 페이지 로드 시 차트 초기화 함수 호출
-    document.addEventListener('DOMContentLoaded', issuesDiscoveredChartInit);
-    document.addEventListener('DOMContentLoaded', basicBarChartInit);
-  </script>
-  
   </body>
 
 </html>

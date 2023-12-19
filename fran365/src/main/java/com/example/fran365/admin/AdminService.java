@@ -8,6 +8,7 @@ import com.example.fran365.brand.Brand;
 import com.example.fran365.delivery.Delivery;
 import com.example.fran365.member.Member;
 import com.example.fran365.product.Product;
+import com.example.fran365.sales.Sales;
 import com.example.fran365.status.Status;
 
 public interface AdminService {
@@ -16,7 +17,7 @@ public interface AdminService {
 	
 	List<Member> memberApprove();
 	
-	Member memberReadDeatail(Integer id);
+	Member memberReadDetail(String username);
 	
 	void memberDelete(Integer id);
 	
@@ -40,9 +41,9 @@ public interface AdminService {
 	
 	void replyDelete(Integer replyId);
 	
-	List<Board> getUserQuestions();
+	List<Board> getUserQuestions(String username);
 	
-	List<Delivery> deliveryReadListByUsername();
+	List<Delivery> deliveryReadListByUsername(String username);
 	
 	void updateDepartment(String username, String newDepartment);
 	
@@ -61,4 +62,13 @@ public interface AdminService {
 	List<Product> productReadList();
 	
 	void productDelete(Integer id);
+	
+	Brand brandReadDetail(Integer id);
+	
+	void brandDelete(Integer id);
+	
+	List<Sales> getRecentFiveMonthsSales(Integer id);
+	
+	List<Sales> findTop7Income();
+	
 }

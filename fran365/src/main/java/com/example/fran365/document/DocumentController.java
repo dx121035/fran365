@@ -41,9 +41,6 @@ public class DocumentController {
         model.addAttribute("member",memberService.readDetailUsername());
 
 
-
-
-
         return "document/create";
     }
 

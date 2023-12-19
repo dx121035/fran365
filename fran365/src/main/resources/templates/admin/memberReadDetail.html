@@ -293,11 +293,11 @@
                         </div>
                         <div>
                           <h5>부서</h5>
-                          <p class="fs-1 text-800 mb-0">[[${member.department}]]</p>
+                          <p class="fs-1 text-800 mb-0">[[${member.department}]]&nbsp;</p>
                         </div>
                         <div>
                           <h5>직급</h5>
-                          <p class="fs-1 text-800 mb-0"><span th:text="${positionMap.get(T(java.lang.Integer).parseInt(member.position ?: '0'))}"></span></p>
+                          <p class="fs-1 text-800 mb-0"><span th:text="${positionMap.get(T(java.lang.Integer).parseInt(member.position ?: '0'))}"></span>&nbsp;</p>
                         </div>
                       </div>
                     </div>
@@ -316,7 +316,7 @@
                       <div class="mb-4">
                         <h5 class="text-1000">주소</h5>[[${member.address}]]
                       </div>
-                      <h5 class="text-1000">가맹점</h5>서울 노량진점
+                      <h5 class="text-1000">가맹점</h5>[[${brand.address1}]]&nbsp;[[${brand.title}]]
                     </div>
                   </div>
                 </div>
