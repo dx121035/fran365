@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.fran365.auth.UserDetailService;
 import com.example.fran365.brand.BrandService;
+import com.example.fran365.event.EventService;
 import com.example.fran365.member.Member;
 import com.example.fran365.member.MemberService;
 
@@ -28,6 +29,9 @@ public class MainController {
 	@Autowired
 	private BrandService brandService;
 	
+	@Autowired
+	private EventService eventService;
+	
 	@GetMapping("/")
 	public String index(Model model, Principal principal) {
 		
@@ -37,6 +41,7 @@ public class MainController {
 			model.addAttribute("awspath", awspath);
 			model.addAttribute("member", memberService.readDetailUsername());
 			model.addAttribute("brands", brandService.list());
+			model.addAttribute("events", eventService.readList());
 			
 			return "index";
 			}
