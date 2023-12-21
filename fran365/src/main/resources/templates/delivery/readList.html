@@ -51,20 +51,12 @@
               <td class="name align-middle white-space-nowrap text-900 fs--1 text-start">[[${delivery.name}]]</td>
               <td class="total align-middle fw-semi-bold text-1000">[[${delivery.total}]]원</td>
               <td class="step align-middle white-space-nowrap text-start fw-bold text-700">
-                <div th:switch="${delivery.statusList[0].step}">
-                  <div class="badge badge-phoenix fs--2 badge-phoenix-success" th:case="'결제완료'">
-                    <span class="fw-bold" th:text="${delivery.statusList[0].step}"></span><span class="ms-1 fas fa-clipboard-check"></span>
-                  </div>
-                  <div class="badge badge-phoenix fs--2 badge-phoenix-primary" th:case="'상품준비'">
-                    <span class="fw-bold" th:text="${delivery.statusList[0].step}"></span><span class="ms-1 fas fas fa-dolly"></span>
-                  </div>
-                  <div class="badge badge-phoenix fs--2 badge-phoenix-info" th:case="'배송 중'">
-                    <span class="fw-bold" th:text="${delivery.statusList[0].step}"></span><span class="ms-1 fas fa-shipping-fast"></span>
-                  </div>
-                  <div class="badge badge-phoenix fs--2 badge-phoenix-secondary" th:case="'배송완료'">
-                    <span class="fw-bold" th:text="${delivery.statusList[0].step}"></span><span class="ms-1 fas fa-box"></span>
-                  </div>
-                </div>
+                <div th:if="${delivery.statusList[#lists.size(delivery.statusList)-1].step eq '배송완료'}" class="badge badge-phoenix fs--1 badge-phoenix-success" style="width: 50%;">
+					<span class="fw-bold" th:text="${delivery.statusList[#lists.size(delivery.statusList)-1].step}"></span>
+				</div>
+				<div th:unless="${delivery.statusList[#lists.size(delivery.statusList)-1].step eq '배송완료'}" class="badge badge-phoenix fs--1 badge-phoenix-warning" style="width: 50%;">
+					<span class="fw-bold" th:text="${delivery.statusList[#lists.size(delivery.statusList)-1].step}"></span>
+				</div>
               </td>
               <td class="createDate align-middle white-space-nowrap text-700 fs--1 ps-4 text-end">[[${#temporals.format(delivery.createDate, 'yyyy-MM-dd HH:mm')}]]</td>
             </tr>
