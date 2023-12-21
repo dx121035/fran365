@@ -287,14 +287,12 @@ public class MemberServiceImpl implements MemberService {
 	// 메일보내기
 	@Override
 	public void mailSend(MailDto mailDto) {
-		System.out.println("전송 완료!");
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setTo(mailDto.getAddress());
 		message.setSubject(mailDto.getTitle());
 		message.setText(mailDto.getMessage());
 		message.setFrom("seula724@naver.com");
 		message.setReplyTo("seula724@naver.com");
-		System.out.println("message" + message);
 		mailSender.send(message);
 	}
 
@@ -323,7 +321,6 @@ public class MemberServiceImpl implements MemberService {
 
 			mailSend(mailDto);
 
-			System.out.println("Temporary password sent successfully to: " + memberOptional.get().getUsername());
 		} else {
 			
 			System.err.println("User with username " + username + " does not exist.");

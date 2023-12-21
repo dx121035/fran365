@@ -147,7 +147,6 @@ public class MemberController {
 	@ResponseBody
 	public String phoneCheck1(String phone) throws NoSuchAlgorithmException, IOException { // 휴대폰 문자보내기
 		int randomNumber = (int) ((Math.random() * (9999 - 1000 + 1)) + 1000);//난수 생성
-		System.out.println(phone);
 		System.out.println(randomNumber);
 		String subject = "인증 번호는 " + randomNumber + "입니다.";
 		memberService.sendSms(subject,phone);

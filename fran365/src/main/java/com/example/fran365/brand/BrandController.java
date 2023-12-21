@@ -43,7 +43,6 @@ public class BrandController {
         model.addAttribute("awspath", awspath);
         model.addAttribute("member",memberService.readDetailUsername());
 
-        System.out.println("브랜드 전부2 : " + brandRepository.findAll().get(0).getStockList().get(0).getQuantity());
 
         return "brand/list";
     }

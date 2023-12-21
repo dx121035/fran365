@@ -229,7 +229,6 @@ public class DocumentServiceImpl implements DocumentService{
         message.setText(mailDto.getMessage());
         message.setFrom("seula724@naver.com");
         message.setReplyTo("seula724@naver.com");
-        System.out.println("message" + message);
         mailSender.send(message);
     }
 
