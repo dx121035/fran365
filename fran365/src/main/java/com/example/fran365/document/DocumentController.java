@@ -94,7 +94,7 @@ public class DocumentController {
         model.addAttribute("count1", documentService.findByStatusAndReceiver(1,receiver));
         model.addAttribute("count2", documentService.findByStatusAndReceiver(2,receiver));
         model.addAttribute("count3", documentService.findByStatusAndReceiver(3,receiver));
-        model.addAttribute("count4", documentService.findByStatusAndReceiver(4,receiver));
+        model.addAttribute("count101", documentService.findByStatusAndReceiver(101,receiver));
         model.addAttribute("count0", documentService.findByStatusAndReceiver(0,receiver));
 
 

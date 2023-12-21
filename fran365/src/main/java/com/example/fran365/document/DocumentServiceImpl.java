@@ -63,6 +63,10 @@ public class DocumentServiceImpl implements DocumentService{
         docuemnt.setStatus(1);
         docuemnt.setCreateDate(LocalDateTime.now());
         docuemnt.setReceiver(receiver);
+        
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        docuemnt.setSender(authentication.getName());
+        
 
         documentRepository.save(docuemnt);
 
@@ -108,10 +112,12 @@ public class DocumentServiceImpl implements DocumentService{
 
     @Override
     public List<Document> readList() {
-        // Fetch documents sent to the currently logged-in user
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String receiver = authentication.getName();
-        return documentRepository.findByReceiver(receiver);
+        String username = authentication.getName();
+        List<Document> sentDocuments = documentRepository.findByReceiver(username);
+        List<Document> receivedDocuments = documentRepository.findBySender(username);
+        sentDocuments.addAll(receivedDocuments);
+        return sentDocuments;
     }
 
     @Override

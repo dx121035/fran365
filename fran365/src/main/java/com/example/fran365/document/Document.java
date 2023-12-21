@@ -33,7 +33,8 @@ public class Document {
 
     private  String title;
 
-
+    private String sender;
+    
     private LocalDateTime createDate;
 
                                             //private String position;

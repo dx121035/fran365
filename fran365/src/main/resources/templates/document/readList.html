@@ -37,7 +37,7 @@
                 <div class="col-12 col-md-auto">
                     <div class="d-flex align-items-center"><span class="fa-stack" style="min-height: 46px;min-width: 46px;"><span class="fa-solid fa-square fa-stack-2x text-danger-300" data-fa-transform="down-4 rotate--10 left-4"></span><span class="fa-solid fa-circle fa-stack-2x stack-circle text-danger-100" data-fa-transform="up-4 right-3 grow-2"></span><span class="fa-stack-1x fa-solid fa-dolly text-danger " data-fa-transform="shrink-2 up-8 right-6"></span></span>
                         <div class="ms-3">
-                            <h4 class="mb-0">[[${count4}]]결재 반려</h4>
+                            <h4 class="mb-0">[[${count101}]]결재 반려</h4>
                             <p class="text-800 fs--1 mb-0">결재가 반려 되었습니다.</p>
                         </div>
                     </div>
@@ -78,7 +78,7 @@
             }
         </script>
 
-        <div id="tableExample4" data-list='{"valueNames":["id","category","deadline","createDate","status"],"page":5,"pagination":true,"filter":{"key":"status"}}'>
+        <div id="tableExample4" data-list='{"valueNames":["id","category","sender","receiver"","createDate","deadline","status"],"page":5,"pagination":true,"filter":{"key":"status"}}'>
             <div class="row justify-content-end g-0">
                 <div class="col-auto px-3">
                     <select class="form-select form-select-sm mb-3" data-list-filter="data-list-filter"  onchange="filterDocuments()">
@@ -95,25 +95,29 @@
                     <thead>
                     <tr class="bg-light">
                         <th class="sort border-top ps-3" data-sort="id">번호</th>
-                        <th class="sort border-top" data-sort="category">카테고리</th>
-                        <th class="sort border-top" data-sort="createDate">작성일</th>
-                        <th class="sort border-top" data-sort="deadline">마감일</th>
+                        <th class="sort border-top ps-3" data-sort="category">카테고리</th>
+                        <th class="sort border-top ps-3" data-sort="sender">발신자</th>
+                        <th class="sort border-top ps-3" data-sort="receiver">수신자</th>
+                        <th class="sort border-top ps-3" data-sort="createDate">작성일</th>
+                        <th class="sort border-top ps-3" data-sort="deadline">마감일</th>
                         <th class="sort border-top text-end pe-3" data-sort="status">상태</th>
                     </tr>
                     </thead>
                     <tbody class="list">
                     <th:block th:each="docu : ${docus}">
-                        <th:block th:unless="${docu.status > 100}">
+                        <th:block th:unless="${docu.status > 101}">
                             <tr th:if="${docu.status != 5 && docu.status != 0}" th:attr="data-status=${docu.status}">
                             <td class="col-2 align-middle ps-3 id" th:text="${docu.id}"></td>
                             <td class="col-3 align-middle category" ><a th:text="${docu.category}" th:href="@{|/document/readDetail?id=${docu.id}|}"></a></td>
+                            <td class="col-2 align-middle sender" th:text="${docu.sender}"></td>
+                            <td class="col-2 align-middle receiver" th:text="${docu.receiver}"></td>
                             <td class="col-3 align-middle createDate" th:text="${#temporals.format(docu.createDate, 'yyyy년 MM월 dd일')}"></td>
-                            <td class="col-3 align-middle deadline" th:text="${docu.deadline}"></td>
+                          <td class="col-2 align-middle deadline" th:text="${docu.deadline}"></td>
                             <td class="align-middle status text-end py-3 pe-3">
                                 <div th:if="${docu.status == 1}" class="badge badge-phoenix fs--2 badge-phoenix-success"><span class="fw-bold">미결재</span><span class="ms-1 fas fa-check"></span></div>
                                 <div th:if="${docu.status == 2}" class="badge badge-phoenix fs--2 badge-phoenix-warning"><span class="fw-bold">결재중</span><span class="ms-1 fas fa-check"></span></div>
                                 <div th:if="${docu.status == 3}" class="badge badge-phoenix fs--2 badge-phoenix-secondary"><span class="fw-bold">결재완료</span><span class="ms-1 fas fa-check"></span></div>
-                                <div th:if="${docu.status == 4}" class="badge badge-phoenix fs--2 badge-phoenix-success"><span class="fw-bold">결재반려</span><span class="ms-1 fas fa-check"></span></div>
+                                <div th:if="${docu.status == 101}" class="badge badge-phoenix fs--2 badge-phoenix-success"><span class="fw-bold">결재반려</span><span class="ms-1 fas fa-check"></span></div>
                                 <div th:if="${docu.status == 0 }" class="badge badge-phoenix fs--2 badge-phoenix-warning"><span class="fw-bold">임시저장</span><span class="ms-1 fas fa-check"></span></div>
 
                             </td>
