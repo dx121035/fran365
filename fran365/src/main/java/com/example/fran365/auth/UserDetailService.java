@@ -53,9 +53,12 @@ public class UserDetailService implements UserDetailsService {
 	public int logincheck(String username) {
 
 		Optional<Member> tmember = userDetailRepository.findByusername(username);
-		Member member = tmember.get();
 
-		if (member != null) {
+
+
+		if (tmember.isPresent()) {
+
+			Member member = tmember.get();
 
 			List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
 			list.add(new SimpleGrantedAuthority("ROLE_USER"));

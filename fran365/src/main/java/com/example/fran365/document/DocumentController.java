@@ -199,8 +199,8 @@ public class DocumentController {
 
     // 반려 버튼 처리
     @PostMapping("/reject/{documentId}")
-    public String reject(@PathVariable("documentId") Integer documentId, @RequestParam("reason") String reason) {
-        documentService.updateDocumentStatusReject(documentId, 100,reason);
+    public String reject(@PathVariable("documentId") Integer documentId) {
+        documentService.updateDocumentStatusReject(documentId, 100);
         return "redirect:/document/readList";
     }
 
