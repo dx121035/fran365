@@ -5,6 +5,7 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 
 
 import com.example.fran365.member.MailDto;
+import com.example.fran365.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
@@ -37,6 +38,9 @@ public class DocumentServiceImpl implements DocumentService{
 
     @Autowired
     private JavaMailSender mailSender;
+
+    @Autowired
+    private MemberService memberService;
 
 
 
@@ -86,6 +90,7 @@ public class DocumentServiceImpl implements DocumentService{
 
         docuemnt.setImage(filename);
         docuemnt.setStatus(0);
+        docuemnt.setReceiver(memberService.findUsername());
         docuemnt.setCreateDate(LocalDateTime.now());
 
 
@@ -203,13 +208,13 @@ public class DocumentServiceImpl implements DocumentService{
     }
 
 
-    public void updateDocumentStatusReject(Integer documentId, int increment, String reason) {
+    public void updateDocumentStatusReject(Integer documentId, int increment ) {
         Document document = documentRepository.findById(documentId)
                 .orElseThrow(() -> new RuntimeException("Document not found with id: " + documentId));
 
         // status를 주어진 값만큼 증가시킴
         document.setStatus(document.getStatus() + increment);
-        document.setReason(reason);
+
 
 
         // 저장

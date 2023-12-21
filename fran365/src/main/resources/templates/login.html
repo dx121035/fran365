@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html lang="en-US" dir="ltr" xmlns:fb="">
+<html lang="en-US" dir="ltr" xmlns:fb="" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8">
@@ -98,6 +97,7 @@
                     <br>
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                     <button class="btn btn-primary w-100 mb-3">로그인</button>
+
                 </form>
                 <a href="/member/findId">아이디 찾기</a> <a href="/member/sendEmail" style=" float: right;" >비밀번호 찾기</a>
                 <br><br>
@@ -108,12 +108,24 @@
                     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v18.0&appId=7733464596705411" nonce="LXlJljbR"></script>
                     <div class="fb-login-button" data-width="" data-size="medium" data-button-type="" data-layout="" data-auto-logout-link="false" data-use-continue-as="false"></div>
                     <!-- 간격 조절을 위한 여백 추가 -->
-                    <div style="margin-right: 100px;"></div>
-                    <a href="/member/create" class="btn btn-primary w-50 mx-1 mb-1">회원가입</a>
+                    <div style="margin-right: 96px;"></div>
+
+
+                    <a href="/member/glogin">
+                        <img src="/images/googlelogo.png"width="187" height="35">
+                    </a>
+                    <!--                    <p><a href="/member/glogin">google in</a></p>-->
+
 
 
                 </div>
                 <br>
+                <!--    ----------------google---------------- -->
+
+                <!--                <h1> name : <a th:text="${#authentication.name}"></a></h1>-->
+
+                <!--    ----------------google---------------- -->
+
 
                 <div class="row justify-content-between">
                     <div class="col">
@@ -129,6 +141,20 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+
+        <a href="/member/create" class="btn btn-primary btn-lg ms-10">회원가입</a>
+        <br>
+        <br>
     </div>
 
 </main>
@@ -218,6 +244,25 @@
         });
     }
 
+</script>
+
+
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script>
+    function handleCredentialResponse(response) {
+        console.log("Encoded JWT ID token: " + response.credential);
+    }
+    window.onload = function () {
+        google.accounts.id.initialize({
+            client_id: "508608122287-17i9dg6kmmq8e9n18edimkmfevnqflc5.apps.googleusercontent.com",
+            callback: handleCredentialResponse
+        });
+        google.accounts.id.renderButton(
+            document.getElementById("buttonDiv"),
+            { theme: "outline", size: "large" }  // customization attributes
+        );
+        google.accounts.id.prompt(); // also display the One Tap dialog
+    }
 </script>
 
 

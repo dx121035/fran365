@@ -38,7 +38,7 @@ public interface DocumentService {
 
     void updateDocumentStatus(Integer documentId, int increment,String receiver);
 
-    void updateDocumentStatusReject(Integer documentId, int increment, String reason);
+    void updateDocumentStatusReject(Integer documentId, int increment);
 
 
     void mailSend(MailDto mailDto);

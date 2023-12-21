@@ -1,6 +1,8 @@
 package com.example.fran365.member;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.ui.Model;
 import java.io.IOException;
+import java.net.URI;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
@@ -126,7 +129,8 @@ public class MemberController {
 		@GetMapping("/update")
 	public String update(Model model) {
 		model.addAttribute("member", memberService.readDetailUsername());
-
+			model.addAttribute("member", memberService.readDetailUsername());
+			model.addAttribute("awspath", awspath);
 		return "member/update";
 	}
 
@@ -207,6 +211,21 @@ public class MemberController {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("error");
 		}
+	}
+
+	@Value("${spring.security.oauth2.client.registration.google.client-id}")
+	private String googleClientId;
+	@GetMapping("/glogin")
+	public ResponseEntity<?> getGoogleAuthUrl(HttpServletRequest request) throws Exception {
+
+		String reqUrl = "https://accounts.google.com/o/oauth2/v2/auth?client_id=" + googleClientId + "&redirect_uri=http://localhost:8080/login/oauth2/code/google&response_type=code&scope=email%20profile%20openid&access_type=offline";
+
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.setLocation(URI.create(reqUrl));
+
+
+		return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
 	}
 
 
