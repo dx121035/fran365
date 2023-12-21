@@ -10,23 +10,23 @@ mail: inew3w@gmail.com-->
         <div class="col-md-10 offset-md-1">
             <h2 class="mb-5">F.A.Q <span style="font-size: 0.6em;">자주하는 질문</span></h2>
             <div class="accordion">
-			    <th:block th:each="faq: ${FAQ}">
-			        <div class="accordion-item border-top border-300">
-			            <h2 class="accordion-header" th:id="'heading-' + ${#strings.replace(faq.title, ' ', '-').toLowerCase()}">
-			                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-			                        th:data-bs-target="'#collapse-' + ${#strings.replace(faq.title, ' ', '-').toLowerCase()}"
-			                        aria-expanded="false" aria-controls="'collapse-' + ${#strings.replace(faq.title, ' ', '-').toLowerCase()}">
-			                    [[${faq.title}]]
-			                </button>
-			            </h2>
-			            <div class="accordion-collapse collapse"
-			                 th:id="'collapse-' + ${#strings.replace(faq.title, ' ', '-').toLowerCase()}"
-			                 aria-labelledby="'heading-' + ${#strings.replace(faq.title, ' ', '-').toLowerCase()}"
-			                 data-bs-parent="#accordionExample">
-			                <div class="accordion-body pt-0">[(${faq.content})]</div>
-			            </div>
-			        </div>
-			    </th:block>
+                <th:block th:each="faq: ${FAQ}">
+                    <div class="accordion-item border-top border-300">
+                        <h2 class="accordion-header" th:id="'heading-' + ${#strings.replace(faq.title, ' ', '-').toLowerCase()}">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    th:data-bs-target="'#collapse-' + ${#strings.replace(faq.title, ' ', '-').toLowerCase()}"
+                                    aria-expanded="false" aria-controls="'collapse-' + ${#strings.replace(faq.title, ' ', '-').toLowerCase()}">
+                                [[${faq.title}]]
+                            </button>
+                        </h2>
+                        <div class="accordion-collapse collapse"
+                             th:id="'collapse-' + ${#strings.replace(faq.title, ' ', '-').toLowerCase()}"
+                             aria-labelledby="'heading-' + ${#strings.replace(faq.title, ' ', '-').toLowerCase()}"
+                             data-bs-parent="#accordionExample">
+                            <div class="accordion-body pt-0">[(${faq.content})]</div>
+                        </div>
+                    </div>
+                </th:block>
 			</div>
             <br><br>
         <div class="card shadow-none border border-300 mb-3"
@@ -69,7 +69,7 @@ mail: inew3w@gmail.com-->
                                     <tr>
                                         <td class="col-2 align-middle ps-3 id" th:text="${board.id}"></td>
                                         <td class="col-3 align-middle title" ><a th:text="${board.title}" th:href="@{|/board/detail?id=${board.id}|}"></a></td>
-                                        <td class="col-3 align-middle title" th:text="${board.writer}"></td>
+                                        <td class="col-3 align-middle writer" th:text="${board.writer}"></td>
                                         <td class="col-3 align-middle createDate" th:text="${#temporals.format(board.createDate, 'yyyy년 MM월 dd일')}"></td>
                                         <td class="col-1 align-middle status text-end py-3 pe-3" >
                                             <div th:if="${board.status eq '답변대기'}" class="badge badge-phoenix fs--2 badge-phoenix-warning">

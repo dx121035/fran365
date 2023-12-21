@@ -78,10 +78,4 @@ public class ReplyController {
         return "board/noticeDetail";
 
     }
-  /*  @GetMapping("/delete")
-    public String delete(Model model,@RequestParam Integer id) {
-        replyService.delete(id);
-
-        return "board/detail";
-    }*/
 }

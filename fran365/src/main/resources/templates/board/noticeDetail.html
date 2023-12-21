@@ -69,9 +69,8 @@ mail: inew3w@gmail.com-->
                                   rows="4"></textarea>
                         <button class="btn btn-primary w-100 mb-4" >등록</button>
                     </form>
-
                     <th:block class="table-primary" th:each="reply: ${board.replyList}">
-                        <div class="fs&#45;&#45;1 fw-semi-bold pb-3 mb-4 border-bottom border-dashed border-300">
+                        <div class="fs--1 fw-semi-bold pb-3 mb-4 border-bottom border-dashed border-300">
                             <div class="d-flex justify-content-between">
                                 <div class="text-1000 mb-1"
                                      th:utext="${#strings.replace(reply.content, ',', '')}"></div>
@@ -84,12 +83,6 @@ mail: inew3w@gmail.com-->
                             </div>
                         </div>
                     </th:block>
-                    <div th:if="${member.name == reply.writer}">
-                        <br><br><br>
-                        <a th:href="@{|/reply/noticeDelete?id=${board.id}|}"
-                           class="border border-300 rounded-2 p-2 mb-2 text-center bg-outline-danger dark__bg-1000 shadow-sm ml-2"
-                           style="text-decoration: none;">삭제</a>
-                    </div>
                 </div>
             </div>
             <br>

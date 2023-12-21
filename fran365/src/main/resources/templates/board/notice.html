@@ -26,16 +26,16 @@ mail: inew3w@gmail.com-->
                             <th class="sort border-top ps-3" data-sort="id">번호</th>
                             <th class="sort border-top" data-sort="title">제목</th>
                             <th class="sort border-top" data-sort="createDate">작성일</th>
-                            <th class="sort border-top text-end pe-3" data-sort="d">조회수 </th>
+                            <th class="sort border-top pe-3" data-sort="d">조회수 </th>
                         </tr>
                         </thead>
                         <tbody id="noticeTableBody">
                         <th:block >
                             <tr th:each="board, loop : ${paging}">
-                                <td class="col-3 align-middle ps-3 id" th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
-                                <td class="col-3 align-middle title" ><a th:text="${board.title}" th:href="@{|/board/noticeDetail?id=${board.id}|}" class="title"></a></td>
-                                <td class="col-3 align-middle createDate" th:text="${#temporals.format(board.createDate, 'yyyy년 MM월 dd일')}" ></td>
-                                <td class="col-3 align-middle d text-end py-3 pe-3" th:text="${#lists.size(board.hitter)}"></td> <p>
+                                <td class="col-2 align-middle ps-3 id" th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
+                                <td class="col-4 align-middle title" ><a th:text="${board.title}" th:href="@{|/board/noticeDetail?id=${board.id}|}" ></a></td>
+                                <td class="col-4 align-middle createDate" th:text="${#temporals.format(board.createDate, 'yyyy년 MM월 dd일')}" ></td>
+                                <td class="col-2 align-middle d py-3 p-3" th:text="${#lists.size(board.hitter)}"></td> <p>
                             </tr>
                         </th:block>
                         </tbody>

@@ -29,7 +29,6 @@ mail: inew3w@gmail.com-->
                         <p><a th:text="${#temporals.format(board.createDate, 'yyyy년 MM월 dd일 HH시 mm분')}"></a>
                         </p>
                     </div>
-
                     <div class="flex-1" style="font-size: 25px;" th:utext="${board.content}"></div>
 
                     <div th:if="${member.name == board.writer}">
@@ -41,7 +40,6 @@ mail: inew3w@gmail.com-->
                            class="border border-300 rounded-2 p-2 mb-2 text-center bg-outline-danger dark__bg-1000 shadow-sm ml-2"
                            style="text-decoration: none;">삭제</a>
                     </div>
-
 
                     <br><br><br>
                 </div><br>
@@ -86,12 +84,6 @@ mail: inew3w@gmail.com-->
                             </div>
                         </div>
                     </th:block>
-                  <!--<div th:if="${member.name == reply.writer}">
-                        <br><br><br>
-                        <a th:href="@{|/reply/delete?id=${board.id}|}"
-                           class="border border-300 rounded-2 p-2 mb-2 text-center bg-outline-danger dark__bg-1000 shadow-sm ml-2"
-                           style="text-decoration: none;">삭제</a>
-                    </div>-->
                 </div>
             </div>
             <br>

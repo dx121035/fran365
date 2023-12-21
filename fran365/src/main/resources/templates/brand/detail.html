@@ -17,9 +17,9 @@ mail: inew3w@gmail.com-->
 <div class="row g-3 mb-6">
     <input type="hidden" name="id" th:value="${brand.id}">
     <div class="col-12 col-lg-3">
-        <div class="container">
+        <br><div class="container">
         <h3>가맹점 정보</h3>
-        </div>
+        </div><br>
         <div class="card h-100">
             <div class="card-body">
                 <div class="border-bottom border-dashed border-300">
@@ -49,8 +49,14 @@ mail: inew3w@gmail.com-->
                         </div>
                         <div class="col-auto">[[${brand.phone}]]</div>
                     </div>
+                    <div class="row flex-between-center mb-2">
+                        <div class="col-auto">
+                            <h5 class="text-1000 mb-0">매장 설명</h5>
+                        </div>
+                        <br>
+                        <p><div class="col-auto" th:utext="${brand.content}" ></div>
+                    </div>
                 </div>
-                <br><br><br><br><br><br>
                 <div th:if="${#authorization.expression('hasRole(''ADMIN'')')  or member.username == brand.username}">
                 <a th:href="@{|/brand/update?id=${brand.id}|}">수정</a>
                 <a th:href="@{|/brand/delete?id=${brand.id}|}">삭제</a>
@@ -60,9 +66,9 @@ mail: inew3w@gmail.com-->
     </div>
     <!-- 매장 상세 지도 & 지도 뷰   -->
     <div class="col-12 col-lg-9">
-        <div class="container">
+        <br><div class="container">
             <h3>가맹점 위치</h3>
-        </div>
+        </div><br>
         <div class="card h-100">
             <div class="card-body">
                 <!--  <div class="h-75 bg-white" id="map"></div>  -->
