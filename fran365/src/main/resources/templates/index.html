@@ -235,53 +235,97 @@
 		    </div>
 		</section>
 		
-		<section class="pt-10" id="blog">
-
-			<div class="container-small px-lg-7 px-xxl-3">
-				<div class="text-center mb-5 mb-8">
-					<h5 class="text-info mb-3">Blogs</h5>
-					<h2 class="mb-2">Our most viewed articles</h2>
-				</div>
-				<div class="row gx-3 gy-7">
-					<div class="col-lg-4">
-						<div class="blog-card"><img class="w-100 rounded-3" src="/assets/img/blog/blog-5.png" alt="" />
-							<div class="d-flex align-items-cente mt-3"><a class="btn-link text-decoration-none text-800 d-flex align-items-center me-3" href="#!"><span class="fa-solid fa-eye fs--1"></span><span class="fs--2 ms-1 lh-1">2563</span></a><a class="btn-link text-decoration-none text-800 d-flex align-items-center me-3" href="#!"><span class="fa-solid fa-heart fs--1"></span><span class="ms-1 fs--2 lh-1">125</span></a><a class="btn-link text-decoration-none text-800 d-flex align-items-center" href="#!"><span class="fa-solid fa-comment fs--1"></span><span class="ms-1 fs--2 lh-1">125</span></a></div><span class="badge bg-primary mb-2 mt-4">SEO</span>
-							<h4 class="mb-3 pe-sm-5 lh-lg">Top 10 ways to Ace SEO for your business</h4><a class="btn-link px-0 d-flex align-items-center fs--1 fw-bold" href="#!" role="button">See more<span class="fa-solid fa-angle-right ms-2"></span></a>
-						</div>
-					</div>
-					<div class="col-lg-4">
-						<div class="blog-card"><img class="w-100 rounded-3" src="/assets/img/blog/blog-6.png" alt="" />
-							<div class="d-flex align-items-cente mt-3"><a class="btn-link text-decoration-none text-800 d-flex align-items-center me-3" href="#!"><span class="fa-solid fa-eye fs--1"></span><span class="fs--2 ms-1 lh-1">1256</span></a><a class="btn-link text-decoration-none text-800 d-flex align-items-center me-3" href="#!"><span class="fa-solid fa-heart fs--1"></span><span class="ms-1 fs--2 lh-1">325</span></a><a class="btn-link text-decoration-none text-800 d-flex align-items-center" href="#!"><span class="fa-solid fa-comment fs--1"></span><span class="ms-1 fs--2 lh-1">32</span></a></div><span class="badge bg-primary mb-2 mt-4">Marketing</span>
-							<h4 class="mb-3 pe-sm-5 lh-lg">Top 12 Marketing strategies you can take</h4><a class="btn-link px-0 d-flex align-items-center fs--1 fw-bold" href="#!" role="button">See more<span class="fa-solid fa-angle-right ms-2"></span></a>
-						</div>
-					</div>
-					<div class="col-lg-4">
-						<div class="blog-card"><img class="w-100 rounded-3" src="../../assets/img/blog/blog-7.png" alt="" />
-							<div class="d-flex align-items-cente mt-3"><a class="btn-link text-decoration-none text-800 d-flex align-items-center me-3" href="#!"><span class="fa-solid fa-eye fs--1"></span><span class="fs--2 ms-1 lh-1">142</span></a><a class="btn-link text-decoration-none text-800 d-flex align-items-center me-3" href="#!"><span class="fa-solid fa-heart fs--1"></span><span class="ms-1 fs--2 lh-1">123</span></a><a class="btn-link text-decoration-none text-800 d-flex align-items-center" href="#!"><span class="fa-solid fa-comment fs--1"></span><span class="ms-1 fs--2 lh-1">22</span></a></div><span class="badge bg-primary mb-2 mt-4">Marketing</span>
-							<h4 class="mb-3 pe-sm-5 lh-lg">The top 7 methods to improve as a marketer</h4><a class="btn-link px-0 d-flex align-items-center fs--1 fw-bold" href="#!" role="button">See more<span class="fa-solid fa-angle-right ms-2"></span></a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- end of .container-->
-
-		</section>
 
 		<section class="pb-10 pb-xl-14">
 
 			<div class="container-small px-lg-7 px-xxl-3">
-				<div class="text-center mb-7">
-					<h5 class="text-info mb-3">Contact</h5>
-					<h2 class="mb-2">Choose the best deal for you</h2>
+				<div class="text-center mb-6">
+					<h2>전국 가맹점 위치</h2>
 				</div>
 				<div class="row">
 					<div class="col-12 mb-10">
-						<div class="googlemap" data-googlemap="data-googlemap" data-gmap="data-gmap" data-latlng="40.7228022,-74.0020158" data-scrollwheel="false" data-zoom="15" style="height: 381px; border-radius:1.5rem;">
-							<div class="marker-content py-3">
-								<h5>Google map</h5>
-								<p>A nice template for your site.<br />Customize it as you want.</p>
-							</div>
-						</div>
+						<div id="kmap" style="width: 100%; height: 450px; margin-left: 30px;"></div>
+                        
+                 <script type="text/javascript"
+                                src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9eab04f54e929879b23643109e0c42e1&libraries=services"></script>
+                        <script th:inline="javascript">
+                            var container = document
+                                    .getElementById('kmap'), // 지도를 표시할 div
+                                option = {
+                                    center : new kakao.maps.LatLng(37,127), // 지도의 중심좌표
+                                    level : 13
+                                    // 지도의 확대 레벨
+                                };
+                            var brandList = /*[[${brands}]]*/ [];
+
+                            // 지도를 생성합니다
+                            var map = new kakao.maps.Map(container,
+                                option);
+                            // 주소-좌표 변환 객체를 생성합니다
+                            var geocoder = new kakao.maps.services.Geocoder();
+
+                            brandList.forEach( function (brand) {
+                                // 주소로 좌표를 검색합니다
+                                geocoder.addressSearch(brand.address2, function(result, status) {
+                                    // 정상적으로 검색이 완료됐으면
+                                    if (status === kakao.maps.services.Status.OK) {
+                                        var coords = new kakao.maps.LatLng(
+                                            result[0].y,
+                                            result[0].x);
+
+                                        // 결과값으로 받은 위치를 마커로 표시합니다
+                                        var marker = new kakao.maps.Marker(
+                                            {
+                                                map : map,
+                                                position : coords,
+                                            });
+                                        var iwContent = '<div style="padding: 10px; font-family: Arial, sans-serif; color: #008080;">지점명: <strong style="color: red; font-weight: bold;">' + brand.title + '</strong></div>' +
+                                            '<div style="padding: 5px 0; white-space: nowrap; font-family: Arial, sans-serif; color: #777;">전화번호: ' + brand.tel + '</div>';
+                                        iwRemoveable = true;
+
+                                        // 인포윈도우로 장소에 대한 설명을 표시합니다
+                                        var infowindow = new kakao.maps.InfoWindow(
+                                            {
+                                                content : iwContent
+                                            });
+                                        // 마커에 마우스오버 이벤트를 등록합니다
+                                        kakao.maps.event.addListener
+                                        (marker,'mouseover',function() {// 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+                                            infowindow.open(map,marker);
+                                        });
+                                        // 마커에 마우스아웃 이벤트를 등록합니다
+                                        kakao.maps.event
+                                            .addListener(
+                                                marker,
+                                                'mouseout',
+                                                function() {
+                                                    // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
+                                                    infowindow
+                                                        .close();
+                                                });
+
+                                        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                                       // map.setCenter(coords);
+                                    }
+                                });
+                            });
+
+                        </script>
+					</div>
+				</div>
+
+			</div>
+		</section>
+		
+		<section class="pb-10 pb-xl-14">
+
+			<div class="container-small px-lg-7 px-xxl-3">
+				<div class="text-center mb-4">
+					<h2>프랜차이즈 본사 일정</h2>
+				</div>
+				<div class="row">
+					<div class="col-12 mb-10">
+						
 					</div>
 				</div>
 
