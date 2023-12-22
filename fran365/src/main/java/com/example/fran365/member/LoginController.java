@@ -76,10 +76,10 @@ public class LoginController {
 
         String googleToken = googleLoginResponse.getId_token();
 
-        //5.諛쏆� �넗�겙�쓣 援ш��뿉 蹂대궡 �쑀���젙蹂대�� �뼸�뒗�떎.
+
         String requestUrl = UriComponentsBuilder.fromHttpUrl(googleAuthUrl + "/tokeninfo").queryParam("id_token",googleToken).toUriString();
 
-        //6.�뿀媛��맂 �넗�겙�쓽 �쑀���젙蹂대�� 寃곌낵濡� 諛쏅뒗�떎.
+
         String resultJson = restTemplate.getForObject(requestUrl, String.class);
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -92,9 +92,9 @@ public class LoginController {
 
         int result = userDetailService.logincheck(email);
 
-        if (result == 1) { //�뵒鍮꾩뿉 �쉶�썝�젙蹂닿� �씠誘� �엳�쓣 寃쎌슦 濡쒓렇�씤 �꽦怨�
+        if (result == 1) {
             return "redirect:/";
-        } else {           //�뵒鍮꾩뿉 �쉶�썝�젙蹂닿� �씠誘� �뾾�뒗 寃쎌슦 �쉶�썝 媛��엯
+        } else {
             return "redirect:/member/create";
         }
 
